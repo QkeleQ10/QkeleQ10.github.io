@@ -37,6 +37,14 @@ body {
     margin-top: 50px;
 }
 
+#errorpage {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
 h1 {
     color: var(--accent);
     font-size: clamp(30px, 8vw, 105px);
