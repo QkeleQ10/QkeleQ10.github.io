@@ -43,7 +43,33 @@
     </header>
 
     <div class="s1">
-        <h2><i data-feather="layout"></i> <span class="i18n">Crowdin projects</span></button></h2>
+        <h2><i data-feather="layout"></i> <span class="i18n">Subsites</span></button></h2>
+        <div class="g1">
+            <div class="gItem">
+                <h3 class="i18n">PreMiD Troubleshooting</h3>
+                <h5 class="i18n">Troubleshooter</h5>
+                <!--<img src="https://pbs.twimg.com/profile_images/1355950211093377025/f5MlK_5x_400x400.jpg" title="Project icon">-->
+                <p data-i18n="crowdinQkeleQ10desc">An easy online check you can run to fix any issues with PreMiD you
+                    might have. Do this before creating a support ticket.</p>
+                <button onclick="open(window.location.href + 'PreMiD-Troubleshooting')"><i
+                        data-feather="alert-octagon"></i><span class="i18n">Troubleshoot</span></button>
+            </div>
+            <div class="gItem" style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+                <p data-i18n="crowdinMCdesc">My other projects are currently being overhauled and rethought. Please
+                    check back later, or view my GitHub to see what I'm up to!</p>
+                <button onclick="open('https:\/\/github.com/QkeleQ10')"><i data-feather="github"></i><span
+                        class="i18n">GitHub</span></button>
+            </div>
+        </div>
+        <div class="scroller">
+            <div class="leB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-left"></i></div>
+            <div class="riB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-right"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="s1">
+        <h2><i data-feather="file-text"></i> <span class="i18n">Crowdin projects</span></button></h2>
         <div class="g1">
             <div class="gItem">
                 <h3 class="i18n">QkeleQ10</h3>
@@ -59,7 +85,7 @@
                 <h5 class="i18n">Coming soon</h5>
                 <p data-i18n="crowdinQkeleQ10desc">Spotistats for Spotify provides insight into your most listened songs
                     and artists, with a choice of different periods.</p>
-                <button disabled onclick="crowdinproj('spotistats')"><i data-feather="clock"></i><span
+                <button disabled onclick="crowdinproj('spotistats')"><i data-feather="loader"></i><span
                         class="i18n">Coming soon</span></button>
             </div>
             <div class="gItem">
@@ -68,8 +94,8 @@
                 <p data-i18n="crowdinPreMiDdesc">PreMiD is a simple, configurable utility that allows you to show what
                     you're doing on the web in your Discord now
                     playing status.</p>
-                <button onclick="crowdinproj('premid')"><i data-feather="arrow-up-right"></i><span class="i18n">Project
-                        page</span></button>
+                <button onclick="crowdinproj('premid')"><i data-feather="arrow-up-right"></i><span
+                        class="i18n">Translate</span></button>
             </div>
             <div class="gItem">
                 <h3 class="i18n">Hypixel</h3>
@@ -77,8 +103,8 @@
                 <p data-i18n="crowdinHypixeldesc">Hypixel is one of the most popular Minecraft server networks in the
                     world,
                     on which you can play minigames.</p>
-                <button onclick="crowdinproj('hypixel')"><i data-feather="arrow-up-right"></i><span class="i18n">Project
-                        page</span></button>
+                <button onclick="crowdinproj('hypixel')"><i data-feather="arrow-up-right"></i><span
+                        class="i18n">Translate</span></button>
             </div>
             <div class="gItem">
                 <h3 class="i18n">Minecraft</h3>
@@ -86,7 +112,7 @@
                 <p data-i18n="crowdinMCdesc">Minecraft is a sandbox video game developed by Mojang. Players may mine
                     materials, craft tools and blocks, and build structures.</p>
                 <button onclick="crowdinproj('minecraft')"><i data-feather="arrow-up-right"></i><span
-                        class="i18n">Project page</span></button>
+                        class="i18n">Translate</span></button>
             </div>
         </div>
         <div class="scroller">
@@ -94,10 +120,11 @@
             <div class="riB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-right"></i>
             </div>
         </div>
+    </div>
 
-        <script>
-            feather.replace()
-        </script>
+    <script>
+        feather.replace()
+    </script>
 
 </body>
 

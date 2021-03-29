@@ -51,3 +51,7 @@ async function gstrings(t) {
 function crowdinproj(name) {
     window.open(`https://crowdin.com/project/${name}`, "_blank")
 }
+
+function open(page) {
+    window.open(page, "_blank")
+}
