@@ -52,6 +52,6 @@ function crowdinproj(name) {
     window.open(`https://crowdin.com/project/${name}`, "_blank")
 }
 
-function open(page) {
+function newpage(page) {
     window.open(page, "_blank")
 }
