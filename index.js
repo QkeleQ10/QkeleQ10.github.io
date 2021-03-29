@@ -1,14 +1,19 @@
 const el = document.querySelector('.g1')
+let c = el.scrollLeft
+let m = el.scrollWidth - el.clientWidth
+let leB = el.nextElementSibling.querySelector(".leB")
+let riB = el.nextElementSibling.querySelector(".riB")
 let strings = {}
 let langCode = "en"
 
 gstrings(1)
 
+if (c == 0) { leB.classList.remove("active") } else { leB.classList.add("active") }
+if (c == m) { riB.classList.remove("active") } else { riB.classList.add("active") }
+
 el.onscroll = function () {
-    let c = el.scrollLeft
-    let m = el.scrollWidth - el.clientWidth
-    let leB = el.nextElementSibling.querySelector(".leB")
-    let riB = el.nextElementSibling.querySelector(".riB")
+    c = el.scrollLeft
+    m = el.scrollWidth - el.clientWidth
     if (c == 0) { leB.classList.remove("active") } else { leB.classList.add("active") }
     if (c == m) { riB.classList.remove("active") } else { riB.classList.add("active") }
 }
