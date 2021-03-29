@@ -1,40 +1,37 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 :root {
-    --foreground: #6b6e6b;
-    --background: #f7f7f7;
+    --txt: #363636;
+    --txt2: #585858;
+    --bk: #f7f7f7;
+    --bk2: #ffffff;
     --accent: #629464;
-    --error: #b1563f;
-    --transparent: #33353380;
+    --headings: #3b803f;
+    --darker: #d8d8d860;
+    --shadow: #aaaaaa60;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --foreground: #EEEEEE;
-        --background: #333333;
-        --accent: #93d996;
-        --error: #e66d4e;
-        --transparent: #EEEEEE80;
+        --txt: #EEEEEE;
+        --txt2: #bebebe;
+        --bk: #333333;
+        --bk2: #363636;
+        --accent: #77bb78;
+        --headings: #7eca82;
+        --darker: #25252560;
+        --shadow: #05050560;
     }
 }
 
 * {
-    text-align: center;
     margin: 0;
     transition: max-height 0.25s;
 }
 
 body {
-    background: var(--background);
+    background: var(--bk);
     font-family: 'Montserrat', arial, sans-serif;
     font-weight: 500;
-}
-
-#g {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-top: 50px;
 }
 
 #errorpage {
@@ -45,10 +42,60 @@ body {
     flex-direction: column;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    color: var(--txt);
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+}
+
 h1 {
-    color: var(--accent);
-    font-size: clamp(30px, 8vw, 105px);
-    font-weight: 500;
+    color: var(--headings);
+}
+
+h5 {
+    color: var(--txt2);
+}
+
+header {
+    margin: 30px min(2vw, 50px) 10px;
+    display: flex;
+    justify-content: space-between;
+    align-content: space-between;
+}
+
+.s1 {
+    margin: 20px min(2vw, 50px) 10px;
+    padding: 25px 20px 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px var(--shadow);
+    background-color: var(--bk2);
+}
+
+.g1 {
+    display: flex;
+    justify-content: left;
+    align-items: stretch;
+    overflow: auto;
+    gap: 10px;
+    padding: 10px;
+    margin: 5px -10px -15px;
+}
+
+.gItem {
+    min-width: clamp(150px, 22.5vw, 300px);
+    padding: 20px 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px var(--shadow);
+    background-color: var(--bk2);
+}
+
+.gItem>img {
+    top: 20px;
+    right: 20px;
+    height: 40px;
+    border-radius: 100px;
 }
 
 div {
@@ -57,8 +104,8 @@ div {
 }
 
 p {
-    margin-top: 50px;
-    color: var(--transparent);
+    margin: 10px 0 0;
+    color: var(--txt2);
 }
 
 .toast, .languagediv {
@@ -72,93 +119,37 @@ p {
     text-overflow: ellipsis;
 }
 
-.languagediv {
-    display: inline-flex;
-    width: fit-content;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    overflow-x: auto;
-    max-width: 90vw;
-    border: 1px solid var(--foreground);
-    color: var(--foreground);
-    font-size: 16px;
-    border-radius: 4px;
-    margin: 5px;
-    transition: max-height 0.25s, padding 0.25s, margin 0.25s, border 0.25s;
-}
-
-.languagediv>* {
-    border-radius: 4px;
-    padding: 10px;
-    transition: padding 0.25s, background-color 0.25s, color 0.25s, box-shadow 0.25s;
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border: none;
+    background: var(--darker);
+    color: var(--accent);
     cursor: pointer;
-    box-shadow: none;
-}
-
-.languagediv>*:hover {
-    background-color: var(--accent);
-    color: var(--background);
-    padding: 10px 20px;
-}
-
-.languagediv>*:focus {
-    box-shadow: inset 0px 0px 0px 3px #93d99670;
-    outline: none;
-}
-
-#error {
-    width: 30em;
-    color: var(--background);
-    background-color: var(--error);
-    padding: 10px 15px;
-    border-radius: 4px;
-    margin: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-input, button, select {
     font-family: 'Montserrat', arial, sans-serif;
-    font-weight: 400;
-    font-size: 16px;
     padding: 10px 15px;
-    border-radius: 4px;
-    margin: 5px;
-    box-sizing: border-box;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 10px 0 0;
+    border-radius: 6px;
+    box-shadow: none;
     transition: box-shadow 0.2s, border 0.2s;
 }
 
-input:hover, select:hover {
-    border: 1px solid var(--accent);
-}
-
 button:hover {
-    border: 1px solid var(--foreground);
-}
-
-input:focus, button:focus, select:focus {
-    box-shadow: 0px 0px 0px 3px #93d99670;
+    box-shadow: inset 0 0 0 3px var(--shadow);
     outline: none;
 }
 
-input, select {
-    width: 30em;
-    text-align: left;
-    border: 1px solid var(--foreground);
-    background: transparent;
-    color: var(--foreground);
+button:focus {
+    box-shadow: inset 0 0 0 3px #93d996b2;
     outline: none;
 }
 
-button {
-    border: 1px solid var(--accent);
-    background: var(--accent);
-    color: var(--background);
-    cursor: pointer;
+button[disabled] {
+    color: var(--txt2);
+    box-shadow: none;
+    cursor: default;
 }
 
 select {
@@ -167,15 +158,24 @@ select {
     max-width: 99vw;
 }
 
-svg {
-    fill: currentColor;
+#bigLogo {
+    fill: var(--accent);
+    height: 50px;
 }
 
-.collapsed, .collapsed:focus, .collapsed:hover {
-    max-height: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    margin: 0px;
-    box-shadow: none;
-    border-width: 0px;
+::-webkit-scrollbar {
+    width: 0;
+    background: transparent;
+}
+
+.scroller {
+    display: flex;
+    justify-content: space-between;
+    color: var(--darker);
+    cursor: default;
+}
+
+.scroller>*.active {
+    color: var(--accent);
+    cursor: pointer;
 }

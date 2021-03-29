@@ -2,6 +2,9 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
     <title>QkeleQ10</title>
     <link rel="icon" href="svg.svg" type="image/svg">
     <meta property="og:type" content="website">
@@ -9,33 +12,23 @@
     <meta property="og:description" content="All tools you need in one place." />
     <meta property="og:image" content="./svg.svg" />
 
-    <meta name="viewport" content="width=device-width">
-    <meta charset="utf-8">
-
     <link rel="stylesheet" href="style.css">
     <script src='index.js' defer></script>
+    <script src="feather.js"></script>
 </head>
 
 <body>
-    <h1 id="heading" style="display: flex; margin-top: 50px; justify-content: center; align-items: center; ">
-        <svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 4000"
-            style="height: clamp(35px, 10vw, 120px);">
+    <header>
+        <svg id="bigLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 4000">
             <path
                 d="M3959.36,1596.62a1990.84,1990.84,0,0,0-301.18-715.81,2005.62,2005.62,0,0,0-879.91-724.49A1992.87,1992.87,0,0,0,2402.38,39.64a2017.27,2017.27,0,0,0-805.76,0A1990.84,1990.84,0,0,0,880.81,340.82a2005.62,2005.62,0,0,0-724.49,879.91A1992.87,1992.87,0,0,0,39.64,1596.62a2017.27,2017.27,0,0,0,0,805.76,1990.84,1990.84,0,0,0,301.18,715.81,2005.62,2005.62,0,0,0,879.91,724.49,1992.87,1992.87,0,0,0,375.89,116.68,2017.27,2017.27,0,0,0,805.76,0,1990.84,1990.84,0,0,0,715.81-301.18,2005.62,2005.62,0,0,0,724.49-879.91,1992.87,1992.87,0,0,0,116.68-375.89,2017.27,2017.27,0,0,0,0-805.76ZM3192.21,2815.67l-809.56-809.56a65,65,0,0,0-91.93,0l-307.2,307.19a65,65,0,0,0,0,91.93l805.07,805.07a2.49,2.49,0,0,1-.4,3.84c-227.09,148-498,234-788.69,234-778.29,0-1415.2-616.93-1447.38-1387.45C516.78,1214.79,1214.8,516.78,2060.71,552.12c770.52,32.18,1387.45,669.09,1387.45,1447.38,0,302.33-93.11,583.32-252.14,815.82A2.49,2.49,0,0,1,3192.21,2815.67Z" />
         </svg>
-    </h1>
 
-    <p class="l18n">This tool was made by Quinten Althues.</p>
-
-    <div style="display: flex; flex-direction: column; margin-top: 50px;">
         <button id="languagebutton"
-            onclick="document.getElementById('languagediv').classList.toggle('collapsed'); document.getElementById('languagediv').children[0].focus()"><svg
-                id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 4000"
-                style="height: 13px">
-                <path d="M3200,800V2764.94l-383.94-172L2660,2523H800V800H3200M4000,0H0V3323H2489l1511,677V0Z" />
-            </svg> <span class="l18n">Language</span>
+            onclick="document.getElementById('languagediv').classList.toggle('collapsed'); document.getElementById('languagediv').children[0].focus()"><i
+                data-feather="globe"></i><span class="i18n">Language</span>
         </button>
-        <div id="languagediv" class="languagediv collapsed">
+        <!--<div id="languagediv" class="languagediv collapsed">
             <div onclick="document.cookie = 'lang=en'; document.location.reload()">English</div>
             <div onclick="document.cookie = 'lang=nl'; document.location.reload()">Nederlands</div>
             <div onclick="document.cookie = 'lang=de'; document.location.reload()">Deutsch</div>
@@ -46,8 +39,65 @@
             <div onclick="document.cookie = 'lang=ms'; document.location.reload()">Melayu</div>
             <div onclick="document.cookie = 'lang=ib'; document.location.reload()">Inhale Banana</div>
             <div onclick="document.cookie = 'lang=em'; document.location.reload()">Emoji</div>
+        </div>-->
+    </header>
+
+    <div class="s1">
+        <h2><i data-feather="layout"></i> <span class="i18n">Crowdin projects</span></button></h2>
+        <div class="g1">
+            <div class="gItem">
+                <h3 class="i18n">QkeleQ10</h3>
+                <h5 class="i18n">Owner</h5>
+                <!--<img src="https://pbs.twimg.com/profile_images/1355950211093377025/f5MlK_5x_400x400.jpg" title="Project icon">-->
+                <p data-i18n="crowdinQkeleQ10desc">Most subsites found on this page are localised using a single Crowdin
+                    project. Any help is massively appreciated!</p>
+                <button onclick="crowdinproj('qkeleq10')"><i data-feather="heart"></i><span
+                        class="i18n">Contribute</span></button>
+            </div>
+            <div class="gItem">
+                <h3 class="i18n">Spotistats</h3>
+                <h5 class="i18n">Coming soon</h5>
+                <p data-i18n="crowdinQkeleQ10desc">Spotistats for Spotify provides insight into your most listened songs
+                    and artists, with a choice of different periods.</p>
+                <button disabled onclick="crowdinproj('spotistats')"><i data-feather="clock"></i><span
+                        class="i18n">Coming soon</span></button>
+            </div>
+            <div class="gItem">
+                <h3 class="i18n">PreMiD</h3>
+                <h5 class="i18n">Proofreader</h5>
+                <p data-i18n="crowdinPreMiDdesc">PreMiD is a simple, configurable utility that allows you to show what
+                    you're doing on the web in your Discord now
+                    playing status.</p>
+                <button onclick="crowdinproj('premid')"><i data-feather="arrow-up-right"></i><span class="i18n">Project
+                        page</span></button>
+            </div>
+            <div class="gItem">
+                <h3 class="i18n">Hypixel</h3>
+                <h5 class="i18n">Proofreader</h5>
+                <p data-i18n="crowdinHypixeldesc">Hypixel is one of the most popular Minecraft server networks in the
+                    world,
+                    on which you can play minigames.</p>
+                <button onclick="crowdinproj('hypixel')"><i data-feather="arrow-up-right"></i><span class="i18n">Project
+                        page</span></button>
+            </div>
+            <div class="gItem">
+                <h3 class="i18n">Minecraft</h3>
+                <h5 class="i18n">Translator</h5>
+                <p data-i18n="crowdinMCdesc">Minecraft is a sandbox video game developed by Mojang. Players may mine
+                    materials, craft tools and blocks, and build structures.</p>
+                <button onclick="crowdinproj('minecraft')"><i data-feather="arrow-up-right"></i><span
+                        class="i18n">Project page</span></button>
+            </div>
         </div>
-    </div>
+        <div class="scroller">
+            <div class="leB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-left"></i></div>
+            <div class="riB active" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-right"></i>
+            </div>
+        </div>
+
+        <script>
+            feather.replace()
+        </script>
 
 </body>
 

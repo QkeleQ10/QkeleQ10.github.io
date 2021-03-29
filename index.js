@@ -1,7 +1,18 @@
+const el = document.querySelector('.g1')
 let strings = {}
 let langCode = "en"
 
 gstrings(1)
+
+el.onscroll = function () {
+    let c = el.scrollLeft
+    let m = el.scrollWidth - el.clientWidth
+    let leB = el.nextElementSibling.querySelector(".leB")
+    let riB = el.nextElementSibling.querySelector(".riB")
+    if (c == 0) { leB.classList.remove("active") } else { leB.classList.add("active") }
+    if (c == m) { riB.classList.remove("active") } else { riB.classList.add("active") }
+}
+
 
 async function gstrings(t) {
     let langCookie = document.cookie.split("lang=")[1]
@@ -18,8 +29,9 @@ async function gstrings(t) {
         if (!strings || request.status == 404) gstrings(t + 1)
         strings = request.response
         document.documentElement.lang = langCode
-        document.querySelectorAll(".l18n").forEach(e => e.innerHTML = strings[e.innerHTML].replace("%dev%", "Quinten Althues") || e.innerHTML)
-        document.querySelectorAll(".l18nP").forEach(e => e.placeholder = strings[e.placeholder] || e.placeholder)
+        document.querySelectorAll("*[data-i18n]").forEach(e => e.innerHTML = strings[e.dataset.i18n] || e.innerHTML)
+        document.querySelectorAll(".i18n").forEach(e => e.innerHTML = strings[e.innerHTML] || e.innerHTML)
+        document.querySelectorAll(".i18nP").forEach(e => e.placeholder = strings[e.placeholder] || e.placeholder)
         document.querySelectorAll(".languagediv>*").forEach(e => {
             e.setAttribute("tabindex", "0")
             if (e.getAttribute("onclick").slice(24, 29).split("'")[0] == langCode) {
@@ -29,4 +41,8 @@ async function gstrings(t) {
             }
         })
     }
+}
+
+function crowdinproj(name) {
+    window.open(`https://crowdin.com/project/${name}`, "_blank")
 }
