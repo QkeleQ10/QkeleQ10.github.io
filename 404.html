@@ -2,25 +2,40 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
     <title>QkeleQ10</title>
     <link rel="icon" href="svg.svg" type="image/svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="QkeleQ10" />
-    <meta property="og:description" content="All tools you need in one place." />
+    <meta property="og:description"
+        content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="./svg.svg" />
 
-    <meta name="viewport" content="width=device-width">
-    <meta charset="utf-8">
-
     <link rel="stylesheet" href="style.css">
-    <script>setTimeout(() => window.location.href = "https://qkeleq10.github.io", 5000)</script>
+    <script>setTimeout(() => window.location.href = "/", 5000)</script>
+    <script src="feather.js"></script>
 </head>
 
 <body>
-    <div id="errorpage">
-        <h1 class="i18n">Oops!</h1>
-        <p class="i18n">That page doesn't exist here. You'll be redirected to the main page...</p>
+
+    <header>
+        <svg id="bigLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 4000">
+            <path
+                d="M3959.36,1596.62a1990.84,1990.84,0,0,0-301.18-715.81,2005.62,2005.62,0,0,0-879.91-724.49A1992.87,1992.87,0,0,0,2402.38,39.64a2017.27,2017.27,0,0,0-805.76,0A1990.84,1990.84,0,0,0,880.81,340.82a2005.62,2005.62,0,0,0-724.49,879.91A1992.87,1992.87,0,0,0,39.64,1596.62a2017.27,2017.27,0,0,0,0,805.76,1990.84,1990.84,0,0,0,301.18,715.81,2005.62,2005.62,0,0,0,879.91,724.49,1992.87,1992.87,0,0,0,375.89,116.68,2017.27,2017.27,0,0,0,805.76,0,1990.84,1990.84,0,0,0,715.81-301.18,2005.62,2005.62,0,0,0,724.49-879.91,1992.87,1992.87,0,0,0,116.68-375.89,2017.27,2017.27,0,0,0,0-805.76ZM3192.21,2815.67l-809.56-809.56a65,65,0,0,0-91.93,0l-307.2,307.19a65,65,0,0,0,0,91.93l805.07,805.07a2.49,2.49,0,0,1-.4,3.84c-227.09,148-498,234-788.69,234-778.29,0-1415.2-616.93-1447.38-1387.45C516.78,1214.79,1214.8,516.78,2060.71,552.12c770.52,32.18,1387.45,669.09,1387.45,1447.38,0,302.33-93.11,583.32-252.14,815.82A2.49,2.49,0,0,1,3192.21,2815.67Z" />
+        </svg>
+    </header>
+
+    <div class="s1" style="display: flex; align-items: center; justify-content: center; gap: 20px; padding: 25px 20px;">
+        <h2><i data-feather="alert-triangle"></i> <span class="i18n">Oops!</span></button></h2>
+        <p data-i18n="404desc" style="margin: 0;">That page doesn't exist here. You'll be redirected to the main page in
+            a moment.</p>
     </div>
+
+    <script>
+        feather.replace()
+    </script>
 
 </body>
 

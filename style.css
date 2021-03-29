@@ -32,14 +32,7 @@ body {
     background: var(--bk);
     font-family: 'Montserrat', arial, sans-serif;
     font-weight: 500;
-}
-
-#errorpage {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    overflow: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -80,7 +73,7 @@ header {
     overflow: auto;
     gap: 10px;
     padding: 10px;
-    margin: 5px -10px -15px;
+    margin: 5px -10px 0;
 }
 
 .gItem {
@@ -161,21 +154,4 @@ select {
 #bigLogo {
     fill: var(--accent);
     height: 50px;
-}
-
-::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
-}
-
-.scroller {
-    display: flex;
-    justify-content: space-between;
-    color: var(--darker);
-    cursor: default;
-}
-
-.scroller>*.active {
-    color: var(--accent);
-    cursor: pointer;
 }

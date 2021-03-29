@@ -9,7 +9,8 @@
     <link rel="icon" href="svg.svg" type="image/svg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="QkeleQ10" />
-    <meta property="og:description" content="All tools you need in one place." />
+    <meta property="og:description"
+        content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="./svg.svg" />
 
     <link rel="stylesheet" href="style.css">
@@ -46,24 +47,19 @@
         <h2><i data-feather="layout"></i> <span class="i18n">Subsites</span></button></h2>
         <div class="g1">
             <div class="gItem">
-                <h3 class="i18n">PreMiD Troubleshooting</h3>
+                <h3>PreMiD Troubleshooting</h3>
                 <h5 class="i18n">Troubleshooter</h5>
                 <!--<img src="https://pbs.twimg.com/profile_images/1355950211093377025/f5MlK_5x_400x400.jpg" title="Project icon">-->
-                <p data-i18n="crowdinQkeleQ10desc">An easy online check you can run to fix any issues with PreMiD you
+                <p data-i18n="premidtsdesc">An easy online check you can run to fix any issues with PreMiD you
                     might have. Do this before creating a support ticket.</p>
                 <button onclick="newpage('https:\/\/qkeleq10.github.io/PreMiD-Troubleshooting/')"><i
                         data-feather="alert-octagon"></i><span class="i18n">Troubleshoot</span></button>
             </div>
             <div class="gItem" style="display: flex; justify-content: center; align-items: center; gap: 30px;">
-                <p data-i18n="crowdinMCdesc">My other projects are currently being overhauled and rethought. Please
+                <p data-i18n="othersUnav">My other projects are currently being overhauled and rethought. Please
                     check back later, or view my GitHub to see what I'm up to!</p>
-                <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i data-feather="github"></i><span
-                        class="i18n">GitHub</span></button>
-            </div>
-        </div>
-        <div class="scroller">
-            <div class="leB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-left"></i></div>
-            <div class="riB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-right"></i>
+                <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i
+                        data-feather="github"></i><span>GitHub</span></button>
             </div>
         </div>
     </div>
@@ -72,52 +68,47 @@
         <h2><i data-feather="file-text"></i> <span class="i18n">Crowdin projects</span></button></h2>
         <div class="g1">
             <div class="gItem">
-                <h3 class="i18n">QkeleQ10</h3>
+                <h3>QkeleQ10</h3>
                 <h5 class="i18n">Owner</h5>
                 <!--<img src="https://pbs.twimg.com/profile_images/1355950211093377025/f5MlK_5x_400x400.jpg" title="Project icon">-->
-                <p data-i18n="crowdinQkeleQ10desc">Most subsites found on this page are localised using a single Crowdin
-                    project. Any help is massively appreciated!</p>
+                <p data-i18n="qkeleqdesc">Most subsites found on this page are localised using a single Crowdin project.
+                    Any help is massively appreciated!</p>
                 <button onclick="crowdinproj('qkeleq10')"><i data-feather="heart"></i><span
                         class="i18n">Contribute</span></button>
             </div>
             <div class="gItem">
-                <h3 class="i18n">Spotistats</h3>
-                <h5 class="i18n">Coming soon</h5>
-                <p data-i18n="crowdinQkeleQ10desc">Spotistats for Spotify provides insight into your most listened songs
+                <h3>Spotistats</h3>
+                <h5 class="i18n">Localisation manager</h5>
+                <p data-i18n="spotistatsdesc">Spotistats for Spotify provides insight into your most listened songs
                     and artists, with a choice of different periods.</p>
-                <button disabled onclick="crowdinproj('spotistats')"><i data-feather="loader"></i><span
-                        class="i18n">Coming soon</span></button>
+                <button onclick="crowdinproj('spotistats')"><i data-feather="arrow-up-right"></i><span
+                        class="i18n">Translate</span></button>
             </div>
             <div class="gItem">
-                <h3 class="i18n">PreMiD</h3>
+                <h3>PreMiD</h3>
                 <h5 class="i18n">Proofreader</h5>
-                <p data-i18n="crowdinPreMiDdesc">PreMiD is a simple, configurable utility that allows you to show what
+                <p data-i18n="premiddesc">PreMiD is a simple, configurable utility that allows you to show what
                     you're doing on the web in your Discord now
                     playing status.</p>
                 <button onclick="crowdinproj('premid')"><i data-feather="arrow-up-right"></i><span
                         class="i18n">Translate</span></button>
             </div>
             <div class="gItem">
-                <h3 class="i18n">Hypixel</h3>
+                <h3>Hypixel</h3>
                 <h5 class="i18n">Proofreader</h5>
-                <p data-i18n="crowdinHypixeldesc">Hypixel is one of the most popular Minecraft server networks in the
+                <p data-i18n="hypixeldesc">Hypixel is one of the most popular Minecraft server networks in the
                     world,
                     on which you can play minigames.</p>
                 <button onclick="crowdinproj('hypixel')"><i data-feather="arrow-up-right"></i><span
                         class="i18n">Translate</span></button>
             </div>
             <div class="gItem">
-                <h3 class="i18n">Minecraft</h3>
+                <h3>Minecraft</h3>
                 <h5 class="i18n">Translator</h5>
-                <p data-i18n="crowdinMCdesc">Minecraft is a sandbox video game developed by Mojang. Players may mine
+                <p data-i18n="mcdesc">Minecraft is a sandbox video game developed by Mojang. Players may mine
                     materials, craft tools and blocks, and build structures.</p>
                 <button onclick="crowdinproj('minecraft')"><i data-feather="arrow-up-right"></i><span
                         class="i18n">Translate</span></button>
-            </div>
-        </div>
-        <div class="scroller">
-            <div class="leB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-left"></i></div>
-            <div class="riB" onclick="this.scrollLeft = this.scrollLeft - 50"><i data-feather="arrow-right"></i>
             </div>
         </div>
     </div>
