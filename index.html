@@ -20,27 +20,10 @@
 
 <body>
     <header>
-        <svg id="bigLogo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4000 4000">
-            <path
-                d="M3959.36,1596.62a1990.84,1990.84,0,0,0-301.18-715.81,2005.62,2005.62,0,0,0-879.91-724.49A1992.87,1992.87,0,0,0,2402.38,39.64a2017.27,2017.27,0,0,0-805.76,0A1990.84,1990.84,0,0,0,880.81,340.82a2005.62,2005.62,0,0,0-724.49,879.91A1992.87,1992.87,0,0,0,39.64,1596.62a2017.27,2017.27,0,0,0,0,805.76,1990.84,1990.84,0,0,0,301.18,715.81,2005.62,2005.62,0,0,0,879.91,724.49,1992.87,1992.87,0,0,0,375.89,116.68,2017.27,2017.27,0,0,0,805.76,0,1990.84,1990.84,0,0,0,715.81-301.18,2005.62,2005.62,0,0,0,724.49-879.91,1992.87,1992.87,0,0,0,116.68-375.89,2017.27,2017.27,0,0,0,0-805.76ZM3192.21,2815.67l-809.56-809.56a65,65,0,0,0-91.93,0l-307.2,307.19a65,65,0,0,0,0,91.93l805.07,805.07a2.49,2.49,0,0,1-.4,3.84c-227.09,148-498,234-788.69,234-778.29,0-1415.2-616.93-1447.38-1387.45C516.78,1214.79,1214.8,516.78,2060.71,552.12c770.52,32.18,1387.45,669.09,1387.45,1447.38,0,302.33-93.11,583.32-252.14,815.82A2.49,2.49,0,0,1,3192.21,2815.67Z" />
-        </svg>
-
-        <button id="languagebutton"
-            onclick="document.getElementById('languagediv').classList.toggle('collapsed'); document.getElementById('languagediv').children[0].focus()"><i
-                data-feather="globe"></i><span class="i18n">Language</span>
+        <img id="bigLogo" src="svg.svg" title="Q logo">
+        <button id="languagebutton" onclick="langpicker()" disabled><i data-feather="globe"></i><span
+                class="i18n">Language</span>
         </button>
-        <!--<div id="languagediv" class="languagediv collapsed">
-            <div onclick="document.cookie = 'lang=en'; document.location.reload()">English</div>
-            <div onclick="document.cookie = 'lang=nl'; document.location.reload()">Nederlands</div>
-            <div onclick="document.cookie = 'lang=de'; document.location.reload()">Deutsch</div>
-            <div onclick="document.cookie = 'lang=it'; document.location.reload()">Italiano</div>
-            <div onclick="document.cookie = 'lang=pt'; document.location.reload()">Português</div>
-            <div onclick="document.cookie = 'lang=pl'; document.location.reload()">Polski</div>
-            <div onclick="document.cookie = 'lang=id'; document.location.reload()">Bahasa Indonesia</div>
-            <div onclick="document.cookie = 'lang=ms'; document.location.reload()">Melayu</div>
-            <div onclick="document.cookie = 'lang=ib'; document.location.reload()">Inhale Banana</div>
-            <div onclick="document.cookie = 'lang=em'; document.location.reload()">Emoji</div>
-        </div>-->
     </header>
 
     <div class="s1">
@@ -55,7 +38,7 @@
                 <button onclick="newpage('https:\/\/qkeleq10.github.io/PreMiD-Troubleshooting/')"><i
                         data-feather="alert-octagon"></i><span class="i18n">Troubleshoot</span></button>
             </div>
-            <div class="gItem" style="display: flex; justify-content: center; align-items: center; gap: 30px;">
+            <div class="gItem gridsb">
                 <p data-i18n="othersUnav">My other projects are currently being overhauled and rethought. Please
                     check back later, or view my GitHub to see what I'm up to!</p>
                 <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i

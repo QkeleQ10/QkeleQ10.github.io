@@ -14,8 +14,8 @@
     :root {
         --txt: #EEEEEE;
         --txt2: #bebebe;
-        --bk: #333333;
-        --bk2: #363636;
+        --bk: #292929;
+        --bk2: #333333;
         --accent: #77bb78;
         --headings: #7eca82;
         --darker: #25252560;
@@ -32,12 +32,13 @@ body {
     background: var(--bk);
     font-family: 'Montserrat', arial, sans-serif;
     font-weight: 500;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--txt);
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: left;
     align-items: center;
     gap: 10px;
@@ -51,9 +52,14 @@ h5 {
     color: var(--txt2);
 }
 
+h2>.feather {
+    color: var(--accent);
+}
+
 header {
     margin: 30px min(2vw, 50px) 10px;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: space-between;
     align-content: space-between;
 }
@@ -67,8 +73,11 @@ header {
 }
 
 .g1 {
-    display: flex;
-    justify-content: left;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+    justify-content: start;
+    justify-items: stretch;
     align-items: stretch;
     overflow: auto;
     gap: 10px;
@@ -102,18 +111,19 @@ p {
 }
 
 .toast, .languagediv {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     max-height: 50px;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
 button {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -139,19 +149,18 @@ button:focus {
     outline: none;
 }
 
-button[disabled] {
+button[disabled], button:not([onclick]) {
     color: var(--txt2);
     box-shadow: none;
     cursor: default;
 }
 
-select {
-    cursor: pointer;
-    padding: 9px 15px;
-    max-width: 99vw;
-}
-
 #bigLogo {
     fill: var(--accent);
     height: 50px;
+}
+
+.gridsb {
+    display: grid;
+    align-content: space-between;
 }
