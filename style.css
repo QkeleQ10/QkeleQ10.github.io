@@ -64,7 +64,7 @@ header {
     align-content: space-between;
 }
 
-.s1 {
+section {
     margin: 20px min(2vw, 50px) 10px;
     padding: 25px 20px 10px;
     border-radius: 6px;
@@ -81,8 +81,8 @@ header {
     align-items: stretch;
     overflow: auto;
     gap: 10px;
-    padding: 10px;
-    margin: 5px -10px 0;
+    padding: 10px 20px;
+    margin: 5px -20px 0;
 }
 
 .gItem {
@@ -156,6 +156,7 @@ button[disabled], button:not([onclick]) {
 }
 
 #bigLogo {
+    padding: 0 20px;
     fill: var(--accent);
     height: 50px;
 }
