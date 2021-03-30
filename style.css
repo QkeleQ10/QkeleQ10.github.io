@@ -5,8 +5,8 @@
     --bk: #f7f7f7;
     --bk2: #ffffff;
     --accent: #629464;
-    --headings: #3b803f;
-    --darker: #d8d8d860;
+    --accent2: #3b803f;
+    --button: #d8d8d860;
     --shadow: #aaaaaa60;
 }
 
@@ -14,11 +14,11 @@
     :root {
         --txt: #EEEEEE;
         --txt2: #bebebe;
-        --bk: #292929;
-        --bk2: #333333;
+        --bk: #2b2b2b;
+        --bk2: #303030;
         --accent: #77bb78;
-        --headings: #7eca82;
-        --darker: #25252560;
+        --accent2: #7eca82;
+        --button: #3f3f3f60;
         --shadow: #05050560;
     }
 }
@@ -45,7 +45,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    color: var(--headings);
+    color: var(--accent2);
 }
 
 h5 {
@@ -128,7 +128,7 @@ button {
     align-items: center;
     gap: 10px;
     border: none;
-    background: var(--darker);
+    background: var(--button);
     color: var(--accent);
     cursor: pointer;
     font-family: 'Montserrat', arial, sans-serif;

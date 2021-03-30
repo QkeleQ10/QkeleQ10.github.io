@@ -1,35 +1,22 @@
-let strings = {}
-let langCode = "en"
+let strings, langCode
 
-gstrings(1)
-
-async function gstrings(t) {
+async function localise(t) {
     let langCookie = document.cookie.split("lang=")[1]
     if (langCookie) langCookie = langCookie.split(";")[0]
     langCode = langCookie || window.navigator.language || "en"
-    if (t > 1) langCode = window.navigator.language.split("-")[0] || "en"
-    if (t > 2) langCode = "en"
-    let requestURL = "https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/" + langCode + ".json"
-    let request = new XMLHttpRequest()
-    request.open('GET', requestURL)
-    request.responseType = 'json'
-    request.send()
-    request.onloadend = function () {
-        if (!strings || request.status == 404) gstrings(t + 1)
-        strings = request.response
-        document.documentElement.lang = langCode
-        document.querySelectorAll("*[data-i18n]").forEach(e => e.innerHTML = strings[e.dataset.i18n] || e.innerHTML)
-        document.querySelectorAll(".i18n").forEach(e => e.innerHTML = strings[e.innerHTML] || e.innerHTML)
-        document.querySelectorAll(".i18nP").forEach(e => e.placeholder = strings[e.placeholder] || e.placeholder)
-        document.querySelectorAll(".languagediv>*").forEach(e => {
-            e.setAttribute("tabindex", "0")
-            if (e.getAttribute("onclick").slice(24, 29).split("'")[0] == langCode) {
-                e.style.backgroundColor = "var(--transparent)"
-                e.style.color = "var(--background)"
-                document.getElementById("languagediv").append(e)
-            }
+    if (t > 0) langCode = window.navigator.language.split("-")[0] || "en"
+    if (t > 1) langCode = "en"
+    if (t > 2) return
+
+    fetch("https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/" + langCode + ".json", { method: 'GET' })
+        .then((response) => { return response.json() })
+        .then((data) => {
+            strings = data
+            if (!strings) localise(t + 1)
+            document.documentElement.lang = langCode
+            document.querySelectorAll("*[data-i18n]").forEach(e => e.innerHTML = strings[e.dataset.i18n] || e.innerHTML)
+            document.querySelectorAll(".i18n").forEach(e => e.innerHTML = strings[e.innerHTML] || e.innerHTML)
         })
-    }
 }
 
 function crowdinproj(name) {
