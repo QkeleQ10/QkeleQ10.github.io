@@ -25,7 +25,6 @@
 
 * {
     margin: 0;
-    transition: max-height 0.25s;
 }
 
 body {
@@ -86,7 +85,7 @@ section {
 }
 
 .gItem {
-    min-width: clamp(150px, 22.5vw, 300px);
+    min-width: clamp(200px, 22.5vw, 300px);
     padding: 20px 15px;
     border-radius: 6px;
     box-shadow: 0 0 5px var(--shadow);
@@ -127,6 +126,7 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    min-height: 44px;
     border: none;
     background: var(--button);
     color: var(--accent);
