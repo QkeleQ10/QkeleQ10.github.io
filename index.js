@@ -3,13 +3,12 @@ let strings, langCode
 function localise(t) {
     let langCookie = document.cookie.split("lang=")[1]
     if (langCookie) langCookie = langCookie.split(";")[0]
-    console.log(document.cookie)
     langCode = langCookie || window.navigator.language || "en"
     if (t > 1) langCode = window.navigator.language.split("-")[0] || "en"
     if (t > 2) langCode = "en"
-    if (t > 3) return
+    if (t > 3) return console.error("Loading strings: Aborted.")
 
-    fetch("https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/" + langCode + ".json", { method: 'GET' })
+    fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/${langCode}.json`)
         .then((response) => { return response.json() })
         .then((data) => {
             strings = data
@@ -17,6 +16,10 @@ function localise(t) {
             document.documentElement.lang = langCode
             document.querySelectorAll("*[data-i18n]").forEach(e => e.innerHTML = strings[e.dataset.i18n] || e.innerHTML)
             document.querySelectorAll(".i18n").forEach(e => e.innerHTML = strings[e.innerHTML] || e.innerHTML)
+        })
+        .catch(() => {
+            console.log("Loading strings: Failed.")
+            localise(t + 1)
         })
 }
 
@@ -35,6 +38,7 @@ function openlangpicker() {
         e.appendChild(b)
         b.style.margin = "0"
         if (langCode == l) b.setAttribute("disabled", true)
+        if (e.scrollWidth > e.clientWidth) document.getElementById("bigLogo").style.width = "0"
     })
 }
 
