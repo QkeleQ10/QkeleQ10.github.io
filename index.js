@@ -25,7 +25,7 @@ function localise(t) {
 
 function openlangpicker() {
     let e = document.getElementById("langpicker")
-    let langs = ["en", "nl", "de", "fr", "pt", "ru", "tr", "id", "ms"]
+    let langs = ["en", "nl", "de", "fr", "pt", "ru", "tr", "id", "ms", "pl"]
     e.toggleAttribute("disabled")
     e.innerHTML = ""
     e.style.background = "none"
