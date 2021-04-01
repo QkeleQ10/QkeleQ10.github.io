@@ -24,21 +24,21 @@ function localise(t) {
 }
 
 function openlangpicker() {
-    let e = document.getElementById("langpicker")
-    let langs = ["en", "nl", "de", "fr", "pt", "ru", "tr", "id", "ms", "pl"]
-    e.toggleAttribute("disabled")
-    e.innerHTML = ""
-    e.style.background = "none"
-    e.style.padding = "0"
-    langs.forEach(l => {
+    let e = document.getElementById("langbutton")
+    let langs = [["en", "English"], ["nl", "Nederlands"], ["de", "Deutsch"], ["fr", "Français"], ["pt", "Português"], ["pl", "Polski"], ["ru", "Русский"], ["tr", "Türkçe"], ["id", "Bahasa Indonesia"], ["ms", "Bahasa Melayu"]]
+    
+    let p = document.getElementById("langpopup")
+    p.classList.remove("hidden")
+    document.querySelector(".popupbk").classList.remove("hidden")
+    document.getElementById("langlist").innerHTML = ""
+
+    langs.forEach((l) => {
         let b = document.createElement("button")
-        b.id = l
-        b.innerHTML = l.toUpperCase()
+        b.id = l[0]
+        if (langCode === l[0]) b.setAttribute("disabled", true)
+        b.innerHTML = l[1]
         b.setAttribute("onclick", "picklang(this.id)")
-        e.appendChild(b)
-        b.style.margin = "0"
-        if (langCode == l) b.setAttribute("disabled", true)
-        if (e.scrollWidth > e.clientWidth) document.getElementById("bigLogo").style.width = "0"
+        document.getElementById("langlist").appendChild(b)
     })
 }
 

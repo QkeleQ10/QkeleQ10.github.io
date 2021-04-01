@@ -103,14 +103,13 @@ section {
     border-radius: 100px;
 }
 
-div {
-    justify-content: center;
-    align-items: center;
-}
-
 p {
     margin: 10px 0 0;
     color: var(--txt2);
+}
+
+a {
+    cursor: pointer;
 }
 
 .toast, .languagediv {
@@ -155,7 +154,7 @@ button:focus {
 }
 
 button[disabled], button:not([onclick]) {
-    color: var(--txt2);
+    color: var(--shadow);
     box-shadow: none;
     cursor: default;
 }
@@ -169,4 +168,64 @@ button[disabled], button:not([onclick]) {
 .gridsb {
     display: grid;
     align-content: space-between;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bk2);
+    padding: 20px;
+    box-shadow: 0 0 5px var(--shadow);
+    border-radius: 6px;
+    animation: flyIn 0.25s;
+}
+
+.popupbk {
+    position: fixed;
+    size: 100vh 100vw;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--shadow);
+    animation: fadeIn 0.25s;
+}
+
+#langlist {
+    display: grid;
+}
+
+.hidden {
+    display: none;
+}
+
+.gridcol {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+}
+
+svg.small {
+    width: 16px;
+    height: 16px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes flyIn {
+    from {
+        top: 0;
+    }
+    to {
+        top: 1;
+    }
 }

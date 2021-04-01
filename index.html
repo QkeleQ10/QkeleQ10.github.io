@@ -21,9 +21,12 @@
 <body>
     <header>
         <img id="bigLogo" src="svg.svg" title="Q logo">
-        <button id="langpicker" onclick="openlangpicker()"><i data-feather="globe"></i><span
-                class="i18n">Language</span>
-        </button>
+        <div class="gridcol">
+            <!---->
+            <button id="langbutton" onclick="openlangpicker()">
+                <i data-feather="globe"></i><span class="i18n">Language</span>
+            </button>
+        </div>
     </header>
 
     <main>
@@ -69,7 +72,8 @@
                     <div>
                         <h3>Spotistats</h3>
                         <h5 class="i18n">Localisation manager</h5>
-                        <p data-i18n="spotistatsdesc">Spotistats for Spotify provides insight into your most listened songs
+                        <p data-i18n="spotistatsdesc">Spotistats for Spotify provides insight into your most listened
+                            songs
                             and artists, with a choice of different periods.</p>
                     </div>
                     <button onclick="crowdinproj('spotistats')"><i data-feather="arrow-up-right"></i><span
@@ -109,6 +113,14 @@
         </section>
 
     </main>
+
+    <div class="popupbk hidden"
+        onclick="this.classList.add('hidden'); document.getElementsByClassName('popup')[0].classList.add('hidden')">
+    </div>
+    <div id="langpopup" class="popup hidden">
+        <h2><i data-feather="globe"></i> <span class="i18n">Select a language</span></h2>
+        <div id="langlist"></div>
+    </div>
 
     <script>
         localise(1)
