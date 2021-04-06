@@ -49,10 +49,15 @@ h1 {
 
 h5 {
     color: var(--txt2);
+    margin: 0 0 10px;
 }
 
-h2>.feather {
-    color: var(--accent);
+p {
+    color: var(--txt2);
+}
+
+a {
+    cursor: pointer;
 }
 
 header {
@@ -64,11 +69,17 @@ header {
 }
 
 section {
+    flex-grow: 4;
+    min-width: clamp(250px, 25vw, 350px);
     margin: 20px min(2vw, 50px) 10px;
     padding: 25px 20px 10px;
     border-radius: 6px;
     box-shadow: 0 0 5px var(--shadow);
     background-color: var(--bk2);
+}
+
+h2>.feather {
+    color: var(--accent);
 }
 
 .g1 {
@@ -103,15 +114,6 @@ section {
     border-radius: 100px;
 }
 
-p {
-    margin: 10px 0 0;
-    color: var(--txt2);
-}
-
-a {
-    cursor: pointer;
-}
-
 .toast, .languagediv {
     display: grid;
     grid-auto-flow: column;
@@ -125,7 +127,6 @@ a {
 
 button {
     display: grid;
-    overflow: auto;
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
@@ -165,11 +166,6 @@ button[disabled], button:not([onclick]) {
     height: 50px;
 }
 
-.gridsb {
-    display: grid;
-    align-content: space-between;
-}
-
 .popup {
     position: fixed;
     top: 50%;
@@ -201,15 +197,41 @@ button[disabled], button:not([onclick]) {
     display: none;
 }
 
-.gridcol {
+.grid-rows {
     display: grid;
-    grid-auto-flow: column;
+    grid-auto-flow: row;
     gap: 10px;
 }
 
-svg.small {
-    width: 16px;
-    height: 16px;
+.grid-columns {
+    display: grid;
+    grid-auto-flow: column;
+    overflow: auto;
+    gap: 10px;
+}
+
+.grid-space-between {
+    display: grid;
+    align-content: space-between;
+}
+
+.section1 {
+    display: flex;
+    align-content: stretch;
+    overflow: auto;
+    margin: -10px 0;
+}
+
+.section1>img {
+    height: 192px;
+    margin: 20px min(2vw, 50px) 10px 0;
+    border-radius: 6px;
+    box-shadow: 0 0 5px var(--shadow);
+    background-color: var(--bk2);
+}
+
+.section1>section {
+    margin: 20px 10px 10px min(2vw, 50px);
 }
 
 @keyframes fadeIn {

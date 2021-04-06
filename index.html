@@ -22,7 +22,7 @@
 
     <header>
         <img id="bigLogo" src="svg.svg" title="Q logo">
-        <div class="gridcol">
+        <div class="grid-columns">
             <!---->
             <button id="langbutton" onclick="openlangpicker()">
                 <i data-feather="globe"></i><span class="i18n">Language</span>
@@ -32,20 +32,31 @@
 
     <main>
 
-        <!--<section>
-            <h2><i data-feather="at-sign"></i> <span class="i18n">RIP, this is still WIP</span></h2>
-            <div class="g1">
-                <div class="gItem gridsb">
-                    <div>
-                        <h3 class="i18n">Socials</h3>
-                    </div>
-                    <button onclick="newpage('https:\/\/twitter.com/QkeleQ10')"><i
-                            data-feather="twitter"></i><span class="i18n">@QkeleQ10</span></button>
-                    <button onclick="newpage('https:\/\/www.instagram.com/qkeleq10')"><i
-                            data-feather="instagram"></i><span class="i18n">@qkeleq10</span></button>
+        <div class="section1">
+            <section>
+                <h2><i data-feather="user"></i> <span class="i18n">About me</span></h2>
+                <div class="g1">
+                    <p class="i18n">A student from the Netherlands with a passion for localisation, programming and design, wanting to improve the world by creating tools for everyone to use.</p>
                 </div>
-            </div>
-        </section>-->
+                <div class="grid-columns">
+                    <button onclick="newpage('https:\/\/twitter.com/QkeleQ10')"><i
+                            data-feather="twitter"></i><span>Twitter</span></button>
+                    <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i
+                            data-feather="github"></i><span>GitHub</span></button>
+                    <button onclick="newpage('https:\/\/www.instagram.com/qkeleq10')"><i
+                            data-feather="instagram"></i><span>Instagram</span></button>
+                    <button onclick="newpage('https:\/\/premid.app/users/807917674477649943')"><i
+                            data-feather="arrow-up-right"></i><span>PreMiD</span></button>
+                    <button onclick="newpage('https:\/\/crowdin.com/profile/QkeleQ10')"><i
+                            data-feather="arrow-up-right"></i><span>Crowdin</span></button>
+                    <button onclick="newpage('https:\/\/www.reddit.com/user/QkeleQ10')"><i
+                            data-feather="arrow-up-right"></i><span>Reddit</span></button>
+
+                </div>
+            </section>
+            <img src="https://yt3.ggpht.com/ytc/AAUvwnjYQO3Ti6dhO5BhKp4SP0tTGVeuIPTlHJehPWqj_ZY=s900-c-k-c0x00ffffff-no-rj"
+                title="My logo" class="logo">
+        </div>
 
         <section>
             <h2><i data-feather="layout"></i> <span class="i18n">Subsites</span></h2>
@@ -54,14 +65,13 @@
                     <div>
                         <h3 class="i18n">PreMiD Troubleshooting</h3>
                         <h5 class="i18n">Troubleshooter</h5>
-                        <!--<img src="https://pbs.twimg.com/profile_images/1355950211093377025/f5MlK_5x_400x400.jpg" title="Project icon">-->
                         <p data-i18n="premidtsdesc">An easy online check you can run to fix any issues with PreMiD you
                             might have. Do this before creating a support ticket.</p>
                     </div>
                     <button onclick="newpage('https:\/\/qkeleq10.github.io/PreMiD-Troubleshooting/')"><i
                             data-feather="alert-octagon"></i><span class="i18n">Troubleshoot</span></button>
                 </div>
-                <div class="gItem gridsb">
+                <div class="gItem grid-space-between">
                     <p data-i18n="othersUnav">My other projects are currently being overhauled and rethought. Please
                         check back later, or view my GitHub to see what I'm up to!</p>
                     <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i
