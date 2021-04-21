@@ -5,18 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
 
-    <title>QkeleQ10</title>
-    <link rel="icon" href="svg.svg" type="image/svg">
+    <title>Update StudyTools - QkeleQ10</title>
+    <link rel="icon" href="/svg.svg" type="image/svg">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="QkeleQ10" />
+    <meta property="og:title" content="Update StudyTools - QkeleQ10" />
     <meta property="og:description"
         content="Welcome to my portfolio page, the portal to all my creations and projects." />
-    <meta property="og:image" content="./svg.svg" />
+    <meta property="og:image" content="/svg.svg" />
 
-    <link rel="stylesheet" href="style.css">
-    <script src="index.js"></script>
-    <script>setTimeout(() => window.location.href = "/", 5000)</script>
-    <script src="feather.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/index.js"></script>
+    <script src="/feather.js"></script>
 </head>
 
 <body>
@@ -28,10 +27,19 @@
         </svg>
     </header>
 
-    <section style="display: flex; flex-direction: column; gap: 20px; padding: 25px 20px;">
-        <h2><i data-feather="alert-triangle"></i> <span class="i18n">Oops!</span></button></h2>
-        <p data-i18n="404desc" style="margin: 0;">That page doesn't exist here. You'll be redirected to the main page in
-            a moment.</p>
+    <section
+        style="display: flex; flex-direction: column; gap: 20px; padding: 25px 20px;">
+        <h2><i data-feather="download-cloud"></i> <span class="i18n">Update available</span></button></h2>
+        <p data-i18n="updatedesc" style="margin: 0;">The extension you were using has an update available, which might
+            include new features and improved stability. Use the button below to download the update.</p>
+        <p>Download the zipped folder and unzip it using Windows Explorer. Extract it to a location you won't
+            accidentally delete it from. Open the 'magisterLogin.js' file using a text editor (right click, 'Open
+            with...'') and fill in the username and password if you so wish. Then head over to 'chrome://extensions' in
+            your browser, make sure 'Developer mode' is enabled, and hit 'Load unpacked extension'. Select the folder
+            you extracted the extension to earlier.</p>
+        <button onclick="newpage('https:\/\/github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip')"><i
+                data-feather="arrow-up-right"></i><span class="i18n">Download</span></button>
+
     </section>
 
     <script>
