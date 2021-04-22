@@ -25,7 +25,7 @@ function localise(t) {
 
 function openlangpicker() {
     let e = document.getElementById("langbutton")
-    let langs = [["en", "English"], ["nl", "Nederlands"], ["de", "Deutsch"], ["fr", "Français"], ["pt", "Português"], ["pl", "Polski"], ["ru", "Русский"], ["tr", "Türkçe"], ["id", "Bahasa Indonesia"], ["ms", "Bahasa Melayu"]]
+    let langs = [["en", "English"], ["nl", "Nederlands"], ["de", "Deutsch"], ["fr", "Français"], ["pt", "Português"], ["pl", "Polski"], ["ru", "Русский"], ["tr", "Türkçe"], ["bn", "বাংলা"]]
     
     let p = document.getElementById("langpopup")
     p.classList.remove("hidden")
