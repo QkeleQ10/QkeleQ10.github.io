@@ -24,22 +24,39 @@ function localise(t) {
 }
 
 function openlangpicker() {
-    let e = document.getElementById("langbutton")
-    let langs = [["en", "English"], ["nl", "Nederlands"], ["de", "Deutsch"], ["fr", "Français"], ["pt", "Português"], ["pl", "Polski"], ["ru", "Русский"], ["tr", "Türkçe"], ["bn", "বাংলা"]]
-    
-    let p = document.getElementById("langpopup")
-    p.classList.remove("hidden")
-    document.querySelector(".popupbk").classList.remove("hidden")
-    document.getElementById("langlist").innerHTML = ""
+    let langs = [["en", "English"]]
 
-    langs.forEach((l) => {
-        let b = document.createElement("button")
-        b.id = l[0]
-        if (langCode === l[0]) b.setAttribute("disabled", true)
-        b.innerHTML = l[1]
-        b.setAttribute("onclick", "picklang(this.id)")
-        document.getElementById("langlist").appendChild(b)
-    })
+    fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/availableLanguages.json`)
+        .then((response) => { return response.json() })
+        .then((availableLanguages) => {
+            fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/languageNames.json`)
+                .then((response) => { return response.json() })
+                .then((languageNames) => {
+                    availableLanguages.data.sort((a, b) => b.data.words.approved - a.data.words.approved).forEach(e => {
+                        if (e.data.translationProgress > 35) langs.push([e.data.languageId, languageNames[e.data.languageId] || `"${e.data.languageId}"`])
+                    })
+
+                    let p = document.getElementById("langpopup")
+                    p.classList.remove("hidden")
+                    document.querySelector(".popupbk").classList.remove("hidden")
+                    document.getElementById("langlist").innerHTML = ""
+
+                    langs.forEach((l) => {
+                        let b = document.createElement("button")
+                        b.id = l[0]
+                        if (langCode === l[0]) b.setAttribute("disabled", true)
+                        b.innerHTML = l[1]
+                        b.setAttribute("onclick", "picklang(this.id)")
+                        document.getElementById("langlist").appendChild(b)
+                    })
+                })
+                .catch(() => {
+                    console.log("Loading languages: Failed.")
+                })
+        })
+        .catch(() => {
+            console.log("Loading languages: Failed.")
+        })
 }
 
 function picklang(lang) {
