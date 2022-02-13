@@ -1,27 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
-:root {
-    --txt: #363636;
-    --txt2: #585858;
-    --bk: #f7f7f7;
-    --bk2: #ffffff;
-    --accent: #629464;
-    --accent2: #3b803f;
-    --button: #d8d8d860;
-    --shadow: #aaaaaa60;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --txt: #EEEEEE;
-        --txt2: #bebebe;
-        --bk: #2b2b2b;
-        --bk2: #303030;
-        --accent: #77bb78;
-        --accent2: #7eca82;
-        --button: #3f3f3f60;
-        --shadow: #05050560;
-    }
-}
 
 * {
     margin: 0;
@@ -36,9 +13,7 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
     color: var(--txt);
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: left;
+    display: flex;
     align-items: center;
     gap: 10px;
 }
@@ -76,10 +51,6 @@ section {
     border-radius: 6px;
     box-shadow: 0 0 5px var(--shadow);
     background-color: var(--bk2);
-}
-
-h2>.feather {
-    color: var(--accent);
 }
 
 .g1 {
@@ -126,8 +97,7 @@ h2>.feather {
 }
 
 button {
-    display: grid;
-    grid-auto-flow: column;
+    display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -138,7 +108,6 @@ button {
     cursor: pointer;
     font-family: 'Montserrat', arial, sans-serif;
     padding: 10px 15px;
-    margin: 10px 0 0;
     border-radius: 6px;
     box-shadow: none;
     transition: box-shadow 0.2s, border 0.2s;
@@ -154,6 +123,10 @@ button:focus {
     outline: none;
 }
 
+button.selected {
+    color: var(--shadow);
+}
+
 button[disabled], button:not([onclick]) {
     color: var(--shadow);
     box-shadow: none;
@@ -166,35 +139,37 @@ button[disabled], button:not([onclick]) {
     height: 50px;
 }
 
-.popup {
+#popupWrapper {
+    height: 100vh;
+    width: 100vw;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    z-index: 1;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--shadow);
+    animation: fadeIn 0.25s;
+}
+
+.popup {
     background-color: var(--bk2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
     border-radius: 6px;
     animation: flyIn 0.25s;
-}
-
-.popupbk {
-    position: fixed;
-    size: 100vh 100vw;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--shadow);
-    animation: fadeIn 0.25s;
+    overflow-wrap: normal;
 }
 
 #langlist {
     display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px;
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .grid-rows {
@@ -238,6 +213,7 @@ button[disabled], button:not([onclick]) {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -247,6 +223,7 @@ button[disabled], button:not([onclick]) {
     from {
         top: 0;
     }
+
     to {
         top: 1;
     }

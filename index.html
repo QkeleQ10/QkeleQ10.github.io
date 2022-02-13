@@ -13,9 +13,9 @@
         content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="/svg.svg" />
 
-    <link rel="stylesheet" href="/style.css">
-    <script src="/index.js"></script>
-    <script src="/feather.js"></script>
+    <link id="vars" rel="stylesheet" href="/css/varsLight.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <script src="/index.js" defer></script>
 </head>
 
 <body>
@@ -141,18 +141,13 @@
 
     </main>
 
-    <div class="popupbk hidden"
+    <div id="popupWrapper" class="hidden"
         onclick="this.classList.add('hidden'); document.getElementsByClassName('popup')[0].classList.add('hidden')">
+        <div id="langpopup" class="popup hidden">
+            <h2><i data-feather="globe"></i> <span class="i18n">Select a language</span></h2>
+            <div id="langlist"></div>
+        </div>
     </div>
-    <div id="langpopup" class="popup hidden">
-        <h2><i data-feather="globe"></i> <span class="i18n">Select a language</span></h2>
-        <div id="langlist"></div>
-    </div>
-
-    <script>
-        localise(1)
-        feather.replace()
-    </script>
 
 </body>
 
