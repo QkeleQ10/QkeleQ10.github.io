@@ -27,6 +27,10 @@ h5 {
     margin: 0 0 10px;
 }
 
+.material-icons-round {
+    color: var(--accent);
+}
+
 p {
     color: var(--txt2);
 }
@@ -101,7 +105,7 @@ button {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    min-height: 44px;
+    height: 44px;
     border: none;
     background: var(--button);
     color: var(--accent);
@@ -154,6 +158,10 @@ button[disabled], button:not([onclick]) {
 }
 
 .popup {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: clamp(150px, 50%, 750px);
     background-color: var(--bk2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
@@ -188,6 +196,7 @@ button[disabled], button:not([onclick]) {
 .grid-space-between {
     display: grid;
     align-content: space-between;
+    gap: 2Never mindThank you0px;
 }
 
 .section1 {

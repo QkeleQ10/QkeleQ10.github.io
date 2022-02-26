@@ -70,7 +70,7 @@ function crowdinproj(name) {
 }
 
 function newpage(page) {
-    window.open(page, "_blank")
+    window.open(`https://${page}`, "_blank")
 }
 
 String.prototype.capitalizeFirstLetter = function () {
