@@ -60,6 +60,11 @@ a {
     cursor: pointer;
 }
 
+li {
+    margin-top: .25em;
+    margin-bottom: .25em;
+}
+
 header {
     margin: 30px min(2vw, 50px) 10px;
     display: grid;
