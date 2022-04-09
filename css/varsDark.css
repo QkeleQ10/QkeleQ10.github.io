@@ -1,0 +1,12 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --txt: #EEEEEE;
+        --txt2: #bebebe;
+        --bk: #2b2b2b;
+        --bk2: #303030;
+        --accent: #77bb78;
+        --accent2: #7eca82;
+        --button: #3f3f3f60;
+        --shadow: #05050560;
+    }
+}

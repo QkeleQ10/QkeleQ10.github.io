@@ -13,9 +13,10 @@
         content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="/svg.svg" />
 
-    <link rel="stylesheet" href="/style.css">
-    <script src="/index.js"></script>
-    <script src="/feather.js"></script>
+    <link id="vars" rel="stylesheet" href="/css/varsLight.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <script src="/index.js" defer></script>
 </head>
 
 <body>
@@ -23,9 +24,9 @@
     <header>
         <img id="bigLogo" src="svg.svg" title="Q logo">
         <div class="grid-columns">
-            <!---->
             <button id="langbutton" onclick="openlangpicker()">
-                <i data-feather="globe"></i><span class="i18n">Language</span>
+                <span class="material-icons-round" aria-hidden="true">language</span>
+                <span class="i18n">Language</spa>
             </button>
         </div>
     </header>
@@ -34,25 +35,19 @@
 
         <div class="section1">
             <section>
-                <h2><i data-feather="user"></i> <span class="i18n">About me</span></h2>
+                <h2>
+                    <span class="material-icons-round" aria-hidden="true">person</span>
+                    <span class="i18n">About me</span>
+                </h2>
                 <div class="g1">
                     <p data-i18n="aboutme">A student from the Netherlands with a passion for localisation, programming
                         and design, wanting to improve the world by creating tools for everyone to use.</p>
                 </div>
                 <div class="grid-columns">
-                    <button onclick="newpage('https:\/\/twitter.com/QkeleQ10')"><i
-                            data-feather="twitter"></i><span>Twitter</span></button>
-                    <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i
-                            data-feather="github"></i><span>GitHub</span></button>
-                    <button onclick="newpage('https:\/\/www.instagram.com/qkeleq10')"><i
-                            data-feather="instagram"></i><span>Instagram</span></button>
-                    <button onclick="newpage('https:\/\/premid.app/users/807917674477649943')"><i
-                            data-feather="arrow-up-right"></i><span>PreMiD</span></button>
-                    <button onclick="newpage('https:\/\/crowdin.com/profile/QkeleQ10')"><i
-                            data-feather="arrow-up-right"></i><span>Crowdin</span></button>
-                    <button onclick="newpage('https:\/\/www.reddit.com/user/QkeleQ10')"><i
-                            data-feather="arrow-up-right"></i><span>Reddit</span></button>
-
+                    <button onclick="newpage('twitter.com/QkeleQ10')">Twitter</button>
+                    <button onclick="newpage('github.com/QkeleQ10')">GitHub</button>
+                    <button onclick="newpage('crowdin.com/profile/QkeleQ10')">Crowdin</button>
+                    <button onclick="newpage('premid.app/users/807917674477649943')">PreMiD</button>
                 </div>
             </section>
             <img src="https://yt3.ggpht.com/ytc/AAUvwnjYQO3Ti6dhO5BhKp4SP0tTGVeuIPTlHJehPWqj_ZY=s900-c-k-c0x00ffffff-no-rj"
@@ -60,29 +55,38 @@
         </div>
 
         <section>
-            <h2><i data-feather="layout"></i> <span class="i18n">Subsites</span></h2>
+            <h2>
+                <span class="material-icons-round" aria-hidden="true">wysiwyg</span>
+                <span class="i18n">Projects</span>
+            </h2>
             <div class="g1">
                 <div class="gItem">
                     <div>
-                        <h3 class="i18n">PreMiD Troubleshooting</h3>
-                        <h5 class="i18n">Troubleshooter</h5>
-                        <p data-i18n="premidtsdesc">An easy online check you can run to fix any issues with PreMiD you
-                            might have. Do this before creating a support ticket.</p>
+                        <h3>SaveTube</h3>
+                        <h5 class="i18n">Utility</h5>
+                        <p data-i18n="savetubedesc">Download YouTube videos to your machine in various formats with
+                            ease, without annoying ads and other dangers.</p>
                     </div>
-                    <button onclick="newpage('https:\/\/qkeleq10.github.io/PreMiD-Troubleshooting/')"><i
-                            data-feather="alert-octagon"></i><span class="i18n">Troubleshoot</span></button>
+                    <button onclick="newpage('qkeleq10.github.io/SaveTube')">
+                        <span class="material-icons-round" aria-hidden="true">launch</span>
+                        <span class="i18n">View</span>
+                    </button>
                 </div>
                 <div class="gItem grid-space-between">
-                    <p data-i18n="othersUnav">My other projects are currently being overhauled and rethought. Please
-                        check back later, or view my GitHub to see what I'm up to!</p>
-                    <button onclick="newpage('https:\/\/github.com/QkeleQ10')"><i
-                            data-feather="github"></i><span>GitHub</span></button>
+                    <p data-i18n="moreSoon">My other projects are currently not available to the public or simply not displayed on here. Check my GitHub profile to learn more. Expect to see more soon!</p>
+                    <button onclick="newpage('github.com/QkeleQ10')">
+                        <span class="material-icons-round" aria-hidden="true">launch</span>
+                        <span>GitHub</span>
+                    </button>
                 </div>
             </div>
         </section>
 
         <section>
-            <h2><i data-feather="file-text"></i> <span class="i18n">Crowdin projects</span></h2>
+            <h2>
+                <span class="material-icons-round" aria-hidden="true">translate</span>
+                <span class="i18n">Localisation</span>
+            </h2>
             <div class="g1">
                 <div class="gItem">
                     <div>
@@ -92,8 +96,8 @@
                         <p data-i18n="qkeleqdesc">Most subsites found on this page are localised using a single Crowdin
                             project. Any help is massively appreciated!</p>
                     </div>
-                    <button onclick="crowdinproj('qkeleq10')"><i data-feather="heart"></i><span
-                            class="i18n">Contribute</span></button>
+                    <button onclick="crowdinproj('qkeleq10')"><span class="material-icons-round"
+                            aria-hidden="true">construction</span><span class="i18n">Contribute</span></button>
                 </div>
                 <div class="gItem">
                     <div>
@@ -103,8 +107,8 @@
                             songs
                             and artists, with a choice of different periods.</p>
                     </div>
-                    <button onclick="crowdinproj('spotistats')"><i data-feather="arrow-up-right"></i><span
-                            class="i18n">Translate</span></button>
+                    <button onclick="crowdinproj('spotistats')"><span class="material-icons-round"
+                            aria-hidden="true">translate</span><span class="i18n">Translate</span></button>
                 </div>
                 <div class="gItem">
                     <div>
@@ -113,8 +117,8 @@
                         <p data-i18n="premiddesc">PreMiD is a simple, configurable utility that allows you to show what
                             you're doing on the web in your Discord now playing status.</p>
                     </div>
-                    <button onclick="crowdinproj('premid')"><i data-feather="arrow-up-right"></i><span
-                            class="i18n">Translate</span></button>
+                    <button onclick="crowdinproj('premid')"><span class="material-icons-round"
+                            aria-hidden="true">translate</span><span class="i18n">Translate</span></button>
                 </div>
                 <div class="gItem">
                     <div>
@@ -123,8 +127,8 @@
                         <p data-i18n="hypixeldesc">Hypixel is one of the most popular Minecraft server networks in the
                             world, on which you can play minigames.</p>
                     </div>
-                    <button onclick="crowdinproj('hypixel')"><i data-feather="arrow-up-right"></i><span
-                            class="i18n">Translate</span></button>
+                    <button onclick="crowdinproj('hypixel')"><span class="material-icons-round"
+                            aria-hidden="true">translate</span><span class="i18n">Translate</span></button>
                 </div>
                 <div class="gItem">
                     <div>
@@ -133,26 +137,28 @@
                         <p data-i18n="mcdesc">Minecraft is a sandbox video game developed by Mojang. Players may mine
                             materials, craft tools and blocks, and build structures.</p>
                     </div>
-                    <button onclick="crowdinproj('minecraft')"><i data-feather="arrow-up-right"></i><span
-                            class="i18n">Translate</span></button>
+                    <button onclick="crowdinproj('minecraft')"><span class="material-icons-round"
+                            aria-hidden="true">translate</span><span class="i18n">Translate</span></button>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <div class="popupbk hidden"
+    <div id="popupWrapper" class="hidden"
         onclick="this.classList.add('hidden'); document.getElementsByClassName('popup')[0].classList.add('hidden')">
+        <div id="langpopup" class="popup hidden">
+            <h2>
+                <span class="material-icons-round" aria-hidden="true">language</span>
+                <span class="i18n">Select a language</span>
+            </h2>
+            <div id="langlist"></div>
+            <button onclick="crowdinproj('qkeleq10')">
+                <span class="material-icons-round" aria-hidden="true">translate</span>
+                <span>Help translate</span>
+            </button>
+        </div>
     </div>
-    <div id="langpopup" class="popup hidden">
-        <h2><i data-feather="globe"></i> <span class="i18n">Select a language</span></h2>
-        <div id="langlist"></div>
-    </div>
-
-    <script>
-        localise(1)
-        feather.replace()
-    </script>
 
 </body>
 
