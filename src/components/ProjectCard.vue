@@ -1,13 +1,57 @@
 <script>
 import DefaultButton from "./DefaultButton.vue";
+import ScrollableRow from "./containers/ScrollableRow.vue";
 export default {
-    components: { DefaultButton }
+    components: { DefaultButton, ScrollableRow },
+    props: {
+        buttons: Array
+    }
 }
 </script>
 
 <template>
-    <h3>Head</h3>
-    <div role="doc-subtitle">Sub</div>
-    <p>Explanation</p>
-    <DefaultButton label="Test"></DefaultButton>
+    <div class="card">
+        <h3 class="card-title">
+            <slot name="title">Title</slot>
+        </h3>
+        <div class="card-subtitle" role="doc-subtitle">
+            <slot name="subtitle">Subtitle</slot>
+        </div>
+        <p class="card-content">
+            <slot name="content">Content</slot>
+        </p>
+        <ScrollableRow>
+            <DefaultButton
+                class="card-button"
+                v-for="button in buttons"
+                :href="button.href"
+                :icon="button.icon"
+            >{{ button.label }}</DefaultButton>
+        </ScrollableRow>
+    </div>
 </template>
+
+<style>
+.card {
+    min-width: clamp(200px, 22.5vw, 300px);
+    padding: 20px 15px;
+    border-radius: 6px;
+    box-shadow: 0 0 5px var(--shadow);
+    background-color: var(--bk2);
+}
+
+.card-title {
+    margin: 0;
+}
+
+.card-subtitle {
+    color: var(--txt2);
+    margin: 0 0 10px;
+    font-size: smaller;
+}
+
+.card-content {
+    color: var(txt2);
+    margin: 0;
+}
+</style>
