@@ -4,7 +4,8 @@ import GridFit from "./containers/GridFit.vue";
 import DefaultButton from "./DefaultButton.vue";
 import { setCookie, getCookie } from "typescript-cookie";
 
-let languages = ref([{ languageId: "en", localisedName: "English", defaultName: "English", translationProgress: 100, approvalProgress: 100 }])
+let languages = reactive([{ languageId: 'en', localisedName: 'English', defaultName: 'English', translationProgress: 100, approvalProgress: 100 }]),
+    currentLanguage = ref(getCookie('language'))
 
 getLanguages()
 
@@ -16,7 +17,7 @@ async function getLanguages() {
     resJson.data.forEach(l => {
         let id = l.data.languageId,
             langNamesLocalised = new Intl.DisplayNames(
-                [id || "en"],
+                [id || 'en'],
                 { type: "language", fallback: "none", languageDisplay: 'standard' }
             ),
             obj = {
@@ -24,7 +25,7 @@ async function getLanguages() {
                 defaultName: (langNamesDefault.of(id) || id).initial()
             }
         if (l.data.translationProgress > 35) {
-            return languages.value.push({ ...l.data, ...obj })
+            return languages.push({ ...l.data, ...obj })
         }
         else return
     })
@@ -43,7 +44,8 @@ String.prototype.initial = function () {
 <template>
     <GridFit>
         <DefaultButton class="tight" v-for="language in languages" :aria-label="language.defaultName"
-            :id="'language-option-' + language.languageId" :key="language.languageId" @click="setLanguage(language.languageId)">
+            :id="'language-option-' + language.languageId" :key="language.languageId"
+            @click="setLanguage(language.languageId)">
             {{ language.localisedName }}
         </DefaultButton>
         </GridFit>

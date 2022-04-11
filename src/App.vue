@@ -1,6 +1,6 @@
 
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, inject } from 'vue'
 import ProjectCard from './components/ProjectCard.vue'
 import ScrollableRow from './components/containers/ScrollableRow.vue'
 import Header from './components/Header.vue'
@@ -14,7 +14,10 @@ let modals = reactive({
 
 function openModal(modal) {
     modals[modal] = true
-    document.getElementById(`modal-${modal}`).firstElementChild.focus()
+}
+
+function closeModal(modal) {
+    modals[modal] = false
 }
 </script>
 
@@ -54,7 +57,7 @@ function openModal(modal) {
         </section>
     </main>
     <div>
-        <Modal v-show="modals.language" id="modal-language">
+        <Modal v-if="modals.language" id="modal-language" @close-modal="closeModal">
             <template #title>{{ $i18n('Select a language') }}</template>
             <template #content>
                 <LanguageList />

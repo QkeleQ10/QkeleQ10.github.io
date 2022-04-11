@@ -1,6 +1,7 @@
 <script setup>
+const emit = defineEmits(['close-modal'])
 function closeModal(modal) {
-    $emit('toggle-modal', modal)
+    emit('close-modal', modal)
 }
 </script>
 
