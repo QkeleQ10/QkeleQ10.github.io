@@ -28,22 +28,22 @@ export default {
     min-width: clamp(200px, 22.5vw, 300px);
     padding: 20px 15px;
     border-radius: 6px;
-    box-shadow: 0 0 5px var(--shadow);
+    box-shadow: 0 1px 5px var(--shadow);
     background-color: var(--bk2);
+    color: var(--txt2);
 }
 
 .card-title {
+    color: var(--txt);
     margin: 0;
 }
 
 .card-subtitle {
-    color: var(--txt2);
     margin: 0 0 10px;
     font-size: smaller;
 }
 
 .card-content {
-    color: var(--txt2);
     margin: 0;
 }
 </style>

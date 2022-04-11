@@ -20,8 +20,8 @@ async function getLanguages() {
                 { type: "language", fallback: "none", languageDisplay: 'standard' }
             ),
             obj = {
-                localisedName: (langNamesLocalised.of(id) || langNamesDefault.of(id) || id),
-                defaultName: (langNamesDefault.of(id) || id)
+                localisedName: (langNamesLocalised.of(id) || langNamesDefault.of(id) || id).initial(),
+                defaultName: (langNamesDefault.of(id) || id).initial()
             }
         if (l.data.translationProgress > 35) {
             return languages.value.push({ ...l.data, ...obj })
@@ -35,16 +35,16 @@ function setLanguage(language) {
     window.location.reload()
 }
 
+String.prototype.initial = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1)
+}
 </script>
 
 <template>
     <GridFit>
-        <DefaultButton
-            v-for="language in languages"
-            :aria-label="language.defaultName"
-            :id="'language-option-' + language.languageId"
-            :key="language.languageId"
-            @click="setLanguage(id)"
-        >{{ language.localisedName }}</DefaultButton>
-    </GridFit>
+        <DefaultButton class="tight" v-for="language in languages" :aria-label="language.defaultName"
+            :id="'language-option-' + language.languageId" :key="language.languageId" @click="setLanguage(language.languageId)">
+            {{ language.localisedName }}
+        </DefaultButton>
+        </GridFit>
 </template>

@@ -9,8 +9,8 @@ export default {
 <template>
     <header>
         <img id="header-logo" src="../assets/logo.svg" title="QkeleQ10" />
-        <DefaultButton icon="" @click="$emit('toggleModal', 'language')">Language</DefaultButton>
-    </header>
+        <DefaultButton icon="globe" @click="$emit('openModal', 'language')">{{ $i18n('Language') }}</DefaultButton>
+        </header>
 </template>
 
 <style>

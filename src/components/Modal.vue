@@ -35,17 +35,18 @@ function closeModal(modal) {
     flex-direction: column;
     gap: 20px;
     width: clamp(150px, 75%, 750px);
-    max-height: 100vh;
+    max-height: 90vh;
     background-color: var(--bk2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
     border-radius: 6px;
-    animation: flyIn 0.25s;
+    color: var(--txt2);
     overflow-wrap: normal;
     overflow: auto;
 }
 
 .modal-title {
+    color: var(--txt);
     margin: 0;
 }
 

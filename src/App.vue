@@ -12,19 +12,20 @@ let modals = reactive({
     language: false
 })
 
-function toggleModal(modal) {
-    modals[modal] = !modals[modal]
+function openModal(modal) {
+    modals[modal] = true
+    document.getElementById(`modal-${modal}`).firstElementChild.focus()
 }
 </script>
 
 <template>
-    <Header @toggleModal="toggleModal" />
+    <Header @openModal="openModal" />
     <main>
         <section>
             <ScrollableRow class="padded">
                 <ProjectCard>
-                    <template #title>Test title</template>
-                    <template #subtitle>Test subtitle</template>
+                    <template #title>QkeleQ10</template>
+                    <template #subtitle>{{ $i18n('Owner') }}</template>
                     <template #content>Test content</template>
                 </ProjectCard>
                 <ProjectCard>
@@ -53,11 +54,12 @@ function toggleModal(modal) {
         </section>
     </main>
     <div>
-        <Modal v-if="modals.language" id="language-modal">
-            <template #title>Select a language</template>
+        <Modal v-show="modals.language" id="modal-language">
+            <template #title>{{ $i18n('Select a language') }}</template>
             <template #content>
-                <LanguageList></LanguageList>
-                <DefaultButton icon="" href="https://crowdin.com/project/QkeleQ10">Help translate</DefaultButton>
+                <LanguageList />
+                <DefaultButton class="tight primary" icon="english-to-chinese"
+                    href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Help translate') }}</DefaultButton>
             </template>
         </Modal>  </div>
 </template>
@@ -72,7 +74,9 @@ function toggleModal(modal) {
     --bk2: #ffffff;
     --accent: #629464;
     --accent2: #3b803f;
-    --button: #d8d8d860;
+    --button: #f1f1f1;
+    --buttonHover: #e2e2e2;
+    --buttonFocus: #cef0cf;
     --shadow: #aaaaaa60;
 }
 
@@ -84,7 +88,7 @@ function toggleModal(modal) {
         --bk2: #303030;
         --accent: #77bb78;
         --accent2: #7eca82;
-        --button: #3f3f3f60;
+        --button: #2b2b2b;
         --shadow: #05050560;
     }
 }
