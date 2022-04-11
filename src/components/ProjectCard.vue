@@ -2,10 +2,7 @@
 import DefaultButton from "./DefaultButton.vue";
 import ScrollableRow from "./containers/ScrollableRow.vue";
 export default {
-    components: { DefaultButton, ScrollableRow },
-    props: {
-        buttons: Array
-    }
+    components: { DefaultButton, ScrollableRow }
 }
 </script>
 
@@ -21,12 +18,7 @@ export default {
             <slot name="content">Content</slot>
         </p>
         <ScrollableRow>
-            <DefaultButton
-                class="card-button"
-                v-for="button in buttons"
-                :href="button.href"
-                :icon="button.icon"
-            >{{ button.label }}</DefaultButton>
+            <slot name="buttons"></slot>
         </ScrollableRow>
     </div>
 </template>
@@ -51,7 +43,7 @@ export default {
 }
 
 .card-content {
-    color: var(txt2);
+    color: var(--txt2);
     margin: 0;
 }
 </style>

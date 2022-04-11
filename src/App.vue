@@ -1,20 +1,24 @@
 
-<script>
+<script setup>
+import { ref, reactive } from 'vue'
 import ProjectCard from './components/ProjectCard.vue'
 import ScrollableRow from './components/containers/ScrollableRow.vue'
 import Header from './components/Header.vue'
+import Modal from './components/Modal.vue'
+import LanguageList from './components/LanguageList.vue'
+import DefaultButton from './components/DefaultButton.vue'
 
-export default {
-    components: {
-        ProjectCard,
-        ScrollableRow,
-        Header
-    }
+let modals = reactive({
+    language: false
+})
+
+function toggleModal(modal) {
+    modals[modal] = !modals[modal]
 }
 </script>
 
 <template>
-    <Header />
+    <Header @toggleModal="toggleModal" />
     <main>
         <section>
             <ScrollableRow class="padded">
@@ -32,10 +36,13 @@ export default {
         </section>
         <section>
             <ScrollableRow class="padded">
-                <ProjectCard :buttons="[{ icon: '', label: 'Hey!', href: 'https://google.com' }]">
+                <ProjectCard>
                     <template #title>Test title</template>
                     <template #subtitle>Test subtitle</template>
                     <template #content>Test content</template>
+                    <template #buttons>
+                        <DefaultButton>Sample button</DefaultButton>
+                    </template>
                 </ProjectCard>
                 <ProjectCard>
                     <template #title>Test title</template>
@@ -45,6 +52,14 @@ export default {
             </ScrollableRow>
         </section>
     </main>
+    <div>
+        <Modal v-if="modals.language" id="language-modal">
+            <template #title>Select a language</template>
+            <template #content>
+                <LanguageList></LanguageList>
+                <DefaultButton icon="" href="https://crowdin.com/project/QkeleQ10">Help translate</DefaultButton>
+            </template>
+        </Modal>  </div>
 </template>
 
 <style>

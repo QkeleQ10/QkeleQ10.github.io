@@ -1,20 +1,22 @@
+<script setup>
+defineProps({
+    icon: String,
+    href: String
+})
+</script>
+
 <script>
 export default {
-    props: {
-        icon: String,
-        href: String
-    },
     inheritAttrs: false
 }
 </script>
 
 <template>
-    <a :href="href">
+    <a :href="href" :v-on-click="$attrs.onClick">
         <button type="button" v-bind="$attrs">
             <span class="button-icon" v-if="icon">{{ icon }}</span>
             <slot>Button</slot>
-        </button>
-    </a>
+        </button>    </a>
 </template>
 
 <style>
@@ -24,7 +26,11 @@ export default {
 }
 
 a {
+    display: block;
+    min-width: fit-content;
+    height: fit-content;
     text-decoration: none;
+    margin: 0;
 }
 
 button {
@@ -34,6 +40,7 @@ button {
     align-items: center;
     gap: 10px;
     min-height: 44px;
+    width: 100%;
     border: none;
     background: var(--button);
     color: var(--accent);

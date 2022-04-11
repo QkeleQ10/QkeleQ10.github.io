@@ -9,7 +9,7 @@ export default {
 <template>
     <header>
         <img id="header-logo" src="../assets/logo.svg" title="QkeleQ10" />
-        <DefaultButton icon="">Language</DefaultButton>
+        <DefaultButton icon="" @click="$emit('toggleModal', 'language')">Language</DefaultButton>
     </header>
 </template>
 
