@@ -13,8 +13,10 @@
         content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="/svg.svg" />
 
-    <link rel="stylesheet" href="/style.css">
-    <script src="/index.js"></script>
+    <link id="vars" rel="stylesheet" href="/css/varsLight.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <script src="/index.js" defer></script>
     <script src="/feather.js"></script>
 </head>
 
@@ -28,15 +30,23 @@
     </header>
 
     <section style="display: flex; flex-direction: column; gap: 20px; padding: 25px 20px;">
-        <h2><i data-feather="book"></i> <span class="i18n">StudyTools</span></button></h2>
+        <h2>
+            <span class="material-icons-round" aria-hidden="true">school</span>
+            <span class="i18n">StudyTools</span>
+        </h2>
         <ol>
-            <li>Download het .ZIP-bestand met de knop hieronder en open deze in Windows Verkenner. Het venster dat opent bevat één map.</li>
-            <li>Sleep deze map naar een veilige locatie, zoals je map 'Documenten'. Zorg ervoor dat je deze locatie onthoudt en de map er niet uit verwijdert.</li>
+            <li>Download het .ZIP-bestand met de knop hieronder en open deze in Windows Verkenner. Het venster dat opent
+                bevat één map.</li>
+            <li>Sleep deze map naar een veilige locatie, zoals je map 'Documenten'. Zorg ervoor dat je deze locatie
+                onthoudt en de map er niet uit verwijdert.</li>
             <li>Ga naar 'chrome://extensions' en zorg ervoor dat de 'Ontwikkelaarsmodus' is ingeschakeld.</li>
-            <li>Klik op 'Uitgepakte extensie laden'. Selecteer vervolgens de map die je zojuist verplaatst hebt (bijvoorbeeld naar 'Documenten').</li>
+            <li>Klik op 'Uitgepakte extensie laden'. Selecteer vervolgens de map die je zojuist verplaatst hebt
+                (bijvoorbeeld naar 'Documenten').</li>
         </ol>
-        <button onclick="newpage('https:\/\/github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip')"><i
-                data-feather="arrow-up-right"></i><span class="i18n">Download</span></button>
+        <button onclick="newpage('https:\/\/github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip')">
+            <span class="material-icons-round" aria-hidden="true">download</span>
+            <span class="i18n">Download</span>
+        </button>
 
     </section>
 

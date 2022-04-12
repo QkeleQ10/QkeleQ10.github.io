@@ -13,8 +13,10 @@
         content="Welcome to my portfolio page, the portal to all my creations and projects." />
     <meta property="og:image" content="/svg.svg" />
 
-    <link rel="stylesheet" href="/style.css">
-    <script src="/index.js"></script>
+    <link id="vars" rel="stylesheet" href="/css/varsLight.css">
+    <link rel="stylesheet" href="/css/general.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+    <script src="/index.js" defer></script>
     <script src="/feather.js"></script>
 </head>
 
@@ -28,16 +30,24 @@
     </header>
 
     <section style="display: flex; flex-direction: column; gap: 20px; padding: 25px 20px;">
-        <h2><i data-feather="download-cloud"></i> <span class="i18n">Update available</span></button></h2>
+        <h2>
+            <span class="material-icons-round" aria-hidden="true">cloud_download</span>
+            <span class="i18n">Update
+                available</span>
+        </h2>
         <p data-i18n="updatedesc" style="margin: 0;">The extension you were using has an update available, which might
             include new features and improved stability. Use the button below to download the update.</p>
         <ol>
-            <li>Download het .ZIP-bestand met de knop hieronder en open deze in Windows Verkenner. Het venster dat opent bevat één map.</li>
-            <li>Sleep deze map naar de locatie waar je hem al eens eerder naartoe hebt gesleept, zoals je map 'Documenten'.</li>
+            <li>Download het .ZIP-bestand met de knop hieronder en open deze in Windows Verkenner. Het venster dat opent
+                bevat één map.</li>
+            <li>Sleep deze map naar de locatie waar je hem al eens eerder naartoe hebt gesleept, zoals je map
+                'Documenten'.</li>
             <li>De updates zullen worden toegepast wanneer je je browser opnieuw start.</li>
         </ol>
-        <button onclick="newpage('https:\/\/github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip')"><i
-                data-feather="arrow-up-right"></i><span class="i18n">Download</span></button>
+        <button onclick="newpage('https:\/\/github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip')">
+            <span class="material-icons-round" aria-hidden="true">download</span>
+            <span class="i18n">Download</span>
+        </button>
 
     </section>
 
