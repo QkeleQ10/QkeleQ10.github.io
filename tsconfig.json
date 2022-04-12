@@ -6,6 +6,7 @@
     "src/**/*.vue"
   ],
   "compilerOptions": {
+    "module": "es2022",
     "baseUrl": ".",
     "paths": {
       "@/*": [

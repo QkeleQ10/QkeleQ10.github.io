@@ -1,12 +1,11 @@
-
 <script setup>
 import { ref, reactive, inject } from 'vue'
-import ProjectCard from './components/ProjectCard.vue'
-import ScrollableRow from './components/containers/ScrollableRow.vue'
-import Header from './components/Header.vue'
-import Modal from './components/Modal.vue'
-import LanguageList from './components/LanguageList.vue'
-import DefaultButton from './components/DefaultButton.vue'
+import ProjectCard from '../components/ProjectCard.vue'
+import ScrollableRow from '../components/ScrollableRow.vue'
+import Header from '../components/Header.vue'
+import Modal from '../components/Modal.vue'
+import LanguageList from '../components/LanguageList.vue'
+import DefaultButton from '../components/DefaultButton.vue'
 
 let modals = reactive({
     language: false
@@ -64,7 +63,8 @@ function closeModal(modal) {
                 <DefaultButton class="tight primary" icon="english-to-chinese"
                     href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Help translate') }}</DefaultButton>
             </template>
-        </Modal>  </div>
+        </Modal>
+    </div>
 </template>
 
 <style>

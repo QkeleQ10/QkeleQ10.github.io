@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
-import GridFit from "./containers/GridFit.vue";
+import GridFit from "./GridFit.vue";
 import DefaultButton from "./DefaultButton.vue";
 import { setCookie, getCookie } from "typescript-cookie";
 

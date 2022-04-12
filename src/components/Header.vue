@@ -1,6 +1,6 @@
 <script>
 import DefaultButton from "./DefaultButton.vue";
-import ScrollableRow from "./containers/ScrollableRow.vue";
+import ScrollableRow from "./ScrollableRow.vue";
 export default {
     components: { DefaultButton, ScrollableRow }
 }
