@@ -3,21 +3,11 @@ import { ref, reactive, inject } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import ScrollableRow from '../components/ScrollableRow.vue'
 import Header from '../components/Header.vue'
-import Modal from '../components/Modal.vue'
-import LanguageList from '../components/LanguageList.vue'
 import DefaultButton from '../components/DefaultButton.vue'
+import Modals from '../components/Modals.vue'
 
-let modals = reactive({
-    language: false
-})
-
-function openModal(modal) {
-    modals[modal] = true
-}
-
-function closeModal(modal) {
-    modals[modal] = false
-}
+const modals = ref(null)
+function openModal(modal) { modals.value.openModal(modal) }
 </script>
 
 <template>
@@ -55,16 +45,7 @@ function closeModal(modal) {
             </ScrollableRow>
         </section>
     </main>
-    <div>
-        <Modal v-if="modals.language" id="modal-language" @close-modal="closeModal">
-            <template #title>{{ $i18n('Select a language') }}</template>
-            <template #content>
-                <LanguageList />
-                <DefaultButton class="tight primary" icon="english-to-chinese"
-                    href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Help translate') }}</DefaultButton>
-            </template>
-        </Modal>
-    </div>
+    <Modals ref="modals" />
 </template>
 
 <style>
@@ -77,8 +58,8 @@ function closeModal(modal) {
     --bk2: #ffffff;
     --accent: #629464;
     --accent2: #3b803f;
-    --button: #f1f1f1;
-    --buttonHover: #e2e2e2;
+    --button: #ebebeb;
+    --buttonHover: #dbe6dc;
     --buttonFocus: #cef0cf;
     --shadow: #aaaaaa60;
 }

@@ -2,38 +2,45 @@ import { createApp } from 'vue'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
+import themePlugin from './plugins/theme'
 import Index from './pages/Index.vue'
 
 initialize()
 
 async function initialize() {
-    const
-        router = createRouter({
-            history: createWebHistory(),
-            routes: [
-                { path: "/", component: Index }
-            ],
-        }),
-        language = String(getCookie('language') || window.navigator.language || "en")
+    const router = createRouter({
+        history: createWebHistory(),
+        routes: [
+            { path: "/", component: Index }
+        ],
+    })
 
-    let strings
+    let strings,
+        language = getCookie('language') || window.navigator.language || "en",
+        theme = getCookie('theme') || window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light' || "light"
 
-    try {
-        const res = await fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/${language}.json`),
-            resJson = await res.json()
-        strings = resJson
-        if (!strings) throw new Error("No strings found")
-    } catch (err) {
-        console.error(err)
-        const res = await fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/en.json`),
-            resJson = await res.json()
-        strings = resJson
-        if (!strings) throw new Error("No strings found")
+    for (let i = 0; i < 3; i++) {
+        try {
+            const res = await fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/strings/${language}.json`),
+                resJson = await res.json()
+            strings = resJson
+            if (strings) break
+            else throw new Error('No strings found!')
+        } catch (err) {
+            console.warn(`No strings found for ${language}`)
+            if (language.includes('-')) language = language.split('-')[0]
+            else language = 'en'
+        }
+    }
+    if (!strings) {
+        console.error(`No strings available`)
+        strings = {}
     }
 
     createApp({})
         .use(router)
-        .use(i18nPlugin, { language: getCookie('language'), strings: strings })
+        .use(themePlugin, { theme })
+        .use(i18nPlugin, { language, strings })
         .mount('#app')
 
     document.documentElement.setAttribute('lang', language)

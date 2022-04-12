@@ -1,21 +1,21 @@
 <script setup>
 const emit = defineEmits(['close-modal'])
-function closeModal(modal) {
-    emit('close-modal', modal)
+function closeModal(event) { emit('close-modal', event?.currentTarget?.id || 'all') }
+
+document.onkeyup = function () {
+    closeModal('all')
 }
 </script>
 
 <template>
-    <Transition>
-        <div class="modal-backdrop" @click.self="closeModal(this.id)">
-            <div class="modal">
-                <h2 class="modal-title">
-                    <slot name="title"></slot>
-                </h2>
-                <slot name="content"></slot>
-            </div>
+    <div class="modal-backdrop" @click.self="closeModal($event)">
+        <div class="modal" role="dialog">
+            <h2 class="modal-title">
+                <slot name="title"></slot>
+            </h2>
+            <slot name="content"></slot>
         </div>
-        </Transition>
+    </div>
 </template>
 
 <style>
@@ -49,15 +49,5 @@ function closeModal(modal) {
 .modal-title {
     color: var(--txt);
     margin: 0;
-}
-
-.v-enter-active,
-.v-leave-active {
-    transition: opacity 0.5s ease;
-}
-
-.v-enter-from,
-.v-leave-to {
-    opacity: 0;
 }
 </style>
