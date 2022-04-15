@@ -10,6 +10,11 @@ let modals = reactive({
 
 function openModal(modal) {
     modals[modal] = true
+    setTimeout(() => {
+        document.getElementById("modal-" + modal)?.firstElementChild?.focus()
+        console.log(document.activeElement)
+    }, 0)
+
 }
 
 function closeModal(modal) {

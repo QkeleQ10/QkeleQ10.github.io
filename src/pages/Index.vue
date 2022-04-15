@@ -2,8 +2,9 @@
 import { ref, reactive, inject } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import ScrollableRow from '../components/ScrollableRow.vue'
-import Header from '../components/Header.vue'
+import ScrollableColumn from '../components/ScrollableColumn.vue'
 import DefaultButton from '../components/DefaultButton.vue'
+import Header from '../components/Header.vue'
 import Modals from '../components/Modals.vue'
 
 const modals = ref(null)
@@ -13,34 +14,52 @@ function openModal(modal) { modals.value.openModal(modal) }
 <template>
     <Header @openModal="openModal" />
     <main>
+        <ScrollableRow>Biography and image here!</ScrollableRow>
         <section>
-            <ScrollableRow class="padded">
+            <ScrollableRow>Projects here!</ScrollableRow>
+        </section>
+        <section>
+            <h2>Localisation</h2>
+            <ScrollableRow class="padded" role="list">
                 <ProjectCard>
                     <template #title>QkeleQ10</template>
                     <template #subtitle>{{ $i18n('Owner') }}</template>
-                    <template #content>Test content</template>
-                </ProjectCard>
-                <ProjectCard>
-                    <template #title>Test title</template>
-                    <template #subtitle>Test subtitle</template>
-                    <template #content>Test content</template>
-                </ProjectCard>
-            </ScrollableRow>
-        </section>
-        <section>
-            <ScrollableRow class="padded">
-                <ProjectCard>
-                    <template #title>Test title</template>
-                    <template #subtitle>Test subtitle</template>
-                    <template #content>Test content</template>
+                    <template #content>{{ $i18n('qkeleqdesc') }}</template>
                     <template #buttons>
-                        <DefaultButton>Sample button</DefaultButton>
+                        <DefaultButton icon="puzzle-piece">Contribute</DefaultButton>
                     </template>
                 </ProjectCard>
                 <ProjectCard>
-                    <template #title>Test title</template>
-                    <template #subtitle>Test subtitle</template>
-                    <template #content>Test content</template>
+                    <template #title>Stats.fm</template>
+                    <template #subtitle>{{ $i18n('Localisation manager') }}</template>
+                    <template #content>{{ $i18n('spotistatsdesc') }}</template>
+                    <template #buttons>
+                        <DefaultButton icon="english-to-chinese">Translate</DefaultButton>
+                    </template>
+                </ProjectCard>
+                <ProjectCard>
+                    <template #title>PreMiD</template>
+                    <template #subtitle>{{ $i18n('Proofreader') }}</template>
+                    <template #content>{{ $i18n('premiddesc') }}</template>
+                    <template #buttons>
+                        <DefaultButton icon="english-to-chinese">Translate</DefaultButton>
+                    </template>
+                </ProjectCard>
+                <ProjectCard>
+                    <template #title>Hypixel</template>
+                    <template #subtitle>{{ $i18n('Proofreader') }}</template>
+                    <template #content>{{ $i18n('hypixeldesc') }}</template>
+                    <template #buttons>
+                        <DefaultButton icon="english-to-chinese">Translate</DefaultButton>
+                    </template>
+                </ProjectCard>
+                <ProjectCard>
+                    <template #title>Minecraft</template>
+                    <template #subtitle>{{ $i18n('Translator') }}</template>
+                    <template #content>{{ $i18n('mcdesc') }}</template>
+                    <template #buttons>
+                        <DefaultButton icon="english-to-chinese">Translate</DefaultButton>
+                    </template>
                 </ProjectCard>
             </ScrollableRow>
         </section>
@@ -92,5 +111,10 @@ section {
     margin: 0 0 20px;
     border-radius: 6px;
     background-color: var(--bk2);
+}
+
+section>h2 {
+    color: var(--txt);
+    margin: 0;
 }
 </style>

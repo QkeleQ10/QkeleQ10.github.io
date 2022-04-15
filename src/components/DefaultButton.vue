@@ -14,9 +14,9 @@ export default {
 <template>
     <a :href="href" :v-on-click="$attrs.onClick">
         <button type="button" v-bind="$attrs">
-            <i :class="`button-icon uil uil-${icon}`" v-if="icon"></i>
+            <i aria-hidden="true" :class="`button-icon uil uil-${icon}`" v-if="icon"></i>
             <slot>Button</slot>
-        </button>    </a>
+        </button> </a>
 </template>
 
 <style>

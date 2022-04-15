@@ -7,17 +7,17 @@ export default {
 </script>
 
 <template>
-    <div class="card">
-        <h3 class="card-title">
-            <slot name="title">Title</slot>
+    <div class="card" role="listitem">
+        <h3 class="card-title" role="heading">
+            <slot name="title"></slot>
         </h3>
         <div class="card-subtitle" role="doc-subtitle">
-            <slot name="subtitle">Subtitle</slot>
+            <slot name="subtitle"></slot>
         </div>
         <p class="card-content">
-            <slot name="content">Content</slot>
+            <slot name="content"></slot>
         </p>
-        <ScrollableRow>
+        <ScrollableRow class="card-buttons">
             <slot name="buttons"></slot>
         </ScrollableRow>
     </div>
@@ -25,6 +25,8 @@ export default {
 
 <style>
 .card {
+    display: grid;
+    grid-template-rows: repeat(3, min-content) 1fr;
     min-width: clamp(200px, 22.5vw, 300px);
     padding: 20px 15px;
     border-radius: 6px;
@@ -45,5 +47,9 @@ export default {
 
 .card-content {
     margin: 0;
+}
+
+.card-buttons {
+    align-self: end;
 }
 </style>

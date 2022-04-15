@@ -2,19 +2,20 @@
 const emit = defineEmits(['close-modal'])
 function closeModal(event) { emit('close-modal', event?.currentTarget?.id || 'all') }
 
-document.onkeyup = function () {
-    closeModal('all')
+document.onkeyup = (e) => {
+    if (e.key === 'Escape') closeModal('all')
 }
 </script>
 
 <template>
     <div class="modal-backdrop" @click.self="closeModal($event)">
-        <div class="modal" role="dialog">
+        <dialog class="modal" role="dialog" tabindex="0">
             <h2 class="modal-title">
                 <slot name="title"></slot>
             </h2>
             <slot name="content"></slot>
-        </div>
+            <a class="modal-close" tabindex="0" role="button">{{ $i18n('Close modal') }}</a>
+        </dialog>
     </div>
 </template>
 
@@ -40,6 +41,7 @@ document.onkeyup = function () {
     background-color: var(--bk2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
+    border: none;
     border-radius: 6px;
     color: var(--txt2);
     overflow-wrap: normal;
@@ -49,5 +51,13 @@ document.onkeyup = function () {
 .modal-title {
     color: var(--txt);
     margin: 0;
+}
+
+.modal-close {
+    height: 0;
+    width: 0;
+    opacity: 0;
+    margin: -20px 0 0 0;
+
 }
 </style>
