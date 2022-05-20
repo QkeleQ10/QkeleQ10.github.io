@@ -1,9 +1,5 @@
-<script>
-import DefaultButton from "./DefaultButton.vue";
+<script setup>
 import ScrollableRow from "./ScrollableRow.vue";
-export default {
-    components: { DefaultButton, ScrollableRow }
-}
 </script>
 
 <template>

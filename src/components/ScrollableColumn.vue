@@ -1,3 +1,5 @@
+<script setup></script>
+
 <script>
 export default {
     methods: {

@@ -1,3 +1,5 @@
+<script setup></script>
+
 <script>
 export default {
     methods: {
@@ -19,7 +21,7 @@ export default {
     display: grid;
     grid-auto-flow: column;
     grid-template-columns: auto;
-    justify-content: start;
+    justify-content: stretch;
     justify-items: stretch;
     align-items: stretch;
     overflow: auto;

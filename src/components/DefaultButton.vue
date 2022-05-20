@@ -1,4 +1,5 @@
 <script setup>
+import Icon from "./Icon.vue";
 defineProps({
     icon: String,
     href: String
@@ -12,9 +13,9 @@ export default {
 </script>
 
 <template>
-    <a :href="href" :v-on-click="$attrs.onClick">
+    <a :href="href" :v-on-click="$attrs.onClick" tabindex="-1">
         <button type="button" v-bind="$attrs">
-            <i aria-hidden="true" :class="`button-icon uil uil-${icon}`" v-if="icon"></i>
+            <Icon :icon="icon"></Icon>
             <slot>Button</slot>
         </button> </a>
 </template>
@@ -35,7 +36,7 @@ button {
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     min-height: 44px;
     width: 100%;
     border: none;
@@ -75,10 +76,5 @@ button.primary {
 
 button.tight {
     margin: 0;
-}
-
-.button-icon {
-    font-size: x-large;
-    margin: -5px 0;
 }
 </style>

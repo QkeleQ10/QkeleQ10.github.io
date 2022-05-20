@@ -41,6 +41,7 @@ document.onkeyup = (e) => {
     background-color: var(--bk2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
+    outline: none;
     border: none;
     border-radius: 6px;
     color: var(--txt2);

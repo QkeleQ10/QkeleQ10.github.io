@@ -44,9 +44,10 @@ String.prototype.initial = function () {
 <template>
     <GridFit>
         <DefaultButton class="tight" v-for="language in languages" :aria-label="language.defaultName"
+            :title="$i18n('changeLanguageTooltip', { language: language.defaultName })"
             :id="'language-option-' + language.languageId" :key="language.languageId"
             @click="setLanguage(language.languageId)">
             {{ language.localisedName }}
         </DefaultButton>
-        </GridFit>
+    </GridFit>
 </template>
