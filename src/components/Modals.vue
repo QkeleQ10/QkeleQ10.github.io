@@ -2,7 +2,7 @@
 import { ref, reactive } from 'vue'
 import Modal from "./Modal.vue";
 import LanguageList from "./LanguageList.vue";
-import DefaultButton from "./DefaultButton.vue";
+import ButtonDefault from "./ButtonDefault.vue";
 
 let modals = reactive({
     language: false
@@ -35,8 +35,8 @@ defineExpose({ openModal, closeModal })
                 <template #title>{{ $i18n('Select a language') }}</template>
                 <template #content>
                     <LanguageList />
-                    <DefaultButton class="tight primary" icon="english-to-chinese"
-                        href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Help translate') }}</DefaultButton>
+                    <ButtonDefault class="tight primary" icon="english-to-chinese"
+                        href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Help translate') }}</ButtonDefault>
                 </template>
             </Modal>
         </Transition>

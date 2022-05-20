@@ -1,31 +1,33 @@
 <script setup>
 import { reactive } from "vue";
-import DefaultButton from "./DefaultButton.vue";
+import ButtonDefault from "./ButtonDefault.vue";
 import Logo from "../assets/Logo.vue";
 
-const obj = reactive({ scrollTop: document.documentElement.scrollTop < 1 })
+const obj = reactive({ belowFold: document.documentElement.scrollTop > 200 })
 
 window.onscroll = function () {
-    obj.scrollTop = document.documentElement.scrollTop < 1
+    obj.belowFold = document.documentElement.scrollTop > 200
 }
 </script>
 
 <template>
-    <header :class="{ 'page-top': obj.scrollTop }" >
-        <Logo transparent fill="monochrome" id="header-logo" />
-        <DefaultButton icon="globe" @click="$emit('openModal', 'language')">{{ $i18n('Language') }}</DefaultButton>
+    <header>
+        <Logo v-if="obj.belowFold" transparent fill="monochrome" id="header-logo" />
+        <div id="header-tools">
+            <!--<ButtonIcon icon="globe" @click="$emit('openModal', 'language')" :title="$i18n('Language')" />-->
+        </div>
     </header>
 </template>
 
 <style>
 header {
-    position: fixed;
     display: grid;
     height: 60px;
     width: 100vw;
     box-sizing: border-box;
     padding: 30px min(2vw, 50px) 10px;
-    grid-auto-flow: column;
+    grid-template-areas: "logo nav tools";
+    grid-template-columns: auto 1fr auto;
     justify-content: space-between;
     align-items: start;
 }
@@ -37,7 +39,7 @@ header svg {
     transition: height 200ms;
 }
 
-header.page-top svg {
-    height: 200px;
+header div#header-logo {
+    grid-area: logo;
 }
 </style>

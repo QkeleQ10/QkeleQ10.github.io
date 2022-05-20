@@ -2,12 +2,12 @@
     <div id="hero">
             <p>{{ $i18n('aboutme') }}</p>
             <ScrollableRow>
-                <DefaultButton icon="twitter" href="https://twitter.com/QkeleQ10">Twitter</DefaultButton>
-                <DefaultButton icon="github" href="https://github.com/QkeleQ10">GitHub</DefaultButton>
-                <DefaultButton icon="external-link-alt" href="https://crowdin.com/profile/QkeleQ10">Crowdin
-                </DefaultButton>
-                <DefaultButton icon="external-link-alt" href="https://premid.app/users/807917674477649943">PreMiD
-                </DefaultButton>
+                <ButtonDefault icon="twitter" href="https://twitter.com/QkeleQ10">Twitter</ButtonDefault>
+                <ButtonDefault icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
+                <ButtonDefault icon="external-link-alt" href="https://crowdin.com/profile/QkeleQ10">Crowdin
+                </ButtonDefault>
+                <ButtonDefault icon="external-link-alt" href="https://premid.app/users/807917674477649943">PreMiD
+                </ButtonDefault>
             </ScrollableRow>
     </div>
 </template>
@@ -15,7 +15,7 @@
 <script setup>
 import Icon from "./Icon.vue";
 import ScrollableRow from "./ScrollableRow.vue";
-import DefaultButton from "./DefaultButton.vue";
+import ButtonDefault from "./ButtonDefault.vue";
 </script>
 
 <style>

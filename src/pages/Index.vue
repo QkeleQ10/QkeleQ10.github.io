@@ -3,7 +3,7 @@ import { ref, reactive, inject } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
 import ScrollableRow from '../components/ScrollableRow.vue'
 import ScrollableColumn from '../components/ScrollableColumn.vue'
-import DefaultButton from '../components/DefaultButton.vue'
+import ButtonDefault from '../components/ButtonDefault.vue'
 import Header from '../components/Header.vue'
 import Modals from '../components/Modals.vue'
 import Icon from '../components/Icon.vue'
@@ -26,7 +26,7 @@ function openModal(modal) { modals.value.openModal(modal) }
                 <ProjectCard>
                     <template #content>{{ $i18n('moreSoon') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="github" href="https://github.com/QkeleQ10">GitHub</DefaultButton>
+                        <ButtonDefault icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
                     </template>
                 </ProjectCard>
             </ScrollableRow>
@@ -42,9 +42,9 @@ function openModal(modal) { modals.value.openModal(modal) }
                     <template #subtitle>{{ $i18n('Owner') }}</template>
                     <template #content>{{ $i18n('qkeleqdesc') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="heart" href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Contribute')
+                        <ButtonDefault icon="heart" href="https://crowdin.com/project/QkeleQ10">{{ $i18n('Contribute')
                         }}
-                        </DefaultButton>
+                        </ButtonDefault>
                     </template>
                 </ProjectCard>
                 <ProjectCard>
@@ -52,10 +52,10 @@ function openModal(modal) { modals.value.openModal(modal) }
                     <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                     <template #content>{{ $i18n('spotistatsdesc') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="english-to-chinese" href="https://statsfm.crowdin.com">{{
+                        <ButtonDefault icon="english-to-chinese" href="https://statsfm.crowdin.com">{{
                                 $i18n('Translate')
                         }}
-                        </DefaultButton>
+                        </ButtonDefault>
                     </template>
                 </ProjectCard>
                 <ProjectCard>
@@ -63,10 +63,10 @@ function openModal(modal) { modals.value.openModal(modal) }
                     <template #subtitle>{{ $i18n('Proofreader') }}</template>
                     <template #content>{{ $i18n('premiddesc') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="english-to-chinese" href="https://crowdin.com/project/premid">{{
+                        <ButtonDefault icon="english-to-chinese" href="https://crowdin.com/project/premid">{{
                                 $i18n('Translate')
                         }}
-                        </DefaultButton>
+                        </ButtonDefault>
                     </template>
                 </ProjectCard>
                 <ProjectCard>
@@ -74,10 +74,10 @@ function openModal(modal) { modals.value.openModal(modal) }
                     <template #subtitle>{{ $i18n('Proofreader') }}</template>
                     <template #content>{{ $i18n('hypixeldesc') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="english-to-chinese" href="https://crowdin.com/project/hypixel">{{
+                        <ButtonDefault icon="english-to-chinese" href="https://crowdin.com/project/hypixel">{{
                                 $i18n('Translate')
                         }}
-                        </DefaultButton>
+                        </ButtonDefault>
                     </template>
                 </ProjectCard>
                 <ProjectCard>
@@ -85,10 +85,10 @@ function openModal(modal) { modals.value.openModal(modal) }
                     <template #subtitle>{{ $i18n('Translator') }}</template>
                     <template #content>{{ $i18n('mcdesc') }}</template>
                     <template #buttons>
-                        <DefaultButton icon="english-to-chinese" href="https://crowdin.com/project/minecraft">{{
+                        <ButtonDefault icon="english-to-chinese" href="https://crowdin.com/project/minecraft">{{
                                 $i18n('Translate')
                         }}
-                        </DefaultButton>
+                        </ButtonDefault>
                     </template>
                 </ProjectCard>
             </ScrollableRow>

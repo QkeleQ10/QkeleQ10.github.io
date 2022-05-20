@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import GridFit from "./GridFit.vue";
-import DefaultButton from "./DefaultButton.vue";
+import ButtonDefault from "./ButtonDefault.vue";
 import { setCookie, getCookie } from "typescript-cookie";
 
 let languages = reactive([{ languageId: 'en', localisedName: 'English', defaultName: 'English', translationProgress: 100, approvalProgress: 100 }]),
@@ -43,11 +43,11 @@ String.prototype.initial = function () {
 
 <template>
     <GridFit>
-        <DefaultButton class="tight" v-for="language in languages" :aria-label="language.defaultName"
+        <ButtonDefault class="tight" v-for="language in languages" :aria-label="language.defaultName"
             :title="$i18n('changeLanguageTooltip', { language: language.defaultName })"
             :id="'language-option-' + language.languageId" :key="language.languageId"
             @click="setLanguage(language.languageId)">
             {{ language.localisedName }}
-        </DefaultButton>
+        </ButtonDefault>
     </GridFit>
 </template>
