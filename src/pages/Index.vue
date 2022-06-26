@@ -17,21 +17,7 @@ function openModal(modal) { modals.value.openModal(modal) }
     <Header />
     <main>
         <Hero />
-        <section>
-            <h2>
-                <Icon icon="sitemap" />
-                {{ $i18n('Projects') }}
-            </h2>
-            <ScrollableRow class="padded">
-                <ProjectCard>
-                    <template #content>{{ $i18n('moreSoon') }}</template>
-                    <template #buttons>
-                        <ButtonDefault icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
-                    </template>
-                </ProjectCard>
-            </ScrollableRow>
-        </section>
-        <section>
+        <!-- <section>
             <h2>
                 <Icon icon="compass" />
                 {{ $i18n('Localisation') }}
@@ -92,9 +78,9 @@ function openModal(modal) { modals.value.openModal(modal) }
                     </template>
                 </ProjectCard>
             </ScrollableRow>
-        </section>
+        </section> -->
     </main>
-    <footer>{{ $i18n('footer') }}</footer>
+    <!-- <footer>{{ $i18n('footer') }}</footer> -->
     <Modals ref="modals" />
 </template>
 
@@ -104,10 +90,13 @@ function openModal(modal) { modals.value.openModal(modal) }
 :root {
     --txt: #363636;
     --txt2: #585858;
+    --heroText: #ffffff;
     --bk: #f7f7f7;
     --bk2: #ffffff;
     --accent: #629464;
     --accent2: #3b803f;
+    --heroAccent1: #227538;
+    --heroAccent2: #1f5f45;
     --button: #ebebeb;
     --buttonHover: #dbe6dc;
     --buttonFocus: #cef0cf;
@@ -118,11 +107,16 @@ function openModal(modal) { modals.value.openModal(modal) }
     :root {
         --txt: #eeeeee;
         --txt2: #bebebe;
+        --heroText: #eeeeee;
         --bk: #2b2b2b;
         --bk2: #303030;
         --accent: #77bb78;
         --accent2: #7eca82;
+        --heroAccent1: #2b5536;
+        --heroAccent2: #1e382d;
         --button: #2b2b2b;
+        --buttonHover: #202020;
+        --buttonFocus: #1c201c;
         --shadow: #05050560;
     }
 }
@@ -141,14 +135,14 @@ main {
     gap: 20px;
 }
 
-section {
+/* section {
     flex-grow: 4;
     min-width: clamp(150px, 25vw, 350px);
     padding: 25px 20px 10px;
     margin: 0 2em;
     border-radius: 6px;
     background-color: var(--bk2);
-}
+} */
 
 h1,
 h2,
@@ -162,6 +156,7 @@ h6 {
 
 p {
     color: var(--txt2);
+    margin: 0;
 }
 
 footer {

@@ -40,13 +40,13 @@ button {
     min-height: 44px;
     width: 100%;
     border: none;
-    background: var(--button);
-    color: var(--accent);
+    background: var(--heroText);
+    color: var(--heroAccent1);
     cursor: pointer;
     font-family: "Montserrat", arial, sans-serif;
     padding: 5px 15px;
     margin: 10px 0 0;
-    border-radius: 6px;
+    /* border-radius: 6px; */
     box-shadow: none;
     transition: background-color 0.1s;
 }

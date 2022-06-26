@@ -12,15 +12,13 @@ window.onscroll = function () {
 
 <template>
     <header>
-        <Logo v-if="obj.belowFold" transparent fill="monochrome" id="header-logo" />
-        <div id="header-tools">
-            <!--<ButtonIcon icon="globe" @click="$emit('openModal', 'language')" :title="$i18n('Language')" />-->
-        </div>
+        <!---->
     </header>
 </template>
 
 <style>
 header {
+    position: absolute;
     display: grid;
     height: 60px;
     width: 100vw;
