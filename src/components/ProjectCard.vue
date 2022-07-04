@@ -1,5 +1,5 @@
 <script setup>
-import ScrollableRow from "./ScrollableRow.vue";
+import Scrollable from "./Scrollable.vue";
 </script>
 
 <template>
@@ -13,9 +13,9 @@ import ScrollableRow from "./ScrollableRow.vue";
         <p class="card-content">
             <slot name="content"></slot>
         </p>
-        <ScrollableRow class="card-buttons">
+        <Scrollable class="card-buttons">
             <slot name="buttons"></slot>
-        </ScrollableRow>
+        </Scrollable>
     </div>
 </template>
 

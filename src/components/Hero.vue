@@ -2,21 +2,21 @@
     <section id="hero">
         <h1 class="section-title">Hi, I'm Quinten.</h1>
         <p class="section-about">Korte voorbeeldtekst - uiteindelijk zal deze langer zijn dan dit</p>
-        <ScrollableRow id="hero-buttons">
-            <ButtonDefault icon="twitter" href="https://twitter.com/QkeleQ10">Twitter</ButtonDefault>
-            <ButtonDefault icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
-            <ButtonDefault icon="external-link-alt" href="https://crowdin.com/profile/QkeleQ10">Crowdin
+        <Scrollable direction="column" id="hero-buttons">
+            <ButtonDefault type="primary" icon="twitter" href="https://twitter.com/QkeleQ10">Twitter</ButtonDefault>
+            <ButtonDefault type="primary" icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
+            <ButtonDefault type="primary" href="https://crowdin.com/profile/QkeleQ10">Crowdin
             </ButtonDefault>
-            <ButtonDefault icon="external-link-alt" href="https://premid.app/users/807917674477649943">PreMiD
+            <ButtonDefault type="primary" href="https://premid.app/users/807917674477649943">PreMiD
             </ButtonDefault>
-        </ScrollableRow>
+        </Scrollable>
         <Logo transparent fill="monochrome" />
     </section>
 </template>
 
 <script setup>
 import Icon from "./Icon.vue";
-import ScrollableRow from "./ScrollableRow.vue";
+import Scrollable from "./Scrollable.vue";
 import ButtonDefault from "./ButtonDefault.vue";
 import Logo from "../assets/Logo.vue";
 </script>
@@ -40,7 +40,7 @@ import Logo from "../assets/Logo.vue";
         grid-template:
             "title logo" auto
             "about logo" auto
-            "buttons buttons" auto / auto 7.5em;
+            "buttons buttons" auto / auto 5em;
             padding: 2em;
             column-gap: 2em;
     }
@@ -70,6 +70,7 @@ import Logo from "../assets/Logo.vue";
 
 #hero #hero-buttons {
     grid-area: buttons;
+    align-self: end;
 }
 
 #hero svg {

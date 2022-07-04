@@ -1,8 +1,7 @@
 <script setup>
 import { ref, reactive, inject } from 'vue'
 import ProjectCard from '../components/ProjectCard.vue'
-import ScrollableRow from '../components/ScrollableRow.vue'
-import ScrollableColumn from '../components/ScrollableColumn.vue'
+import Scrollable from '../components/Scrollable.vue'
 import ButtonDefault from '../components/ButtonDefault.vue'
 import Header from '../components/Header.vue'
 import Modals from '../components/Modals.vue'
@@ -22,7 +21,7 @@ function openModal(modal) { modals.value.openModal(modal) }
                 <Icon icon="compass" />
                 {{ $i18n('Localisation') }}
             </h2>
-            <ScrollableRow class="padded" role="list">
+            <Scrollable class="padded" role="list">
                 <ProjectCard>
                     <template #title>QkeleQ10</template>
                     <template #subtitle>{{ $i18n('Owner') }}</template>
@@ -77,7 +76,7 @@ function openModal(modal) { modals.value.openModal(modal) }
                         </ButtonDefault>
                     </template>
                 </ProjectCard>
-            </ScrollableRow>
+            </Scrollable>
         </section> -->
     </main>
     <!-- <footer>{{ $i18n('footer') }}</footer> -->

@@ -1,6 +1,7 @@
 <script setup>
 import Icon from "./Icon.vue";
 defineProps({
+    type: String,
     icon: String,
     href: String
 })
@@ -14,7 +15,7 @@ export default {
 
 <template>
     <a :href="href" :v-on-click="$attrs.onClick" tabindex="-1">
-        <button type="button" v-bind="$attrs">
+        <button type="button" v-bind="$attrs" :data-button-style="style">
             <Icon :icon="icon"></Icon>
             <slot>Button</slot>
         </button> </a>
@@ -54,6 +55,7 @@ button {
 button:hover,
 button:focus {
     background: var(--buttonHover);
+    color: var(--heroText);
     outline: none;
 }
 
