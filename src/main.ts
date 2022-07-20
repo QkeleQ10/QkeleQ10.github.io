@@ -37,6 +37,8 @@ async function initialize() {
         strings = {}
     }
 
+    console.info(`Using language ${language}`)
+
     createApp({})
         .use(router)
         .use(themePlugin, { theme })

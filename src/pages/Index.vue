@@ -13,6 +13,7 @@ function openModal(modal) { modals.value.openModal(modal) }
 </script>
 
 <template>
+    <ButtonDefault @click="this.$root.dataset.theme = 'dark'">Change theme</ButtonDefault>
     <Header />
     <main>
         <Hero />
@@ -84,82 +85,5 @@ function openModal(modal) { modals.value.openModal(modal) }
 </template>
 
 <style>
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
-
-:root {
-    --txt: #363636;
-    --txt2: #585858;
-    --heroText: #ffffff;
-    --bk: #f7f7f7;
-    --bk2: #ffffff;
-    --accent: #629464;
-    --accent2: #3b803f;
-    --heroAccent1: #227538;
-    --heroAccent2: #1f5f45;
-    --button: #ebebeb;
-    --buttonHover: #dbe6dc;
-    --buttonFocus: #cef0cf;
-    --shadow: #aaaaaa60;
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --txt: #eeeeee;
-        --txt2: #bebebe;
-        --heroText: #eeeeee;
-        --bk: #2b2b2b;
-        --bk2: #303030;
-        --accent: #77bb78;
-        --accent2: #7eca82;
-        --heroAccent1: #2b5536;
-        --heroAccent2: #1e382d;
-        --button: #2b2b2b;
-        --buttonHover: #202020;
-        --buttonFocus: #1c201c;
-        --shadow: #05050560;
-    }
-}
-
-body {
-    background: var(--bk);
-    font-family: "Montserrat", arial, sans-serif;
-    font-weight: 500;
-    overflow-x: hidden;
-    margin: 0;
-}
-
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-/* section {
-    flex-grow: 4;
-    min-width: clamp(150px, 25vw, 350px);
-    padding: 25px 20px 10px;
-    margin: 0 2em;
-    border-radius: 6px;
-    background-color: var(--bk2);
-} */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--txt);
-    margin: 0;
-}
-
-p {
-    color: var(--txt2);
-    margin: 0;
-}
-
-footer {
-    font-size: small;
-    color: var(--txt2)
-}
+@import "../assets/css/base.css"
 </style>

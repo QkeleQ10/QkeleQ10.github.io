@@ -1,0 +1,36 @@
+@import url("colors.css");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
+
+body {
+  background: var(--bk);
+  font-family: "Montserrat", arial, sans-serif;
+  font-weight: 500;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--txt);
+  margin: 0;
+}
+
+p {
+  color: var(--txt2);
+  margin: 0;
+}
+
+footer {
+  font-size: small;
+  color: var(--txt2)
+}

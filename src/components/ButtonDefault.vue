@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-    <a :href="href" :v-on-click="$attrs.onClick" tabindex="-1">
+    <a :href="href" tabindex="-1">
         <button type="button" v-bind="$attrs" :data-button-style="style">
             <Icon :icon="icon"></Icon>
             <slot>Button</slot>
