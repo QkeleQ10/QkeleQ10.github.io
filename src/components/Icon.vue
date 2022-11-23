@@ -5,21 +5,13 @@ defineProps({
 </script>
 
 <template>
-    <i aria-hidden="true" :class="`uil uil-${icon}`" v-if="icon"></i>
+    <span aria-hidden="true" class="icon material-symbols-rounded">
+        <slot></slot>
+    </span>
 </template>
 
 <style>
-h1 .uil,
-h2 .uil,
-h3 .uil,
-h4 .uil,
-h5 .uil,
-h6 .uil {
-    color: var(--accent);
-    margin: 0 10px 0 0;
-}
-
-button .uil {
-    font-size: x-large;
+button .icon:not(:last-child) {
+    margin-right: 6px;
 }
 </style>

@@ -39,7 +39,13 @@ async function initialize() {
 
     console.info(`Using language ${language}`)
 
-    createApp({})
+    createApp({
+        data() {
+            return {
+                theme: 'auto'
+            }
+        }
+    })
         .use(router)
         .use(themePlugin, { theme })
         .use(i18nPlugin, { language, strings })

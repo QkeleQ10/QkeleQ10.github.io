@@ -27,7 +27,7 @@ import Scrollable from "./Scrollable.vue";
     padding: 20px 15px;
     border-radius: 6px;
     box-shadow: 0 1px 5px var(--shadow);
-    background-color: var(--bk2);
+    background-color: var(--bg2);
     color: var(--txt2);
 }
 

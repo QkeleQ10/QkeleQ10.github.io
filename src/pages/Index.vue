@@ -6,17 +6,18 @@ import ButtonDefault from '../components/ButtonDefault.vue'
 import Header from '../components/Header.vue'
 import Modals from '../components/Modals.vue'
 import Icon from '../components/Icon.vue'
-import Hero from '../components/Hero.vue'
+import Hero from '../sections/Hero.vue'
+import Localisation from '@/sections/Localisation.vue'
 
 const modals = ref(null)
 function openModal(modal) { modals.value.openModal(modal) }
 </script>
 
 <template>
-    <ButtonDefault @click="this.$root.dataset.theme = 'dark'">Change theme</ButtonDefault>
     <Header />
     <main>
         <Hero />
+        <Localisation />
         <!-- <section>
             <h2>
                 <Icon icon="compass" />

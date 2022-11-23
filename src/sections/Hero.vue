@@ -3,8 +3,8 @@
         <h1 class="section-title">Hi, I'm Quinten.</h1>
         <p class="section-about">Korte voorbeeldtekst - uiteindelijk zal deze langer zijn dan dit</p>
         <Scrollable direction="column" id="hero-buttons">
-            <ButtonDefault type="primary" icon="twitter" href="https://twitter.com/QkeleQ10">Twitter</ButtonDefault>
-            <ButtonDefault type="primary" icon="github" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
+            <ButtonDefault type="primary" href="https://twitter.com/QkeleQ10">Twitter</ButtonDefault>
+            <ButtonDefault type="primary" href="https://github.com/QkeleQ10">GitHub</ButtonDefault>
             <ButtonDefault type="primary" href="https://crowdin.com/profile/QkeleQ10">Crowdin
             </ButtonDefault>
             <ButtonDefault type="primary" href="https://premid.app/users/807917674477649943">PreMiD
@@ -15,9 +15,9 @@
 </template>
 
 <script setup>
-import Icon from "./Icon.vue";
-import Scrollable from "./Scrollable.vue";
-import ButtonDefault from "./ButtonDefault.vue";
+import Icon from "../components/Icon.vue";
+import Scrollable from "../components/Scrollable.vue";
+import ButtonDefault from "../components/ButtonDefault.vue";
 import Logo from "../assets/Logo.vue";
 </script>
 
@@ -30,9 +30,10 @@ import Logo from "../assets/Logo.vue";
         "buttons logo" auto
         / auto 10em;
     column-gap: 4em;
-    background: linear-gradient(300deg, var(--heroAccent1), var(--heroAccent2));
+    background: linear-gradient(300deg, rgb(var(--darkAccent)), rgb(var(--darkAccent2)));
+    color: rgb(var(--heroContent));
     box-sizing: border-box;
-    padding: 4em 4em 2em;
+    padding: 5em 4em 2em;
 }
 
 @media (max-width: 900px) {
@@ -41,7 +42,7 @@ import Logo from "../assets/Logo.vue";
             "title logo" auto
             "about logo" auto
             "buttons buttons" auto / auto 5em;
-            padding: 2em;
+            padding: 5em 2em 2em;
             column-gap: 2em;
     }
 }
@@ -57,13 +58,13 @@ import Logo from "../assets/Logo.vue";
 }
 
 #hero .section-title {
-    color: var(--heroText);
+    color: rgb(var(--heroContent));
     grid-area: title;
     font-size: 3em;
 }
 
 #hero .section-about {
-    color: var(--heroText);
+    color: rgb(var(--heroContent));
     grid-area: about;
     font-size: 1.3em;
 }
@@ -74,7 +75,7 @@ import Logo from "../assets/Logo.vue";
 }
 
 #hero svg {
-    color: var(--heroText);
+    color: rgb(var(--heroContent));
     grid-area: logo;
 }
 </style>

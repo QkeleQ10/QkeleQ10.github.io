@@ -38,7 +38,7 @@ document.onkeyup = (e) => {
     gap: 20px;
     width: clamp(150px, 75%, 750px);
     max-height: 90vh;
-    background-color: var(--bk2);
+    background-color: var(--bg2);
     padding: 20px;
     box-shadow: 0 0 5px var(--shadow);
     outline: none;

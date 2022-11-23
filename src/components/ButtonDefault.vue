@@ -1,7 +1,6 @@
 <script setup>
 import Icon from "./Icon.vue";
 defineProps({
-    type: String,
     icon: String,
     href: String
 })
@@ -16,7 +15,7 @@ export default {
 <template>
     <a :href="href" tabindex="-1">
         <button type="button" v-bind="$attrs" :data-button-style="style">
-            <Icon :icon="icon"></Icon>
+            <Icon>{{ icon }}</Icon>
             <slot>Button</slot>
         </button> </a>
 </template>
@@ -37,30 +36,39 @@ button {
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
-    gap: 5px;
     min-height: 44px;
     width: 100%;
     border: none;
-    background: var(--heroText);
-    color: var(--heroAccent1);
-    cursor: pointer;
+    background-color: rgb(var(--lightAccent));
+    color: rgb(var(--bgLight));
     font-family: "Montserrat", arial, sans-serif;
     padding: 5px 15px;
     margin: 10px 0 0;
-    /* border-radius: 6px; */
     box-shadow: none;
-    transition: background-color 0.1s;
+    cursor: pointer;
+    transition: background-color 200ms;
+}
+
+#hero button {
+    background-color: rgb(var(--bgLight));
+    color: rgb(var(--darkAccent));
 }
 
 button:hover,
 button:focus {
-    background: var(--buttonHover);
-    color: var(--heroText);
+    background: rgb(var(--highlightLight));
+    color: rgb(var(--bgLight));
     outline: none;
 }
 
+#hero button:hover,
+#hero button:focus {
+    background: rgb(var(--highlightLight));
+    color: rgb(var(--fgDark));
+}
+
 button:focus {
-    box-shadow: inset 0 0 0 3px var(--accent);
+    box-shadow: inset 0 0 0 3px rgb(var(--lightAccent));
     outline: none;
 }
 
@@ -73,10 +81,6 @@ button[disabled] {
 
 button.primary {
     background: var(--accent);
-    color: var(--bk2);
-}
-
-button.tight {
-    margin: 0;
+    color: var(--bg2);
 }
 </style>
