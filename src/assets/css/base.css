@@ -2,11 +2,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap");
 
 body {
-  background: var(--bg);
+  background-color: rgb(var(--bgPrimary));
   font-family: "Montserrat", arial, sans-serif;
   font-weight: 500;
   overflow-x: hidden;
   margin: 0;
+}
+
+body:has(.modal) {
+  overflow-y: hidden;
 }
 
 main {
@@ -21,16 +25,26 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--txt);
+  color: rgb(var(--fgPrimary));
   margin: 0;
 }
 
 p {
-  color: var(--txt2);
+  color: rgb(var(--fgSecondary));
   margin: 0;
 }
 
 footer {
   font-size: small;
-  color: var(--txt2)
+  color: rgb(var(--fgSecondary));
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

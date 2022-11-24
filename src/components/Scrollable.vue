@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-    <div class="scrollable" :data-direction="direction" :data-stretch="stretch" :data-padded="padded"
+    <div class="scrollable" role="list" :data-direction="direction" :data-stretch="stretch" :data-padded="padded"
         v-if="hasContent()">
         <slot></slot>
     </div>
@@ -30,6 +30,7 @@ export default {
 
 <style>
 .scrollable {
+    max-width: 100%;
     display: grid;
     grid-template-columns: auto;
     justify-items: stretch;

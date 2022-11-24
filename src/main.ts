@@ -1,8 +1,9 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
-import themePlugin from './plugins/theme'
+import Button from './components/Button.vue'
 import Index from './pages/Index.vue'
 
 initialize()
@@ -39,16 +40,14 @@ async function initialize() {
 
     console.info(`Using language ${language}`)
 
-    createApp({
-        data() {
-            return {
-                theme: 'auto'
-            }
-        }
-    })
+    const pinia = createPinia()
+    const app = createApp({})
+
+    app
         .use(router)
-        .use(themePlugin, { theme })
+        .use(pinia)
         .use(i18nPlugin, { language, strings })
+        .component('Button', Button)
         .mount('#app')
 
     document.documentElement.setAttribute('lang', language)

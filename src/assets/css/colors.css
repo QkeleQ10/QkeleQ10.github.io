@@ -1,24 +1,46 @@
 :root {
-    --txt: #363636;
-    --txt2: #585858;
-    --darkAccent: 34, 117, 56;
-    --darkAccent2: 31, 95, 69;
-    --lightAccent: 98, 148, 100;
-    --heroContent: 255, 255, 255;
-    --bgLight: 255, 255, 255;
-    --bgDark: 247, 247, 247;
-    --fgDark: 54, 54, 54;
-    --accent: #629464;
-    --accent2: #3b803f;
-    --button: #ebebeb;
-    --buttonHover: #dbe6dc;
-    --buttonFocus: #cef0cf;
-    --highlightLight: 206, 240, 207;
-    --shadow: #aaaaaa60;
+    --accentLight: 98, 148, 100;
+    --accentDark: 34, 117, 56;
+    --hero1: 34, 117, 56;
+    --hero2: 31, 95, 69;
+    --accentVeryLight: 206, 240, 207;
+    --bgPrimary: 255, 255, 255;
+    --bgSecondary: 247, 247, 247;
+    --bgTertiary: 235, 235, 235;
+    --fgSecondary: 88, 88, 88;
+    --fgPrimary: 54, 54, 54;
+    --fgContrast: 255, 255, 255;
+    --greyLight: 170, 170, 170;
 }
 
-@media only screen {
-    :root[data-theme=dark] {
-        
+:root.dark {
+    --accentLight: 34, 117, 56;
+    --accentDark: 98, 148, 100;
+    --hero1: 34, 117, 56;
+    --hero2: 31, 95, 69;
+    --accentVeryLight: 49, 82, 50;
+    --bgPrimary: 18, 18, 18;
+    --bgSecondary: 247, 247, 247;
+    --bgTertiary: 235, 235, 235;
+    --fgSecondary: 255, 255, 255;
+    --fgPrimary: 235, 235, 235;
+    --fgContrast: 255, 255, 255;
+    --greyLight: 170, 170, 170;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not(.light) {
+        --accentLight: 34, 117, 56;
+        --accentDark: 98, 148, 100;
+        --hero1: 34, 117, 56;
+        --hero2: 31, 95, 69;
+        --accentVeryLight: 49, 82, 50;
+        --bgPrimary: 18, 18, 18;
+        --bgSecondary: 247, 247, 247;
+        --bgTertiary: 235, 235, 235;
+        --fgSecondary: 255, 255, 255;
+        --fgPrimary: 235, 235, 235;
+        --fgContrast: 255, 255, 255;
+        --greyLight: 170, 170, 170;
     }
 }

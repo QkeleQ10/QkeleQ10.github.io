@@ -1,8 +1,10 @@
 <script setup>
 import Icon from "./Icon.vue";
+
 defineProps({
     icon: String,
-    href: String
+    href: String,
+    style: String
 })
 </script>
 
@@ -13,11 +15,11 @@ export default {
 </script>
 
 <template>
-    <a :href="href" tabindex="-1">
-        <button type="button" v-bind="$attrs" :data-button-style="style">
-            <Icon>{{ icon }}</Icon>
+    <a :href="href" role="listitem" tabindex="-1">
+        <button type="button" role="button" v-bind="$attrs">
+            <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
-        </button> </a>
+        </button></a>
 </template>
 
 <style>
@@ -36,11 +38,12 @@ button {
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
+    gap: 0.5em;
     min-height: 44px;
     width: 100%;
     border: none;
-    background-color: rgb(var(--lightAccent));
-    color: rgb(var(--bgLight));
+    background-color: rgb(var(--accentLight));
+    color: rgb(var(--fgContrast));
     font-family: "Montserrat", arial, sans-serif;
     padding: 5px 15px;
     margin: 10px 0 0;
@@ -49,38 +52,39 @@ button {
     transition: background-color 200ms;
 }
 
-#hero button {
-    background-color: rgb(var(--bgLight));
-    color: rgb(var(--darkAccent));
-}
-
 button:hover,
-button:focus {
-    background: rgb(var(--highlightLight));
-    color: rgb(var(--bgLight));
+button:focus,
+button:active,
+button[active=true] {
+    background: rgb(var(--accentDark));
+    color: rgb(var(--bgPrimary));
     outline: none;
 }
 
-#hero button:hover,
-#hero button:focus {
-    background: rgb(var(--highlightLight));
-    color: rgb(var(--fgDark));
+button.hero {
+    background-color: rgb(var(--fgContrast));
+    color: rgb(var(--accentDark));
+}
+
+button.hero:hover,
+button.hero:focus {
+    background: rgb(var(--accentVeryLight));
+    color: rgb(var(--fgPrimary));
 }
 
 button:focus {
-    box-shadow: inset 0 0 0 3px rgb(var(--lightAccent));
+    box-shadow: inset 0 0 0 3px rgb(var(--accentLight));
     outline: none;
+}
+
+button[active=true] {
+    pointer-events: none;
 }
 
 button[disabled] {
-    background: var(--button);
-    color: var(--shadow);
+    background: rgb(var(--bgTertiary));
+    color: var(rgba(var(--greyLight), 0.4));
     box-shadow: none;
     cursor: default;
-}
-
-button.primary {
-    background: var(--accent);
-    color: var(--bg2);
 }
 </style>

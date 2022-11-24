@@ -9,7 +9,10 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
+    "@vueuse/components": "^9.6.0",
+    "@vueuse/core": "^9.6.0",
     "intl-messageformat": "^10.2.1",
+    "pinia": "^2.0.26",
     "typescript-cookie": "^1.0.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

@@ -1,6 +1,5 @@
 <script setup>
 import { reactive } from "vue";
-import ButtonDefault from "./ButtonDefault.vue";
 import Logo from "../assets/Logo.vue";
 import ThemeSwitcher from "./ThemeSwitcher.vue";
 import LanguageSwitcher from "./LanguageSwitcher.vue";
@@ -14,7 +13,7 @@ window.onscroll = function () {
 
 <template>
     <header>
-        <Logo v-show="windowTop > 0" transparent fill="monochrome" />
+        <Logo @click="router.push('/')" v-show="windowTop > 0" transparent fill="monochrome" />
         <nav></nav>
         <div id="controls">
             <LanguageSwitcher />
@@ -25,25 +24,40 @@ window.onscroll = function () {
 
 <style>
 header {
-    position: absolute;
+    position: fixed;
     display: grid;
     width: 100%;
     column-gap: 2em;
     height: 60px;
-    width: 100vw;
     box-sizing: border-box;
-    padding: 1em 4em 2em;
+    padding: 1em 2em 2em;
     grid-template-areas: "logo nav tools";
     grid-template-columns: auto 1fr auto;
     justify-content: space-between;
     align-items: center;
-    color: rgb(var(--bgLight));
+    color: rgb(var(--accentDark));
+    transition: padding 200ms;
+}
+
+header.hero-visible {
+    padding: 1em 4em 2em;
+    color: rgb(var(--fgContrast));
 }
 
 header svg {
-    color: var(--bg2);
+    color: currentColor;
     height: 30px;
-    transition: height 200ms;
+    cursor: pointer;
+    padding: 0.5em;
+    transition: translate 200ms, color 200ms;
+}
+
+header svg:hover {
+    color: rgb(var(--accentLight));
+}
+
+header.hero-visible svg {
+    translate: 0 calc(-3em - 30px);
 }
 
 header div#header-logo {

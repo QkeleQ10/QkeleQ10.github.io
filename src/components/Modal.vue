@@ -1,20 +1,19 @@
 <script setup>
-const emit = defineEmits(['close-modal'])
-function closeModal(event) { emit('close-modal', event?.currentTarget?.id || 'all') }
+function closeModal() { document.querySelector('.modal-backdrop').click() }
 
 document.onkeyup = (e) => {
-    if (e.key === 'Escape') closeModal('all')
+    if (e.key === 'Escape') closeModal()
 }
 </script>
 
 <template>
-    <div class="modal-backdrop" @click.self="closeModal($event)">
+    <div class="modal-backdrop">
         <dialog class="modal" role="dialog" tabindex="0">
             <h2 class="modal-title">
                 <slot name="title"></slot>
             </h2>
             <slot name="content"></slot>
-            <a class="modal-close" tabindex="0" role="button">{{ $i18n('Close modal') }}</a>
+            <a class="modal-close" onclick="closeModal" tabindex="0">Close dialog</a>
         </dialog>
     </div>
 </template>
@@ -29,7 +28,9 @@ document.onkeyup = (e) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(var(--fgPrimary), 0.5);
+    backdrop-filter: blur(0.5em);
+    animation: fadeIn 200ms;
 }
 
 .modal {
@@ -38,27 +39,26 @@ document.onkeyup = (e) => {
     gap: 20px;
     width: clamp(150px, 75%, 750px);
     max-height: 90vh;
-    background-color: var(--bg2);
+    background-color: rgb(var(--bgPrimary));
     padding: 20px;
-    box-shadow: 0 0 5px var(--shadow);
+    box-shadow: 0 0 5px rgba(var(--fgPrimary), 0.5);
     outline: none;
     border: none;
     border-radius: 6px;
-    color: var(--txt2);
+    color: rgb(var(--fgPrimary));
     overflow-wrap: normal;
     overflow: auto;
 }
 
 .modal-title {
-    color: var(--txt);
+    color: rgb(var(--fgPrimary));
     margin: 0;
 }
 
 .modal-close {
+    position: absolute;
     height: 0;
     width: 0;
     opacity: 0;
-    margin: -20px 0 0 0;
-
 }
 </style>

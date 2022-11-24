@@ -1,19 +1,24 @@
 <script setup>
+import { useThemeStore } from '../stores/theme'
 import Icon from './Icon.vue';
+
+const theme = useThemeStore()
+
+theme.set((theme.theme))
 </script>
 
 <template>
     <div id="theme-switcher">
-        <button type="button" role="switch" title="Dark theme" :aria-checked="this.$root.theme == 'dark'"
-            :active="this.$root.theme == 'dark'" @click="this.$root.theme = 'dark'">
+        <button type="button" role="switch" aria-label="Set site theme to dark" title="Dark theme"
+            :aria-checked="this.$root.theme == 'dark'" :active="theme.theme === 'dark'" @click="theme.set('dark')">
             <Icon>dark_mode</Icon>
         </button>
-        <button type="button" role="switch" title="Light theme" :aria-checked="this.$root.theme == 'light'"
-            :active="this.$root.theme == 'light'" @click="this.$root.theme = 'light'">
+        <button type="button" role="switch" aria-label="Set site theme to light" title="Light theme"
+            :aria-checked="this.$root.theme == 'light'" :active="theme.theme === 'light'" @click="theme.set('light')">
             <Icon>light_mode</Icon>
         </button>
-        <button type="button" role="switch" title="Adapt to system theme" :aria-checked="this.$root.theme == 'auto'"
-            :active="this.$root.theme == 'auto'" @click="this.$root.theme = 'auto'">
+        <button type="button" role="switch" aria-label="Set site theme to system theme" title="System theme"
+            :aria-checked="this.$root.theme == 'auto'" :active="theme.theme === 'auto'" @click="theme.set('auto')">
             <Icon>brightness_auto</Icon>
         </button>
     </div>
@@ -23,7 +28,13 @@ import Icon from './Icon.vue';
 #theme-switcher {
     display: grid;
     grid-auto-flow: column;
-    border: 1px solid currentColor;
+    border: 1px solid transparent;
+    transition: border 200ms;
+}
+
+#theme-switcher:hover,
+#theme-switcher:focus-within {
+    border-color: rgb(var(--accentVeryLight));
 }
 
 #theme-switcher>button {
@@ -39,12 +50,12 @@ import Icon from './Icon.vue';
 }
 
 #theme-switcher:hover>button[active=true] {
-    background-color: rgb(var(--highlightLight));
-    color: var(--txt);
+    background-color: rgb(var(--accentVeryLight));
+    color: rgb(var(--fgPrimary));
 }
 
 #theme-switcher>button:hover {
-    background-color: rgba(var(--highlightLight), 0.5);
+    background-color: rgba(var(--accentVeryLight), 0.5);
 }
 
 #theme-switcher:not(:hover):not(:focus-within)>button:not([active=true]) {

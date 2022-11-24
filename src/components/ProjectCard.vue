@@ -26,13 +26,13 @@ import Scrollable from "./Scrollable.vue";
     min-width: clamp(200px, 22.5vw, 300px);
     padding: 20px 15px;
     border-radius: 6px;
-    box-shadow: 0 1px 5px var(--shadow);
+    box-shadow: 0 1px 5px var(rgba(var(--greyLight), 0.4));
     background-color: var(--bg2);
-    color: var(--txt2);
+    color: rgb(var(--fgSecondary));
 }
 
 .card-title {
-    color: var(--txt);
+    color: rgb(var(--fgPrimary));
     margin: 0;
 }
 
