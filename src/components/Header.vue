@@ -13,7 +13,9 @@ window.onscroll = function () {
 
 <template>
     <header>
-        <Logo @click="router.push('/')" v-show="windowTop > 0" transparent fill="monochrome" />
+        <RouterLink to="/">
+            <Logo @click="router.push('/')" v-show="windowTop > 0" transparent fill="monochrome" />
+        </RouterLink>
         <nav></nav>
         <div id="controls">
             <LanguageSwitcher />
@@ -35,28 +37,39 @@ header {
     grid-template-columns: auto 1fr auto;
     justify-content: space-between;
     align-items: center;
-    color: rgb(var(--accentDark));
+    color: rgb(var(--fgTertiary));
     transition: padding 200ms;
 }
 
-header.hero-visible {
+header[data-hero-visible=true] {
     padding: 1em 4em 2em;
     color: rgb(var(--fgContrast));
 }
 
+header.collide+main {
+    border-top: 4em solid transparent;
+}
+
+header>a {
+    color: currentColor;
+}
+
 header svg {
+    background-color: none;
     color: currentColor;
     height: 30px;
     cursor: pointer;
     padding: 0.5em;
-    transition: translate 200ms, color 200ms;
+    border-radius: 0.5em;
+    transition: translate 200ms, color 200ms, background-color 200ms;
 }
 
 header svg:hover {
-    color: rgb(var(--accentLight));
+    background-color: rgb(var(--bgPrimary));
+    color: rgb(var(--accentDark));
 }
 
-header.hero-visible svg {
+header[data-hero-visible=true] svg {
     translate: 0 calc(-3em - 30px);
 }
 

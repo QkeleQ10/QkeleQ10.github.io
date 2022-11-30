@@ -4,6 +4,7 @@ import Icon from "./Icon.vue";
 defineProps({
     icon: String,
     href: String,
+    target: String,
     style: String
 })
 </script>
@@ -15,7 +16,7 @@ export default {
 </script>
 
 <template>
-    <a :href="href" role="listitem" tabindex="-1">
+    <a :href="href" :target="target" role="listitem" tabindex="-1">
         <button type="button" role="button" v-bind="$attrs">
             <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
@@ -49,7 +50,7 @@ button {
     margin: 10px 0 0;
     box-shadow: none;
     cursor: pointer;
-    transition: background-color 200ms;
+    transition: background-color 200ms, color 200ms;
 }
 
 button:hover,

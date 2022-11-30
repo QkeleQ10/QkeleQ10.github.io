@@ -9,19 +9,19 @@ import Hero from '../sections/Hero.vue'
 import Localisation from '@/sections/Localisation.vue'
 
 const target = ref(null)
-const isVisible = ref(false)
+const heroVisible = ref(false)
 
 function onElementVisibility(state) {
-    isVisible.value = state
+    heroVisible.value = state
 }
 
 </script>
 
 <template>
-    <Header :class="isVisible ? 'hero-visible' : ''" />
+    <Header :data-hero-visible="heroVisible ? true : false" />
     <main>
         <Hero v-element-visibility="onElementVisibility" />
-        <Localisation />
+        <Localisation :data-hero-visible="heroVisible ? true : false" />
     </main>
     <!-- <footer>{{ $i18n('footer') }}</footer> -->
 </template>

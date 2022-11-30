@@ -11,6 +11,10 @@ defineProps({
 </template>
 
 <style>
+.icon {
+    user-select: none;
+}
+
 button .icon:not(:last-child) {
     margin-right: 6px;
 }

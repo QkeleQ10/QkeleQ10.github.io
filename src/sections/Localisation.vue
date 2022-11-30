@@ -63,5 +63,6 @@ import Heading2 from '@/components/Heading2.vue';
                 </template>
             </ProjectCard>
         </Scrollable>
+        <div style="height: 150vh"></div>
     </section>
 </template>

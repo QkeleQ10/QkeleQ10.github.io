@@ -5,6 +5,7 @@ import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
 import Button from './components/Button.vue'
 import Index from './pages/Index.vue'
+import StudyTools from './pages/StudyTools.vue'
 
 initialize()
 
@@ -12,7 +13,11 @@ async function initialize() {
     const router = createRouter({
         history: createWebHistory(),
         routes: [
-            { path: "/", component: Index }
+            { path: "/", component: Index },
+            { path: "/extensions/studytools", component: StudyTools },
+            { path: "/extensions/studytools/update", component: StudyTools },
+            { path: "/extensions/studytools/download", component: StudyTools },
+            { path: "/:pathMatch(.*)*", component: Index }
         ],
     })
 

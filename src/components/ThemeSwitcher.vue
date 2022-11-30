@@ -29,12 +29,16 @@ theme.set((theme.theme))
     display: grid;
     grid-auto-flow: column;
     border: 1px solid transparent;
-    transition: border 200ms;
+    background-color: none;
+    transition: border 200ms, background-color 200ms;
 }
 
-#theme-switcher:hover,
-#theme-switcher:focus-within {
+#theme-switcher:hover {
     border-color: rgb(var(--accentVeryLight));
+}
+
+header:not([data-hero-visible=true]) #theme-switcher:hover {
+    background-color: rgb(var(--bgPrimary));
 }
 
 #theme-switcher>button {
@@ -58,7 +62,7 @@ theme.set((theme.theme))
     background-color: rgba(var(--accentVeryLight), 0.5);
 }
 
-#theme-switcher:not(:hover):not(:focus-within)>button:not([active=true]) {
+#theme-switcher:not(:hover)>button:not([active=true]) {
     width: 0;
     padding: 0;
     opacity: 0;

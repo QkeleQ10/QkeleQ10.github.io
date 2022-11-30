@@ -34,14 +34,18 @@ function helpTranslate() { window.open('https://crowdin.com/project/QkeleQ10', '
     grid-auto-flow: column;
     grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(auto, 1fr));
-    border: 1px solid transparent;
     max-width: calc(100vw - 4em);
-    transition: border 200ms;
+    border: 1px solid transparent;
+    background-color: none;
+    transition: border 200ms, background-color 200ms;
 }
 
-#language-buttons:hover,
-#language-buttons:focus-within {
+#language-buttons:hover {
     border-color: rgb(var(--accentVeryLight));
+}
+
+header:not([data-hero-visible=true]) #language-buttons:hover {
+    background-color: rgb(var(--bgPrimary));
 }
 
 #language-buttons>button {
@@ -60,7 +64,7 @@ function helpTranslate() { window.open('https://crowdin.com/project/QkeleQ10', '
     background-color: rgba(var(--accentVeryLight), 0.5);
 }
 
-#language-buttons:not(:hover):not(:focus-within)>button:not(.shown) {
+#language-buttons:not(:hover)>button:not(.shown) {
     width: 0;
     padding: 0;
     opacity: 0;

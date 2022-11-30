@@ -70,7 +70,6 @@ import Logo from "../assets/Logo.vue";
 #hero #hero-buttons {
     grid-area: buttons;
     align-self: end;
-    margin-top: 1em;
 }
 
 #hero svg {

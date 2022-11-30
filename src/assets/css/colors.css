@@ -7,8 +7,9 @@
     --bgPrimary: 255, 255, 255;
     --bgSecondary: 247, 247, 247;
     --bgTertiary: 235, 235, 235;
-    --fgSecondary: 88, 88, 88;
     --fgPrimary: 54, 54, 54;
+    --fgSecondary: 88, 88, 88;
+    --fgTertiary: 98, 98, 98;
     --fgContrast: 255, 255, 255;
     --greyLight: 170, 170, 170;
 }
@@ -20,10 +21,11 @@
     --hero2: 31, 95, 69;
     --accentVeryLight: 49, 82, 50;
     --bgPrimary: 18, 18, 18;
-    --bgSecondary: 247, 247, 247;
-    --bgTertiary: 235, 235, 235;
-    --fgSecondary: 255, 255, 255;
-    --fgPrimary: 235, 235, 235;
+    --bgSecondary: 29, 29, 29;
+    --bgTertiary: 247, 247, 247;
+    --fgPrimary: 255, 255, 255;
+    --fgSecondary: 235, 235, 235;
+    --fgTertiary: 220, 220, 220;
     --fgContrast: 255, 255, 255;
     --greyLight: 170, 170, 170;
 }
@@ -36,10 +38,11 @@
         --hero2: 31, 95, 69;
         --accentVeryLight: 49, 82, 50;
         --bgPrimary: 18, 18, 18;
-        --bgSecondary: 247, 247, 247;
-        --bgTertiary: 235, 235, 235;
-        --fgSecondary: 255, 255, 255;
-        --fgPrimary: 235, 235, 235;
+        --bgSecondary: 29, 29, 29;
+        --bgTertiary: 247, 247, 247;
+        --fgPrimary: 255, 255, 255;
+        --fgSecondary: 235, 235, 235;
+        --fgTertiary: 220, 220, 220;
         --fgContrast: 255, 255, 255;
         --greyLight: 170, 170, 170;
     }

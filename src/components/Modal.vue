@@ -28,7 +28,7 @@ document.onkeyup = (e) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(var(--fgPrimary), 0.5);
+    background: rgba(var(--fgTertiary), 0.5);
     backdrop-filter: blur(0.5em);
     animation: fadeIn 200ms;
 }
