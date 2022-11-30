@@ -9,15 +9,15 @@ theme.set((theme.theme))
 
 <template>
     <div id="theme-switcher">
-        <button type="button" role="switch" aria-label="Set site theme to dark" title="Dark theme"
+        <button type="button" role="switch" :aria-label="$i18n('setThemeTooltip', {theme: 'dark'})" :title="$i18n('dark')"
             :aria-checked="this.$root.theme == 'dark'" :active="theme.theme === 'dark'" @click="theme.set('dark')">
             <Icon>dark_mode</Icon>
         </button>
-        <button type="button" role="switch" aria-label="Set site theme to light" title="Light theme"
+        <button type="button" role="switch" :aria-label="$i18n('setThemeTooltip', { theme: 'light' })" :title="$i18n('light')"
             :aria-checked="this.$root.theme == 'light'" :active="theme.theme === 'light'" @click="theme.set('light')">
             <Icon>light_mode</Icon>
         </button>
-        <button type="button" role="switch" aria-label="Set site theme to system theme" title="System theme"
+        <button type="button" role="switch" :aria-label="$i18n('setThemeTooltip', { theme: 'auto' })" :title="$i18n('auto')"
             :aria-checked="this.$root.theme == 'auto'" :active="theme.theme === 'auto'" @click="theme.set('auto')">
             <Icon>brightness_auto</Icon>
         </button>

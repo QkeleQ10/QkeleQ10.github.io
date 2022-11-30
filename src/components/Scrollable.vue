@@ -30,7 +30,7 @@ export default {
 
 <style>
 .scrollable {
-    max-width: 100%;
+    max-width: min(100vw, 100%);
     display: grid;
     grid-template-columns: auto;
     justify-items: stretch;

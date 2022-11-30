@@ -1,15 +1,21 @@
 <script setup>
 import Scrollable from "./Scrollable.vue";
+
+defineProps({
+    imageSrc: String,
+    imageAlt: String
+})
 </script>
 
 <template>
     <div class="card" role="listitem">
+        <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt">
         <h3 class="card-title" role="heading">
             <slot name="title"></slot>
         </h3>
-        <div class="card-subtitle" role="doc-subtitle">
+        <span class="card-subtitle" role="doc-subtitle">
             <slot name="subtitle"></slot>
-        </div>
+        </span>
         <p class="card-content">
             <slot name="content"></slot>
         </p>
@@ -22,13 +28,22 @@ import Scrollable from "./Scrollable.vue";
 <style>
 .card {
     display: grid;
-    grid-template-rows: repeat(3, min-content) 1fr;
+    align-content: start;
+    grid-template-rows: auto auto auto 1fr;
     min-width: clamp(200px, 22.5vw, 300px);
-    padding: 20px 15px;
-    border-radius: 6px;
-    box-shadow: 0 1px 5px var(rgba(var(--greyLight), 0.4));
-    background-color: var(--bg2);
+    padding: 1.2em 1em;
+    background-color: rgb(var(--bgSecondary));
     color: rgb(var(--fgSecondary));
+}
+
+.card:has(.card-image) {
+    grid-template-rows: auto auto auto auto 1fr;
+}
+
+.card-image {
+    width: 100%;
+    margin-bottom: 1em;
+    outline: 1px solid rgb(var(--accentVeryLight), .5);
 }
 
 .card-title {
@@ -37,7 +52,7 @@ import Scrollable from "./Scrollable.vue";
 }
 
 .card-subtitle {
-    margin: 0 0 10px;
+    margin-bottom: 10px;
     font-size: smaller;
 }
 

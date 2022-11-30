@@ -11,19 +11,19 @@ function helpTranslate() { window.open('https://crowdin.com/project/QkeleQ10', '
 
 <template>
     <div id="language-buttons">
-        <button type="button" role="link" :title="$i18n('Help translate this site')" @click="helpTranslate()">
+        <button type="button" role="link" :title="$i18n('helpTranslate')" @click="helpTranslate()">
             <Icon>volunteer_activism</Icon>
         </button>
-        <button class="shown" type="button" role="button" title="Change site language" @click="pickerOpen = 1">
+        <button class="shown" type="button" role="button" :title="$i18n('changeLanguage')" @click="pickerOpen = 1">
             <Icon>language</Icon>
         </button>
     </div>
     <Modal v-if="pickerOpen === 1" id="modal-language" @click.self="pickerOpen = 0">
-        <template #title>{{ $i18n('Select a language') }}</template>
+        <template #title>{{ $i18n('selectLanguage') }}</template>
         <template #content>
             <LanguageList />
             <Button class="tight primary" icon="volunteer_activism" href="https://crowdin.com/project/QkeleQ10">
-                {{ $i18n('Help translate this site') }}</Button>
+                {{ $i18n('helpTranslate') }}</Button>
         </template>
     </Modal>
 </template>

@@ -3,18 +3,12 @@ import { reactive } from "vue";
 import Logo from "../assets/Logo.vue";
 import ThemeSwitcher from "./ThemeSwitcher.vue";
 import LanguageSwitcher from "./LanguageSwitcher.vue";
-
-const obj = reactive({ belowFold: document.documentElement.scrollTop > 200 })
-
-window.onscroll = function () {
-    obj.belowFold = document.documentElement.scrollTop > 200
-}
 </script>
 
 <template>
     <header>
         <RouterLink to="/">
-            <Logo @click="router.push('/')" v-show="windowTop > 0" transparent fill="monochrome" />
+            <Logo @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
         <nav></nav>
         <div id="controls">
@@ -83,7 +77,8 @@ header>#controls {
 }
 
 @media (max-width: 900px) {
-    header {
+    header,
+    header[data-hero-visible=true] {
         padding: 1em 2em 2em;
     }
 }

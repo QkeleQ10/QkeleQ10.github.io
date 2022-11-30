@@ -4,7 +4,7 @@ import Icon from "./Icon.vue";
 defineProps({
     icon: String,
     href: String,
-    target: String,
+    target: { type: String, default: '_blank' },
     style: String
 })
 </script>
@@ -79,7 +79,7 @@ button:focus {
 }
 
 button[active=true] {
-    pointer-events: none;
+    cursor: default;
 }
 
 button[disabled] {

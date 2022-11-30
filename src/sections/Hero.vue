@@ -2,9 +2,10 @@
     <section id="hero">
         <h1 class="section-title">Hi, I'm Quinten.</h1>
         <p class="section-about">{{ $i18n('aboutme') }}</p>
-        <Scrollable direction="column" id="hero-buttons">
-            <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
+        <Scrollable direction="column"  stretch id="hero-buttons">
+            <Button class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
             <Button class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
+            <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
             <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
             <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
         </Scrollable>
@@ -37,10 +38,12 @@ import Logo from "../assets/Logo.vue";
 @media (max-width: 900px) {
     #hero {
         grid-template:
+            "title ." 2em
             "title logo" auto
             "about logo" auto
-            "buttons buttons" auto / auto 5em;
-        padding: 5em 2em 2em;
+            "buttons logo" auto
+            / auto 5em;
+        padding: 3em 2em 2em;
         column-gap: 2em;
     }
 }

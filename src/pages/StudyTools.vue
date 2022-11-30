@@ -15,7 +15,7 @@ import Heading2 from '@/components/Heading2.vue'
     <main>
         <section>
             <Heading2 icon="download">Study Tools voor Magister</Heading2>
-            <p>Volg de instructies hieronder om de laatste versie van <u>Study Tools voor Magister</u> te downloaden.
+            <p>Gebruik de knop hieronder om de laatste versie van <u>Study Tools voor Magister</u> te installeren. Gebruik je de downloadknop? Volg dan de stappen hieronder.
             </p>
             <ol>
                 <li>Download het .ZIP-bestand met de knop hieronder en open deze in Windows Verkenner. Het venster dat

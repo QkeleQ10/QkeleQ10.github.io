@@ -7,7 +7,7 @@ export default {
             if (values) {
                 return new IntlMessageFormat(string, options.language).format(values)
             } else {
-                return string
+                return new IntlMessageFormat(string, options.language).format()
             }
         }
     }
