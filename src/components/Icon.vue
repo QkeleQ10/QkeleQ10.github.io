@@ -11,6 +11,8 @@ defineProps({
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded');
+
 .icon {
     user-select: none;
 }

@@ -35,7 +35,6 @@ import Heading2 from '@/components/Heading2.vue'
             </Scrollable>
         </section>
     </main>
-    <!-- <footer>{{ $i18n('footer') }}</footer> -->
 </template>
 
 <style>

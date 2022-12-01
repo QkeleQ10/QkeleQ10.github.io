@@ -23,7 +23,6 @@ function onElementVisibility(state) {
         <Hero v-element-visibility="onElementVisibility" />
         <Localisation :data-hero-visible="heroVisible ? true : false" />
     </main>
-    <!-- <footer>{{ $i18n('footer') }}</footer> -->
 </template>
 
 <style>

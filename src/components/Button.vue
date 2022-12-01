@@ -17,7 +17,7 @@ export default {
 
 <template>
     <a :href="href" :target="target" role="listitem" tabindex="-1">
-        <button type="button" role="button" v-bind="$attrs">
+        <button type="button" role="button" class="button" v-bind="$attrs">
             <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
         </button></a>
@@ -32,6 +32,10 @@ a {
     height: fit-content;
     text-decoration: none;
     margin: 0;
+}
+
+a:has(.button) {
+    height: auto;
 }
 
 button {
@@ -51,6 +55,11 @@ button {
     box-shadow: none;
     cursor: pointer;
     transition: background-color 200ms, color 200ms;
+}
+
+.button {
+    min-height: 44px;
+    height: calc(100% - 10px);
 }
 
 button:hover,
