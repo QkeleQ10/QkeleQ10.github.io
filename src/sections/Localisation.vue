@@ -1,14 +1,16 @@
 <script setup>
-import Scrollable from '@/components/Scrollable.vue';
-import ProjectCard from '@/components/ProjectCard.vue';
-import Heading2 from '@/components/Heading2.vue';
+import Scrollable from '@/components/Scrollable.vue'
+import ProjectCard from '@/components/ProjectCard.vue'
+import Heading2 from '@/components/Heading2.vue'
+
+import statsfmImage from '@/assets/images/statsfm.webp'
 </script>
 
 <template>
     <section id="localisation">
         <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
         <div role="list">
-            <ProjectCard id="localisation1" image-src="src/assets/images/statsfm.webp" image-alt="stats.fm">
+            <ProjectCard id="localisation1" :image-src="statsfmImage" image-alt="stats.fm">
                 <template #title>stats.fm</template>
                 <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                 <template #content>{{ $i18n('statsfmdesc') }}</template>

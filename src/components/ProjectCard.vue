@@ -1,5 +1,5 @@
 <script setup>
-import Scrollable from "./Scrollable.vue";
+import Scrollable from "./Scrollable.vue"
 
 defineProps({
     imageSrc: String,
