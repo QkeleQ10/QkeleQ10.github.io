@@ -8,30 +8,58 @@ import Icon from '@/components/Icon.vue'
 import Hero from '@/sections/Hero.vue'
 import Localisation from '@/sections/Localisation.vue'
 import Heading2 from '@/components/Heading2.vue'
+import GridFit from '@/components/GridFit.vue'
 </script>
 
 <template>
     <Header class="collide" />
     <main>
         <section>
-            <Heading2 icon="download">Study Tools voor Magister</Heading2>
-            <p>Gebruik de knop hieronder om de laatste versie van <u>Study Tools voor Magister</u> te installeren. Gebruik je geen Microsoft Edge? Volg dan de stappen hieronder.
-            </p>
-            <ol>
-                <li>Download het .ZIP-bestand met de rechterknop hieronder en open deze in Windows Verkenner. Het venster dat
-                    opent
-                    bevat één map.</li>
-                <li>Sleep deze map naar de locatie waar je hem al eens eerder naartoe hebt gesleept, zoals je map
-                    'Documenten'.</li>
-                <li>De updates zullen worden toegepast wanneer je je browser opnieuw start.</li>
-            </ol>
-            <Scrollable direction="column" stretch="true">
-                <Button icon="shopping_cart"
-                    href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc"
-                    target="_blank">Installeren via Edge Add-ons</Button>
-                <Button icon="download"
-                    href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip">Downloaden voor andere
-                    Chromium-browsers</Button>
+            <Heading2 icon="extension">Study Tools voor Magister</Heading2>
+            <Scrollable stretch direction="column">
+                <ProjectCard stretch-buttons>
+                    <template #title>Microsoft Edge</template>
+                    <template #content>Installeer de extensie met de knop hieronder.</template>
+                    <template #buttons><Button icon="shopping_cart"
+                            href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
+                            via Edge Add-ons</Button></template>
+                </ProjectCard>
+                <ProjectCard stretch-buttons>
+                    <template #title>Andere Chromium-browsers</template>
+                    <template #subtitle>Zoals Google Chrome, Brave en Opera</template>
+                    <template #content>
+                        <p>Volg de stappen hieronder om de extensie te installeren.</p>
+                        <ol>
+                            <li><span>
+                                    Download het .ZIP-bestand en open deze. Het bestand bevat één map.
+                                </span></li>
+                            <li><span>
+                                    Sleep deze map naar de gewenste locatie, zoals je map 'Documenten'.
+                                </span></li>
+                        </ol>
+                        <p>Als je Study Tools voor het eerst installeert:</p>
+                        <ol start="3">
+                            <li><span>
+                                    Ga naar 'chrome://extensions' en zorg ervoor dat de 'Ontwikkelaarsmodus' is
+                                    ingeschakeld.
+                                </span></li>
+                            <li><span>
+                                    Klik op 'Uitgepakte extensie laden'. Selecteer vervolgens de map van stap 2.
+                                </span></li>
+                        </ol>
+                        <p>Als je Study Tools al had geïnstalleerd:</p>
+                        <ol start="3">
+                            <li><span>
+                                    Herstart je browser.
+                                </span></li>
+                        </ol>
+                    </template>
+                    <template #buttons><Button icon="download"
+                            href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip"
+                            target="_self">Downloaden voor
+                            andere
+                            Chromium-browsers</Button></template>
+                </ProjectCard>
             </Scrollable>
         </section>
     </main>

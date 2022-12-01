@@ -3,7 +3,8 @@ import Scrollable from "./Scrollable.vue"
 
 defineProps({
     imageSrc: String,
-    imageAlt: String
+    imageAlt: String,
+    stretchButtons: Boolean
 })
 </script>
 
@@ -19,7 +20,7 @@ defineProps({
         <p class="card-content">
             <slot name="content"></slot>
         </p>
-        <Scrollable class="card-buttons">
+        <Scrollable :stretch="stretchButtons" class="card-buttons">
             <slot name="buttons"></slot>
         </Scrollable>
     </div>
@@ -54,10 +55,6 @@ defineProps({
 .card-subtitle {
     margin-bottom: 10px;
     font-size: smaller;
-}
-
-.card-content {
-    margin: 0;
 }
 
 .card-buttons {

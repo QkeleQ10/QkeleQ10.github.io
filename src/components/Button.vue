@@ -46,12 +46,13 @@ button {
     gap: 0.5em;
     min-height: 44px;
     width: 100%;
+    padding: 5px 15px;
+    margin: 10px 0 0;
+    font-family: "Montserrat", arial, sans-serif;
+    font-weight: 600;
     border: none;
     background-color: rgb(var(--accentLight));
     color: rgb(var(--fgContrast));
-    font-family: "Montserrat", arial, sans-serif;
-    padding: 5px 15px;
-    margin: 10px 0 0;
     box-shadow: none;
     cursor: pointer;
     transition: background-color 200ms, color 200ms;

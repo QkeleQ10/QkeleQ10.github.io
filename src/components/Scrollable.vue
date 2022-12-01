@@ -36,7 +36,7 @@ export default {
     justify-items: stretch;
     align-items: stretch;
     overflow: auto;
-    gap: 10px;
+    gap: 1em;
     width: max-content;
 }
 

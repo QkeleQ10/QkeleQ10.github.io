@@ -20,7 +20,7 @@ document.onkeyup = (e) => {
 
 <style>
 .modal-backdrop {
-    position: fixed;
+    position: absolute;
     height: 100vh;
     width: 100vw;
     top: 0;
@@ -31,6 +31,7 @@ document.onkeyup = (e) => {
     background: rgba(var(--fgTertiary), 0.5);
     backdrop-filter: blur(0.5em);
     animation: fadeIn 200ms;
+    z-index: 99;
 }
 
 .modal {
@@ -48,6 +49,7 @@ document.onkeyup = (e) => {
     color: rgb(var(--fgPrimary));
     overflow-wrap: normal;
     overflow: auto;
+    z-index: 100;
 }
 
 .modal-title {
