@@ -5,7 +5,7 @@
     "dev": "vite",
     "expose": "vite --host",
     "build": "vue-tsc --noEmit && vite build",
-    "publish": "vue-tsc --noEmit && vite build && git add dist && git commit -m \"Dist subtree commit\" && git subtree push --prefix dist origin gh-pages",
+    "deploy": "npm run build && git add dist && git commit -m 'adding dist subtree' && git subtree push --prefix dist origin gh-pages",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit"
   },
