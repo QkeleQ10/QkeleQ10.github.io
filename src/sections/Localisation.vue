@@ -8,7 +8,7 @@ import Heading2 from '@/components/Heading2.vue';
     <section id="localisation">
         <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
         <div role="list">
-            <ProjectCard id="localisation1" image-src="/src/assets/images/statsfm.webp" image-alt="stats.fm">
+            <ProjectCard id="localisation1" image-src="src/assets/images/statsfm.webp" image-alt="stats.fm">
                 <template #title>stats.fm</template>
                 <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                 <template #content>{{ $i18n('statsfmdesc') }}</template>
