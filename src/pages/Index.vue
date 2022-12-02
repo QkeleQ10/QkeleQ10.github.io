@@ -1,14 +1,11 @@
 <script setup>
-import { ref, reactive, inject } from 'vue'
+import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
-import ProjectCard from '../components/ProjectCard.vue'
-import Scrollable from '../components/Scrollable.vue'
 import Header from '../components/Header.vue'
-import Icon from '../components/Icon.vue'
 import Hero from '../sections/Hero.vue'
 import Localisation from '@/sections/Localisation.vue'
+import Projects from '@/sections/Projects.vue'
 
-const target = ref(null)
 const heroVisible = ref(false)
 
 function onElementVisibility(state) {
@@ -22,6 +19,7 @@ function onElementVisibility(state) {
     <main>
         <Hero v-element-visibility="onElementVisibility" />
         <Localisation :data-hero-visible="heroVisible ? true : false" />
+        <Projects :data-hero-visible="heroVisible ? true : false" />
     </main>
 </template>
 

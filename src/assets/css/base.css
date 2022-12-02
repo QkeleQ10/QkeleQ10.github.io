@@ -13,12 +13,6 @@ body:has(.modal) {
   overflow-y: hidden;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
 section {
   display: flex;
   flex-direction: column;

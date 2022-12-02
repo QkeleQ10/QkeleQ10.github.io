@@ -1,8 +1,13 @@
+<script setup>
+import Scrollable from "../components/Scrollable.vue";
+import Logo from "../assets/Logo.vue";
+</script>
+
 <template>
     <section id="hero">
-        <h1 class="section-title">Hi, I'm Quinten.</h1>
+        <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
         <p class="section-about">{{ $i18n('aboutme') }}</p>
-        <Scrollable direction="column"  stretch id="hero-buttons">
+        <Scrollable direction="column" stretch id="hero-buttons">
             <Button class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
             <Button class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
             <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
@@ -12,12 +17,6 @@
         <Logo transparent fill="monochrome" />
     </section>
 </template>
-
-<script setup>
-import Icon from "../components/Icon.vue";
-import Scrollable from "../components/Scrollable.vue";
-import Logo from "../assets/Logo.vue";
-</script>
 
 <style>
 #hero {
@@ -33,6 +32,7 @@ import Logo from "../assets/Logo.vue";
     color: rgb(var(--fgContrast));
     box-sizing: border-box;
     padding: 3em 4em 2em;
+    margin-bottom: 1.5em;
 }
 
 @media (max-width: 900px) {

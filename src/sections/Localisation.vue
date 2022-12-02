@@ -1,8 +1,6 @@
 <script setup>
-import Scrollable from '@/components/Scrollable.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import Heading2 from '@/components/Heading2.vue'
-
 import statsfmImage from '@/assets/images/statsfm.webp'
 </script>
 
