@@ -12,7 +12,7 @@ import Heading2 from '@/components/Heading2.vue'
                 <template #subtitle>{{ $i18n('Discord bot') }}</template>
                 <template #content>{{ $i18n('mctdesc') }}</template>
                 <template #buttons>
-                    <Button icon="forum" href="https://crowdin.com/project/premid">{{ $i18n('Join') }}</Button>
+                    <Button icon="forum" href="https://discord.gg/wpD5sPD">{{ $i18n('Join') }}</Button>
                 </template>
             </ProjectCard>
             <ProjectCard id="projects2">
