@@ -14,17 +14,21 @@ import GridFit from '@/components/GridFit.vue'
 <template>
     <Header class="collide" />
     <main>
-        <section>
+        <section id="st">
             <Heading2 icon="extension">Study Tools voor Magister</Heading2>
-            <Scrollable stretch direction="column">
-                <ProjectCard stretch-buttons>
+            <div role="list">
+                <ProjectCard id="st1" stretch-buttons>
                     <template #title>Microsoft Edge</template>
                     <template #content>Installeer de extensie met de knop hieronder.</template>
                     <template #buttons><Button icon="shopping_cart"
                             href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
                             via Edge Add-ons</Button></template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons>
+                <ProjectCard id="st2" stretch-buttons disabled>
+                    <template #title>Google Chrome</template>
+                    <template #content>Gebruik voorlopig de installatiemethode voor andere Chromium-browsers.</template>
+                </ProjectCard>
+                <ProjectCard id="st3" stretch-buttons>
                     <template #title>Andere Chromium-browsers</template>
                     <template #subtitle>Zoals Google Chrome, Brave en Opera</template>
                     <template #content>
@@ -56,15 +60,59 @@ import GridFit from '@/components/GridFit.vue'
                     </template>
                     <template #buttons><Button icon="download"
                             href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip"
-                            target="_self">Downloaden voor
-                            andere
-                            Chromium-browsers</Button></template>
+                            target="_self">Downloaden voor Chromium</Button></template>
                 </ProjectCard>
-            </Scrollable>
+                <ProjectCard id="st4" stretch-buttons>
+                    <template #title>Bètaversie</template>
+                    <template #subtitle>Voor Chromium-browsers</template>
+                    <template #buttons><Button icon="shopping_cart"
+                            href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/dev.zip">Bètaversie
+                            downloaden voor Chromium</Button></template>
+                </ProjectCard>
+            </div>
         </section>
     </main>
 </template>
 
 <style>
-@import "../assets/css/base.css"
+@import "../assets/css/base.css";
+
+#st>div {
+    display: grid;
+    grid-template:
+        'a1 a3 a3' auto
+        'a1 a3 a3' auto
+        'a2 a3 a3' auto
+        'a2 a4 a4' auto
+        / 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+#st1 {
+    grid-area: a1;
+}
+
+#st2 {
+    grid-area: a2;
+}
+
+#st3 {
+    grid-area: a3;
+}
+
+#st4 {
+    grid-area: a4;
+}
+
+@media (max-width: 800px) {
+    #st>div {
+        grid-template:
+            'a1' auto
+            'a2' auto
+            'a3' auto
+            'a4' auto
+            / 1fr;
+        gap: 1em;
+    }
+}
 </style>

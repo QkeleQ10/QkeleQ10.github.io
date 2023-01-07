@@ -37,6 +37,11 @@ defineProps({
     color: rgb(var(--fgSecondary));
 }
 
+.card[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
 .card:has(.card-image) {
     grid-template-rows: auto auto auto auto 1fr;
 }
