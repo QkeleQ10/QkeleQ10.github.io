@@ -38,12 +38,13 @@ a:has(.button) {
     height: auto;
 }
 
-button {
+.button {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
+    height: calc(100% - 10px);
     min-height: 44px;
     width: 100%;
     padding: 5px 15px;
@@ -58,41 +59,36 @@ button {
     transition: background-color 200ms, color 200ms;
 }
 
-.button {
-    min-height: 44px;
-    height: calc(100% - 10px);
-}
-
-button:hover,
-button:focus,
-button:active,
-button[active=true] {
+.button:hover,
+.button:focus,
+.button:active,
+.button[active=true] {
     background: rgb(var(--accentDark));
     color: rgb(var(--bgPrimary));
     outline: none;
 }
 
-button.hero {
+.button.hero {
     background-color: rgb(var(--fgContrast));
     color: rgb(var(--accentDark));
 }
 
-button.hero:hover,
-button.hero:focus {
+.button.hero:hover,
+.button.hero:focus {
     background: rgb(var(--accentVeryLight));
     color: rgb(var(--fgPrimary));
 }
 
-button:focus {
+.button:focus {
     box-shadow: inset 0 0 0 3px rgb(var(--accentLight));
     outline: none;
 }
 
-button[active=true] {
+.button[active=true] {
     cursor: default;
 }
 
-button[disabled] {
+.button[disabled] {
     background: rgb(var(--bgTertiary));
     color: var(rgba(var(--greyLight), 0.4));
     box-shadow: none;

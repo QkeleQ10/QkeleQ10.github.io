@@ -6,8 +6,8 @@ import Heading2 from '@/components/Heading2.vue'
 <template>
     <section id="projects">
         <Heading2 icon="web">{{ $i18n('Projects') }}</Heading2>
-        <div role="list">
-            <ProjectCard id="projects1">
+        <div class="sectionGrid" role="list">
+            <ProjectCard>
                 <template #title>Minecraft Translators Bot</template>
                 <template #subtitle>{{ $i18n('Discord bot') }}</template>
                 <template #content>{{ $i18n('mctdesc') }}</template>
@@ -15,7 +15,7 @@ import Heading2 from '@/components/Heading2.vue'
                     <Button icon="forum" href="https://discord.gg/wpD5sPD">{{ $i18n('Join') }}</Button>
                 </template>
             </ProjectCard>
-            <ProjectCard id="projects2">
+            <ProjectCard>
                 <template #title>Study Tools voor Magister</template>
                 <template #subtitle>{{ $i18n('Browser extension') }}</template>
                 <template #content>{{ $i18n('studytoolsdesc') }}</template>
@@ -30,19 +30,20 @@ import Heading2 from '@/components/Heading2.vue'
 </template>
 
 <style>
-#projects>div {
+#projects>.sectionGrid {
     display: grid;
+    height: 100%;
     grid-template:
         'a1 a1 a2' auto
         / 1fr 1fr 1fr;
     gap: 1em;
 }
 
-#projects1 {
+#projects>.sectionGrid>*:nth-child(1) {
     grid-area: a1;
 }
 
-#projects2 {
+#projects>.sectionGrid>*:nth-child(2) {
     grid-area: a2;
 }
 

@@ -17,18 +17,12 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  padding: 1em 2em 2em;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  padding: 1em 3em;
+  padding-right: 80px;
   transition: padding 200ms;
-}
-
-section[data-hero-visible=true] {
-  padding: 1em 4em 2em;
-}
-
-@media (max-width: 900px) {
-  section[data-hero-visible=true] {
-    padding: 1em 2em 2em;
-  }
 }
 
 h1,

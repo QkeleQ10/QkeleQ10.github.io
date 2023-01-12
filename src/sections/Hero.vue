@@ -1,82 +1,65 @@
 <script setup>
-import Scrollable from "../components/Scrollable.vue";
 import Logo from "../assets/Logo.vue";
+import CollectionHorizontal from "@/components/CollectionHorizontal.vue";
+import Icon from "@/components/Icon.vue";
 </script>
 
 <template>
     <section id="hero">
-        <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
-        <p class="section-about">{{ $i18n('aboutme') }}</p>
-        <Scrollable direction="column" stretch id="hero-buttons">
+        <div>
+            <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
+            <p class="section-about">{{ $i18n('aboutme') }}</p>
+        </div>
+        <CollectionHorizontal stretch id="hero-buttons">
             <Button class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
             <Button class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
             <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
             <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
             <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
-        </Scrollable>
+        </CollectionHorizontal>
+        <Icon id="hero-scroll-down">expand_more</Icon>
         <Logo transparent fill="monochrome" />
     </section>
 </template>
 
 <style>
 #hero {
-    display: grid;
-    grid-template:
-        "title ." 2em
-        "title logo" auto
-        "about logo" auto
-        "buttons logo" auto
-        / auto 10em;
-    column-gap: 4em;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    box-sizing: border-box;
     background: linear-gradient(300deg, rgb(var(--hero1)), rgb(var(--hero2)));
     color: rgb(var(--fgContrast));
-    box-sizing: border-box;
-    padding: 3em 4em 2em;
+    padding: 5em 3em 3em 3em;
     margin-bottom: 1.5em;
-}
-
-@media (max-width: 900px) {
-    #hero {
-        grid-template:
-            "title ." 2em
-            "title logo" auto
-            "about logo" auto
-            "buttons logo" auto
-            / auto 5em;
-        padding: 3em 2em 2em;
-        column-gap: 2em;
-    }
-}
-
-@media (max-width: 650px) {
-    #hero {
-        grid-template:
-            "title" auto
-            "about" auto
-            "buttons" auto / auto;
-        gap: 0;
-    }
+    overflow: hidden;
 }
 
 #hero .section-title {
     color: rgb(var(--fgContrast));
-    grid-area: title;
-    font-size: 3em;
+    font-size: min(7em, 15vw);
 }
 
 #hero .section-about {
     color: rgb(var(--fgContrast));
-    grid-area: about;
-    font-size: 1.3em;
-}
-
-#hero #hero-buttons {
-    grid-area: buttons;
-    align-self: end;
+    width: 70%;
+    font-size: min(2em, 5vw);
 }
 
 #hero svg {
-    color: rgb(var(--fgContrast));
-    grid-area: logo;
+    position: absolute;
+    max-width: 90vw;
+    max-height: 120vh;
+    right: 0;
+    bottom: 0;
+    color: rgba(var(--fgContrast), 0.1);
+    pointer-events: none;
+}
+
+#hero #hero-scroll-down {
+    position: absolute;
+    bottom: 3em;
 }
 </style>

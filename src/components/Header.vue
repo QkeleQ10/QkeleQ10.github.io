@@ -24,7 +24,7 @@ header {
     display: grid;
     width: 100%;
     column-gap: 2em;
-    height: 60px;
+    height: 80px;
     box-sizing: border-box;
     padding: 1em 2em 2em;
     grid-template-areas: "logo nav tools";
@@ -33,6 +33,7 @@ header {
     align-items: center;
     color: rgb(var(--fgTertiary));
     transition: padding 200ms;
+    z-index: 9999;
 }
 
 header[data-hero-visible=true] {
