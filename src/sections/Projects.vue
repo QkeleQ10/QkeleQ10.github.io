@@ -23,6 +23,7 @@ import Heading2 from '@/components/Heading2.vue'
                     <RouterLink to="/extensions/studytools">
                         <Button icon="shopping_cart">{{ $i18n('Install') }}</Button>
                     </RouterLink>
+                    <Button href="https://github.com/QkeleQ10/Study-Tools" icon="code">GitHub</Button>
                 </template>
             </ProjectCard>
         </div>

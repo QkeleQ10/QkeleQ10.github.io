@@ -43,7 +43,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             </ProjectCard>
             <ProjectCard>
                 <template #title>Hypixel</template>
-                <template #subtitle>{{ $i18n('Proofreader') }}</template>
+                <template #subtitle>{{ $i18n('Former proofreader') }}</template>
                 <template #content>{{ $i18n('hypixeldesc') }}</template>
                 <template #buttons>
                     <Button icon="translate" href="https://crowdin.com/project/hypixel">{{

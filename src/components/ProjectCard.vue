@@ -1,10 +1,10 @@
 <script setup>
+import CollectionHorizontal from "./CollectionHorizontal.vue";
 import Scrollable from "./Scrollable.vue"
 
 defineProps({
     imageSrc: String,
-    imageAlt: String,
-    stretchButtons: Boolean
+    imageAlt: String
 })
 </script>
 
@@ -20,9 +20,9 @@ defineProps({
         <p class="card-content">
             <slot name="content"></slot>
         </p>
-        <Scrollable :stretch="stretchButtons" class="card-buttons">
+        <CollectionHorizontal class="card-buttons">
             <slot name="buttons"></slot>
-        </Scrollable>
+        </CollectionHorizontal>
     </div>
 </template>
 
