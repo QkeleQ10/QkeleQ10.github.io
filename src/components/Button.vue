@@ -57,7 +57,7 @@ a:focus {
     color: rgb(var(--fgContrast));
     box-shadow: none;
     cursor: pointer;
-    transition: filter 200ms;
+    transition: filter 200ms, background-color 200ms, color 200ms;
 }
 
 .button:hover {
@@ -81,9 +81,8 @@ a:focus {
     background-color: rgb(var(--bgSecondary));
 }
 
-.button[active=true],
-.button[disabled] {
-    cursor: default;
+.button.rail[active=true] {
+    background-color: rgb(var(--accentVeryLight));
 }
 
 .button[disabled] {
