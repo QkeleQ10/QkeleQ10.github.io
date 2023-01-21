@@ -1,11 +1,3 @@
-<script setup>
-function closeModal() { document.querySelector('.modal-backdrop').click() }
-
-document.onkeyup = (e) => {
-    if (e.key === 'Escape') closeModal()
-}
-</script>
-
 <template>
     <div class="modal-backdrop">
         <dialog class="modal" role="dialog" tabindex="0">
@@ -13,7 +5,6 @@ document.onkeyup = (e) => {
                 <slot name="title"></slot>
             </h2>
             <slot name="content"></slot>
-            <a class="modal-close" onclick="closeModal" tabindex="0">Close dialog</a>
         </dialog>
     </div>
 </template>

@@ -7,6 +7,7 @@
     --bgPrimary: 255, 255, 255;
     --bgSecondary: 240, 240, 240;
     --bgTertiary: 230, 230, 230;
+    --bgContrast: 54, 54, 54;
     --fgPrimary: 54, 54, 54;
     --fgSecondary: 88, 88, 88;
     --fgTertiary: 98, 98, 98;
@@ -23,6 +24,7 @@
     --bgPrimary: 18, 18, 18;
     --bgSecondary: 29, 29, 29;
     --bgTertiary: 247, 247, 247;
+    --bgContrast: 54, 54, 54;
     --fgPrimary: 255, 255, 255;
     --fgSecondary: 235, 235, 235;
     --fgTertiary: 220, 220, 220;
@@ -40,6 +42,7 @@
         --bgPrimary: 18, 18, 18;
         --bgSecondary: 29, 29, 29;
         --bgTertiary: 247, 247, 247;
+        --bgContrast: 54, 54, 54;
         --fgPrimary: 255, 255, 255;
         --fgSecondary: 235, 235, 235;
         --fgTertiary: 220, 220, 220;

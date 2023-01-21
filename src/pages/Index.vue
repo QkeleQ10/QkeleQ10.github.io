@@ -1,7 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-import { vElementVisibility } from '@vueuse/components'
-import Header from '../components/Header.vue'
 import Hero from '../sections/Hero.vue'
 import Localisation from '@/sections/Localisation.vue'
 import Projects from '@/sections/Projects.vue'
@@ -12,8 +9,8 @@ import NavigationRail from '@/components/NavigationRail.vue'
     <NavigationRail />
     <main>
         <Hero />
-        <Localisation />
         <Projects />
+        <Localisation />
     </main>
 </template>
 

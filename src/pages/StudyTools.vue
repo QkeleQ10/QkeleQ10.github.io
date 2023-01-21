@@ -1,22 +1,15 @@
 <script setup>
-import { ref, reactive, inject } from 'vue'
-import { vElementVisibility } from '@vueuse/components'
 import ProjectCard from '@/components/ProjectCard.vue'
-import Scrollable from '@/components/Scrollable.vue'
-import Header from '@/components/Header.vue'
-import Icon from '@/components/Icon.vue'
-import Hero from '@/sections/Hero.vue'
-import Localisation from '@/sections/Localisation.vue'
 import Heading2 from '@/components/Heading2.vue'
-import GridFit from '@/components/GridFit.vue'
+import NavigationRail from '@/components/NavigationRail.vue';
 </script>
 
 <template>
-    <Header class="collide" />
+    <NavigationRail />
     <main>
         <section id="st">
             <Heading2 icon="extension">Study Tools voor Magister</Heading2>
-            <div role="list">
+            <div class="sectionGrid" role="list">
                 <ProjectCard id="st1" stretch-buttons>
                     <template #title>Microsoft Edge</template>
                     <template #content>Installeer de extensie met de knop hieronder.</template>
@@ -77,7 +70,7 @@ import GridFit from '@/components/GridFit.vue'
 <style>
 @import "../assets/css/base.css";
 
-#st>div {
+#st>.sectionGrid {
     display: grid;
     grid-template:
         'a1 a3 a3' auto
@@ -105,7 +98,7 @@ import GridFit from '@/components/GridFit.vue'
 }
 
 @media (max-width: 800px) {
-    #st>div {
+    #st>.sectionGrid {
         grid-template:
             'a1' auto
             'a2' auto

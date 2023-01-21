@@ -16,11 +16,12 @@ export default {
 </script>
 
 <template>
-    <a :href="href" :target="target" role="listitem" tabindex="-1">
-        <button type="button" role="button" class="button" v-bind="$attrs">
+    <a :href="href" :target="target" tabindex="-1">
+        <button type="button" role="button" class="button" v-bind="$attrs" :tabindex="href ? 0 : -1">
             <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
-        </button></a>
+        </button>
+    </a>
 </template>
 
 <style>
@@ -34,8 +35,8 @@ a {
     margin: 0;
 }
 
-a:has(.button) {
-    height: auto;
+a:focus {
+    outline: none;
 }
 
 .button {
@@ -56,42 +57,36 @@ a:has(.button) {
     color: rgb(var(--fgContrast));
     box-shadow: none;
     cursor: pointer;
-    transition: background-color 200ms, color 200ms;
+    transition: filter 200ms;
 }
 
-.button:hover,
-.button:focus,
-.button:active,
-.button[active=true] {
-    background: rgb(var(--accentDark));
-    color: rgb(var(--bgPrimary));
+.button:hover {
+    filter: brightness(0.9);
+}
+
+.button:focus, a:focus .button {
+    filter: brightness(0.8);
+    box-shadow: inset 0 0 0 3px currentColor;
     outline: none;
 }
 
 .button.hero {
     background-color: rgb(var(--fgContrast));
-    color: rgb(var(--accentDark));
+    color: rgb(var(--bgContrast));
 }
 
-.button.hero:hover,
-.button.hero:focus {
-    background: rgb(var(--accentVeryLight));
-    color: rgb(var(--fgPrimary));
+.button.rail {
+    padding: 0;
+    color: rgb(var(--fgSecondary));
+    background-color: rgb(var(--bgSecondary));
 }
 
-.button:focus {
-    box-shadow: inset 0 0 0 3px rgb(var(--accentLight));
-    outline: none;
-}
-
-.button[active=true] {
+.button[active=true],
+.button[disabled] {
     cursor: default;
 }
 
 .button[disabled] {
-    background: rgb(var(--bgTertiary));
-    color: var(rgba(var(--greyLight), 0.4));
-    box-shadow: none;
-    cursor: default;
+    pointer-events: none;
 }
 </style>

@@ -31,9 +31,16 @@ import Heading2 from '@/components/Heading2.vue'
 </template>
 
 <style>
+#projects {
+    display: grid;
+    grid-template:
+        'heading' auto
+        'content' 1fr
+        / 1fr;
+}
+
 #projects>.sectionGrid {
     display: grid;
-    height: 100%;
     grid-template:
         'a1 a1 a2' auto
         / 1fr 1fr 1fr;
@@ -49,7 +56,7 @@ import Heading2 from '@/components/Heading2.vue'
 }
 
 @media (max-width: 800px) {
-    #projects>div {
+    #projects>.sectionGrid {
         grid-template:
             'a1 a2' auto
             / 1fr 1fr;
@@ -58,7 +65,7 @@ import Heading2 from '@/components/Heading2.vue'
 }
 
 @media (max-width: 550px) {
-    #projects>div {
+    #projects>.sectionGrid {
         grid-template:
             'a1' auto
             'a2' auto

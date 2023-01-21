@@ -31,8 +31,8 @@ defineProps({
     display: grid;
     align-content: start;
     grid-template-rows: auto auto auto 1fr;
-    min-width: clamp(200px, 22.5vw, 300px);
-    padding: 1.2em 1em;
+    min-width: clamp(200px, 20vw, 300px);
+    padding: 1.25em 1em;
     background-color: rgb(var(--bgSecondary));
     color: rgb(var(--fgSecondary));
 }

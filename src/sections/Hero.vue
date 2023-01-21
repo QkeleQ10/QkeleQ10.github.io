@@ -28,12 +28,10 @@ import Icon from "@/components/Icon.vue";
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 100vh;
     box-sizing: border-box;
     background: linear-gradient(300deg, rgb(var(--hero1)), rgb(var(--hero2)));
     color: rgb(var(--fgContrast));
-    padding: 5em 3em 3em 3em;
-    margin-bottom: 1.5em;
+    padding-top: 5em;
     overflow: hidden;
 }
 

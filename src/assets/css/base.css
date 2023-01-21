@@ -1,6 +1,10 @@
 @import url("colors.css");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+html {
+  scroll-snap-type: y mandatory;
+}
+
 body {
   background-color: rgb(var(--bgPrimary));
   font-family: "Montserrat", arial, sans-serif;
@@ -17,12 +21,12 @@ section {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  height: 100vh;
+  min-height: 100vh;
   width: 100vw;
   box-sizing: border-box;
-  padding: 1em 3em;
-  padding-right: 80px;
+  padding: 2em 86px 2em 3em;
   transition: padding 200ms;
+  scroll-snap-align: start;
 }
 
 h1,

@@ -68,9 +68,16 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 </template>
 
 <style>
+#localisation {
+    display: grid;
+    grid-template:
+        'heading' auto
+        'content' 1fr
+        / 1fr;
+}
+
 #localisation>.sectionGrid {
     display: grid;
-    height: 100%;
     grid-template:
         'a1 a2 a2 a3' auto
         'a1 a4 a5 a5' auto
@@ -99,7 +106,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 }
 
 @media (max-width: 1200px) {
-    #localisation>div {
+    #localisation>.sectionGrid {
         grid-template:
             'a1 a2 a3' auto
             'a1 a4 a5' auto
@@ -109,7 +116,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 }
 
 @media (max-width: 800px) {
-    #localisation>div {
+    #localisation>.sectionGrid {
         grid-template:
             'a1 a2' auto
             'a1 a3' auto
@@ -120,7 +127,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 }
 
 @media (max-width: 550px) {
-    #localisation>div {
+    #localisation>.sectionGrid {
         grid-template:
             'a1' auto
             'a2' auto

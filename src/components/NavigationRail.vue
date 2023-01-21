@@ -10,8 +10,8 @@ import ThemeSwitcher from './ThemeSwitcher.vue';
             <Logo @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
         <div id="navigation-rail-controls">
-            <ThemeSwitcher vertical />
-            <LanguageSwitcher vertical />
+            <ThemeSwitcher />
+            <LanguageSwitcher />
         </div>
     </div>
 </template>
@@ -21,10 +21,9 @@ import ThemeSwitcher from './ThemeSwitcher.vue';
     position: fixed;
     right: 0;
     top: 0;
-    height: 100vh;
-    width: 60px;
-    box-sizing: border-box;
-    padding: 1em;
+    height: calc(100vh - 4em);
+    width: 40px;
+    padding: 2em 22px 2em 10px;
     display: grid;
     grid-template-rows: [logo-start] auto [nav-start] auto [nav-end] 1fr [controls-start] auto [controls-end];
     justify-content: center;
