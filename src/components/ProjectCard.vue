@@ -4,13 +4,14 @@ import Scrollable from "./Scrollable.vue"
 
 defineProps({
     imageSrc: String,
-    imageAlt: String
+    imageAlt: String,
+    imageBackdrop: Boolean
 })
 </script>
 
 <template>
     <div class="card" role="listitem">
-        <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt">
+        <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt" :data-backdrop="imageBackdrop">
         <h3 class="card-title" role="heading">
             <slot name="title"></slot>
         </h3>
@@ -20,7 +21,7 @@ defineProps({
         <p class="card-content">
             <slot name="content"></slot>
         </p>
-        <CollectionHorizontal class="card-buttons">
+        <CollectionHorizontal role="menubar" class="card-buttons">
             <slot name="buttons"></slot>
         </CollectionHorizontal>
     </div>
@@ -28,6 +29,7 @@ defineProps({
 
 <style>
 .card {
+    position: relative;
     display: grid;
     align-content: start;
     grid-template-rows: auto auto auto 1fr;
@@ -42,14 +44,29 @@ defineProps({
     pointer-events: none;
 }
 
-.card:has(.card-image) {
+.card:has(.card-image:not([data-backdrop])) {
     grid-template-rows: auto auto auto auto 1fr;
+}
+
+.card>*:not(image[data-backdrop=true]) {
+    z-index: 1;
 }
 
 .card-image {
     width: 100%;
     margin-bottom: 1em;
     outline: 1px solid rgb(var(--accentVeryLight), .5);
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.card-image[data-backdrop=true] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0.1;
 }
 
 .card-title {

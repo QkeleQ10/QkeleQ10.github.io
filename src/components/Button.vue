@@ -57,7 +57,7 @@ a:focus {
     color: rgb(var(--fgContrast));
     box-shadow: none;
     cursor: pointer;
-    transition: filter 200ms, background-color 200ms, color 200ms;
+    transition: filter 200ms, background-color 200ms, color 200ms, box-shadow 200ms;
 }
 
 .button:hover {
@@ -77,6 +77,7 @@ a:focus {
 
 .button.rail {
     padding: 0;
+    margin: 0;
     color: rgb(var(--fgSecondary));
     background-color: rgb(var(--bgSecondary));
 }

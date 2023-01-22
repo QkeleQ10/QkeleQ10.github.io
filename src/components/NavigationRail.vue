@@ -1,18 +1,19 @@
 <script setup>
 import Logo from "../assets/Logo.vue";
+import CollectionVertical from "./CollectionVertical.vue";
 import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 </script>
 
 <template>
     <div id="navigation-rail">
-        <RouterLink to="/" id="navigation-rail-logo">
-            <Logo @click="router.push('/')" transparent fill="monochrome" />
+        <RouterLink :aria-label="$i18n('navigateHome')" role="navigation" to="/" id="navigation-rail-logo">
+            <Logo aria-hidden @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
-        <div id="navigation-rail-controls">
+        <CollectionVertical role="menubar" id="navigation-rail-controls">
             <ThemeSwitcher />
             <LanguageSwitcher />
-        </div>
+        </CollectionVertical>
     </div>
 </template>
 
@@ -39,7 +40,7 @@ import ThemeSwitcher from './ThemeSwitcher.vue';
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
-    color: rgb(var(--fgTertiary));
+    color: rgb(var(--fgSecondary));
 }
 
 #navigation-rail-controls {

@@ -17,7 +17,6 @@ import Icon from "@/components/Icon.vue";
             <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
             <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
         </CollectionHorizontal>
-        <Icon id="hero-scroll-down">expand_more</Icon>
         <Logo transparent fill="monochrome" />
     </section>
 </template>

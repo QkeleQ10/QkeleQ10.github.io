@@ -8,7 +8,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     <section id="localisation">
         <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
         <div class="sectionGrid" role="list">
-            <ProjectCard :image-src="statsfmImage" image-alt="stats.fm">
+            <ProjectCard :image-src="statsfmImage" image-alt="stats.fm" image-backdrop>
                 <template #title>stats.fm</template>
                 <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                 <template #content>{{ $i18n('statsfmdesc') }}</template>
@@ -79,9 +79,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 #localisation>.sectionGrid {
     display: grid;
     grid-template:
-        'a1 a2 a2 a3' auto
-        'a1 a4 a5 a5' auto
-        / 1fr 1fr 1fr 1fr;
+        'a1 a1 a2' auto 'a1 a1 a3' auto 'a4 a5 a5' auto / 1fr 1fr 1fr;
     gap: 1em;
 }
 
@@ -105,17 +103,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     grid-area: a5;
 }
 
-@media (max-width: 1200px) {
-    #localisation>.sectionGrid {
-        grid-template:
-            'a1 a2 a3' auto
-            'a1 a4 a5' auto
-            / 1fr 1fr 1fr;
-        gap: 1em;
-    }
-}
-
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
     #localisation>.sectionGrid {
         grid-template:
             'a1 a2' auto
@@ -126,7 +114,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 620px) {
     #localisation>.sectionGrid {
         grid-template:
             'a1' auto

@@ -1,10 +1,10 @@
+
+import Heading2 from './Heading2.vue';
+
 <template>
     <div class="modal-backdrop">
         <dialog class="modal" role="dialog" tabindex="0">
-            <h2 class="modal-title">
-                <slot name="title"></slot>
-            </h2>
-            <slot name="content"></slot>
+            <slot></slot>
         </dialog>
     </div>
 </template>

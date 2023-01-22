@@ -29,7 +29,7 @@ h2>em {
 
 h2>.icon {
     position: relative;
-    top: 11.5%;
+    translate: 0 11.5%;
     margin-right: 0.5em;
     font-size: 3rem;
     color: rgb(var(--fgPrimary));
