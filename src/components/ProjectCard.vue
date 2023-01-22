@@ -37,11 +37,16 @@ defineProps({
     padding: 1.25em 1em;
     background-color: rgb(var(--bgSecondary));
     color: rgb(var(--fgSecondary));
+    transition: opacity 200ms;
 }
 
 .card[disabled] {
     opacity: 0.5;
     pointer-events: none;
+}
+
+.card[data-highlight=false]:not(:hover, :focus-within) {
+    opacity: 0.5;
 }
 
 .card:has(.card-image:not([data-backdrop])) {

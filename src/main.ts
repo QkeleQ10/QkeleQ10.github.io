@@ -3,6 +3,7 @@ import { createPinia } from 'pinia'
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
+import detectBrowserPlugin from './plugins/detectBrowser'
 import Button from './components/Button.vue'
 import Index from './pages/Index.vue'
 import StudyTools from './pages/StudyTools.vue'
@@ -52,6 +53,7 @@ async function initialize() {
         .use(router)
         .use(pinia)
         .use(i18nPlugin, { language, strings })
+        .use(detectBrowserPlugin)
         .component('Button', Button)
         .mount('#app')
 
