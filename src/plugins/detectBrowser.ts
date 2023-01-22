@@ -1,3 +1,5 @@
+declare const window: any
+
 export default {
     install: async (app: any) => {
         app.config.globalProperties.$browser = () => {
