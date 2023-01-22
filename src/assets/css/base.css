@@ -1,34 +1,36 @@
 @import url("colors.css");
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+* {
+    transition: background-color 200ms, color 200ms;
+}
+
+html {
+    scroll-snap-type: y mandatory;
+}
+
 body {
-  background-color: rgb(var(--bgPrimary));
-  font-family: "Montserrat", arial, sans-serif;
-  font-weight: 500;
-  overflow-x: hidden;
-  margin: 0;
+    background-color: rgb(var(--bgPrimary));
+    font-family: "Montserrat", arial, sans-serif;
+    font-weight: 500;
+    overflow-x: hidden;
+    margin: 0;
 }
 
 body:has(.modal) {
-  overflow-y: hidden;
+    overflow-y: hidden;
 }
 
 section {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  padding: 1em 2em 2em;
-  transition: padding 200ms;
-}
-
-section[data-hero-visible=true] {
-  padding: 1em 4em 2em;
-}
-
-@media (max-width: 900px) {
-  section[data-hero-visible=true] {
-    padding: 1em 2em 2em;
-  }
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    min-height: 100vh;
+    width: 100vw;
+    box-sizing: border-box;
+    padding: 2em 86px 2em 3em;
+    transition: padding 200ms;
+    scroll-snap-align: start;
 }
 
 h1,
@@ -37,32 +39,32 @@ h3,
 h4,
 h5,
 h6 {
-  color: rgb(var(--fgPrimary));
-  margin: 0;
+    color: rgb(var(--fgPrimary));
+    margin: 0;
 }
 
 p {
-  font-weight: 600;
-  color: rgb(var(--fgSecondary));
-  margin: 0;
+    font-weight: 600;
+    color: rgb(var(--fgSecondary));
+    margin: 0;
 }
 
 li {
-  font-weight: 500;
-  color: rgb(var(--fgTertiary));
+    font-weight: 500;
+    color: rgb(var(--fgTertiary));
 }
 
 footer {
-  font-size: small;
-  color: rgb(var(--fgSecondary));
+    font-size: small;
+    color: rgb(var(--fgSecondary));
 }
 
 @keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 
-  100% {
-    opacity: 1;
-  }
+    100% {
+        opacity: 1;
+    }
 }

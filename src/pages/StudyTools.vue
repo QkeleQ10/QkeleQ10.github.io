@@ -1,34 +1,34 @@
 <script setup>
-import { ref, reactive, inject } from 'vue'
-import { vElementVisibility } from '@vueuse/components'
 import ProjectCard from '@/components/ProjectCard.vue'
-import Scrollable from '@/components/Scrollable.vue'
-import Header from '@/components/Header.vue'
-import Icon from '@/components/Icon.vue'
-import Hero from '@/sections/Hero.vue'
-import Localisation from '@/sections/Localisation.vue'
 import Heading2 from '@/components/Heading2.vue'
-import GridFit from '@/components/GridFit.vue'
+import NavigationRail from '@/components/NavigationRail.vue';
 </script>
 
 <template>
-    <Header class="collide" />
+    <NavigationRail />
     <main>
         <section id="st">
             <Heading2 icon="extension">Study Tools voor Magister</Heading2>
-            <div role="list">
-                <ProjectCard id="st1" stretch-buttons>
+            <div class="sectionGrid" role="list">
+                <ProjectCard stretch-buttons :data-highlight="$browser() === 'edge'">
                     <template #title>Microsoft Edge</template>
                     <template #content>Installeer de extensie met de knop hieronder.</template>
                     <template #buttons><Button icon="shopping_cart"
                             href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
                             via Edge Add-ons</Button></template>
                 </ProjectCard>
-                <ProjectCard id="st2" stretch-buttons disabled>
+                <ProjectCard stretch-buttons :data-highlight="$browser() === 'firefox'">
+                    <template #title>Mozilla Firefox</template>
+                    <template #content>Installeer de extensie met de knop hieronder.</template>
+                    <template #buttons><Button icon="shopping_cart"
+                            href="https://addons.mozilla.org/nl/firefox/addon/studytools/">Installeren
+                            via Firefox Add-ons</Button></template>
+                </ProjectCard>
+                <ProjectCard stretch-buttons disabled>
                     <template #title>Google Chrome</template>
                     <template #content>Gebruik voorlopig de installatiemethode voor andere Chromium-browsers.</template>
                 </ProjectCard>
-                <ProjectCard id="st3" stretch-buttons>
+                <ProjectCard stretch-buttons :data-highlight="$browser() === 'chromium'">
                     <template #title>Andere Chromium-browsers</template>
                     <template #subtitle>Zoals Google Chrome, Brave en Opera</template>
                     <template #content>
@@ -62,10 +62,10 @@ import GridFit from '@/components/GridFit.vue'
                             href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip"
                             target="_self">Downloaden voor Chromium</Button></template>
                 </ProjectCard>
-                <ProjectCard id="st4" stretch-buttons>
+                <ProjectCard stretch-buttons data-highlight="false">
                     <template #title>Bètaversie</template>
                     <template #subtitle>Voor Chromium-browsers</template>
-                    <template #buttons><Button icon="shopping_cart"
+                    <template #buttons><Button icon="download"
                             href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/dev.zip">Bètaversie
                             downloaden voor Chromium</Button></template>
                 </ProjectCard>
@@ -77,40 +77,64 @@ import GridFit from '@/components/GridFit.vue'
 <style>
 @import "../assets/css/base.css";
 
-#st>div {
+#st {
     display: grid;
     grid-template:
-        'a1 a3 a3' auto
-        'a1 a3 a3' auto
-        'a2 a3 a3' auto
-        'a2 a4 a4' auto
+        'heading' auto
+        'content' 1fr
+        / 1fr;
+}
+
+#st>.sectionGrid {
+    display: grid;
+    grid-template:
+        'a1 a2 a3' auto
+        'a4 a4 a5' auto
+        'a4 a4 a5' auto
         / 1fr 1fr 1fr;
     gap: 1em;
 }
 
-#st1 {
+#st>.sectionGrid>*:nth-child(1) {
     grid-area: a1;
 }
 
-#st2 {
+#st>.sectionGrid>*:nth-child(2) {
     grid-area: a2;
 }
 
-#st3 {
+#st>.sectionGrid>*:nth-child(3) {
     grid-area: a3;
 }
 
-#st4 {
+#st>.sectionGrid>*:nth-child(4) {
     grid-area: a4;
 }
 
-@media (max-width: 800px) {
-    #st>div {
+#st>.sectionGrid>*:nth-child(5) {
+    grid-area: a5;
+}
+
+@media (max-width: 1100px) {
+    #st>.sectionGrid {
+        grid-template:
+            'a1 a2' auto
+            'a3 a3' auto
+            'a4 a4' auto
+            'a5 a5' auto
+            / 1fr 1fr;
+        gap: 1em;
+    }
+}
+
+@media (max-width: 620px) {
+    #st>.sectionGrid {
         grid-template:
             'a1' auto
             'a2' auto
             'a3' auto
             'a4' auto
+            'a5' auto
             / 1fr;
         gap: 1em;
     }

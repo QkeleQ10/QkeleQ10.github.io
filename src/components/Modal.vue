@@ -1,26 +1,17 @@
-<script setup>
-function closeModal() { document.querySelector('.modal-backdrop').click() }
 
-document.onkeyup = (e) => {
-    if (e.key === 'Escape') closeModal()
-}
-</script>
+import Heading2 from './Heading2.vue';
 
 <template>
     <div class="modal-backdrop">
         <dialog class="modal" role="dialog" tabindex="0">
-            <h2 class="modal-title">
-                <slot name="title"></slot>
-            </h2>
-            <slot name="content"></slot>
-            <a class="modal-close" onclick="closeModal" tabindex="0">Close dialog</a>
+            <slot></slot>
         </dialog>
     </div>
 </template>
 
 <style>
 .modal-backdrop {
-    position: absolute;
+    position: fixed;
     height: 100vh;
     width: 100vw;
     top: 0;

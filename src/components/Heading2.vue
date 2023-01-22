@@ -15,13 +15,23 @@ defineProps({
 
 <style>
 h2 {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
+    font-size: 3rem;
 }
 
-h2>icon {
+h2:has(em) {
+    color: rgb(var(--greyLight));
+}
+
+h2>em {
+    color: rgb(var(--fgPrimary));
+    font-style: normal;
+}
+
+h2>.icon {
     position: relative;
-    top: 11.5%;
+    translate: 0 11.5%;
+    margin-right: 0.5em;
+    font-size: 3rem;
+    color: rgb(var(--fgPrimary));
 }
 </style>

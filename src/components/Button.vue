@@ -16,11 +16,12 @@ export default {
 </script>
 
 <template>
-    <a :href="href" :target="target" role="listitem" tabindex="-1">
-        <button type="button" role="button" class="button" v-bind="$attrs">
+    <a :href="href" :target="target" tabindex="-1">
+        <button type="button" role="button" class="button" v-bind="$attrs" :tabindex="href ? 0 : -1">
             <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
-        </button></a>
+        </button>
+    </a>
 </template>
 
 <style>
@@ -34,16 +35,17 @@ a {
     margin: 0;
 }
 
-a:has(.button) {
-    height: auto;
+a:focus {
+    outline: none;
 }
 
-button {
+.button {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
     align-items: center;
     gap: 0.5em;
+    height: calc(100% - 10px);
     min-height: 44px;
     width: 100%;
     padding: 5px 15px;
@@ -55,47 +57,36 @@ button {
     color: rgb(var(--fgContrast));
     box-shadow: none;
     cursor: pointer;
-    transition: background-color 200ms, color 200ms;
+    transition: filter 200ms, background-color 200ms, color 200ms, box-shadow 200ms;
 }
 
-.button {
-    min-height: 44px;
-    height: calc(100% - 10px);
+.button:hover {
+    filter: brightness(0.9);
 }
 
-button:hover,
-button:focus,
-button:active,
-button[active=true] {
-    background: rgb(var(--accentDark));
-    color: rgb(var(--bgPrimary));
+.button:focus, a:focus .button {
+    filter: brightness(0.8);
+    box-shadow: inset 0 0 0 3px currentColor;
     outline: none;
 }
 
-button.hero {
+.button.hero {
     background-color: rgb(var(--fgContrast));
-    color: rgb(var(--accentDark));
+    color: rgb(var(--bgContrast));
 }
 
-button.hero:hover,
-button.hero:focus {
-    background: rgb(var(--accentVeryLight));
-    color: rgb(var(--fgPrimary));
+.button.rail {
+    padding: 0;
+    margin: 0;
+    color: rgb(var(--fgSecondary));
+    background-color: rgb(var(--bgSecondary));
 }
 
-button:focus {
-    box-shadow: inset 0 0 0 3px rgb(var(--accentLight));
-    outline: none;
+.button.rail[active=true] {
+    background-color: rgb(var(--accentVeryLight));
 }
 
-button[active=true] {
-    cursor: default;
-}
-
-button[disabled] {
-    background: rgb(var(--bgTertiary));
-    color: var(rgba(var(--greyLight), 0.4));
-    box-shadow: none;
-    cursor: default;
+.button[disabled] {
+    pointer-events: none;
 }
 </style>
