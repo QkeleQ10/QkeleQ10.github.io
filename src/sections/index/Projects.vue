@@ -55,42 +55,12 @@ import studytoolsImage from '@/assets/images/studytools.webp'
 </template>
 
 <style>
-#projects {
-    display: grid;
-    grid-template:
-        'heading' auto
-        'content' 1fr
-        / 1fr;
-}
-
 #projects>.sectionGrid {
-    display: grid;
     grid-template:
         'a1 a1 a2' auto
         'a1 a1 a3' auto
         'a4 a5 a5' auto
         / 1fr 1fr 1fr;
-    gap: 1em;
-}
-
-#projects>.sectionGrid>*:nth-child(1) {
-    grid-area: a1;
-}
-
-#projects>.sectionGrid>*:nth-child(2) {
-    grid-area: a2;
-}
-
-#projects>.sectionGrid>*:nth-child(3) {
-    grid-area: a3;
-}
-
-#projects>.sectionGrid>*:nth-child(4) {
-    grid-area: a4;
-}
-
-#projects>.sectionGrid>*:nth-child(5) {
-    grid-area: a5;
 }
 
 @media (max-width: 1100px) {
@@ -100,7 +70,6 @@ import studytoolsImage from '@/assets/images/studytools.webp'
             'a1 a3' auto
             'a4 a5' auto
             / 1fr 1fr;
-        gap: 1em;
     }
 }
 
@@ -113,7 +82,6 @@ import studytoolsImage from '@/assets/images/studytools.webp'
             'a4' auto
             'a5' auto
             / 1fr;
-        gap: 1em;
     }
 }
 </style>

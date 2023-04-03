@@ -53,8 +53,8 @@ a:focus {
     font-family: "Montserrat", arial, sans-serif;
     font-weight: 600;
     border: none;
-    background-color: rgb(var(--accentLight));
-    color: rgb(var(--fgContrast));
+    background-color: var(--accentLight);
+    color: var(--fgContrast);
     box-shadow: none;
     cursor: pointer;
     transition: filter 200ms, background-color 200ms, color 200ms, box-shadow 200ms;
@@ -71,19 +71,19 @@ a:focus {
 }
 
 .button.hero {
-    background-color: rgb(var(--fgContrast));
-    color: rgb(var(--bgContrast));
+    background-color: var(--fgContrast);
+    color: var(--bgContrast);
 }
 
 .button.rail {
     padding: 0;
     margin: 0;
-    color: rgb(var(--fgSecondary));
-    background-color: rgb(var(--bgSecondary));
+    color: var(--fgSecondary);
+    background-color: var(--bgSecondary);
 }
 
 .button.rail[active=true] {
-    background-color: rgb(var(--accentVeryLight));
+    background-color: var(--accentVeryLight);
 }
 
 .button[disabled] {

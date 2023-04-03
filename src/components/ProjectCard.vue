@@ -35,8 +35,8 @@ defineProps({
     grid-template-rows: auto auto auto 1fr;
     min-width: clamp(200px, 20vw, 300px);
     padding: 1.25em 1em;
-    background-color: rgb(var(--bgSecondary));
-    color: rgb(var(--fgSecondary));
+    background-color: var(--bgSecondary);
+    color: var(--fgSecondary);
     transition: opacity 200ms;
 }
 
@@ -55,27 +55,38 @@ defineProps({
 
 .card>*:not(image[data-backdrop=true]) {
     z-index: 1;
+    transition: opacity 500ms cubic-bezier(.17,.25,0,.77);
 }
 
 .card-image {
     width: 100%;
     margin-bottom: 1em;
-    outline: 1px solid rgb(var(--accentVeryLight), .5);
+    outline: 1px solid var(--accentVeryLight);
     object-fit: cover;
+    object-position: center;
     pointer-events: none;
 }
 
-.card-image[data-backdrop=true] {
+.card-image[data-backdrop] {
     position: absolute;
     height: 100%;
     width: 100%;
     top: 0;
     left: 0;
     opacity: 0.1;
+    transition: opacity 500ms cubic-bezier(.17,.25,0,.77);
+}
+
+.card:hover .card-image[data-backdrop=hover] {
+    opacity: 1 !important;
+}
+
+.card:has(.card-image[data-backdrop=hover]):hover>* {
+    opacity: 0;
 }
 
 .card-title {
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
     margin: 0;
 }
 

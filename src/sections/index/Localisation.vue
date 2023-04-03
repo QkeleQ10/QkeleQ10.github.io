@@ -68,40 +68,11 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 </template>
 
 <style>
-#localisation {
-    display: grid;
-    grid-template:
-        'heading' auto
-        'content' 1fr
-        / 1fr;
-}
-
 #localisation>.sectionGrid {
-    display: grid;
     grid-template:
         'a1 a1 a2' auto 'a1 a1 a3' auto 'a4 a5 a5' auto / 1fr 1fr 1fr;
-    gap: 1em;
 }
 
-#localisation>.sectionGrid>*:nth-child(1) {
-    grid-area: a1;
-}
-
-#localisation>.sectionGrid>*:nth-child(2) {
-    grid-area: a2;
-}
-
-#localisation>.sectionGrid>*:nth-child(3) {
-    grid-area: a3;
-}
-
-#localisation>.sectionGrid>*:nth-child(4) {
-    grid-area: a4;
-}
-
-#localisation>.sectionGrid>*:nth-child(5) {
-    grid-area: a5;
-}
 
 @media (max-width: 1100px) {
     #localisation>.sectionGrid {
@@ -110,7 +81,6 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             'a1 a3' auto
             'a4 a5' auto
             / 1fr 1fr;
-        gap: 1em;
     }
 }
 
@@ -123,7 +93,6 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             'a4' auto
             'a5' auto
             / 1fr;
-        gap: 1em;
     }
 }
 </style>

@@ -1,52 +1,53 @@
+:root[data-color-scheme=st] {
+    --hue: 209;
+}
+
 :root {
-    --accentLight: 98, 148, 100;
-    --accentDark: 34, 117, 56;
-    --hero1: 34, 117, 56;
-    --hero2: 31, 95, 69;
-    --accentVeryLight: 206, 240, 207;
-    --bgPrimary: 255, 255, 255;
-    --bgSecondary: 240, 240, 240;
-    --bgTertiary: 230, 230, 230;
-    --bgContrast: 54, 54, 54;
-    --fgPrimary: 54, 54, 54;
-    --fgSecondary: 88, 88, 88;
-    --fgTertiary: 98, 98, 98;
-    --fgContrast: 255, 255, 255;
-    --greyLight: 170, 170, 170;
+    --hue: 130;
+    --accentLight: hsl(var(--hue), 20%, 48%);
+    --accentDark: hsl(var(--hue), 55%, 30%);
+    --hero1: hsl(var(--hue), 40%, 29%);
+    --hero2: hsl(var(--hue), 36%, 30%);
+    --accentVeryLight: hsl(var(--hue), 53%, 87%);
+    --bgPrimary: hsl(0, 0%, 100%);
+    --bgSecondary: hsl(0, 0%, 94%);
+    --bgTertiary: hsl(0, 0%, 90%);
+    --bgContrast: hsl(0, 0%, 21%);
+    --fgPrimary: hsl(0, 0%, 21%);
+    --fgSecondary: hsl(0, 0%, 35%);
+    --fgTertiary: hsl(0, 0%, 38%);
+    --fgContrast: hsl(0, 0%, 100%);
+    --greyLight: hsl(0, 0%, 67%);
 }
 
 :root.dark {
-    --accentLight: 34, 117, 56;
-    --accentDark: 98, 148, 100;
-    --hero1: 34, 117, 56;
-    --hero2: 31, 95, 69;
-    --accentVeryLight: 49, 82, 50;
-    --bgPrimary: 18, 18, 18;
-    --bgSecondary: 29, 29, 29;
-    --bgTertiary: 247, 247, 247;
-    --bgContrast: 54, 54, 54;
-    --fgPrimary: 255, 255, 255;
-    --fgSecondary: 235, 235, 235;
-    --fgTertiary: 220, 220, 220;
-    --fgContrast: 255, 255, 255;
-    --greyLight: 170, 170, 170;
+    --accentLight: hsl(var(--hue), 55%, 30%);
+    --accentDark: hsl(var(--hue), 20%, 48%);
+    --accentVeryLight: hsl(var(--hue), 25%, 26%);
+    --bgPrimary: hsl(0, 0%, 7%);
+    --bgSecondary: hsl(0, 0%, 11%);
+    --bgTertiary: hsl(0, 0%, 97%);
+    --bgContrast: hsl(0, 0%, 21%);
+    --fgPrimary: hsl(0, 0%, 100%);
+    --fgSecondary: hsl(0, 0%, 92%);
+    --fgTertiary: hsl(0, 0%, 86%);
+    --fgContrast: hsl(0, 0%, 100%);
+    --greyLight: hsl(0, 0%, 67%);
 }
 
 @media (prefers-color-scheme: dark) {
     :root:not(.light) {
-        --accentLight: 34, 117, 56;
-        --accentDark: 98, 148, 100;
-        --hero1: 34, 117, 56;
-        --hero2: 31, 95, 69;
-        --accentVeryLight: 49, 82, 50;
-        --bgPrimary: 18, 18, 18;
-        --bgSecondary: 29, 29, 29;
-        --bgTertiary: 247, 247, 247;
-        --bgContrast: 54, 54, 54;
-        --fgPrimary: 255, 255, 255;
-        --fgSecondary: 235, 235, 235;
-        --fgTertiary: 220, 220, 220;
-        --fgContrast: 255, 255, 255;
-        --greyLight: 170, 170, 170;
+        --accentLight: hsl(var(--hue), 55%, 30%);
+        --accentDark: hsl(var(--hue), 20%, 48%);
+        --accentVeryLight: hsl(var(--hue), 25%, 26%);
+        --bgPrimary: hsl(0, 0%, 7%);
+        --bgSecondary: hsl(0, 0%, 11%);
+        --bgTertiary: hsl(0, 0%, 97%);
+        --bgContrast: hsl(0, 0%, 21%);
+        --fgPrimary: hsl(0, 0%, 100%);
+        --fgSecondary: hsl(0, 0%, 92%);
+        --fgTertiary: hsl(0, 0%, 86%);
+        --fgContrast: hsl(0, 0%, 100%);
+        --greyLight: hsl(0, 0%, 67%);
     }
 }

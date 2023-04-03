@@ -20,6 +20,10 @@ async function initialize() {
             { path: "/extensions/studytools/download", component: StudyTools },
             { path: "/:pathMatch(.*)*", component: Index }
         ],
+        scrollBehavior(to, from, savedPosition) {
+            // always scroll to top
+            return { top: 0 }
+        },
     })
 
     let strings,

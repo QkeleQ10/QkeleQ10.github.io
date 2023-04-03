@@ -19,11 +19,11 @@ h2 {
 }
 
 h2:has(em) {
-    color: rgb(var(--greyLight));
+    color: var(--greyLight);
 }
 
 h2>em {
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
     font-style: normal;
 }
 
@@ -32,6 +32,6 @@ h2>.icon {
     translate: 0 11.5%;
     margin-right: 0.5em;
     font-size: 3rem;
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
 }
 </style>

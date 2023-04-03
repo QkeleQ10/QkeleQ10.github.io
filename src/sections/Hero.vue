@@ -1,23 +1,14 @@
 <script setup>
-import Logo from "../assets/Logo.vue";
 import CollectionHorizontal from "@/components/CollectionHorizontal.vue";
-import Icon from "@/components/Icon.vue";
+
+defineProps({
+    icon: String
+})
 </script>
 
 <template>
     <section id="hero">
-        <div>
-            <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
-            <p class="section-about">{{ $i18n('aboutme') }}</p>
-        </div>
-        <CollectionHorizontal stretch id="hero-buttons">
-            <Button class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
-            <Button class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
-            <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
-            <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
-            <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
-        </CollectionHorizontal>
-        <Logo transparent fill="monochrome" />
+        <slot></slot>
     </section>
 </template>
 
@@ -28,31 +19,35 @@ import Icon from "@/components/Icon.vue";
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    background: linear-gradient(300deg, rgb(var(--hero1)), rgb(var(--hero2)));
-    color: rgb(var(--fgContrast));
+    background: linear-gradient(300deg, var(--hero1), var(--hero2));
+    color: var(--fgContrast);
     padding-top: 5em;
     overflow: hidden;
 }
 
 #hero .section-title {
-    color: rgb(var(--fgContrast));
+    color: var(--fgContrast);
     font-size: min(7em, 15vw);
 }
 
 #hero .section-about {
-    color: rgb(var(--fgContrast));
+    color: var(--fgContrast);
     width: 70%;
     font-size: min(2em, 5vw);
 }
 
-#hero svg {
+#hero>svg,
+#hero>.icon {
     position: absolute;
     max-width: 90vw;
     max-height: 120vh;
     right: 0;
     bottom: 0;
-    color: rgba(var(--fgContrast), 0.1);
+    font-size: 120vh;
+    color: var(--fgContrast);
+    opacity: .1;
     pointer-events: none;
+    user-select: none;
 }
 
 #hero #hero-scroll-down {

@@ -10,7 +10,7 @@ html {
 }
 
 body {
-    background-color: rgb(var(--bgPrimary));
+    background-color: var(--bgPrimary);
     font-family: "Montserrat", arial, sans-serif;
     font-weight: 500;
     overflow-x: hidden;
@@ -22,8 +22,11 @@ body:has(.modal) {
 }
 
 section {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template:
+        'heading' auto
+        'content' 1fr
+        / 1fr;
     gap: 1em;
     min-height: 100vh;
     width: 100vw;
@@ -33,30 +36,75 @@ section {
     scroll-snap-align: start;
 }
 
+.sectionGrid {
+    display: grid;
+    grid-template:
+        'a1 a2 a3' auto
+        'a4 a5 a6' auto
+        / 1fr 1fr 1fr;
+    gap: 1em;
+}
+
+section.quarter {
+    min-height: 25vh;
+}
+
+section.half {
+    min-height: 50vh;
+}
+
+section.threequarters {
+    min-height: 75vh;
+}
+
+.sectionGrid>*:nth-child(1) {
+    grid-area: a1;
+}
+
+.sectionGrid>*:nth-child(2) {
+    grid-area: a2;
+}
+
+.sectionGrid>*:nth-child(3) {
+    grid-area: a3;
+}
+
+.sectionGrid>*:nth-child(4) {
+    grid-area: a4;
+}
+
+.sectionGrid>*:nth-child(5) {
+    grid-area: a5;
+}
+
+.sectionGrid>*:nth-child(6) {
+    grid-area: a6;
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
     margin: 0;
 }
 
 p {
-    font-weight: 600;
-    color: rgb(var(--fgSecondary));
+    font-weight: 500;
+    color: var(--fgSecondary);
     margin: 0;
 }
 
 li {
     font-weight: 500;
-    color: rgb(var(--fgTertiary));
+    color: var(--fgTertiary);
 }
 
 footer {
     font-size: small;
-    color: rgb(var(--fgSecondary));
+    color: var(--fgSecondary);
 }
 
 @keyframes fadeIn {

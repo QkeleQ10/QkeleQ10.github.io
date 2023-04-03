@@ -31,20 +31,20 @@ import Heading2 from './Heading2.vue';
     gap: 20px;
     width: clamp(150px, 75%, 750px);
     max-height: 90vh;
-    background-color: rgb(var(--bgPrimary));
+    background-color: var(--bgPrimary);
     padding: 20px;
     box-shadow: 0 0 5px rgba(var(--fgPrimary), 0.5);
     outline: none;
     border: none;
     border-radius: 6px;
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
     overflow-wrap: normal;
     overflow: auto;
     z-index: 100;
 }
 
 .modal-title {
-    color: rgb(var(--fgPrimary));
+    color: var(--fgPrimary);
     margin: 0;
 }
 
