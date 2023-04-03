@@ -18,6 +18,7 @@
     --fgTertiary: hsl(0, 0%, 38%);
     --fgContrast: hsl(0, 0%, 100%);
     --greyLight: hsl(0, 0%, 67%);
+    color-scheme: light;
 }
 
 :root.dark {
@@ -33,6 +34,7 @@
     --fgTertiary: hsl(0, 0%, 86%);
     --fgContrast: hsl(0, 0%, 100%);
     --greyLight: hsl(0, 0%, 67%);
+    color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -49,5 +51,6 @@
         --fgTertiary: hsl(0, 0%, 86%);
         --fgContrast: hsl(0, 0%, 100%);
         --greyLight: hsl(0, 0%, 67%);
+        color-scheme: dark;
     }
 }
