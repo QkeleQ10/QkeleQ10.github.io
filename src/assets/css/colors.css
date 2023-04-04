@@ -9,6 +9,7 @@
     --hero1: hsl(var(--hue), 40%, 29%);
     --hero2: hsl(var(--hue), 36%, 30%);
     --accentVeryLight: hsl(var(--hue), 53%, 87%);
+    --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 100%);
     --bgSecondary: hsl(0, 0%, 94%);
     --bgTertiary: hsl(0, 0%, 90%);
@@ -25,6 +26,7 @@
     --accentLight: hsl(var(--hue), 55%, 30%);
     --accentDark: hsl(var(--hue), 20%, 48%);
     --accentVeryLight: hsl(var(--hue), 25%, 26%);
+    --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 7%);
     --bgSecondary: hsl(0, 0%, 11%);
     --bgTertiary: hsl(0, 0%, 97%);
@@ -42,6 +44,7 @@
         --accentLight: hsl(var(--hue), 55%, 30%);
         --accentDark: hsl(var(--hue), 20%, 48%);
         --accentVeryLight: hsl(var(--hue), 25%, 26%);
+        --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
         --bgPrimary: hsl(0, 0%, 7%);
         --bgSecondary: hsl(0, 0%, 11%);
         --bgTertiary: hsl(0, 0%, 97%);

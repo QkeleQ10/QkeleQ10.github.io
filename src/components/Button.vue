@@ -64,7 +64,8 @@ a:focus {
     filter: brightness(0.9);
 }
 
-.button:focus, a:focus .button {
+.button:focus,
+a:focus .button {
     filter: brightness(0.8);
     box-shadow: inset 0 0 0 3px currentColor;
     outline: none;

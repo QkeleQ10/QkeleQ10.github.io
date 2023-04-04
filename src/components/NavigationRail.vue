@@ -6,23 +6,29 @@ import CollectionVertical from "./CollectionVertical.vue";
 import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
 
-const target = ref()
-const isVisible = ref(false)
+const navigationDetector1 = ref()
+const navigationDetector2 = ref()
+const isVisible1 = ref(false)
+const isVisible2 = ref(false)
 
-function onElementVisibility(state) {
-    isVisible.value = state
+function onElementVisibility1(state) {
+    isVisible1.value = state
+}
+function onElementVisibility2(state) {
+    isVisible2.value = state
 }
 
 </script>
 
 <template>
-    <div id="navigation-detector" ref="target" v-element-visibility="onElementVisibility"></div>
+    <div class="navigation-detector" id="navigation-detector-1" ref="navigationDetector1" v-element-visibility="onElementVisibility1"></div>
+    <div class="navigation-detector" id="navigation-detector-2" ref="navigationDetector2" v-element-visibility="onElementVisibility2"></div>
     <div id="navigation-rail">
         <RouterLink :aria-label="$i18n('navigateHome')" role="navigation" to="/" id="navigation-rail-logo"
-            :data-contrast="isVisible">
+            :data-contrast="isVisible1">
             <Logo aria-hidden @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
-        <CollectionVertical role="menubar" id="navigation-rail-controls">
+        <CollectionVertical role="menubar" id="navigation-rail-controls" :data-contrast="isVisible2">
             <ThemeSwitcher />
             <LanguageSwitcher />
         </CollectionVertical>
@@ -30,11 +36,15 @@ function onElementVisibility(state) {
 </template>
 
 <style>
-#navigation-detector {
+.navigation-detector {
     position: absolute;
     visibility: hidden;
     pointer-events: none;
     top: 95vh;
+}
+
+#navigation-detector-2 {
+    top: 10vh;
 }
 
 #navigation-rail {
@@ -68,5 +78,14 @@ function onElementVisibility(state) {
 
 #navigation-rail-controls {
     grid-row: controls;
+}
+
+*[data-contrast=true] .button.rail {
+    background-color: var(--fgContrast);
+    color: var(--bgContrast);
+}
+
+*[data-contrast=true] .button.rail[active=true] {
+    background-color: var(--accentVeryLightContrast);
 }
 </style>

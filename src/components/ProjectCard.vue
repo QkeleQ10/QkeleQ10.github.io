@@ -53,9 +53,9 @@ defineProps({
     grid-template-rows: auto auto auto auto 1fr;
 }
 
-.card>*:not(image[data-backdrop=true]) {
+.card>*:not(image) {
     z-index: 1;
-    transition: opacity 500ms cubic-bezier(.17,.25,0,.77);
+    transition: opacity 500ms cubic-bezier(.17, .25, 0, .77);
 }
 
 .card-image {
@@ -69,12 +69,15 @@ defineProps({
 
 .card-image[data-backdrop] {
     position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
+    max-height: 100%;
+    min-height: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
     opacity: 0.1;
-    transition: opacity 500ms cubic-bezier(.17,.25,0,.77);
+    transition: opacity 500ms cubic-bezier(.17, .25, 0, .77);
 }
 
 .card:hover .card-image[data-backdrop=hover] {

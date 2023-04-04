@@ -27,7 +27,8 @@ const installation = ref()
         <Hero>
             <div>
                 <h1 class="section-title">Study Tools voor Magister</h1>
-                <p class="section-about">Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de grootste
+                <p class="section-about">Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de
+                    grootste
                     elektronische leeromgeving van Nederland.</p>
             </div>
             <CollectionHorizontal stretch id="hero-buttons">
@@ -43,8 +44,10 @@ const installation = ref()
                 <ProjectCard stretch-buttons :data-highlight="$browser() === 'chromium'">
                     <template #title>Voor Google Chrome</template>
                     <template #subtitle>en andere Chromium-browsers zoals Brave en Opera</template>
-                    <template #content>Komt binnenkort! Scroll voor nu even verder naar beneden en gebruik de geavanceerde
-                        methode.</template>
+                    <template #content>Installeer de extensie met de knop hieronder.</template>
+                    <template #buttons><Button icon="shopping_cart"
+                            href="https://chrome.google.com/webstore/detail/study-tools-voor-magister/hacjodpccmeoocakiahjfndppdeallak">Installeren
+                            via Chrome Web Store</Button></template>
                 </ProjectCard>
                 <ProjectCard stretch-buttons :data-highlight="$browser() === 'edge'">
                     <template #title>Voor Microsoft Edge</template>
@@ -63,7 +66,7 @@ const installation = ref()
             </div>
         </section>
         <section id="features" class="threequarters">
-            <Heading2 icon="tips_and_updates">Functionaliteiten</Heading2>
+            <Heading2 icon="tips_and_updates">Functio&shy;naliteiten</Heading2>
             <div class="sectionGrid" role="list">
                 <ProjectCard stretch-buttons :image-src="imageTheme" image-alt="Thema" image-backdrop="hover">
                     <template #title>Aangepaste thema's</template>
