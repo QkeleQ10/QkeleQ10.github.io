@@ -22,7 +22,7 @@
     color-scheme: light;
 }
 
-:root.dark {
+:root[data-theme=dark] {
     --accentLight: hsl(var(--hue), 55%, 30%);
     --accentDark: hsl(var(--hue), 20%, 48%);
     --accentVeryLight: hsl(var(--hue), 25%, 26%);
@@ -40,7 +40,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-    :root:not(.light) {
+    :root:not([data-theme=light]) {
         --accentLight: hsl(var(--hue), 55%, 30%);
         --accentDark: hsl(var(--hue), 20%, 48%);
         --accentVeryLight: hsl(var(--hue), 25%, 26%);

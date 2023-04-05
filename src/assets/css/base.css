@@ -28,12 +28,16 @@ section {
         'content' 1fr
         / 1fr;
     gap: 1em;
-    min-height: 100vh;
+    min-height: 100svh;
     width: 100vw;
     box-sizing: border-box;
-    padding: 2em 86px 2em 3em;
+    padding: 2em 3em 2em 86px;
     transition: padding 200ms;
     scroll-snap-align: start;
+}
+
+:root[data-menu-collapsed] section {
+    padding: 2em 22px;
 }
 
 .sectionGrid {
@@ -46,15 +50,15 @@ section {
 }
 
 section.quarter {
-    min-height: 25vh;
+    min-height: 25svh;
 }
 
 section.half {
-    min-height: 50vh;
+    min-height: 50svh;
 }
 
 section.threequarters {
-    min-height: 75vh;
+    min-height: 75svh;
 }
 
 .sectionGrid>*:nth-child(1) {
@@ -106,6 +110,13 @@ footer {
     font-size: small;
     color: var(--fgSecondary);
 }
+
+@media (max-width: 620px) {
+    html {
+            scroll-snap-type: none;
+        }
+}
+
 
 @keyframes fadeIn {
     0% {

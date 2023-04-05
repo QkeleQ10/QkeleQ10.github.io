@@ -6,7 +6,7 @@ export const useThemeStore = defineStore('theme', {
     state: () => ({ theme: getCookie('theme') || 'auto', scheme: 'normal' }),
     actions: {
         set(theme: string) {
-            document.documentElement.setAttribute('class', theme)
+            document.documentElement.setAttribute('data-theme', theme)
             this.theme = theme
             setCookie('theme', theme, { expires: 730 })
         },

@@ -58,10 +58,10 @@ defineProps({
 #hero>.icon {
     position: absolute;
     max-width: 90vw;
-    max-height: 120vh;
+    max-height: 120svh;
     right: 0;
     bottom: 0;
-    font-size: 120vh;
+    font-size: 120svh;
     color: var(--fgContrast);
     opacity: .1;
     pointer-events: none;

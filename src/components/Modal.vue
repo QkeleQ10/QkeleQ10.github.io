@@ -30,7 +30,7 @@ import Heading2 from './Heading2.vue';
     flex-direction: column;
     gap: 20px;
     width: clamp(150px, 75%, 750px);
-    max-height: 90vh;
+    max-height: 90svh;
     background-color: var(--bgPrimary);
     padding: 20px;
     box-shadow: 0 0 5px rgba(var(--fgPrimary), 0.5);
