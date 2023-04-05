@@ -1,7 +1,7 @@
 <script setup>
 import ProjectCard from '@/components/ProjectCard.vue'
 import Heading2 from '@/components/Heading2.vue'
-import studytoolsImage from '@/assets/images/studytools.webp'
+import studytoolsImage from '@/assets/images/studytools/themes.webp'
 </script>
 
 <template>

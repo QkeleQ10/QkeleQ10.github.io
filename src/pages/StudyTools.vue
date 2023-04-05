@@ -6,12 +6,12 @@ import Heading2 from '@/components/Heading2.vue'
 import NavigationRail from '@/components/NavigationRail.vue';
 import Hero from '@/sections/Hero.vue';
 import Icon from '@/components/Icon.vue';
-import imageTheme from '@/assets/images/studytools/themes.png'
-import imageLogin from '@/assets/images/studytools/login.png'
-import imageToday from '@/assets/images/studytools/today.png'
-import imageStudyguide from '@/assets/images/studytools/studyguide.png'
-import imageGradecalculator from '@/assets/images/studytools/gradecalculator.png'
-import imageGradebackup from '@/assets/images/studytools/gradebackup.png'
+import imageTheme from '@/assets/images/studytools/themes.webp'
+import imageLogin from '@/assets/images/studytools/login.webp'
+import imageToday from '@/assets/images/studytools/today.webp'
+import imageStudyguide from '@/assets/images/studytools/studyguide.webp'
+import imageGradecalculator from '@/assets/images/studytools/gradecalculator.webp'
+import imageGradebackup from '@/assets/images/studytools/gradebackup.webp'
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
 
 const theme = useThemeStore()
