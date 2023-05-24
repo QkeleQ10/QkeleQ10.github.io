@@ -15,6 +15,7 @@ async function initialize() {
         history: createWebHistory(),
         routes: [
             { path: "/", component: Index },
+            { path: "/studytools", component: StudyTools },
             { path: "/extensions/studytools", component: StudyTools },
             { path: "/extensions/studytools/update", component: StudyTools },
             { path: "/extensions/studytools/download", component: StudyTools },

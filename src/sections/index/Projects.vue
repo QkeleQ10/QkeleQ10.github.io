@@ -8,12 +8,12 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
     <section id="projects">
         <Heading2 icon="web">{{ $i18n('Projects') }}</Heading2>
         <div class="sectionGrid" role="list">
-            <ProjectCard :image-src="studytoolsImage" image-alt="stats.fm" image-backdrop>
+            <ProjectCard :image-src="studytoolsImage" image-alt="stats.fm" image-position>
                 <template #title>Study Tools voor Magister</template>
                 <template #subtitle>{{ $i18n('Browser extension') }}</template>
                 <template #content>{{ $i18n('studytoolsdesc') }}</template>
                 <template #buttons>
-                    <RouterLink to="/extensions/studytools">
+                    <RouterLink to="/studytools">
                         <Button icon="shopping_cart">{{ $i18n('Install') }}</Button>
                     </RouterLink>
                     <Button href="https://github.com/QkeleQ10/Study-Tools" icon="code">GitHub</Button>

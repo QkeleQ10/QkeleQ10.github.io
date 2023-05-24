@@ -35,30 +35,24 @@ const installation = ref()
                 <Button icon="expand_more" class="hero" onclick="installation.scrollIntoView({behavior: 'smooth'})">{{
                     $i18n('Install') }}</Button>
                 <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
+                <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
             </CollectionHorizontal>
             <Icon>school</Icon>
         </Hero>
-        <section ref="installation" id="installation" class="quarter">
+        <section ref="installation" id="installation" class="half">
             <Heading2 icon="install_desktop">{{ $i18n('Install') }}</Heading2>
             <div class="sectionGrid" role="list">
-                <ProjectCard stretch-buttons :data-highlight="$browser() === 'chromium'">
-                    <template #title>Voor Google Chrome</template>
-                    <template #subtitle>en andere Chromium-browsers zoals Brave en Opera</template>
-                    <template #content>Installeer de extensie met de knop hieronder.</template>
+                <ProjectCard stretch-buttons :data-highlight="$browser() === 'chromium' || $browser() === 'edge'">
+                    <template #title>Chrome Web Store</template>
+                    <template #subtitle>Voor Chromium-browsers zoals Microsoft Edge, Google Chrome, Brave en Opera</template>
+                    <template #content>Aanbevolen. Installeer de extensie met de knop hieronder.</template>
                     <template #buttons><Button icon="shopping_cart"
                             href="https://chrome.google.com/webstore/detail/study-tools-voor-magister/hacjodpccmeoocakiahjfndppdeallak">Installeren
                             via Chrome Web Store</Button></template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons :data-highlight="$browser() === 'edge'">
-                    <template #title>Voor Microsoft Edge</template>
-                    <template #content>Installeer de extensie met de knop hieronder.</template>
-                    <template #buttons><Button icon="shopping_cart"
-                            href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
-                            via Edge Add-ons</Button></template>
-                </ProjectCard>
                 <ProjectCard stretch-buttons :data-highlight="$browser() === 'firefox'">
-                    <template #title>Voor Mozilla Firefox</template>
-                    <template #content>Installeer de extensie met de knop hieronder.</template>
+                    <template #title>Firefox Add-ons</template>
+                    <template #content>Deze versie kan achterlopen of instabiel zijn. Het wordt aangeraden om een Chromium-browser te gebruiken.</template>
                     <template #buttons><Button icon="shopping_cart"
                             href="https://addons.mozilla.org/nl/firefox/addon/studytools/">Installeren
                             via Firefox Add-ons</Button></template>
@@ -68,40 +62,40 @@ const installation = ref()
         <section id="features" class="threequarters">
             <Heading2 icon="tips_and_updates">Functio&shy;naliteiten</Heading2>
             <div class="sectionGrid" role="list">
-                <ProjectCard stretch-buttons :image-src="imageTheme" image-alt="Thema" image-backdrop="hover">
+                <ProjectCard stretch-buttons :image-src="imageTheme" image-alt="Thema" image-position="hover">
                     <template #title>Aangepaste thema's</template>
-                    <template #subtitle>Maak je Magister jou</template>
-                    <template #content>Stap af van de blauwe flashbang en kies je eigen thema- en accentkleur! Je kunt
+                    <template #subtitle>Klaar met de blauwe flashbang?</template>
+                    <template #content>Kies je eigen thema- en accentkleur! Je kunt
                         kiezen uit een licht, donker en automatisch thema. De accentkleur kun je helemaal zelf kiezen. Je
-                        mag zelfs je hele Magister gitzwart of knalroze maken.</template>
+                        mag zelfs je hele Magister gitzwart of knalroze maken. Mocht dat je ding zijn.</template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons :image-src="imageLogin" image-alt="Inloggen" image-backdrop="hover">
+                <ProjectCard stretch-buttons :image-src="imageLogin" image-alt="Inloggen" image-position="hover">
                     <template #title>Automatisch inloggen</template>
                     <template #subtitle>Nooit meer worden aangestaard door het inlogscherm</template>
                     <template #content>Compleet instelbare automatische login. Ondersteunt inloggen met gebruikersnaam en
                         wachtwoord of via een Microsoft-account. Of zet de optie gewoon uit.</template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons :image-src="imageToday" image-alt="Vandaag" image-backdrop="hover">
+                <ProjectCard stretch-buttons :image-src="imageToday" image-alt="Vandaag" image-position="hover">
                     <template #title>Vandaag</template>
                     <template #subtitle>Zie het in één oogopslag</template>
                     <template #content>Geheel opnieuw opgebouwd met focus op overzichtelijkheid en aantrekkelijkheid. Je
                         kunt aanpassen hoe alles wordt weergegeven. Niet iedereen vindt dit fijn, dus je kunt het altijd
                         uitschakelen.</template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons :image-src="imageStudyguide" image-alt="Studiewijzers" image-backdrop="hover">
+                <ProjectCard stretch-buttons :image-src="imageStudyguide" image-alt="Studiewijzers" image-position="hover">
                     <template #title>Studiewijzers</template>
                     <template #subtitle>Geen speurtochten meer naar je huiswerk</template>
                     <template #content>Kies uit 3 weergave-opties om studiewijzers overzichtelijker weer te geven. Alles is
                         natuurlijk geheel aanpasbaar en uitschakelbaar.</template>
                 </ProjectCard>
                 <ProjectCard stretch-buttons :image-src="imageGradecalculator" image-alt="Cijfercalculator"
-                    image-backdrop="hover">
+                    image-position="hover">
                     <template #title>Cijfercalculator</template>
                     <template #subtitle>Nooit meer cijfers overtypen op andere websites</template>
                     <template #content>Laat Study Tools voor je berekenen wat je moet halen of wat je komt te staan. Je kunt
                         alles aanpassen en je krijgt zelfs een handig grafiekje!</template>
                 </ProjectCard>
-                <ProjectCard stretch-buttons :image-src="imageGradebackup" image-alt="Cijferback-up" image-backdrop="hover">
+                <ProjectCard stretch-buttons :image-src="imageGradebackup" image-alt="Cijferback-up" image-position="hover">
                     <template #title>Cijferback-up</template>
                     <template #subtitle>Omzeil de regeling van je school</template>
                     <template #content>Met Study Tools kun je altijd bij je cijferlijst. Je kunt namelijk op elk moment je
@@ -142,18 +136,34 @@ const installation = ref()
                     </template>
                 </ProjectCard>
                 <ProjectCard stretch-buttons data-highlight="false">
-                    <template #title>Stabiele versie voor Chromium</template>
+                    <template #title>Chromium-installatiebestand</template>
                     <template #subtitle>Voor bijvoorbeeld Chrome, Edge, Brave en Opera</template>
+                    <template #content>De laatste stabiele versie als .ZIP-bestand.</template>
                     <template #buttons><Button icon="download"
                             href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip"
                             target="_self">Stabiele versie downloaden voor Chromium</Button></template>
                 </ProjectCard>
                 <ProjectCard stretch-buttons data-highlight="false">
-                    <template #title>Bètaversie voor Chromium</template>
+                    <template #title>Chromium-installatiebestand (dev)</template>
                     <template #subtitle>Voor bijvoorbeeld Chrome, Edge, Brave en Opera</template>
+                    <template #content>De ontwikkelaarsversie als .ZIP-bestand. Dit is afkomstig van de branche waar
+                        ik in werk, dus verwacht instabiliteit!</template>
                     <template #buttons><Button icon="download"
                             href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/dev.zip">Bètaversie
                             downloaden voor Chromium</Button></template>
+                </ProjectCard>
+
+                <ProjectCard stretch-buttons data-highlight="false">
+                    <template #title>Microsoft Edge Add-ons</template>
+                    <template #content>Deze versie kan achterlopen of instabiel zijn. De Chromium-versie bovenaan de pagina
+                        werkt ook voor Microsoft Edge. Het is beter om die te installeren.</template>
+                    <template #buttons>
+                        <Button icon="expand_less"
+                            onclick="installation.scrollIntoView({behavior: 'smooth'})">Chromium-versie installeren</Button>
+                        <Button icon="shopping_cart"
+                            href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
+                            via Edge Add-ons</Button>
+                    </template>
                 </ProjectCard>
             </div>
         </section>
@@ -165,8 +175,8 @@ const installation = ref()
 
 #st>#installation>.sectionGrid {
     grid-template:
-        'a1 a1 a2 a3' auto
-        / 1fr 1fr 1fr 1fr;
+        'a1 a1 a2' auto
+        / 1fr 1fr 1fr;
 }
 
 #st>#features>.sectionGrid {
@@ -179,6 +189,7 @@ const installation = ref()
 #st>#advanced>.sectionGrid {
     grid-template:
         'a1 a1 a2 a3' auto
+        'a1 a1 a4 a4' auto
         / 1fr 1fr 1fr 1fr;
 }
 
@@ -186,7 +197,7 @@ const installation = ref()
     #st>#installation>.sectionGrid {
         grid-template:
             'a1 a1' auto
-            'a2 a3' auto
+            'a2 a2' auto
             / 1fr 1fr;
     }
 
@@ -202,6 +213,7 @@ const installation = ref()
         grid-template:
             'a1 a1' auto
             'a2 a3' auto
+            'a4 a4' auto
             / 1fr 1fr;
     }
 }
@@ -211,7 +223,6 @@ const installation = ref()
         grid-template:
             'a1' auto
             'a2' auto
-            'a3' auto
             / 1fr;
     }
 
@@ -231,6 +242,7 @@ const installation = ref()
             'a1' auto
             'a2' auto
             'a3' auto
+            'a4' auto
             / 1fr;
     }
 }

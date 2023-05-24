@@ -5,13 +5,13 @@ import Scrollable from "./Scrollable.vue"
 defineProps({
     imageSrc: String,
     imageAlt: String,
-    imageBackdrop: Boolean
+    imagePosition: String
 })
 </script>
 
 <template>
     <div class="card" role="listitem">
-        <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt" :data-backdrop="imageBackdrop">
+        <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt" :data-position="imagePosition">
         <h3 class="card-title" role="heading">
             <slot name="title"></slot>
         </h3>
@@ -49,7 +49,7 @@ defineProps({
     opacity: 0.5;
 }
 
-.card:has(.card-image:not([data-backdrop])) {
+.card:has(.card-image:not([data-position])) {
     grid-template-rows: auto auto auto auto 1fr;
 }
 
@@ -67,7 +67,7 @@ defineProps({
     pointer-events: none;
 }
 
-.card-image[data-backdrop] {
+.card-image[data-position] {
     position: absolute;
     max-height: 100%;
     min-height: 100%;
@@ -80,11 +80,11 @@ defineProps({
     transition: opacity 500ms cubic-bezier(.17, .25, 0, .77);
 }
 
-.card:hover .card-image[data-backdrop=hover] {
+.card:hover .card-image[data-position=hover] {
     opacity: 1 !important;
 }
 
-.card:has(.card-image[data-backdrop=hover]):hover>* {
+.card:has(.card-image[data-position=hover]):hover>* {
     opacity: 0;
 }
 

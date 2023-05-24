@@ -8,7 +8,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     <section id="localisation">
         <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
         <div class="sectionGrid" role="list">
-            <ProjectCard :image-src="statsfmImage" image-alt="stats.fm" image-backdrop>
+            <ProjectCard :image-src="statsfmImage" image-alt="stats.fm" image-position>
                 <template #title>stats.fm</template>
                 <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                 <template #content>{{ $i18n('statsfmdesc') }}</template>
