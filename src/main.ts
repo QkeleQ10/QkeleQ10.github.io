@@ -7,6 +7,7 @@ import detectBrowserPlugin from './plugins/detectBrowser'
 import Button from './components/Button.vue'
 import Index from './pages/Index.vue'
 import StudyTools from './pages/StudyTools.vue'
+import StudyToolsGrades from './pages/StudyToolsGrades.vue'
 
 initialize()
 
@@ -16,6 +17,7 @@ async function initialize() {
         routes: [
             { path: "/", component: Index },
             { path: "/studytools", component: StudyTools },
+            { path: "/studytools/grades", component: StudyToolsGrades },
             { path: "/extensions/studytools", component: StudyTools },
             { path: "/extensions/studytools/update", component: StudyTools },
             { path: "/extensions/studytools/download", component: StudyTools },

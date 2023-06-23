@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
-    stretch: Boolean
+    stretch: Boolean,
+    uniform: Boolean
 })
 </script>
 
@@ -15,7 +16,7 @@ export default {
 </script>
 
 <template>
-    <div class="collection-horizontal" role="list" :data-stretch="stretch" v-if="hasContent()">
+    <div class="collection-horizontal" role="list" :data-stretch="stretch" :data-uniform="uniform" v-if="hasContent()">
         <slot></slot>
     </div>
 </template>
@@ -29,7 +30,14 @@ export default {
 
 .collection-horizontal[data-stretch=true] {
     width: 100%;
-    place-items: stretch;
-    place-content: stretch;
+    justify-content: space-between;
+}
+
+.collection-horizontal[data-stretch=true]>* {
+    margin-right: auto;
+}
+
+.collection-horizontal[data-uniform=true]>* {
+    flex: 1 1 0px;
 }
 </style>

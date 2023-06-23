@@ -23,7 +23,7 @@ const projects = ref()
                 <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
                 <p class="section-about">{{ $i18n('aboutme') }}</p>
             </div>
-            <CollectionHorizontal stretch id="hero-buttons">
+            <CollectionHorizontal id="hero-buttons">
                 <Button icon="expand_more" class="hero" onclick="projects.scrollIntoView({behavior: 'smooth'})">{{
                     $i18n('Projects') }}</Button>
                 <Button icon="groups" class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>

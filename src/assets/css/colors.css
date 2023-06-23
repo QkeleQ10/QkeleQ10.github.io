@@ -12,13 +12,16 @@
     --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 100%);
     --bgSecondary: hsl(0, 0%, 94%);
-    --bgTertiary: hsl(0, 0%, 90%);
     --bgContrast: hsl(0, 0%, 21%);
+    --bgHighlight: hsl(var(--hue), 100%, 97%);
     --fgPrimary: hsl(0, 0%, 21%);
     --fgSecondary: hsl(0, 0%, 35%);
     --fgTertiary: hsl(0, 0%, 38%);
     --fgContrast: hsl(0, 0%, 100%);
     --greyLight: hsl(0, 0%, 67%);
+    --tablePrimary: hsl(0, 0%, 100%);
+    --tableEmpty: hsl(0, 0%, 94%);
+    --border: hsl(0, 0%, 90%);
     color-scheme: light;
 }
 
@@ -29,13 +32,16 @@
     --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 7%);
     --bgSecondary: hsl(0, 0%, 11%);
-    --bgTertiary: hsl(0, 0%, 97%);
     --bgContrast: hsl(0, 0%, 21%);
+    --bgHighlight: hsl(var(--hue), 20%, 12%);
     --fgPrimary: hsl(0, 0%, 100%);
     --fgSecondary: hsl(0, 0%, 92%);
     --fgTertiary: hsl(0, 0%, 86%);
     --fgContrast: hsl(0, 0%, 100%);
     --greyLight: hsl(0, 0%, 67%);
+    --tablePrimary: hsl(0, 0%, 9%);
+    --tableEmpty: hsl(0, 0%, 6%);
+    --border: hsl(0, 0%, 17%);
     color-scheme: dark;
 }
 
@@ -47,13 +53,16 @@
         --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
         --bgPrimary: hsl(0, 0%, 7%);
         --bgSecondary: hsl(0, 0%, 11%);
-        --bgTertiary: hsl(0, 0%, 97%);
         --bgContrast: hsl(0, 0%, 21%);
+        --bgHighlight: hsl(var(--hue), 20%, 12%);
         --fgPrimary: hsl(0, 0%, 100%);
         --fgSecondary: hsl(0, 0%, 92%);
         --fgTertiary: hsl(0, 0%, 86%);
         --fgContrast: hsl(0, 0%, 100%);
         --greyLight: hsl(0, 0%, 67%);
+        --tablePrimary: hsl(0, 0%, 9%);
+        --tableEmpty: hsl(0, 0%, 6%);
+        --border: hsl(0, 0%, 17%);
         color-scheme: dark;
     }
 }
