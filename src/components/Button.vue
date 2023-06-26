@@ -17,7 +17,7 @@ export default {
 
 <template>
     <a :href="href" :target="target" tabindex="-1">
-        <button type="button" role="button" class="button" v-bind="$attrs" :tabindex="href ? 0 : -1">
+        <button type="button" role="button" class="button" v-bind="$attrs">
             <Icon v-if="icon">{{ icon }}</Icon>
             <slot>Button</slot>
         </button>

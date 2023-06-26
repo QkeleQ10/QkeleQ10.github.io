@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
     stretch: Boolean,
-    uniform: Boolean
+    uniform: Boolean,
+    wrap: Boolean
 })
 </script>
 
@@ -16,7 +17,8 @@ export default {
 </script>
 
 <template>
-    <div class="collection-horizontal" role="list" :data-stretch="stretch" :data-uniform="uniform" v-if="hasContent()">
+    <div class="collection-horizontal" role="list" :data-stretch="stretch" :data-uniform="uniform" :data-wrap="wrap"
+        v-if="hasContent()">
         <slot></slot>
     </div>
 </template>
@@ -39,5 +41,11 @@ export default {
 
 .collection-horizontal[data-uniform=true]>* {
     flex: 1 1 0px;
+}
+
+.collection-horizontal[data-wrap=true] {
+    max-width: 100%;
+    overflow: hidden;
+    flex-wrap: wrap;
 }
 </style>

@@ -14,6 +14,7 @@
     --bgSecondary: hsl(0, 0%, 94%);
     --bgContrast: hsl(0, 0%, 21%);
     --bgHighlight: hsl(var(--hue), 100%, 97%);
+    --bgPositive: hsl(156deg, 100%, 87%);
     --fgPrimary: hsl(0, 0%, 21%);
     --fgSecondary: hsl(0, 0%, 35%);
     --fgTertiary: hsl(0, 0%, 38%);
@@ -34,6 +35,7 @@
     --bgSecondary: hsl(0, 0%, 11%);
     --bgContrast: hsl(0, 0%, 21%);
     --bgHighlight: hsl(var(--hue), 20%, 12%);
+    --bgPositive: hsl(156deg, 20%, 12%);
     --fgPrimary: hsl(0, 0%, 100%);
     --fgSecondary: hsl(0, 0%, 92%);
     --fgTertiary: hsl(0, 0%, 86%);
@@ -55,6 +57,7 @@
         --bgSecondary: hsl(0, 0%, 11%);
         --bgContrast: hsl(0, 0%, 21%);
         --bgHighlight: hsl(var(--hue), 20%, 12%);
+        --bgPositive: hsl(156deg, 20%, 12%);
         --fgPrimary: hsl(0, 0%, 100%);
         --fgSecondary: hsl(0, 0%, 92%);
         --fgTertiary: hsl(0, 0%, 86%);

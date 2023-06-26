@@ -16,6 +16,9 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
                     <RouterLink to="/studytools">
                         <Button icon="shopping_cart">{{ $i18n('Install') }}</Button>
                     </RouterLink>
+                    <RouterLink to="/studytools/grades">
+                        <Button icon="upload_file">{{ $i18n('Import grades') }}</Button>
+                    </RouterLink>
                     <Button href="https://github.com/QkeleQ10/Study-Tools" icon="code">GitHub</Button>
                 </template>
             </ProjectCard>
