@@ -27,7 +27,7 @@ export default {
 .collection-horizontal {
     display: flex;
     overflow: auto;
-    gap: 10px;
+    gap: 18px 10px;
 }
 
 .collection-horizontal[data-stretch=true] {

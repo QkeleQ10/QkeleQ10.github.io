@@ -1,6 +1,8 @@
 <script setup>
 import { useThemeStore } from '../stores/theme'
 import { ref, reactive } from 'vue'
+
+import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
 import Metric from '@/components/Metric.vue'
 import NavigationRail from '@/components/NavigationRail.vue';
@@ -8,6 +10,7 @@ import Hero from '@/sections/Hero.vue';
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
 import Heading4 from '@/components/Heading4.vue';
+import CollectionVertical from '@/components/CollectionVertical.vue'
 
 const theme = useThemeStore()
 theme.setScheme('st')
@@ -121,65 +124,67 @@ function median(valueArray = []) {
                     <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
                         de knop "{{ $i18n('Import grades') }}".</p>
                 </div>
-                <aside>
-                    <div id="meta">
-                        <Heading4>Details</Heading4>
-                        <small v-if="importedDate && list.length > 0">Geïmporteerd uit back-up van {{ importedDate
-                        }}</small>
-                        <p v-else>Als je je back-up hebt geïmporteerd, dan zullen hier aanvullende details
-                            en statistieken verschijnen.</p>
-                        <br><br>
-                        <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
-                            <Metric description="Resultaat" stretch> {{ current.result || '?' }} </Metric>
-                            <Metric description="Weegfactor" insignificant> {{ current.weight || '?' }} </Metric>
-                            <Metric description="Kolomnaam" insignificant> {{ current.column || '?' }} </Metric>
-                            <Metric description="Kolomkop" insignificant stretch> {{ current.title || "Klik op een cijfer"
-                            }}
-                            </Metric>
-                        </CollectionHorizontal>
-                    </div>
-                    <div id="grade-stats" v-show="list.length > 0">
-                        <Heading4 icon="l">Statistieken</Heading4>
-                        <CollectionHorizontal stretch uniform wrap>
-                            <Metric description="Gemiddelde (excl. weging)">{{
-                                weightedMean(valueArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 3,
-                                    maximumFractionDigits: 3
-                                }) }}</Metric>
-                            <Metric description="Mediaan" insignificant>{{
-                                median(valueArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) }}</Metric>
-                            <Metric description="Aantal" insignificant>{{ valueArray.length }}</Metric>
-                            <Metric description="Voldoendes" insignificant
-                                :extra="valuesSufficient.length ? (valuesSufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                {{ valuesSufficient.length || "geen" }}</Metric>
-                            <Metric description="Onvoldoendes" insignificant
-                                :extra="valuesInsufficient.length ? (valuesInsufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                {{ valuesInsufficient.length || "geen" }}
-                            </Metric>
-                            <Metric description="Laagste cijfer" insignificant>{{
-                                Math.min(...valueArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) }}</Metric>
-                            <Metric description="Hoogste cijfer" insignificant>{{
-                                Math.max(...valueArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) }}</Metric>
-                        </CollectionHorizontal>
-                        <br>
-                        <Metric description="Histogram (afgeronde behaalde cijfers)"></Metric>
-                        <div id="bar-chart">
-                            <div v-for="n in 10" :data-grade="n" :data-frequency="freqTable[n]"
-                                :data-percentage="Math.round(freqTable[n] / valueArray.length * 100)"
-                                :style="`min-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%; max-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%`">
+                <CollectionVertical id="aside">
+                    <Card id="meta" small>
+                        <template #title>Details</template>
+                        <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van {{
+                            importedDate }}</template>
+                        <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende details
+                            en statistieken verschijnen.</template>
+                        <template #content>
+                            <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
+                                <Metric description="Resultaat" stretch> {{ current.result || '?' }} </Metric>
+                                <Metric description="Weegfactor" insignificant> {{ current.weight || '?' }} </Metric>
+                                <Metric description="Kolomnaam" insignificant> {{ current.column || '?' }} </Metric>
+                                <Metric description="Kolomkop" insignificant stretch>
+                                    {{ current.title || "Klik op een cijfer" }}
+                                </Metric>
+                            </CollectionHorizontal>
+                        </template>
+                    </Card>
+                    <Card id="grade-stats" v-show="list.length > 0" small>
+                        <template #title>Statistieken</template>
+                        <template #content>
+                            <CollectionHorizontal stretch uniform wrap>
+                                <Metric description="Gemiddelde (excl. weging)">{{
+                                    weightedMean(valueArray).toLocaleString('nl-NL', {
+                                        minimumFractionDigits: 3,
+                                        maximumFractionDigits: 3
+                                    }) }}</Metric>
+                                <Metric description="Mediaan" insignificant>{{
+                                    median(valueArray).toLocaleString('nl-NL', {
+                                        minimumFractionDigits: 1,
+                                        maximumFractionDigits: 1
+                                    }) }}</Metric>
+                                <Metric description="Aantal" insignificant>{{ valueArray.length }}</Metric>
+                                <Metric description="Voldoendes" insignificant
+                                    :extra="valuesSufficient.length ? (valuesSufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                    {{ valuesSufficient.length || "geen" }}</Metric>
+                                <Metric description="Onvoldoendes" insignificant
+                                    :extra="valuesInsufficient.length ? (valuesInsufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                    {{ valuesInsufficient.length || "geen" }}
+                                </Metric>
+                                <Metric description="Laagste cijfer" insignificant>{{
+                                    Math.min(...valueArray).toLocaleString('nl-NL', {
+                                        minimumFractionDigits: 1,
+                                        maximumFractionDigits: 1
+                                    }) }}</Metric>
+                                <Metric description="Hoogste cijfer" insignificant>{{
+                                    Math.max(...valueArray).toLocaleString('nl-NL', {
+                                        minimumFractionDigits: 1,
+                                        maximumFractionDigits: 1
+                                    }) }}</Metric>
+                            </CollectionHorizontal>
+                            <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
+                            <div id="bar-chart">
+                                <div v-for="n in 10" :data-grade="n" :data-frequency="freqTable[n]"
+                                    :data-percentage="Math.round(freqTable[n] / valueArray.length * 100)"
+                                    :style="`min-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%; max-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%`">
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </aside>
+                        </template>
+                    </Card>
+                </CollectionVertical>
             </div>
         </section>
     </main>
@@ -209,19 +214,12 @@ function median(valueArray = []) {
     gap: 1.5rem;
 }
 
-aside {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border);
+#aside {
     overflow-y: auto;
 }
 
-aside>* {
-    padding: 1rem;
-}
-
-aside>*+* {
-    border-top: 1px solid var(--border);
+#bar-chart-title {
+    margin-top: 24px;
 }
 
 #bar-chart {
@@ -231,7 +229,7 @@ aside>*+* {
     gap: 4px;
     width: 100%;
     height: 150px;
-    padding-top: 32px;
+    padding-block: 32px 16px;
 }
 
 #bar-chart>* {
@@ -261,7 +259,6 @@ aside>*+* {
     left: 50%;
     translate: -50%;
     font-size: 12px;
-    opacity: 0.6;
 }
 
 #bar-chart>*:hover:before {

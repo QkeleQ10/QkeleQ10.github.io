@@ -5,12 +5,13 @@ import Scrollable from "./Scrollable.vue"
 defineProps({
     imageSrc: String,
     imageAlt: String,
-    imagePosition: String
+    imagePosition: String,
+    small: Boolean
 })
 </script>
 
 <template>
-    <div class="card" role="listitem">
+    <div class="card" role="listitem" :data-small="small">
         <img class="card-image" v-if="imageSrc" :src="imageSrc" :alt="imageAlt" :data-position="imagePosition">
         <h3 class="card-title" role="heading">
             <slot name="title"></slot>
@@ -38,6 +39,10 @@ defineProps({
     background-color: var(--bgSecondary);
     color: var(--fgSecondary);
     transition: opacity 200ms;
+}
+
+.card[data-small=true] {
+    font-size: .85rem;
 }
 
 .card[disabled] {
