@@ -6,6 +6,8 @@
     --hue: 130;
     --accentLight: hsl(var(--hue), 20%, 48%);
     --accentDark: hsl(var(--hue), 55%, 30%);
+    --accentWarn: hsl(0, 40%, 48%);
+    --accentOk: hsl(160, 40%, 48%);
     --hero1: hsl(var(--hue), 40%, 29%);
     --hero2: hsl(var(--hue), 36%, 30%);
     --accentVeryLight: hsl(var(--hue), 53%, 87%);
@@ -29,6 +31,8 @@
 :root[data-theme=dark] {
     --accentLight: hsl(var(--hue), 55%, 30%);
     --accentDark: hsl(var(--hue), 20%, 48%);
+    --accentWarn: hsl(0, 40%, 40%);
+    --accentOk: hsl(160, 55%, 30%);
     --accentVeryLight: hsl(var(--hue), 25%, 26%);
     --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 7%);
@@ -51,6 +55,8 @@
     :root:not([data-theme=light]) {
         --accentLight: hsl(var(--hue), 55%, 30%);
         --accentDark: hsl(var(--hue), 20%, 48%);
+        --accentWarn: hsl(0, 40%, 40%);
+        --accentOk: hsl(160, 55%, 30%);
         --accentVeryLight: hsl(var(--hue), 25%, 26%);
         --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
         --bgPrimary: hsl(0, 0%, 7%);

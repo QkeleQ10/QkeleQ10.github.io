@@ -1,5 +1,5 @@
 <script setup>
-import ProjectCard from '@/components/ProjectCard.vue'
+import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
 import statsfmImage from '@/assets/images/statsfm.webp'
 </script>
@@ -8,7 +8,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     <section id="localisation">
         <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
         <div class="sectionGrid" role="list">
-            <ProjectCard :image-src="statsfmImage" image-alt="stats.fm" image-position>
+            <Card :image-src="statsfmImage" image-alt="stats.fm" image-position>
                 <template #title>stats.fm</template>
                 <template #subtitle>{{ $i18n('Localisation manager') }}</template>
                 <template #content>{{ $i18n('statsfmdesc') }}</template>
@@ -18,8 +18,8 @@ import statsfmImage from '@/assets/images/statsfm.webp'
                     }}
                     </Button>
                 </template>
-            </ProjectCard>
-            <ProjectCard>
+            </Card>
+            <Card>
                 <template #title>PreMiD</template>
                 <template #subtitle>{{ $i18n('Proofreader') }}</template>
                 <template #content>{{ $i18n('premiddesc') }}</template>
@@ -29,8 +29,8 @@ import statsfmImage from '@/assets/images/statsfm.webp'
                     }}
                     </Button>
                 </template>
-            </ProjectCard>
-            <ProjectCard>
+            </Card>
+            <Card>
                 <template #title>QkeleQ10</template>
                 <template #subtitle>{{ $i18n('Owner') }}</template>
                 <template #content>{{ $i18n('qkeleqdesc') }}</template>
@@ -40,8 +40,8 @@ import statsfmImage from '@/assets/images/statsfm.webp'
                     }}
                     </Button>
                 </template>
-            </ProjectCard>
-            <ProjectCard>
+            </Card>
+            <Card>
                 <template #title>Hypixel</template>
                 <template #subtitle>{{ $i18n('Former proofreader') }}</template>
                 <template #content>{{ $i18n('hypixeldesc') }}</template>
@@ -51,8 +51,8 @@ import statsfmImage from '@/assets/images/statsfm.webp'
                     }}
                     </Button>
                 </template>
-            </ProjectCard>
-            <ProjectCard>
+            </Card>
+            <Card>
                 <template #title>Minecraft</template>
                 <template #subtitle>{{ $i18n('Translator') }}</template>
                 <template #content>{{ $i18n('mcdesc') }}</template>
@@ -62,7 +62,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
                     }}
                     </Button>
                 </template>
-            </ProjectCard>
+            </Card>
         </div>
     </section>
 </template>

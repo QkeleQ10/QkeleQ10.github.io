@@ -19,6 +19,7 @@ let list = ref([])
 let valueArray = ref([])
 let valuesSufficient = ref([])
 let valuesInsufficient = ref([])
+let freqTable = ref({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 })
 let importedDate = ref('')
 let current = ref({ result: '', weight: '', column: '', title: '' })
 
@@ -27,6 +28,7 @@ function fileChanged(event) {
     valueArray.value = []
     valuesSufficient.value = []
     valuesInsufficient.value = []
+    freqTable.value = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 }
     importedDate.value = ''
     current.value = { result: '', weight: '', column: '', title: '' }
     let reader = new FileReader()
@@ -46,6 +48,7 @@ function fileChanged(event) {
                         valueArray.value.push(number)
                         if (number >= 5.5) valuesSufficient.value.push(number)
                         else valuesInsufficient.value.push(number)
+                        freqTable.value[Math.round(number)]++
                     }
 
                     return acc
@@ -121,12 +124,12 @@ function median(valueArray = []) {
                 <aside>
                     <div id="meta">
                         <Heading4>Details</Heading4>
-                        <p v-if="importedDate && list.length > 0">Geïmporteerd uit back-up van {{ importedDate }}</p>
+                        <small v-if="importedDate && list.length > 0">Geïmporteerd uit back-up van {{ importedDate
+                        }}</small>
                         <p v-else>Als je je back-up hebt geïmporteerd, dan zullen hier aanvullende details
                             en statistieken verschijnen.</p>
-                    </div>
-                    <div id="grade-details" v-show="list.length > 0">
-                        <CollectionHorizontal stretch uniform wrap>
+                        <br><br>
+                        <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
                             <Metric description="Resultaat" stretch> {{ current.result || '?' }} </Metric>
                             <Metric description="Weegfactor" insignificant> {{ current.weight || '?' }} </Metric>
                             <Metric description="Kolomnaam" insignificant> {{ current.column || '?' }} </Metric>
@@ -167,6 +170,14 @@ function median(valueArray = []) {
                                     maximumFractionDigits: 1
                                 }) }}</Metric>
                         </CollectionHorizontal>
+                        <br>
+                        <Metric description="Histogram (afgeronde behaalde cijfers)"></Metric>
+                        <div id="bar-chart">
+                            <div v-for="n in 10" :data-grade="n" :data-frequency="freqTable[n]"
+                                :data-percentage="Math.round(freqTable[n] / valueArray.length * 100)"
+                                :style="`min-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%; max-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%`">
+                            </div>
+                        </div>
                     </div>
                 </aside>
             </div>
@@ -211,6 +222,50 @@ aside>* {
 
 aside>*+* {
     border-top: 1px solid var(--border);
+}
+
+#bar-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 4px;
+    width: 100%;
+    height: 150px;
+    padding-top: 32px;
+}
+
+#bar-chart>* {
+    position: relative;
+    flex: 1 1;
+    background-color: var(--accentOk);
+}
+
+#bar-chart>*:nth-child(-n+5) {
+    background: var(--accentWarn);
+}
+
+#bar-chart>*:after {
+    content: attr(data-grade);
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    translate: -50%;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+#bar-chart>*:before {
+    content: attr(data-frequency) '×';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    translate: -50%;
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+#bar-chart>*:hover:before {
+    content: attr(data-percentage) '%';
 }
 
 #table-wrapper {
