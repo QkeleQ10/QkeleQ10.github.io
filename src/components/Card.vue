@@ -43,6 +43,7 @@ defineProps({
 
 .card[data-small=true] {
     font-size: .85rem;
+    min-width: 0px;
 }
 
 .card[disabled] {

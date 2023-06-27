@@ -236,6 +236,8 @@ function median(valueArray = []) {
     position: relative;
     flex: 1 1;
     background-color: var(--accentOk);
+    transition-property: min-height, max-height;
+    transition-duration: 200ms;
 }
 
 #bar-chart>*:nth-child(-n+5) {
