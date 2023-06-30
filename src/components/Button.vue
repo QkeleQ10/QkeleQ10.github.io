@@ -19,7 +19,7 @@ export default {
     <a :href="href" :target="target" tabindex="-1">
         <button type="button" role="button" class="button" v-bind="$attrs">
             <Icon v-if="icon">{{ icon }}</Icon>
-            <slot>Button</slot>
+            <slot></slot>
         </button>
     </a>
 </template>
@@ -74,6 +74,11 @@ a:focus .button {
 .button.hero {
     background-color: var(--fgContrast);
     color: var(--bgContrast);
+}
+
+.button.secondary {
+    background-color: var(--bgSecondary);
+    color: var(--fgPrimary);
 }
 
 .button.rail {

@@ -1,6 +1,6 @@
 <script setup>
 import { useThemeStore } from '../stores/theme'
-import { ref, reactive } from 'vue'
+import { ref, computed } from 'vue'
 
 import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
@@ -9,7 +9,6 @@ import NavigationRail from '@/components/NavigationRail.vue';
 import Hero from '@/sections/Hero.vue';
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
-import Heading4 from '@/components/Heading4.vue';
 import CollectionVertical from '@/components/CollectionVertical.vue'
 
 const theme = useThemeStore()
@@ -17,23 +16,55 @@ theme.setScheme('st')
 
 const grades = ref()
 const input = ref()
+const container = ref()
 
 let list = ref([])
-let valueArray = ref([])
-let valuesSufficient = ref([])
-let valuesInsufficient = ref([])
-let freqTable = ref({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 })
 let importedDate = ref('')
-let current = ref({ result: '', weight: '', column: '', title: '' })
+let gradesArray = computed(() => {
+    let results = []
+    list.value.forEach((subArray, i) => {
+        if (excludedSubjects.value.has(i)) return
+        for (let obj of subArray) {
+            let num = Number(obj.result?.replace(',', '.')),
+                type = obj.className
+            if ((!type?.includes('gemiddeldecolumn') || type?.includes('herkansingKolom') || type?.includes('heeftonderliggendekolommen')) && typeof num === 'number' && !isNaN(num)) {
+                results.push(num)
+            }
+        }
+    })
+    return results
+})
+let gradesOkArray = computed(() => gradesArray.value.filter(e => e >= 5.5))
+let gradesWarnArray = computed(() => gradesArray.value.filter(e => e < 5.5))
+let gradesFrequencyTable = computed(() => {
+    const roundedNumbers = gradesArray.value.map((number) => Math.round(number))
+    const frequencyTable = {}
+    for (let i = 1; i <= 10; i++) { frequencyTable[i] = 0 }
+    roundedNumbers.forEach((number) => {
+        if (number >= 1 && number <= 10) {
+            frequencyTable[number]++
+        }
+    })
+    return frequencyTable
+})
+let excludedSubjects = ref(new Set())
+let currentlySelected = ref({ result: '', weight: '', column: '', title: '' })
+
+function excludeSubject(i) {
+    excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
+}
+
+function excludeAllSubjects() {
+    list.value.forEach((e, i) => {
+        excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
+    })
+}
 
 function fileChanged(event) {
     list.value = []
-    valueArray.value = []
-    valuesSufficient.value = []
-    valuesInsufficient.value = []
-    freqTable.value = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0, 10: 0 }
     importedDate.value = ''
-    current.value = { result: '', weight: '', column: '', title: '' }
+    excludedSubjects.value.clear()
+    currentlySelected.value = { result: '', weight: '', column: '', title: '' }
     let reader = new FileReader()
     reader.onload = async event => {
         let json = JSON.parse(event.target.result)
@@ -45,20 +76,9 @@ function fileChanged(event) {
                     }
                     acc[acc.length - 1].push(e)
 
-                    let string = e.result?.replace(',', '.'),
-                        number = Number(string)
-                    if ((!e.className.includes('gemiddeldecolumn') || e.className.includes('herkansingKolom') || e.className.includes('heeftonderliggendekolommen')) && !isNaN(number)) {
-                        valueArray.value.push(number)
-                        if (number >= 5.5) valuesSufficient.value.push(number)
-                        else valuesInsufficient.value.push(number)
-                        freqTable.value[Math.round(number)]++
-                    }
-
                     return acc
                 }, [[]])
         )
-
-        console.log((valueArray))
 
         importedDate.value = new Date(json.date).toLocaleString('nl-NL', {
             weekday: "long", year:
@@ -96,28 +116,39 @@ function median(valueArray = []) {
                 <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
             </div>
             <CollectionHorizontal id="hero-buttons">
-                <Button icon="upload_file" class="hero" onclick="input.click()">{{ $i18n('Import grades') }}</Button>
+                <Button icon="upload_file" class="hero" @click="input.click()">{{ $i18n('Import grades') }}</Button>
                 <input type="file" accept=".json" @change="fileChanged"
                     @input="grades.scrollIntoView({ behavior: 'smooth' })" ref="input" id="input" style="display: none;">
             </CollectionHorizontal>
             <Icon>school</Icon>
         </Hero>
-        <section ref="grades" id="grades">
+        <section ref="grades" id="grades" class="full max-full">
             <Heading2 icon="summarize">Cijferoverzicht</Heading2>
             <CollectionHorizontal stretch uniform id="grade-actions" wrap>
-                <Button icon="upload_file" onclick="input.click()">{{ $i18n('Import grades') }}</Button>
-                <Button icon="calculate" onclick="alert('Komt binnenkort!')">Cijfercalculator</Button>
+                <Button icon="calculate" title="Cijfercalculator"
+                    onclick="alert('Komt binnenkort!')">Cijfercalculator</Button>
+                <Button icon="upload_file" :title="$i18n('Import grades')" class="secondary"
+                    @click="input.click()"></Button>
+                <Button icon="info" class="secondary" title="Zijbalk weergeven of verbergen"
+                    @click="container.classList.toggle('hide-aside')"></Button>
+                <Button icon="deselect" class="secondary" title="Selectie omkeren"
+                    @click="excludeAllSubjects()"></Button>
             </CollectionHorizontal>
-            <div id="grades-wrapper">
+            <div ref="container" id="container">
                 <div id="table-wrapper">
                     <table>
-                        <tr v-for="(row) in list">
+                        <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)">
                             <td v-for="(cell) in row" :class="cell.className">
                                 <span :tabindex="cell.result ? 1 : -1"
                                     :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
-                                    :title="`${cell.result}\n${cell.title}`"
-                                    @focus="current = { result: cell.result, weight: cell.weight, column: cell.column, title: cell.title }">{{
+                                    :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
+                                    @focus="currentlySelected = { result: cell.result, weight: cell.weight, column: cell.column, title: cell.title }">{{
                                         cell.type === 'rowheader' ? cell.title : cell.result }}</span>
+                                <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
+                                    :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
+                                    @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
+                                    @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank' : 'check_box' }}
+                                </Icon>
                             </td>
                         </tr>
                     </table>
@@ -133,11 +164,13 @@ function median(valueArray = []) {
                             en statistieken verschijnen.</template>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
-                                <Metric description="Resultaat" stretch> {{ current.result || '?' }} </Metric>
-                                <Metric description="Weegfactor" insignificant> {{ current.weight || '?' }} </Metric>
-                                <Metric description="Kolomnaam" insignificant> {{ current.column || '?' }} </Metric>
+                                <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
+                                <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}
+                                </Metric>
+                                <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
+                                </Metric>
                                 <Metric description="Kolomkop" insignificant stretch>
-                                    {{ current.title || "Klik op een cijfer" }}
+                                    {{ currentlySelected.title || "Klik op een cijfer" }}
                                 </Metric>
                             </CollectionHorizontal>
                         </template>
@@ -147,39 +180,39 @@ function median(valueArray = []) {
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
                                 <Metric description="Gemiddelde (excl. weging)">{{
-                                    weightedMean(valueArray).toLocaleString('nl-NL', {
+                                    weightedMean(gradesArray).toLocaleString('nl-NL', {
                                         minimumFractionDigits: 3,
                                         maximumFractionDigits: 3
                                     }) }}</Metric>
                                 <Metric description="Mediaan" insignificant>{{
-                                    median(valueArray).toLocaleString('nl-NL', {
+                                    median(gradesArray).toLocaleString('nl-NL', {
                                         minimumFractionDigits: 1,
                                         maximumFractionDigits: 1
                                     }) }}</Metric>
-                                <Metric description="Aantal" insignificant>{{ valueArray.length }}</Metric>
+                                <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
                                 <Metric description="Voldoendes" insignificant
-                                    :extra="valuesSufficient.length ? (valuesSufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                    {{ valuesSufficient.length || "geen" }}</Metric>
+                                    :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                    {{ gradesOkArray.length || "geen" }}</Metric>
                                 <Metric description="Onvoldoendes" insignificant
-                                    :extra="valuesInsufficient.length ? (valuesInsufficient.length / valueArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                    {{ valuesInsufficient.length || "geen" }}
+                                    :extra="gradesWarnArray.length ? (gradesWarnArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                    {{ gradesWarnArray.length || "geen" }}
                                 </Metric>
                                 <Metric description="Laagste cijfer" insignificant>{{
-                                    Math.min(...valueArray).toLocaleString('nl-NL', {
+                                    Math.min(...gradesArray).toLocaleString('nl-NL', {
                                         minimumFractionDigits: 1,
                                         maximumFractionDigits: 1
                                     }) }}</Metric>
                                 <Metric description="Hoogste cijfer" insignificant>{{
-                                    Math.max(...valueArray).toLocaleString('nl-NL', {
+                                    Math.max(...gradesArray).toLocaleString('nl-NL', {
                                         minimumFractionDigits: 1,
                                         maximumFractionDigits: 1
                                     }) }}</Metric>
                             </CollectionHorizontal>
                             <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
                             <div id="bar-chart">
-                                <div v-for="n in 10" :data-grade="n" :data-frequency="freqTable[n]"
-                                    :data-percentage="Math.round(freqTable[n] / valueArray.length * 100)"
-                                    :style="`min-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%; max-height: ${freqTable[n] / Math.max(...Object.values(freqTable)) * 100}%`">
+                                <div v-for="n in 10" :data-grade="n" :data-frequency="gradesFrequencyTable[n]"
+                                    :data-percentage="Math.round(gradesFrequencyTable[n] / gradesArray.length * 100)"
+                                    :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
                                 </div>
                             </div>
                         </template>
@@ -205,16 +238,22 @@ function median(valueArray = []) {
     grid-area: actions;
 }
 
-#grades-wrapper {
+#container {
     grid-area: content;
     display: grid;
-    grid-template:
-        'table aside' 100%
-        / 1fr 300px;
+    grid-template-columns: 1fr 300px;
     gap: 1.5rem;
+    overflow: hidden;
+    transition: grid-template-columns 200ms, gap 200ms;
+}
+
+#container.hide-aside {
+    grid-template-columns: 1fr 0px;
+    gap: 0;
 }
 
 #aside {
+    width: 300px;
     overflow-y: auto;
 }
 
@@ -278,10 +317,15 @@ table {
 
 tr {
     background-color: var(--tablePrimary);
+    transition: opacity 200ms;
 }
 
 tr:first-child {
     display: none;
+}
+
+tr[data-excluded=true] {
+    opacity: .5;
 }
 
 td {
@@ -294,12 +338,36 @@ td:last-child {
 }
 
 td.text {
+    position: relative;
     padding: 0 6px;
     white-space: nowrap;
+    overflow: hidden;
 }
 
-td.text>span {
+td.text>span:first-child {
     font: 600 12px/40px 'Segoe UI', system-ui;
+}
+
+td.text>.icon {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    translate: 150% -50%;
+    transition: translate 200ms, color 200ms;
+    color: var(--fgTertiary);
+    background: var(--bgPrimary);
+    cursor: pointer;
+}
+
+tr:hover>td.text>.icon,
+tr:focus-within>td.text>.icon,
+tr[data-excluded=true]>td.text>.icon {
+    translate: 0 -50%;
+}
+
+td.text>.icon:hover,
+td.text>.icon:focus {
+    color: var(--accentWarn);
 }
 
 td.grade.empty {
@@ -350,5 +418,17 @@ td.grade.vrijstellingcolumn {
 
 td.grade.gemiddeldecolumn {
     background-color: var(--bgPositive);
+}
+
+
+@media (max-width: 620px) {
+    #grades {
+        display: grid;
+        grid-template:
+            'heading' auto
+            'actions' auto
+            'content' 1fr
+            / 1fr;
+    }
 }
 </style>
