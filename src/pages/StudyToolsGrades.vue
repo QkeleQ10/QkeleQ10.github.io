@@ -96,14 +96,16 @@ function weightedMean(valueArray = [], weightArray = []) {
     }).reduce((p, c) => {
         return [p[0] + c[0], p[1] + c[1]]
     }, [0, 0])
-    return (result[0] / result[1])
+    let res = (result[0] / result[1])
+    return isNaN(res) ? undefined : res
 }
 
 function median(valueArray = []) {
     let values = [...valueArray].sort()
     var half = Math.floor(values.length / 2)
     if (values.length % 2) return values[half]
-    return (values[half - 1] + values[half]) / 2.0
+    let res = (values[half - 1] + values[half]) / 2.0
+    return isNaN(res) ? undefined : res
 }
 </script>
 
@@ -131,8 +133,7 @@ function median(valueArray = []) {
                     @click="input.click()"></Button>
                 <Button icon="info" class="secondary" title="Zijbalk weergeven of verbergen"
                     @click="container.classList.toggle('hide-aside')"></Button>
-                <Button icon="deselect" class="secondary" title="Selectie omkeren"
-                    @click="excludeAllSubjects()"></Button>
+                <Button icon="deselect" class="secondary" title="Selectie omkeren" @click="excludeAllSubjects()"></Button>
             </CollectionHorizontal>
             <div ref="container" id="container">
                 <div id="table-wrapper">
@@ -147,7 +148,8 @@ function median(valueArray = []) {
                                 <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
                                     :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
                                     @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
-                                    @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank' : 'check_box' }}
+                                    @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank'
+                                        : 'check_box' }}
                                 </Icon>
                             </td>
                         </tr>
@@ -180,15 +182,15 @@ function median(valueArray = []) {
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
                                 <Metric description="Gemiddelde (excl. weging)">{{
-                                    weightedMean(gradesArray).toLocaleString('nl-NL', {
+                                    weightedMean(gradesArray)?.toLocaleString('nl-NL', {
                                         minimumFractionDigits: 3,
                                         maximumFractionDigits: 3
-                                    }) }}</Metric>
+                                    }) || '?' }}</Metric>
                                 <Metric description="Mediaan" insignificant>{{
-                                    median(gradesArray).toLocaleString('nl-NL', {
+                                    median(gradesArray)?.toLocaleString('nl-NL', {
                                         minimumFractionDigits: 1,
                                         maximumFractionDigits: 1
-                                    }) }}</Metric>
+                                    }) || '?' }}</Metric>
                                 <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
                                 <Metric description="Voldoendes" insignificant
                                     :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
