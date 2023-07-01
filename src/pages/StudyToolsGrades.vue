@@ -18,6 +18,7 @@ const grades = ref()
 const input = ref()
 const container = ref()
 
+let mode = ref(0)
 let list = ref([])
 let importedDate = ref('')
 let gradesArray = computed(() => {
@@ -49,6 +50,19 @@ let gradesFrequencyTable = computed(() => {
 })
 let excludedSubjects = ref(new Set())
 let currentlySelected = ref({ result: '', weight: '', column: '', title: '' })
+let calculatorSelection = ref([])
+
+function changeSelection(result, weight, column, title) {
+    if (result?.length > 0) currentlySelected.value = { result, weight, column, title }
+
+    if (mode.value === 1) {
+        if (result?.length > 0 && Number(result.replace(',', '.'))) {
+            let indexOfExisting = calculatorSelection.value.findIndex(e => e.result === Number(result.replace(',', '.')) && e.weight === Number(weight) && e.column === column && e.title === title)
+            if (indexOfExisting >= 0) calculatorSelection.value.splice(indexOfExisting, 1)
+            else calculatorSelection.value.push({ result: Number(result.replace(',', '.')), weight: Number(weight), column, title })
+        }
+    }
+}
 
 function excludeSubject(i) {
     excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
@@ -128,7 +142,7 @@ function median(valueArray = []) {
             <Heading2 icon="summarize">Cijferoverzicht</Heading2>
             <CollectionHorizontal stretch uniform id="grade-actions" wrap>
                 <Button icon="calculate" title="Cijfercalculator"
-                    onclick="alert('Komt binnenkort!')">Cijfercalculator</Button>
+                    @click="mode ^= 1; calculatorSelection = []">Cijfercalculator</Button>
                 <Button icon="upload_file" :title="$i18n('Import grades')" class="secondary"
                     @click="input.click()"></Button>
                 <Button icon="info" class="secondary" title="Zijbalk weergeven of verbergen"
@@ -138,13 +152,18 @@ function median(valueArray = []) {
             <div ref="container" id="container">
                 <div id="table-wrapper">
                     <table>
-                        <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)">
-                            <td v-for="(cell) in row" :class="cell.className">
-                                <span :tabindex="cell.result ? 1 : -1"
+                        <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
+                            <td v-for="(cell) in row" :class="cell.className" :key="cell.column">
+                                <span :tabindex="cell.result ? 1 : -1" role="button"
                                     :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
                                     :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
-                                    @focus="currentlySelected = { result: cell.result, weight: cell.weight, column: cell.column, title: cell.title }">{{
-                                        cell.type === 'rowheader' ? cell.title : cell.result }}</span>
+                                    :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
+                                    :data-included="calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
+                                    @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                                    @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                                    @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
+                                    {{ cell.type === 'rowheader' ? cell.title : cell.result }}
+                                </span>
                                 <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
                                     :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
                                     @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
@@ -160,14 +179,15 @@ function median(valueArray = []) {
                 <CollectionVertical id="aside">
                     <Card id="meta" small>
                         <template #title>Details</template>
-                        <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van {{
-                            importedDate }}</template>
-                        <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende details
+                        <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
+                            {{ importedDate }}</template>
+                        <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende
+                            details
                             en statistieken verschijnen.</template>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
                                 <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
-                                <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}
+                                <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}×
                                 </Metric>
                                 <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
                                 </Metric>
@@ -177,7 +197,7 @@ function median(valueArray = []) {
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="grade-stats" v-show="list.length > 0" small>
+                    <Card id="grade-stats" v-show="mode === 0 && list.length > 0" small>
                         <template #title>Statistieken</template>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
@@ -219,6 +239,42 @@ function median(valueArray = []) {
                             </div>
                         </template>
                     </Card>
+                    <Card id="calculator-added" v-show="mode === 1 && list.length > 0" small>
+                        <template #title>Toegevoegde cijfers</template>
+                        <template #content>
+                            <ul>
+                                <p v-if="calculatorSelection.length < 1">Klik op de cijfers die je wilt
+                                    toevoegen aan de berekening.</p>
+                                <li v-for="(item, i) in calculatorSelection" :key="item.column" tabindex="1" role="button"
+                                    @click="calculatorSelection.splice(i, 1)"
+                                    @keyup.enter="calculatorSelection.splice(i, 1)"
+                                    @keyup.space="calculatorSelection.splice(i, 1)">
+                                    {{ `${item.result.toLocaleString('nl-NL', {
+                                        minimumFractionDigits: 1,
+                                        maximumFractionDigits: 1
+                                    })} (${item.weight}×) — ${item.column}, ${item.title}` }}
+                                </li>
+                            </ul>
+                        </template>
+                    </Card>
+                    <Card id="calculator-result" v-show="mode === 1 && list.length > 0" small>
+                        <template #content>
+                            <CollectionHorizontal stretch uniform wrap>
+                                <Metric description="Gemiddelde (incl. weging)">{{
+                                    weightedMean(calculatorSelection.map(e => e.result), calculatorSelection.map(e =>
+                                        e.weight))?.toLocaleString('nl-NL',
+                                            { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }}</Metric>
+                                <Metric description="Mediaan">{{
+                                    median(calculatorSelection.map(e => e.result))?.toLocaleString('nl-NL',
+                                        { minimumFractionDigits: 1, maximumFractionDigits: 1 }) || '?' }}</Metric>
+                            </CollectionHorizontal>
+                        </template>
+                    </Card>
+                    <Card id="calculator-chart" v-show="mode === 1 && list.length > 0" small>
+                        <template #title>Toekomstig cijfer</template>
+                        <template #subtitle>Zie hier wat je moet halen en wat je komt te staan.</template>
+                        <template #content>Komt binnenkort!np</template>
+                    </Card>
                 </CollectionVertical>
             </div>
         </section>
@@ -257,6 +313,20 @@ function median(valueArray = []) {
 #aside {
     width: 300px;
     overflow-y: auto;
+}
+
+#calculator-added ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#calculator-added ul>li:not(:last-child) {
+    margin-bottom: 6px;
+}
+
+#calculator-result {
+    padding-top: 7px;
 }
 
 #bar-chart-title {
@@ -357,7 +427,7 @@ td.text>.icon {
     translate: 150% -50%;
     transition: translate 200ms, color 200ms;
     color: var(--fgTertiary);
-    background: var(--bgPrimary);
+    background: var(--tablePrimary);
     cursor: pointer;
 }
 
@@ -369,7 +439,7 @@ tr[data-excluded=true]>td.text>.icon {
 
 td.text>.icon:hover,
 td.text>.icon:focus {
-    color: var(--accentWarn);
+    color: var(--accentDark);
 }
 
 td.grade.empty {
@@ -386,6 +456,8 @@ td.grade>span {
     text-overflow: ellipsis;
     text-align: center;
     font: 400 12px/40px 'Segoe UI', system-ui;
+    box-shadow: inset 0px 0px 0px 0px transparent;
+    transition: box-shadow 200ms;
 }
 
 td.text>span {
@@ -396,8 +468,12 @@ td.grade:not(.empty)>span {
     cursor: pointer;
 }
 
-td>span:focus {
-    outline: 3px solid var(--accentVeryLight);
+td.grade>span[data-current=true] {
+    box-shadow: inset 0px 0px 0px 2px var(--accentLight);
+}
+
+td.grade>span[data-included=true] {
+    box-shadow: inset 0px 0px 0px 3px var(--accentOk);
 }
 
 td.grade>span[title^="5,0"],
