@@ -55,7 +55,7 @@ let calculatorSelection = ref([])
 function changeSelection(result, weight, column, title) {
     if (result?.length > 0) currentlySelected.value = { result, weight, column, title }
 
-    if (mode.value === 1) {
+    if (mode.value === 'mixed' || mode.value === 'calculator') {
         if (result?.length > 0 && Number(result.replace(',', '.'))) {
             let indexOfExisting = calculatorSelection.value.findIndex(e => e.result === Number(result.replace(',', '.')) && e.weight === Number(weight) && e.column === column && e.title === title)
             if (indexOfExisting >= 0) calculatorSelection.value.splice(indexOfExisting, 1)
@@ -143,6 +143,7 @@ function median(valueArray = []) {
             <CollectionHorizontal stretch uniform id="grade-actions" wrap>
                 <Button icon="calculate" title="Cijfercalculator"
                     @click="mode ^= 1; calculatorSelection = []">Cijfercalculator</Button>
+                    <!-- add a button like the theme switcher, so that the user can toggle modes -->
                 <Button icon="upload_file" :title="$i18n('Import grades')" class="secondary"
                     @click="input.click()"></Button>
                 <Button icon="info" class="secondary" title="Zijbalk weergeven of verbergen"
@@ -177,7 +178,7 @@ function median(valueArray = []) {
                         de knop "{{ $i18n('Import grades') }}".</p>
                 </div>
                 <CollectionVertical id="aside">
-                    <Card id="meta" small>
+                    <Card id="meta" v-show="mode === 'mixed' || mode === 'stats'" small>
                         <template #title>Details</template>
                         <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
                             {{ importedDate }}</template>
@@ -197,7 +198,7 @@ function median(valueArray = []) {
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="grade-stats" v-show="mode === 0 && list.length > 0" small>
+                    <Card id="grade-stats" v-if="list.length > 0" v-show="mode === 'stats'" small>
                         <template #title>Statistieken</template>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
@@ -239,7 +240,8 @@ function median(valueArray = []) {
                             </div>
                         </template>
                     </Card>
-                    <Card id="calculator-added" v-show="mode === 1 && list.length > 0" small>
+                    <Card id="calculator-added" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
+                        small>
                         <template #title>Toegevoegde cijfers</template>
                         <template #content>
                             <ul>
@@ -257,7 +259,8 @@ function median(valueArray = []) {
                             </ul>
                         </template>
                     </Card>
-                    <Card id="calculator-result" v-show="mode === 1 && list.length > 0" small>
+                    <Card id="calculator-result" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
+                        small>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
                                 <Metric description="Gemiddelde (incl. weging)">{{
@@ -270,7 +273,8 @@ function median(valueArray = []) {
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="calculator-chart" v-show="mode === 1 && list.length > 0" small>
+                    <Card id="calculator-chart" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
+                        small>
                         <template #title>Toekomstig cijfer</template>
                         <template #subtitle>Zie hier wat je moet halen en wat je komt te staan.</template>
                         <template #content>Komt binnenkort!np</template>
