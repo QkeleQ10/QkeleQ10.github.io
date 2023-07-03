@@ -9,16 +9,22 @@ import NavigationRail from '@/components/NavigationRail.vue';
 import Hero from '@/sections/Hero.vue';
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
-import CollectionVertical from '@/components/CollectionVertical.vue'
 
 const theme = useThemeStore()
 theme.setScheme('st')
+
+const possibleGrades = Array.from({ length: 91 }, (_, i) => (i / 10 + 1))
 
 const grades = ref()
 const input = ref()
 const container = ref()
 
-let mode = ref(0)
+let view = ref({
+    aside: { state: true, title: "Zijbalk", icon: 'view_sidebar' },
+    meta: { state: true, title: "Details", icon: 'info', requiresOne: true },
+    stats: { state: true, title: "Statistieken", icon: 'insights', requiresOne: true, disallow: 'calculator' },
+    calculator: { state: false, title: "Cijfercalculator", icon: 'calculate', requiresOne: true, disallow: 'stats' }
+})
 let list = ref([])
 let importedDate = ref('')
 let gradesArray = computed(() => {
@@ -51,17 +57,41 @@ let gradesFrequencyTable = computed(() => {
 let excludedSubjects = ref(new Set())
 let currentlySelected = ref({ result: '', weight: '', column: '', title: '' })
 let calculatorSelection = ref([])
+let hypotheticalWeight = ref(1)
+let hypotheticalPossibilities = computed(() => {
+    let array = []
+
+    for (let i = 0, x = 1.0; x < 10.0; i++, x = x + 0.1) {
+        array[i] = {
+            x,
+            y: weightedMean(
+                calculatorSelection.value.map(e => e.result).concat([x]),
+                calculatorSelection.value.map(e => e.weight).concat([hypotheticalWeight.value])
+            )
+        }
+    }
+
+    console.log(array)
+    return array
+})
 
 function changeSelection(result, weight, column, title) {
     if (result?.length > 0) currentlySelected.value = { result, weight, column, title }
 
-    if (mode.value === 'mixed' || mode.value === 'calculator') {
+    if (view.value.calculator.state) {
         if (result?.length > 0 && Number(result.replace(',', '.'))) {
             let indexOfExisting = calculatorSelection.value.findIndex(e => e.result === Number(result.replace(',', '.')) && e.weight === Number(weight) && e.column === column && e.title === title)
             if (indexOfExisting >= 0) calculatorSelection.value.splice(indexOfExisting, 1)
             else calculatorSelection.value.push({ result: Number(result.replace(',', '.')), weight: Number(weight), column, title })
         }
     }
+}
+
+function flipViewState(key) {
+    let value = view.value[key]
+    view.value[key].state = !value.state
+    if (value.state && value.disallow) view.value[value.disallow].state = false
+    if (Object.values(view.value).filter(obj => obj.requiresOne === true).every(obj => !obj.state)) Object.values(view.value).filter(obj => obj.requiresOne === true)[0].state = true
 }
 
 function excludeSubject(i) {
@@ -79,6 +109,7 @@ function fileChanged(event) {
     importedDate.value = ''
     excludedSubjects.value.clear()
     currentlySelected.value = { result: '', weight: '', column: '', title: '' }
+    calculatorSelection.value = []
     let reader = new FileReader()
     reader.onload = async event => {
         let json = JSON.parse(event.target.result)
@@ -140,17 +171,18 @@ function median(valueArray = []) {
         </Hero>
         <section ref="grades" id="grades" class="full max-full">
             <Heading2 icon="summarize">Cijferoverzicht</Heading2>
-            <CollectionHorizontal stretch uniform id="grade-actions" wrap>
-                <Button icon="calculate" title="Cijfercalculator"
-                    @click="mode ^= 1; calculatorSelection = []">Cijfercalculator</Button>
-                    <!-- add a button like the theme switcher, so that the user can toggle modes -->
-                <Button icon="upload_file" :title="$i18n('Import grades')" class="secondary"
-                    @click="input.click()"></Button>
-                <Button icon="info" class="secondary" title="Zijbalk weergeven of verbergen"
-                    @click="container.classList.toggle('hide-aside')"></Button>
+            <CollectionHorizontal id="grade-actions" wrap>
+                <CollectionHorizontal gapless>
+                    <Button v-for="(value, key) in view" :icon="view[key].icon" class="narrow toggle"
+                        :data-state="view[key].state"
+                        :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
+                        @click="flipViewState(key)"></Button>
+                </CollectionHorizontal>
                 <Button icon="deselect" class="secondary" title="Selectie omkeren" @click="excludeAllSubjects()"></Button>
+                <Button icon="upload_file" class="secondary" :title="$i18n('Import grades')" @click="input.click()">{{
+                    $i18n('Import grades') }}</Button>
             </CollectionHorizontal>
-            <div ref="container" id="container">
+            <div ref="container" id="container" :class="view.aside.state ? '' : 'hide-aside'">
                 <div id="table-wrapper">
                     <table>
                         <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
@@ -159,7 +191,7 @@ function median(valueArray = []) {
                                     :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
                                     :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
                                     :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
-                                    :data-included="calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
+                                    :data-included="view.calculator.state && calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
                                     @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
                                     @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
                                     @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
@@ -177,8 +209,8 @@ function median(valueArray = []) {
                     <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
                         de knop "{{ $i18n('Import grades') }}".</p>
                 </div>
-                <CollectionVertical id="aside">
-                    <Card id="meta" v-show="mode === 'mixed' || mode === 'stats'" small>
+                <TransitionGroup name="aside" tag="div" class="collection-vertical" id="aside">
+                    <Card id="meta" key="meta" v-if="view.meta.state" small>
                         <template #title>Details</template>
                         <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
                             {{ importedDate }}</template>
@@ -198,7 +230,7 @@ function median(valueArray = []) {
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="grade-stats" v-if="list.length > 0" v-show="mode === 'stats'" small>
+                    <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
                         <template #title>Statistieken</template>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
@@ -240,13 +272,10 @@ function median(valueArray = []) {
                             </div>
                         </template>
                     </Card>
-                    <Card id="calculator-added" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
-                        small>
+                    <Card id="calculator-added" key="calculator-added" v-if="view.calculator.state" small>
                         <template #title>Toegevoegde cijfers</template>
                         <template #content>
-                            <ul>
-                                <p v-if="calculatorSelection.length < 1">Klik op de cijfers die je wilt
-                                    toevoegen aan de berekening.</p>
+                            <TransitionGroup name="list" tag="ul">
                                 <li v-for="(item, i) in calculatorSelection" :key="item.column" tabindex="1" role="button"
                                     @click="calculatorSelection.splice(i, 1)"
                                     @keyup.enter="calculatorSelection.splice(i, 1)"
@@ -256,30 +285,39 @@ function median(valueArray = []) {
                                         maximumFractionDigits: 1
                                     })} (${item.weight}×) — ${item.column}, ${item.title}` }}
                                 </li>
-                            </ul>
+                                <li v-if="calculatorSelection.length < 1">Klik op de cijfers die je wilt toevoegen aan
+                                    de
+                                    berekening.</li>
+                            </TransitionGroup>
                         </template>
                     </Card>
-                    <Card id="calculator-result" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
-                        small>
+                    <Card id="calculator-result" key="calculator-result" v-if="view.calculator.state" small>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
                                 <Metric description="Gemiddelde (incl. weging)">{{
-                                    weightedMean(calculatorSelection.map(e => e.result), calculatorSelection.map(e =>
-                                        e.weight))?.toLocaleString('nl-NL',
-                                            { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }}</Metric>
+                                    weightedMean(
+                                        calculatorSelection.map(e => e.result),
+                                        calculatorSelection.map(e => e.weight)
+                                    )?.toLocaleString('nl-NL',
+                                        { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }}</Metric>
                                 <Metric description="Mediaan">{{
                                     median(calculatorSelection.map(e => e.result))?.toLocaleString('nl-NL',
                                         { minimumFractionDigits: 1, maximumFractionDigits: 1 }) || '?' }}</Metric>
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="calculator-chart" v-if="list.length > 0" v-show="mode === 'mixed' || mode === 'calculator'"
-                        small>
+                    <Card id="calculator-chart" key="calculator-chart" v-if="view.calculator.state" small>
                         <template #title>Toekomstig cijfer</template>
                         <template #subtitle>Zie hier wat je moet halen en wat je komt te staan.</template>
-                        <template #content>Komt binnenkort!np</template>
+                        <template #content>
+                            <input type="number" v-model="hypotheticalWeight" />
+                            <p v-for="item in hypotheticalPossibilities">( {{ item.x.toLocaleString('nl-NL',
+                                { minimumFractionDigits: 1, maximumFractionDigits: 1 }) }}; {{
+        item.y.toLocaleString('nl-NL',
+            { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }} )</p>
+                        </template>
                     </Card>
-                </CollectionVertical>
+                </TransitionGroup>
             </div>
         </section>
     </main>
@@ -317,12 +355,28 @@ function median(valueArray = []) {
 #aside {
     width: 300px;
     overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#aside>* {
+    min-width: 300px;
+    max-width: 300px;
+    box-sizing: border-box;
 }
 
 #calculator-added ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
+}
+
+#calculator-added ul>li {
+    cursor: pointer;
+}
+
+#calculator-added ul>li:hover,
+#calculator-added ul>li:focus {
+    color: var(--accentWarn);
 }
 
 #calculator-added ul>li:not(:last-child) {
@@ -473,11 +527,12 @@ td.grade:not(.empty)>span {
 }
 
 td.grade>span[data-current=true] {
-    box-shadow: inset 0px 0px 0px 2px var(--accentLight);
+    outline: 2px solid var(--accentLight);
+    outline-offset: -1px;
 }
 
 td.grade>span[data-included=true] {
-    box-shadow: inset 0px 0px 0px 3px var(--accentOk);
+    box-shadow: inset 0px 0px 0px 4px var(--accentOk);
 }
 
 td.grade>span[title^="5,0"],
@@ -502,6 +557,31 @@ td.grade.gemiddeldecolumn {
     background-color: var(--bgPositive);
 }
 
+.list-move,
+.list-enter-active,
+.list-leave-active,
+.aside-move,
+.aside-enter-active,
+.aside-leave-active {
+    transition: all 200ms ease;
+}
+
+.list-leave-active,
+.aside-leave-active {
+    position: absolute;
+}
+
+.list-enter-from,
+.list-leave-to {
+    opacity: 0;
+    translate: -30px;
+}
+
+.aside-enter-from,
+.aside-leave-to {
+    opacity: 0;
+    scale: .5;
+}
 
 @media (max-width: 620px) {
     #grades {

@@ -76,9 +76,18 @@ a:focus .button {
     color: var(--bgContrast);
 }
 
-.button.secondary {
+.button.secondary, .button.toggle {
     background-color: var(--bgSecondary);
     color: var(--fgPrimary);
+}
+
+.button.toggle[data-state=true] {
+    background-color: var(--accentVeryLight);
+}
+
+.button.narrow {
+    padding: 5px 8px;
+    width: 40px;
 }
 
 .button.rail {

@@ -1,5 +1,6 @@
 <script setup>
 defineProps({
+    gapless: Boolean,
     stretch: Boolean,
     uniform: Boolean,
     wrap: Boolean
@@ -17,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="collection-horizontal" role="list" :data-stretch="stretch" :data-uniform="uniform" :data-wrap="wrap"
+    <div class="collection-horizontal" role="list" :data-gapless="gapless" :data-stretch="stretch" :data-uniform="uniform" :data-wrap="wrap"
         v-if="hasContent()">
         <slot></slot>
     </div>
@@ -28,6 +29,10 @@ export default {
     display: flex;
     overflow: auto;
     gap: 18px 10px;
+}
+
+.collection-horizontal[data-gapless=true] {
+    gap: 0 0;
 }
 
 .collection-horizontal[data-stretch=true] {
