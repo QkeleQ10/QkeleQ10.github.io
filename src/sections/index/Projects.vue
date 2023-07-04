@@ -5,7 +5,6 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
 </script>
 
 <template>
-    <section id="projects">
         <Heading2 icon="web">{{ $i18n('Projects') }}</Heading2>
         <div class="sectionGrid" role="list">
             <Card :image-src="studytoolsImage" image-alt="stats.fm" image-position>
@@ -54,7 +53,6 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
                 </template>
             </Card>
         </div>
-    </section>
 </template>
 
 <style>

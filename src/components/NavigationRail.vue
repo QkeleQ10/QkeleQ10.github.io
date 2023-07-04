@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import { vElementVisibility } from '@vueuse/components'
-import Logo from "../assets/Logo.vue";
+import Logo from "../components/Logo.vue";
 import CollectionVertical from "./CollectionVertical.vue";
 import LanguageSwitcher from './LanguageSwitcher.vue';
 import ThemeSwitcher from './ThemeSwitcher.vue';
@@ -38,7 +38,7 @@ if (window.innerWidth < 620) {
         <Icon id="navigation-rail-collapser" :data-contrast="isVisible1" @click="menuCollapse('toggle')">menu</Icon>
         <RouterLink :aria-label="$i18n('navigateHome')" role="navigation" to="/" id="navigation-rail-logo"
             :data-contrast="isVisible1">
-            <Logo aria-hidden @click="router.push('/')" transparent fill="monochrome" />
+            <Logo aria-hidden="true" @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
         <CollectionVertical role="menubar" id="navigation-rail-controls" :data-contrast="isVisible2">
             <ThemeSwitcher />

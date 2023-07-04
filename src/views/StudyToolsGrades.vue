@@ -1,14 +1,15 @@
 <script setup>
+import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
 import { ref, computed } from 'vue'
 
 import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
 import Metric from '@/components/Metric.vue'
-import NavigationRail from '@/components/NavigationRail.vue';
-import Hero from '@/sections/Hero.vue';
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
+
+useMeta({ title: "Cijferback-up" })
 
 const theme = useThemeStore()
 theme.setScheme('st')
@@ -155,124 +156,122 @@ function median(valueArray = []) {
 </script>
 
 <template>
-    <NavigationRail />
-    <main>
-        <Hero>
-            <div>
-                <h1 class="section-title">Cijferback-up</h1>
-                <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
+    <Teleport to="#hero">
+        <div>
+            <h1 class="section-title">Cijferback-up</h1>
+            <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
+        </div>
+        <CollectionHorizontal id="hero-buttons">
+            <Button icon="upload_file" class="hero" @click="input.click()">{{ $i18n('Import grades') }}</Button>
+            <input type="file" accept=".json" @change="fileChanged" @input="grades.scrollIntoView({ behavior: 'smooth' })"
+                ref="input" id="input" style="display: none;">
+        </CollectionHorizontal>
+        <Icon>school</Icon>
+    </Teleport>
+    <section ref="grades" id="grades" class="full max-full">
+        <Heading2 icon="summarize">Cijferoverzicht</Heading2>
+        <CollectionHorizontal id="grade-actions" wrap>
+            <CollectionHorizontal gapless>
+                <Button v-for="(value, key) in view" :icon="view[key].icon" class="narrow toggle"
+                    :data-state="view[key].state" :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
+                    @click="flipViewState(key)"></Button>
+            </CollectionHorizontal>
+            <Button icon="deselect" class="secondary" title="Selectie omkeren" @click="excludeAllSubjects()"></Button>
+            <Button icon="upload_file" class="secondary" :title="$i18n('Import grades')" @click="input.click()">{{
+                $i18n('Import grades') }}</Button>
+        </CollectionHorizontal>
+        <div ref="container" id="container" :class="view.aside.state ? '' : 'hide-aside'">
+            <div id="table-wrapper">
+                <table>
+                    <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
+                        <td v-for="(cell) in row" :class="cell.className" :key="cell.column">
+                            <span :tabindex="cell.result ? 1 : -1" role="button"
+                                :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
+                                :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
+                                :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
+                                :data-included="view.calculator.state && calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
+                                @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                                @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                                @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
+                                {{ cell.type === 'rowheader' ? cell.title : cell.result }}
+                            </span>
+                            <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
+                                :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
+                                @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
+                                @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank'
+                                    : 'check_box' }}
+                            </Icon>
+                        </td>
+                    </tr>
+                </table>
+                <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
+                    de knop "{{ $i18n('Import grades') }}".</p>
             </div>
-            <CollectionHorizontal id="hero-buttons">
-                <Button icon="upload_file" class="hero" @click="input.click()">{{ $i18n('Import grades') }}</Button>
-                <input type="file" accept=".json" @change="fileChanged"
-                    @input="grades.scrollIntoView({ behavior: 'smooth' })" ref="input" id="input" style="display: none;">
-            </CollectionHorizontal>
-            <Icon>school</Icon>
-        </Hero>
-        <section ref="grades" id="grades" class="full max-full">
-            <Heading2 icon="summarize">Cijferoverzicht</Heading2>
-            <CollectionHorizontal id="grade-actions" wrap>
-                <CollectionHorizontal gapless>
-                    <Button v-for="(value, key) in view" :icon="view[key].icon" class="narrow toggle"
-                        :data-state="view[key].state"
-                        :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
-                        @click="flipViewState(key)"></Button>
-                </CollectionHorizontal>
-                <Button icon="deselect" class="secondary" title="Selectie omkeren" @click="excludeAllSubjects()"></Button>
-                <Button icon="upload_file" class="secondary" :title="$i18n('Import grades')" @click="input.click()">{{
-                    $i18n('Import grades') }}</Button>
-            </CollectionHorizontal>
-            <div ref="container" id="container" :class="view.aside.state ? '' : 'hide-aside'">
-                <div id="table-wrapper">
-                    <table>
-                        <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
-                            <td v-for="(cell) in row" :class="cell.className" :key="cell.column">
-                                <span :tabindex="cell.result ? 1 : -1" role="button"
-                                    :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
-                                    :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
-                                    :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
-                                    :data-included="view.calculator.state && calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
-                                    @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
-                                    @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
-                                    @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
-                                    {{ cell.type === 'rowheader' ? cell.title : cell.result }}
-                                </span>
-                                <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
-                                    :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
-                                    @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
-                                    @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank'
-                                        : 'check_box' }}
-                                </Icon>
-                            </td>
-                        </tr>
-                    </table>
-                    <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
-                        de knop "{{ $i18n('Import grades') }}".</p>
-                </div>
-                <TransitionGroup name="aside" tag="div" class="collection-vertical" id="aside">
-                    <Card id="meta" key="meta" v-if="view.meta.state" small>
-                        <template #title>Details</template>
-                        <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
-                            {{ importedDate }}</template>
-                        <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende
-                            details
-                            en statistieken verschijnen.</template>
-                        <template #content>
-                            <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
-                                <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
-                                <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}×
-                                </Metric>
-                                <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
-                                </Metric>
-                                <Metric description="Kolomkop" insignificant stretch>
-                                    {{ currentlySelected.title || "Klik op een cijfer" }}
-                                </Metric>
-                            </CollectionHorizontal>
-                        </template>
-                    </Card>
-                    <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
-                        <template #title>Statistieken</template>
-                        <template #content>
-                            <CollectionHorizontal stretch uniform wrap>
-                                <Metric description="Gemiddelde (excl. weging)">{{
-                                    weightedMean(gradesArray)?.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 3,
-                                        maximumFractionDigits: 3
-                                    }) || '?' }}</Metric>
-                                <Metric description="Mediaan" insignificant>{{
-                                    median(gradesArray)?.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) || '?' }}</Metric>
-                                <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
-                                <Metric description="Voldoendes" insignificant
-                                    :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                    {{ gradesOkArray.length || "geen" }}</Metric>
-                                <Metric description="Onvoldoendes" insignificant
-                                    :extra="gradesWarnArray.length ? (gradesWarnArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                    {{ gradesWarnArray.length || "geen" }}
-                                </Metric>
-                                <Metric description="Laagste cijfer" insignificant>{{
-                                    Math.min(...gradesArray).toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }}</Metric>
-                                <Metric description="Hoogste cijfer" insignificant>{{
-                                    Math.max(...gradesArray).toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }}</Metric>
-                            </CollectionHorizontal>
-                            <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
-                            <div id="bar-chart">
-                                <div v-for="n in 10" :data-grade="n" :data-frequency="gradesFrequencyTable[n]"
-                                    :data-percentage="Math.round(gradesFrequencyTable[n] / gradesArray.length * 100)"
-                                    :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
-                                </div>
+            <TransitionGroup name="aside" tag="div" id="aside">
+                <Card id="meta" key="meta" v-if="view.meta.state" small>
+                    <template #title>Details</template>
+                    <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
+                        {{ importedDate }}</template>
+                    <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende
+                        details
+                        en statistieken verschijnen.</template>
+                    <template #content>
+                        <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
+                            <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
+                            <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}×
+                            </Metric>
+                            <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
+                            </Metric>
+                            <Metric description="Kolomkop" insignificant stretch>
+                                {{ currentlySelected.title || "Klik op een cijfer" }}
+                            </Metric>
+                        </CollectionHorizontal>
+                    </template>
+                </Card>
+                <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
+                    <template #title>Statistieken</template>
+                    <template #content>
+                        <CollectionHorizontal stretch uniform wrap>
+                            <Metric description="Gemiddelde (excl. weging)">{{
+                                weightedMean(gradesArray)?.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 3,
+                                    maximumFractionDigits: 3
+                                }) || '?' }}</Metric>
+                            <Metric description="Mediaan" insignificant>{{
+                                median(gradesArray)?.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) || '?' }}</Metric>
+                            <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
+                            <Metric description="Voldoendes" insignificant
+                                :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                {{ gradesOkArray.length || "geen" }}</Metric>
+                            <Metric description="Onvoldoendes" insignificant
+                                :extra="gradesWarnArray.length ? (gradesWarnArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                                {{ gradesWarnArray.length || "geen" }}
+                            </Metric>
+                            <Metric description="Laagste cijfer" insignificant>{{
+                                Math.min(...gradesArray).toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }}</Metric>
+                            <Metric description="Hoogste cijfer" insignificant>{{
+                                Math.max(...gradesArray).toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }}</Metric>
+                        </CollectionHorizontal>
+                        <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
+                        <div id="bar-chart">
+                            <div v-for="n in 10" :data-grade="n" :data-frequency="gradesFrequencyTable[n]"
+                                :data-percentage="Math.round(gradesFrequencyTable[n] / gradesArray.length * 100)"
+                                :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
                             </div>
-                        </template>
-                    </Card>
-                    <Card id="calculator-added" key="calculator-added" v-if="view.calculator.state" small>
+                        </div>
+                    </template>
+                </Card>
+                <div id="calculator" key="calculator" v-if="view.calculator.state">
+                    <Card id="calculator-added" small>
                         <template #title>Toegevoegde cijfers</template>
                         <template #content>
                             <TransitionGroup name="list" tag="ul">
@@ -291,7 +290,7 @@ function median(valueArray = []) {
                             </TransitionGroup>
                         </template>
                     </Card>
-                    <Card id="calculator-result" key="calculator-result" v-if="view.calculator.state" small>
+                    <Card id="calculator-result" small>
                         <template #content>
                             <CollectionHorizontal stretch uniform wrap>
                                 <Metric description="Gemiddelde (incl. weging)">{{
@@ -306,21 +305,23 @@ function median(valueArray = []) {
                             </CollectionHorizontal>
                         </template>
                     </Card>
-                    <Card id="calculator-chart" key="calculator-chart" v-if="view.calculator.state" small>
+                    <Card id="calculator-chart" small>
                         <template #title>Toekomstig cijfer</template>
                         <template #subtitle>Zie hier wat je moet halen en wat je komt te staan.</template>
                         <template #content>
                             <input type="number" v-model="hypotheticalWeight" />
-                            <p v-for="item in hypotheticalPossibilities">( {{ item.x.toLocaleString('nl-NL',
-                                { minimumFractionDigits: 1, maximumFractionDigits: 1 }) }}; {{
-        item.y.toLocaleString('nl-NL',
-            { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }} )</p>
+                            <CollectionHorizontal stretch gapless>
+                                <div v-for="item in hypotheticalPossibilities" class="grid-column"
+                                    :data-x="item.x.toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"
+                                    :data-y="item.y.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })">
+                                </div>
+                            </CollectionHorizontal>
                         </template>
                     </Card>
-                </TransitionGroup>
-            </div>
-        </section>
-    </main>
+                </div>
+            </TransitionGroup>
+        </div>
+    </section>
 </template>
 
 <style>
@@ -332,6 +333,8 @@ function median(valueArray = []) {
         'heading actions actions' auto
         'content content content' 1fr
         / 1fr auto 300px;
+    max-height: 100vh;
+    overflow: hidden;
 }
 
 #grade-actions {
@@ -342,6 +345,7 @@ function median(valueArray = []) {
     grid-area: content;
     display: grid;
     grid-template-columns: 1fr 300px;
+    grid-template-rows: 100%;
     gap: 1.5rem;
     overflow: hidden;
     transition: grid-template-columns 200ms, gap 200ms;
@@ -353,6 +357,7 @@ function median(valueArray = []) {
 }
 
 #aside {
+    position: relative;
     width: 300px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -362,6 +367,11 @@ function median(valueArray = []) {
     min-width: 300px;
     max-width: 300px;
     box-sizing: border-box;
+}
+
+#aside>*:not(:last-child),
+#calculator>*:not(:last-child) {
+    margin-bottom: 10px;
 }
 
 #calculator-added ul {
@@ -385,6 +395,16 @@ function median(valueArray = []) {
 
 #calculator-result {
     padding-top: 7px;
+}
+
+#calculator-chart .grid-column {
+    height: 40px;
+    width: 100%;
+    background: var(--);
+}
+
+#calculator-chart .grid-column:hover {
+    background: var(--accentDark);
 }
 
 #bar-chart-title {
@@ -581,6 +601,7 @@ td.grade.gemiddeldecolumn {
 .aside-leave-to {
     opacity: 0;
     scale: .5;
+    translate: 0 -25%;
 }
 
 @media (max-width: 620px) {

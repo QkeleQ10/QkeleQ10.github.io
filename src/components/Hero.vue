@@ -13,16 +13,31 @@ defineProps({
 </template>
 
 <style>
+@property --gradientFrom {
+    syntax: '<color>';
+    initial-value: #2c6836;
+    inherits: false;
+}
+
+@property --gradientTo {
+    syntax: '<color>';
+    initial-value: #2c6836;
+    inherits: false;
+}
+
 #hero {
+    --gradientFrom: var(--hero1);
+    --gradientTo: var(--hero2);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    background: linear-gradient(300deg, var(--hero1), var(--hero2));
+    background: linear-gradient(300deg, var(--gradientFrom), var(--gradientTo));
     color: var(--fgContrast);
     padding-top: 5em;
     overflow: hidden;
+    transition: --hero1 200ms, --hero2 200ms;
 }
 
 #hero .section-title {
@@ -54,13 +69,14 @@ defineProps({
     font-size: min(2em, 5vw);
 }
 
-#hero>svg,
+#hero>.logo,
 #hero>.icon {
     position: absolute;
     max-width: 90vw;
     max-height: 120svh;
     right: 0;
-    bottom: 0;
+    top: 50%;
+    translate: 0 -50%;
     font-size: 120svh;
     color: var(--fgContrast);
     opacity: .1;
