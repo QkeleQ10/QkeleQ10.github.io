@@ -13,31 +13,25 @@ defineProps({
 </template>
 
 <style>
-@property --gradientFrom {
-    syntax: '<color>';
-    initial-value: #2c6836;
-    inherits: false;
-}
-
-@property --gradientTo {
-    syntax: '<color>';
-    initial-value: #2c6836;
+@property --hueValue {
+    syntax: '<number>';
+    initial-value: 130;
     inherits: false;
 }
 
 #hero {
-    --gradientFrom: var(--hero1);
+    --hueValue: var(--hue);
     --gradientTo: var(--hero2);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    background: linear-gradient(300deg, var(--gradientFrom), var(--gradientTo));
+    background: linear-gradient(300deg, hsl(var(--hueValue), 40%, 29%), hsl(var(--hueValue), 36%, 30%));
     color: var(--fgContrast);
     padding-top: 5em;
     overflow: hidden;
-    transition: --hero1 200ms, --hero2 200ms;
+    transition: --hueValue 1000ms;
 }
 
 #hero .section-title {

@@ -212,11 +212,8 @@ function median(valueArray = []) {
                     <template #title>Details</template>
                     <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
                         {{ importedDate }}</template>
-                    <template #subtitle v-else>Wanneer je je back-up hebt geïmporteerd zullen hier aanvullende
-                        details
-                        en statistieken verschijnen.</template>
                     <template #content>
-                        <CollectionHorizontal stretch uniform wrap v-show="list.length > 0">
+                        <CollectionHorizontal stretch uniform wrap v-if="list.length > 0">
                             <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
                             <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}×
                             </Metric>
@@ -226,11 +223,12 @@ function median(valueArray = []) {
                                 {{ currentlySelected.title || "Klik op een cijfer" }}
                             </Metric>
                         </CollectionHorizontal>
+                        <p v-else>Upload je cijfers om details te bekijken.</p>
                     </template>
                 </Card>
                 <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
                     <template #title>Statistieken</template>
-                    <template #content>
+                    <template #content v-if="gradesArray.length > 0">
                         <CollectionHorizontal stretch uniform wrap>
                             <Metric description="Gemiddelde (excl. weging)">{{
                                 weightedMean(gradesArray)?.toLocaleString('nl-NL', {
@@ -268,6 +266,9 @@ function median(valueArray = []) {
                                 :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
                             </div>
                         </div>
+                    </template>
+                    <template #content v-else>
+                        Er zijn geen cijfers geselecteerd.
                     </template>
                 </Card>
                 <div id="calculator" key="calculator" v-if="view.calculator.state">

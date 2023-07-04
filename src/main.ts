@@ -47,6 +47,7 @@ async function initialise() {
             ],
             scrollBehavior(to, from, savedPosition) {
                 if (savedPosition) {
+                    savedPosition.behavior = "smooth"
                     return savedPosition
                 } else {
                     return {

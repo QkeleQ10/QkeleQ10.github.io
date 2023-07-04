@@ -8,8 +8,6 @@
     --accentDark: hsl(var(--hue), 55%, 30%);
     --accentWarn: hsl(0, 40%, 48%);
     --accentOk: hsl(160, 40%, 48%);
-    --hero1: hsl(var(--hue), 40%, 29%);
-    --hero2: hsl(var(--hue), 36%, 30%);
     --accentVeryLight: hsl(var(--hue), 53%, 87%);
     --accentVeryLightContrast: hsl(var(--hue), 53%, 87%);
     --bgPrimary: hsl(0, 0%, 100%);

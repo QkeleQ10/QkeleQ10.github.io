@@ -16,27 +16,7 @@ useMeta({
     <NavigationRail />
     <main>
         <section id="hero"></section>
-        <router-view v-slot="{ Component }">
-            <!-- <transition name="fade"> -->
-            <component :is="Component" />
-            <!-- </transition> -->
+        <router-view>
         </router-view>
     </main>
 </template>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-    transition-property: opacity;
-    transition-duration: .25s;
-}
-
-.fade-enter-active {
-    transition-delay: .25s;
-}
-
-.fade-enter,
-.fade-leave-active {
-    opacity: 0
-}
-</style>
