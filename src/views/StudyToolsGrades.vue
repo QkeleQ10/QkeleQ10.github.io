@@ -215,7 +215,8 @@ function median(valueArray = []) {
                     <template #content>
                         <CollectionHorizontal stretch uniform wrap v-if="list.length > 0">
                             <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
-                            <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight || '?' }}×
+                            <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight > 0 ?
+                                currentlySelected.weight + '×' : currentlySelected.weight === 0 ? 'formatief' : '?' }}
                             </Metric>
                             <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
                             </Metric>
