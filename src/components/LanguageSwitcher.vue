@@ -20,9 +20,9 @@ export default {
 
 <template>
     <div id="language-switcher" v-bind="$attrs">
-        <Button class="rail" role="link" :title="$i18n('helpTranslate')" @click="helpTranslate()">
+        <!-- <Button class="rail" role="link" :title="$i18n('helpTranslate')" @click="helpTranslate()">
             <Icon>volunteer_activism</Icon>
-        </Button>
+        </Button> -->
         <Button class="shown rail" role="button" :title="$i18n('changeLanguage')" @click="pickerOpen = 1" active="true">
             <Icon>language</Icon>
         </Button>
@@ -30,8 +30,8 @@ export default {
     <Modal v-if="pickerOpen === 1" id="modal-language" @click.self="pickerOpen = 0" tabindex="1">
         <Heading2 icon="language" class="modal-title"> {{ $i18n('selectLanguage') }} </Heading2>
         <LanguageList />
-        <!-- <Button class="tight primary" icon="volunteer_activism" href="https://crowdin.com/project/QkeleQ10">
-            {{ $i18n('helpTranslate') }}</Button> -->
+        <Button class="tight primary" icon="volunteer_activism" href="https://crowdin.com/project/QkeleQ10">
+            {{ $i18n('helpTranslate') }}</Button>
     </Modal>
 </template>
 
