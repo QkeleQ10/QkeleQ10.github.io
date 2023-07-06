@@ -2,8 +2,17 @@
     --hue: 209;
 }
 
+:root[data-color-scheme=error] {
+    --sat1: 0%;
+    --sat2: 0%;
+    --lum: 7%;
+}
+
 :root {
     --hue: 130;
+    --sat1: 40%;
+    --sat2: 36%;
+    --lum: 30%;
     --accentLight: hsl(var(--hue), 20%, 48%);
     --accentDark: hsl(var(--hue), 55%, 30%);
     --accentWarn: hsl(0, 40%, 48%);

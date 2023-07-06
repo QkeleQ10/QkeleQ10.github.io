@@ -19,19 +19,39 @@ defineProps({
     inherits: false;
 }
 
+@property --sat1Value {
+    syntax: '<percentage>';
+    initial-value: 40%;
+    inherits: false;
+}
+
+@property --sat2Value {
+    syntax: '<percentage>';
+    initial-value: 36%;
+    inherits: false;
+}
+
+@property --lumValue {
+    syntax: '<percentage>';
+    initial-value: 30%;
+    inherits: false;
+}
+
 #hero {
     --hueValue: var(--hue);
-    --gradientTo: var(--hero2);
+    --sat1Value: var(--sat1);
+    --sat2Value: var(--sat2);
+    --lumValue: var(--lum);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-sizing: border-box;
-    background: linear-gradient(300deg, hsl(var(--hueValue), 40%, 29%), hsl(var(--hueValue), 36%, 30%));
+    background: linear-gradient(300deg, hsl(var(--hueValue) var(--sat1Value) var(--lumValue)), hsl(var(--hueValue) var(--sat2Value) var(--lumValue)));
     color: var(--fgContrast);
     padding-top: 5em;
     overflow: hidden;
-    transition: --hueValue 1000ms;
+    transition: --hueValue 1000ms, --sat1Value 1000ms, --sat2Value 1000ms, --lumValue 1000ms;
 }
 
 #hero>* {
