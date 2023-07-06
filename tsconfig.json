@@ -13,7 +13,8 @@
         "./src/*"
       ]
     },
-    "allowJs": true
+    "allowJs": true,
+    "ignoreDeprecations": "5.0",
   },
   "references": [
     {
