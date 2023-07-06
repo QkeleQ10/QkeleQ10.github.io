@@ -34,6 +34,10 @@ defineProps({
     transition: --hueValue 1000ms;
 }
 
+#hero>* {
+    transition: transform 200ms ease-out;
+}
+
 #hero .section-title {
     color: var(--fgContrast);
     font-size: 7rem;

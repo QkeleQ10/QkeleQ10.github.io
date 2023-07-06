@@ -2,6 +2,7 @@
 import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
 import { ref, computed } from 'vue'
+import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
@@ -13,6 +14,9 @@ useMeta({ title: "Cijferback-up" })
 
 const theme = useThemeStore()
 theme.setScheme('st')
+
+const { x, y, sourceType } = useMouse(),
+    { width, height } = useWindowSize()
 
 const possibleGrades = Array.from({ length: 91 }, (_, i) => (i / 10 + 1))
 
@@ -157,7 +161,8 @@ function median(valueArray = []) {
 
 <template>
     <Teleport to="#hero">
-        <div>
+        <div
+            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
             <h1 class="section-title">Cijferback-up</h1>
             <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
         </div>
@@ -166,8 +171,11 @@ function median(valueArray = []) {
             <input type="file" accept=".json" @change="fileChanged" @input="grades.scrollIntoView({ behavior: 'smooth' })"
                 ref="input" id="input" style="display: none;">
         </CollectionHorizontal>
-        <Icon>school</Icon>
+        <Icon
+            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
+            school</Icon>
     </Teleport>
+
     <section ref="grades" id="grades" class="full max-full">
         <Heading2 icon="summarize">Cijferoverzicht</Heading2>
         <CollectionHorizontal id="grade-actions" wrap>
@@ -180,7 +188,9 @@ function median(valueArray = []) {
             <Button icon="upload_file" class="secondary" :title="$i18n('Import grades')" @click="input.click()">{{
                 $i18n('Import grades') }}</Button>
         </CollectionHorizontal>
+
         <div ref="container" id="container" :class="view.aside.state ? '' : 'hide-aside'">
+
             <div id="table-wrapper">
                 <table>
                     <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
@@ -207,6 +217,7 @@ function median(valueArray = []) {
                 <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
                     de knop "{{ $i18n('Import grades') }}".</p>
             </div>
+
             <TransitionGroup name="aside" tag="div" id="aside">
                 <Card id="meta" key="meta" v-if="view.meta.state" small>
                     <template #title>Details</template>
@@ -322,6 +333,7 @@ function median(valueArray = []) {
                     </Card>
                 </div>
             </TransitionGroup>
+
         </div>
     </section>
 </template>
@@ -615,5 +627,4 @@ td.grade.gemiddeldecolumn {
             'content' 1fr
             / 1fr;
     }
-}
-</style>
+}</style>

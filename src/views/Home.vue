@@ -1,21 +1,26 @@
 <script setup>
 import { useThemeStore } from '../stores/theme'
 import { ref } from 'vue'
+import { useMouse, useWindowSize } from '@vueuse/core'
+
 import Localisation from '@/sections/index/Localisation.vue'
 import Projects from '@/sections/index/Projects.vue'
 import Logo from '@/components/Logo.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
 
 const theme = useThemeStore()
-
 theme.setScheme('normal')
+
+const { x, y, sourceType } = useMouse(),
+    { width, height } = useWindowSize()
 
 const projects = ref()
 </script>
 
 <template>
     <Teleport to="#hero">
-        <div>
+        <div
+            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
             <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
             <p class="section-about">{{ $i18n('aboutme') }}</p>
         </div>
@@ -28,11 +33,14 @@ const projects = ref()
             <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
             <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
         </CollectionHorizontal>
-        <Logo transparent fill="monochrome" />
+        <Logo transparent fill="monochrome"
+            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }" />
     </Teleport>
+
     <section id="projects" ref="projects">
         <Projects />
     </section>
+
     <section id="localisation" ref="localisation">
         <Localisation />
     </section>

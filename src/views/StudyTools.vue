@@ -2,6 +2,7 @@
 import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
 import { ref } from 'vue'
+import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
@@ -19,12 +20,16 @@ useMeta({ title: "Study Tools" })
 const theme = useThemeStore()
 theme.setScheme('st')
 
+const { x, y, sourceType } = useMouse(),
+    { width, height } = useWindowSize()
+
 const installation = ref()
 </script>
 
 <template>
     <Teleport to="#hero">
-        <div>
+        <div
+            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
             <h1 class="section-title">Study Tools voor Magister</h1>
             <p class="section-about">Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de
                 grootste
@@ -39,8 +44,11 @@ const installation = ref()
             <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
             <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
         </CollectionHorizontal>
-        <Icon>school</Icon>
+        <Icon
+            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
+            school</Icon>
     </Teleport>
+
     <section ref="installation" id="installation" class="half">
         <Heading2 icon="install_desktop">{{ $i18n('Install') }}</Heading2>
         <div class="sectionGrid" role="list">
@@ -63,6 +71,7 @@ const installation = ref()
             </Card>
         </div>
     </section>
+
     <section id="features" class="threequarters">
         <Heading2 icon="tips_and_updates">Functio&shy;naliteiten</Heading2>
         <div class="sectionGrid" role="list">
@@ -111,6 +120,7 @@ const installation = ref()
             </Card>
         </div>
     </section>
+
     <section id="advanced" class="quarter">
         <Heading2 icon="science">Geavanceerd</Heading2>
         <div class="sectionGrid" role="list">
