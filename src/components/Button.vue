@@ -3,9 +3,9 @@ import Icon from "./Icon.vue";
 
 defineProps({
     icon: String,
+    filled: Boolean,
     href: String,
-    target: { type: String, default: '_blank' },
-    style: String
+    target: { type: String, default: '_blank' }
 })
 </script>
 
@@ -18,15 +18,13 @@ export default {
 <template>
     <a :href="href" :target="target" tabindex="-1">
         <button type="button" role="button" class="button" v-bind="$attrs">
-            <Icon v-if="icon">{{ icon }}</Icon>
+            <Icon v-if="icon" :filled="filled">{{ icon }}</Icon>
             <slot></slot>
         </button>
     </a>
 </template>
 
 <style>
-@import 'https://unicons.iconscout.com/release/v4.0.0/css/line.css';
-
 a {
     display: block;
     min-width: fit-content;
@@ -35,7 +33,7 @@ a {
     margin: 0;
 }
 
-a:focus {
+a:focus-visible {
     outline: none;
 }
 
@@ -50,7 +48,7 @@ a:focus {
     width: 100%;
     padding: 5px 15px;
     margin: 10px 0 0;
-    font-family: "Montserrat", arial, sans-serif;
+    font-family: var(--font2);
     font-weight: 600;
     border: none;
     background-color: var(--accentLight);
@@ -64,11 +62,15 @@ a:focus {
     filter: brightness(0.9);
 }
 
-.button:focus,
-a:focus .button {
+.button:focus-visible,
+a:focus-visible .button {
     filter: brightness(0.8);
     box-shadow: inset 0 0 0 3px currentColor;
     outline: none;
+}
+
+ul>li a>.button {
+    margin-top: 2px;
 }
 
 .button.hero {
@@ -76,7 +78,8 @@ a:focus .button {
     color: var(--bgContrast);
 }
 
-.button.secondary, .button.toggle {
+.button.secondary,
+.button.toggle {
     background-color: var(--bgSecondary);
     color: var(--fgPrimary);
 }
@@ -90,6 +93,15 @@ a:focus .button {
     width: 40px;
 }
 
+.button.insignificant .icon {
+    opacity: .5;
+}
+
+.button.left {
+    text-align: left;
+    justify-content: start;
+}
+
 .button.rail {
     padding: 0;
     margin: 0;
@@ -97,7 +109,8 @@ a:focus .button {
     background-color: var(--bgSecondary);
 }
 
-.button.rail[active=true] {
+.button.rail[active=true],
+.button.secondary[active=true] {
     background-color: var(--accentVeryLight);
 }
 

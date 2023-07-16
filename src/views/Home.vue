@@ -7,6 +7,7 @@ import Localisation from '@/sections/index/Localisation.vue'
 import Projects from '@/sections/index/Projects.vue'
 import Logo from '@/components/Logo.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
+import Heading1 from '@/components/Heading1.vue'
 
 const theme = useThemeStore()
 theme.setScheme('normal')
@@ -21,7 +22,7 @@ const projects = ref()
     <Teleport to="#hero">
         <div
             :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <h1 class="section-title">{{ $i18n('heroTitle') }}</h1>
+            <Heading1 class="section-title">{{ $i18n('heroTitle') }}</Heading1>
             <p class="section-about">{{ $i18n('aboutme') }}</p>
         </div>
         <CollectionHorizontal id="hero-buttons">

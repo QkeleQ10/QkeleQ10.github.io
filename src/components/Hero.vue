@@ -58,29 +58,6 @@ defineProps({
     transition: transform 200ms ease-out;
 }
 
-#hero .section-title {
-    color: var(--fgContrast);
-    font-size: 7rem;
-}
-
-@media (max-width: 1300px) {
-    #hero .section-title {
-        font-size: 6rem;
-    }
-}
-
-@media (max-width: 1100px) {
-    #hero .section-title {
-        font-size: 4.5rem;
-    }
-}
-
-@media (max-width: 620px) {
-    #hero .section-title {
-        font-size: 3rem;
-    }
-}
-
 #hero .section-about {
     color: var(--fgContrast);
     width: 70%;

@@ -18,8 +18,8 @@ export default {
 </script>
 
 <template>
-    <div class="collection-horizontal" role="list" :data-gapless="gapless" :data-stretch="stretch" :data-uniform="uniform" :data-wrap="wrap"
-        v-if="hasContent()">
+    <div class="collection-horizontal" role="list" :data-gapless="gapless" :data-stretch="stretch" :data-uniform="uniform"
+        :data-wrap="wrap" v-if="hasContent()">
         <slot></slot>
     </div>
 </template>
@@ -41,7 +41,7 @@ export default {
 }
 
 .collection-horizontal[data-stretch=true]>* {
-    margin-right: auto;
+    margin-right: 0;
 }
 
 .collection-horizontal[data-uniform=true]>* {
@@ -52,5 +52,9 @@ export default {
     max-width: 100%;
     overflow: hidden;
     flex-wrap: wrap;
+}
+
+.collection-horizontal.align-right {
+    justify-content: flex-end;
 }
 </style>

@@ -4,6 +4,7 @@ import { useThemeStore } from '../stores/theme'
 import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Icon from '@/components/Icon.vue';
+import Heading1 from '@/components/Heading1.vue';
 
 useMeta({ title: "Study Tools" })
 
@@ -19,7 +20,7 @@ const { x, y, sourceType } = useMouse(),
         <Teleport to="#hero">
             <div id="error"
                 :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-                <h1 class="section-title">Oops.</h1>
+                <Heading1 class="section-title">Oops.</Heading1>
                 <p>This page doesn't exist.</p>
                 <RouterLink to="/">
                     <Button icon="home" class="">Main page</Button>
@@ -48,8 +49,7 @@ const { x, y, sourceType } = useMouse(),
     font-size: 32px;
 }
 
-#error>h1,
-#error>p {
+#error p {
     color: var(--fgContrast);
 }
 </style>

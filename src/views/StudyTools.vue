@@ -14,6 +14,7 @@ import imageStudyguide from '@/assets/images/studytools/studyguide.webp'
 import imageGradecalculator from '@/assets/images/studytools/gradecalculator.webp'
 import imageGradebackup from '@/assets/images/studytools/gradebackup.webp'
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
+import Heading1 from '@/components/Heading1.vue'
 
 useMeta({ title: "Study Tools" })
 
@@ -30,7 +31,7 @@ const installation = ref()
     <Teleport to="#hero">
         <div
             :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <h1 class="section-title">Study Tools voor Magister</h1>
+            <Heading1 class="section-title">Study Tools voor Magister</Heading1>
             <p class="section-about">Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de
                 grootste
                 elektronische leeromgeving van Nederland.</p>
@@ -49,7 +50,7 @@ const installation = ref()
             school</Icon>
     </Teleport>
 
-    <section ref="installation" id="installation" class="half">
+    <section ref="installation" id="installation" class="quarter">
         <Heading2 icon="install_desktop">{{ $i18n('Install') }}</Heading2>
         <div class="sectionGrid" role="list">
             <Card stretch-buttons :data-highlight="$browser() === 'chromium' || $browser() === 'edge'">

@@ -9,6 +9,7 @@ import Heading2 from '@/components/Heading2.vue'
 import Metric from '@/components/Metric.vue'
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
+import Heading1 from '@/components/Heading1.vue'
 
 useMeta({ title: "Cijferback-up" })
 
@@ -163,7 +164,7 @@ function median(valueArray = []) {
     <Teleport to="#hero">
         <div
             :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <h1 class="section-title">Cijferback-up</h1>
+            <Heading1 class="section-title">Cijferback-up</Heading1>
             <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
         </div>
         <CollectionHorizontal id="hero-buttons">
@@ -509,7 +510,9 @@ td.text {
 }
 
 td.text>span:first-child {
-    font: 600 12px/40px 'Segoe UI', system-ui;
+    font-size: 12px;
+    line-height: 40px;
+    font-weight: 600;
 }
 
 td.text>.icon {
@@ -547,7 +550,9 @@ td.grade>span {
     white-space: nowrap;
     text-overflow: ellipsis;
     text-align: center;
-    font: 400 12px/40px 'Segoe UI', system-ui;
+    font-size: 12px;
+    line-height: 40px;
+    font-weight: 400;
     box-shadow: inset 0px 0px 0px 0px transparent;
     transition: box-shadow 200ms;
 }

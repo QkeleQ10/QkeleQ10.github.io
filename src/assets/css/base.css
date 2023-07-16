@@ -1,5 +1,8 @@
 @import url("colors.css");
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+:root {
+    --font1: "Work Sans", arial, sans-serif;
+    --font2: "Inter", arial, sans-serif;
+}
 
 * {
     transition: background-color 200ms, color 200ms;
@@ -11,7 +14,7 @@ html {
 
 body {
     background-color: var(--bgPrimary);
-    font-family: "Montserrat", arial, sans-serif;
+    font-family: var(--font2);
     font-weight: 500;
     overflow-x: hidden;
     margin: 0;
@@ -123,7 +126,6 @@ footer {
         }
 }
 
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -131,5 +133,11 @@ footer {
 
     100% {
         opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        translate: -100%;
     }
 }

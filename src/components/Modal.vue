@@ -1,57 +1,56 @@
+<script setup>
+import { ref } from 'vue';
 
-import Heading2 from './Heading2.vue';
+let modal = ref(null)
+</script>
 
 <template>
-    <div class="modal-backdrop">
-        <dialog class="modal" role="dialog" tabindex="0">
-            <slot></slot>
-        </dialog>
-    </div>
+    <dialog ref="modal">
+        <slot></slot>
+    </dialog>
 </template>
 
 <style>
-.modal-backdrop {
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(var(--fgTertiary), 0.5);
-    backdrop-filter: blur(0.5em);
-    animation: fadeIn 200ms;
-    z-index: 99;
-}
-
-.modal {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: clamp(150px, 75%, 750px);
-    max-height: 90svh;
-    background-color: var(--bgPrimary);
-    padding: 20px;
-    box-shadow: 0 0 5px rgba(var(--fgPrimary), 0.5);
-    outline: none;
+dialog[open] {
+    padding: 32px;
     border: none;
-    border-radius: 6px;
-    color: var(--fgPrimary);
-    overflow-wrap: normal;
-    overflow: auto;
-    z-index: 100;
+    max-height: calc(100vh - 64px);
 }
 
-.modal-title {
-    color: var(--fgPrimary);
+dialog::backdrop {
+    background-color: var(--bgContrast);
+    opacity: .5;
+}
+
+dialog.dock-left {
+    position: fixed;
+    left: 0;
+    height: calc(100vh - 64px);
     margin: 0;
+    animation: dockedModal 250ms both;
 }
 
-.modal-close {
-    position: absolute;
-    height: 0;
-    width: 0;
-    opacity: 0;
+dialog.dock-left[open]>*, dialog.dock-left[open]>ul>li {
+    animation: dockedModalContent 250ms both;
+    animation-delay: calc(var(--animation-order) * 7ms);
+}
+
+a#closer {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+@keyframes dockedModal {
+    to {
+        background-position: 0 -100%;
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    }
+}
+
+@keyframes dockedModalContent {
+    from {
+        translate: -150%;
+    }
 }
 </style>

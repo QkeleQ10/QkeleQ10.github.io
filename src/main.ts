@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { createMetaManager } from 'vue-meta'
 import { createPinia } from 'pinia'
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
 import detectBrowserPlugin from './plugins/detectBrowser'
