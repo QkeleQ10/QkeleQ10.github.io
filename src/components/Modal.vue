@@ -1,7 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 
-let modal = ref(null)
+let modal = ref()
+
+const dismissModal = () => {
+    modal.value.classList.add('closing')
+    setTimeout(() => {
+        modal.value.close()
+        modal.value.classList.remove('closing')
+    }, 200)
+}
+
+defineExpose({
+    dismissModal
+})
+
 </script>
 
 <template>
@@ -22,6 +35,14 @@ dialog::backdrop {
     opacity: .5;
 }
 
+dialog[open]::backdrop {
+    animation: modalBackdrop 500ms;
+}
+
+dialog.closing[open]::backdrop {
+    animation: closeModalBackdrop 200ms;
+}
+
 dialog.dock-left {
     position: fixed;
     left: 0;
@@ -30,15 +51,37 @@ dialog.dock-left {
     animation: dockedModal 250ms both;
 }
 
-dialog.dock-left[open]>*, dialog.dock-left[open]>ul>li {
+dialog.dock-left[open]>*,
+dialog.dock-left[open]>ul>li {
     animation: dockedModalContent 250ms both;
     animation-delay: calc(var(--animation-order) * 7ms);
+}
+
+dialog.dock-left.closing {
+    animation: closeDockedModal 200ms both;
+}
+
+dialog.dock-left.closing[open]>*,
+dialog.dock-left.closing[open]>ul>li {
+    animation: closeDockedModalContent 200ms both;
 }
 
 a#closer {
     position: absolute !important;
     top: -9999px !important;
     left: -9999px !important;
+}
+
+@keyframes modalBackdrop {
+    from {
+        opacity: 0;
+    }
+}
+
+@keyframes closeModalBackdrop {
+    to {
+        opacity: 0;
+    }
 }
 
 @keyframes dockedModal {
@@ -48,8 +91,21 @@ a#closer {
     }
 }
 
+@keyframes closeDockedModal {
+    from {
+        background-position: 0 -100%;
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    }
+}
+
 @keyframes dockedModalContent {
     from {
+        translate: -150%;
+    }
+}
+
+@keyframes closeDockedModalContent {
+    to {
         translate: -150%;
     }
 }

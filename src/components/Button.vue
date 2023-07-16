@@ -109,7 +109,7 @@ ul>li a>.button {
     background-color: var(--bgSecondary);
 }
 
-.button.rail[active=true],
+.button[data-checked=true],
 .button.secondary[active=true] {
     background-color: var(--accentVeryLight);
 }

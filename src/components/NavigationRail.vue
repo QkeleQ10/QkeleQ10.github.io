@@ -135,8 +135,4 @@ if (window.innerWidth < 620) {
     background-color: var(--fgContrast);
     color: var(--bgContrast);
 }
-
-:root:not([data-menu-collapsed]) *[data-contrast=true] .button.rail[active=true] {
-    background-color: var(--accentVeryLightContrast);
-}
 </style>

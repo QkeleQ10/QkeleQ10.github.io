@@ -8,8 +8,7 @@ import Button from './Button.vue';
 import Heading2 from './Heading2.vue';
 
 import CollectionHorizontal from './CollectionHorizontal.vue';
-const modal = ref(null)
-
+const modal = ref()
 
 let languages = ref([{ languageId: 'en', localisedName: 'English', defaultName: 'English', translationProgress: 100, approvalProgress: 100 }]),
     currentLanguage = ref(getCookie('language'))
@@ -86,7 +85,7 @@ export default {
         <CollectionHorizontal class="align-right" :style="{ '--animation-order': languages.length }">
             <Button class="secondary" icon="edit" href="https://crowdin.com/project/QkeleQ10/">
                 {{ $i18n('helpTranslate') }}</Button>
-            <Button class="primary" icon="close" @click="modal.$el.close()">
+            <Button class="primary" icon="close" @click="modal.dismissModal()">
                 {{ $i18n('close') }}</Button>
         </CollectionHorizontal>
     </Modal>
