@@ -73,11 +73,13 @@ export default {
                                 width="26" height="26" :alt="language.defaultName" aria-hidden="true">
                             <span>{{ language.localisedName }}</span>
                             <span>{{ language.defaultName }}</span>
+                            <span>{{ Number(language.translationProgress / 100).toLocaleString(currentLanguage,
+                                { style: 'percent' }) }}</span>
                         </div>
                     </Button>
                     <Button v-show="language.translationProgress < 100" class="secondary insignificant" icon="edit"
                         :active="currentLanguage === language.languageId" :filled="currentLanguage === language.languageId"
-                        :title="$i18n('helpTranslate') + ` (${language.defaultName} ${language.translationProgress}%)`"
+                        :title="$i18n('helpTranslateLanguage', { language: language.defaultName, progress: Number(language.translationProgress / 100).toLocaleString(currentLanguage, { style: 'percent' }) })"
                         :href="`https://crowdin.com/project/QkeleQ10/${language.languageId}`"></Button>
                 </div>
             </li>
@@ -123,6 +125,7 @@ export default {
     justify-content: stretch;
     width: 100%;
 }
+
 .language-item-container>* {
     height: 100%;
 }
@@ -133,18 +136,18 @@ export default {
 
 .language-details {
     display: grid;
-    grid-template-columns: auto max-content 1fr;
+    grid-template-columns: auto max-content auto auto;
     overflow-x: hidden;
     align-items: center;
     gap: 12px;
 }
 
-.language-details>span:last-child {
+.language-details>span:nth-child(n+3) {
     opacity: 0;
     transition: opacity 200ms;
 }
 
-li:hover .language-details>span:last-child {
+li:hover .language-details>span:nth-child(n+3) {
     opacity: .4;
 }
 </style>

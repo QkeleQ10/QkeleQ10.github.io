@@ -12,21 +12,21 @@ theme.set((theme.theme))
         <div :title="$i18n('dark')">
             <input :aria-label="$i18n('dark')" type="radio" id="theme-dark" :checked="theme.theme === 'dark'"
                 @click="theme.set('dark')">
-            <label for="theme-dark">
+            <label for="theme-dark" aria-hidden="true">
                 <Icon aria-hidden="true" :filled="theme.theme === 'dark'">dark_mode</Icon>
             </label>
         </div>
         <div :title="$i18n('light')">
             <input :aria-label="$i18n('light')" type="radio" id="theme-light" :checked="theme.theme === 'light'"
                 @click="theme.set('light')">
-            <label for="theme-light">
+            <label for="theme-light" aria-hidden="true">
                 <Icon aria-hidden="true" :filled="theme.theme === 'light'">light_mode</Icon>
             </label>
         </div>
         <div :title="$i18n('auto')">
             <input :aria-label="$i18n('auto')" type="radio" id="theme-auto" :checked="theme.theme === 'auto'"
                 @click="theme.set('auto')">
-            <label for="theme-auto">
+            <label for="theme-auto" aria-hidden="true">
                 <Icon aria-hidden="true" :filled="theme.theme === 'auto'">brightness_auto</Icon>
             </label>
         </div>

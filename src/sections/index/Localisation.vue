@@ -13,7 +13,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             <template #content>{{ $i18n('statsfmdesc') }}</template>
             <template #buttons>
                 <Button icon="translate" href="https://statsfm.crowdin.com">{{
-                    $i18n('Translate')
+                    $i18n('viewTranslation')
                 }}
                 </Button>
             </template>
@@ -24,7 +24,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             <template #content>{{ $i18n('premiddesc') }}</template>
             <template #buttons>
                 <Button icon="translate" href="https://crowdin.com/project/premid">{{
-                    $i18n('Translate')
+                    $i18n('viewTranslation')
                 }}
                 </Button>
             </template>
@@ -34,8 +34,8 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             <template #subtitle>{{ $i18n('Owner') }}</template>
             <template #content>{{ $i18n('qkeleqdesc') }}</template>
             <template #buttons>
-                <Button icon="volunteer_activism" href="https://crowdin.com/project/QkeleQ10">{{
-                    $i18n('Contribute')
+                <Button icon="edit" href="https://crowdin.com/project/QkeleQ10">{{
+                    $i18n('contributeTranslation')
                 }}
                 </Button>
             </template>
@@ -46,7 +46,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             <template #content>{{ $i18n('hypixeldesc') }}</template>
             <template #buttons>
                 <Button icon="translate" href="https://crowdin.com/project/hypixel">{{
-                    $i18n('Translate')
+                    $i18n('viewTranslation')
                 }}
                 </Button>
             </template>
@@ -57,7 +57,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
             <template #content>{{ $i18n('mcdesc') }}</template>
             <template #buttons>
                 <Button icon="translate" href="https://crowdin.com/project/minecraft">{{
-                    $i18n('Translate')
+                    $i18n('viewTranslation')
                 }}
                 </Button>
             </template>

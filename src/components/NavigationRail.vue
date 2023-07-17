@@ -23,11 +23,21 @@ function menuCollapse(state) {
     if (state === 'toggle' && document.documentElement.dataset.menuCollapsed == 'true') state = false
     else if (state === 'toggle' && document.documentElement.dataset.menuCollapsed == 'false') state = true
     document.documentElement.dataset.menuCollapsed = state
+    collapsed.value = state
 }
 
 if (window.innerWidth < 620) {
     menuCollapse(true)
 }
+
+window.addEventListener("resize", () => {
+    if (window.innerWidth < 620) {
+        menuCollapse(true)
+    } else {
+        document.documentElement.removeAttribute('data-menu-collapsed')
+        collapsed.value = undefined
+    }
+})
 </script>
 
 <template>
@@ -36,9 +46,9 @@ if (window.innerWidth < 620) {
     <div class="navigation-detector" id="navigation-detector-2" ref="navigationDetector2"
         v-element-visibility="onElementVisibility2"></div>
     <div id="navigation-rail">
-        <Icon id="navigation-rail-collapser" :data-contrast="isVisible1" @click="menuCollapse('toggle')"
+        <Icon id="navigation-rail-collapser" :data-contrast="isVisible2" @click="menuCollapse('toggle')"
             @keyup.enter="menuCollapse('toggle')" @keyup.space="menuCollapse('toggle')" aria-hidden="false" tabindex="0">
-            {{ collapsed ? 'yes' : 'menu' }}</Icon>
+            {{ collapsed ? 'menu' : 'close' }}</Icon>
         <RouterLink aria-hidden="false" tabindex="0" :aria-label="$i18n('navigateHome')" role="navigation" to="/"
             id="navigation-rail-logo" :data-contrast="isVisible1">
             <Logo aria-hidden="true" @click="router.push('/')" transparent fill="monochrome" />
@@ -48,6 +58,7 @@ if (window.innerWidth < 620) {
             <LanguageSwitcher />
         </CollectionVertical>
     </div>
+    <div id="navigation-rail-dismiss" @click="menuCollapse(true)"></div>
 </template>
 
 <style>
@@ -95,6 +106,24 @@ if (window.innerWidth < 620) {
     cursor: pointer;
     border-radius: 6px;
     transition: color 200ms, background-color 200ms, translate 200ms, box-shadow 200ms;
+}
+
+:root[data-menu-collapsed] #navigation-rail-dismiss {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100lvh;
+    z-index: 9998;
+    pointer-events: none;
+    background-color: var(--bgContrast);
+    opacity: 0;
+    transition: opacity 200ms;
+}
+
+:root[data-menu-collapsed=false] #navigation-rail-dismiss {
+    pointer-events: all;
+    opacity: .5;
 }
 
 :root[data-menu-collapsed=true] #navigation-rail-collapser {

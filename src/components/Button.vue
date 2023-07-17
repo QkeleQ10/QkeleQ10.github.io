@@ -79,12 +79,12 @@ ul>li a>.button {
 }
 
 .button.secondary,
-.button.toggle {
+.button[role=checkbox] {
     background-color: var(--bgSecondary);
     color: var(--fgPrimary);
 }
 
-.button.toggle[data-state=true] {
+.button[role=checkbox][aria-checked=true] {
     background-color: var(--accentVeryLight);
 }
 

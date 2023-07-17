@@ -38,9 +38,9 @@ const installation = ref()
         </div>
         <CollectionHorizontal id="hero-buttons">
             <Button icon="expand_more" class="hero" @click="installation.scrollIntoView({ behavior: 'smooth' })">{{
-                $i18n('Install') }}</Button>
+                $i18n('getExtension') }}</Button>
             <RouterLink to="/studytools/grades">
-                <Button icon="upload_file" class="hero">Cijferback-up</Button>
+                <Button icon="upload" class="hero">Cijferback-up</Button>
             </RouterLink>
             <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
             <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
@@ -51,14 +51,14 @@ const installation = ref()
     </Teleport>
 
     <section ref="installation" id="installation" class="quarter">
-        <Heading2 icon="install_desktop">{{ $i18n('Install') }}</Heading2>
+        <Heading2 icon="install_desktop">{{ $i18n('getExtension') }}</Heading2>
         <div class="sectionGrid" role="list">
             <Card stretch-buttons :data-highlight="$browser() === 'chromium' || $browser() === 'edge'">
                 <template #title>Chrome Web Store</template>
                 <template #subtitle>Voor Chromium-browsers zoals Microsoft Edge, Google Chrome, Brave en
                     Opera</template>
                 <template #content>Aanbevolen. Installeer de extensie met de knop hieronder.</template>
-                <template #buttons><Button icon="shopping_cart"
+                <template #buttons><Button icon="install_desktop"
                         href="https://chrome.google.com/webstore/detail/study-tools-voor-magister/hacjodpccmeoocakiahjfndppdeallak">Installeren
                         via Chrome Web Store</Button></template>
             </Card>
@@ -66,7 +66,7 @@ const installation = ref()
                 <template #title>Firefox Add-ons</template>
                 <template #content>Deze versie kan achterlopen of instabiel zijn. Het wordt aangeraden om een
                     Chromium-browser te gebruiken.</template>
-                <template #buttons><Button icon="shopping_cart"
+                <template #buttons><Button icon="install_desktop"
                         href="https://addons.mozilla.org/nl/firefox/addon/studytools/">Installeren
                         via Firefox Add-ons</Button></template>
             </Card>
@@ -115,7 +115,7 @@ const installation = ref()
                     cijfers exporteren en importeren.</template>
                 <template #buttons>
                     <RouterLink to="/studytools/grades">
-                        <Button icon="upload_file">Cijferback-up importeren</Button>
+                        <Button icon="upload">Cijferback-up importeren</Button>
                     </RouterLink>
                 </template>
             </Card>
@@ -179,7 +179,7 @@ const installation = ref()
                 <template #buttons>
                     <Button icon="expand_less" @click="installation.scrollIntoView({ behavior: 'smooth' })">Chromium-versie
                         installeren</Button>
-                    <Button icon="shopping_cart"
+                    <Button icon="install_desktop"
                         href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
                         via Edge Add-ons</Button>
                 </template>
