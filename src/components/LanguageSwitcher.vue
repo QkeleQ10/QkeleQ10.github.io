@@ -82,7 +82,7 @@ export default {
                 </div>
             </li>
         </ul>
-        <CollectionHorizontal class="align-right" :style="{ '--animation-order': languages.length }">
+        <CollectionHorizontal class="wrap no-row-gap align-right" :style="{ '--animation-order': languages.length }">
             <Button class="secondary" icon="edit" href="https://crowdin.com/project/QkeleQ10/">
                 {{ $i18n('helpTranslate') }}</Button>
             <Button class="primary" icon="close" @click="modal.dismissModal()">
@@ -122,7 +122,9 @@ export default {
 }
 
 .language-item-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: stretch;
     width: 100%;
 }
 

@@ -46,8 +46,9 @@ dialog.closing[open]::backdrop {
 dialog.dock-left {
     position: fixed;
     left: 0;
-    height: calc(100vh - 64px);
+    height: calc(100dvh - 64px);
     margin: 0;
+    margin-right: 64px;
     animation: dockedModal 250ms both;
 }
 

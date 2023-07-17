@@ -35,6 +35,10 @@ export default {
     gap: 0 0;
 }
 
+.collection-horizontal.no-row-gap {
+    row-gap: 0;
+}
+
 .collection-horizontal[data-stretch=true] {
     width: 100%;
     justify-content: space-between;
@@ -48,7 +52,8 @@ export default {
     flex: 1 1 0px;
 }
 
-.collection-horizontal[data-wrap=true] {
+.collection-horizontal[data-wrap=true],
+.collection-horizontal.wrap {
     max-width: 100%;
     overflow: hidden;
     flex-wrap: wrap;
