@@ -11,23 +11,39 @@ const dismissModal = () => {
     }, 200)
 }
 
+function modalClick(event) {
+    // Call dismissModal() when clicked outside .modal-inner
+    if (event.target.tagName === 'DIALOG') {
+        dismissModal()
+    }
+}
+
 defineExpose({
     dismissModal
 })
-
 </script>
 
 <template>
-    <dialog ref="modal">
-        <slot></slot>
+    <dialog ref="modal" @click="modalClick">
+        <div class="modal-inner">
+            <slot></slot>
+        </div>
     </dialog>
 </template>
 
 <style>
 dialog[open] {
-    padding: 32px;
+    padding: 0;
     border: none;
-    max-height: calc(100vh - 64px);
+    min-height: 100dvh;
+    max-height: 100dvh;
+}
+
+dialog[open]>.modal-inner {
+    height: 100%;
+    width: 100%;
+    padding: 32px;
+    box-sizing: border-box;
 }
 
 dialog::backdrop {
@@ -49,11 +65,16 @@ dialog.dock-left {
     height: calc(100dvh - 64px);
     margin: 0;
     margin-right: 64px;
+    overflow: hidden;
+    background-color: transparent;
+    background-size: 100% 200%;
+    background-image: linear-gradient(to bottom, transparent 50%, var(--bgPrimary) 50%);
+    transition: background-position 2000ms cubic-bezier(0, 0, 0, 1), box-shadow 200ms;
     animation: dockedModal 250ms both;
 }
 
-dialog.dock-left[open]>*,
-dialog.dock-left[open]>ul>li {
+dialog.dock-left[open]>.modal-inner>*,
+dialog.dock-left[open]>.modal-inner>ul>li {
     animation: dockedModalContent 250ms both;
     animation-delay: calc(var(--animation-order) * 7ms);
 }
@@ -62,15 +83,9 @@ dialog.dock-left.closing {
     animation: closeDockedModal 200ms both;
 }
 
-dialog.dock-left.closing[open]>*,
-dialog.dock-left.closing[open]>ul>li {
+dialog.dock-left.closing[open]>.modal-inner>*,
+dialog.dock-left.closing[open]>.modal-inner>ul>li {
     animation: closeDockedModalContent 200ms both;
-}
-
-a#closer {
-    position: absolute !important;
-    top: -9999px !important;
-    left: -9999px !important;
 }
 
 @keyframes modalBackdrop {

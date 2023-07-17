@@ -68,7 +68,7 @@ export default {
                         :title="$i18n('changeLanguageTooltip', { language: language.defaultName })"
                         :id="'language-option-' + language.languageId" :key="language.languageId"
                         :active="currentLanguage === language.languageId" @click="setLanguage(language.languageId)">
-                        <div class="language-button">
+                        <div class="language-details">
                             <img :src="`https://raw.githubusercontent.com/QkeleQ10/http-resources/main/flags/${language.languageId}.png`"
                                 width="26" height="26" :alt="language.defaultName" aria-hidden="true">
                             <span>{{ language.localisedName }}</span>
@@ -92,21 +92,16 @@ export default {
 </template>
 
 <style>
-#modal-language {
+#modal-language>.modal-inner {
     grid-template-rows: auto 1fr auto;
     gap: 6px;
-    overflow: hidden;
-    background-color: transparent;
-    background-size: 100% 200%;
-    background-image: linear-gradient(to bottom, transparent 50%, var(--bgPrimary) 50%);
-    transition: background-position 2000ms cubic-bezier(0, 0, 0, 1), box-shadow 200ms;
 }
 
-#modal-language[open] {
+#modal-language[open]>.modal-inner {
     display: grid;
 }
 
-#modal-language[open]>h2 {
+#modal-language[open]>.modal-inner>h2 {
     margin-bottom: 10px;
 }
 
@@ -125,25 +120,31 @@ export default {
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: stretch;
+    justify-content: stretch;
     width: 100%;
+}
+.language-item-container>* {
+    height: 100%;
 }
 
 .language-item-container>*:first-child {
     flex: 1;
 }
 
-.language-button {
-    display: flex;
+.language-details {
+    display: grid;
+    grid-template-columns: auto max-content 1fr;
+    overflow-x: hidden;
     align-items: center;
     gap: 12px;
 }
 
-.language-button>span:last-child {
+.language-details>span:last-child {
     opacity: 0;
     transition: opacity 200ms;
 }
 
-li:hover .language-button>span:last-child {
+li:hover .language-details>span:last-child {
     opacity: .4;
 }
 </style>

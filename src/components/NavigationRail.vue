@@ -9,8 +9,9 @@ import Icon from './Icon.vue';
 
 const navigationDetector1 = ref()
 const navigationDetector2 = ref()
-const isVisible1 = ref(false)
-const isVisible2 = ref(false)
+const isVisible1 = ref(true)
+const isVisible2 = ref(true)
+const collapsed = ref(document.documentElement.dataset.menuCollapsed)
 
 function onElementVisibility1(state) {
     isVisible1.value = state
@@ -35,9 +36,11 @@ if (window.innerWidth < 620) {
     <div class="navigation-detector" id="navigation-detector-2" ref="navigationDetector2"
         v-element-visibility="onElementVisibility2"></div>
     <div id="navigation-rail">
-        <Icon id="navigation-rail-collapser" :data-contrast="isVisible1" @click="menuCollapse('toggle')">menu</Icon>
-        <RouterLink :aria-label="$i18n('navigateHome')" role="navigation" to="/" id="navigation-rail-logo"
-            :data-contrast="isVisible1">
+        <Icon id="navigation-rail-collapser" :data-contrast="isVisible1" @click="menuCollapse('toggle')"
+            @keyup.enter="menuCollapse('toggle')" @keyup.space="menuCollapse('toggle')" aria-hidden="false" tabindex="0">
+            {{ collapsed ? 'yes' : 'menu' }}</Icon>
+        <RouterLink aria-hidden="false" tabindex="0" :aria-label="$i18n('navigateHome')" role="navigation" to="/"
+            id="navigation-rail-logo" :data-contrast="isVisible1">
             <Logo aria-hidden="true" @click="router.push('/')" transparent fill="monochrome" />
         </RouterLink>
         <CollectionVertical role="menubar" id="navigation-rail-controls" :data-contrast="isVisible2">
@@ -84,14 +87,30 @@ if (window.innerWidth < 620) {
 #navigation-rail-collapser {
     display: none;
     color: var(--fgSecondary);
+    background-color: var(--bgPrimary);
     text-align: center;
+    line-height: 40px;
     height: 40px;
     grid-row: hamburger-start / logo-start;
-    transition: color 200ms;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: color 200ms, background-color 200ms, translate 200ms, box-shadow 200ms;
+}
+
+:root[data-menu-collapsed=true] #navigation-rail-collapser {
+    translate: -10px -20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+#navigation-rail-collapser:focus-visible {
+    color: var(--accentDark);
+    background-color: var(--accentVeryLight);
+    outline: none;
 }
 
 :root[data-menu-collapsed] #navigation-rail-collapser {
-    display: block;pointer-events: auto;
+    display: block;
+    pointer-events: auto;
     grid-row: hamburger-start / logo-start;
 }
 
@@ -113,18 +132,33 @@ if (window.innerWidth < 620) {
 
 #navigation-rail-logo {
     grid-row: logo-start / nav-start;
+    color: var(--fgSecondary);
+    border-radius: 6px;
+    height: 40px;
+    transition: color 200ms, background-color 200ms, translate 200ms;
+}
+
+:root[data-menu-collapsed] #navigation-rail-logo {
+    margin-top: 12px;
 }
 
 #navigation-rail-logo svg {
     width: 100%;
     padding: 5px;
     box-sizing: border-box;
-    color: var(--fgSecondary);
+}
+
+#navigation-rail-logo:focus-visible {
+    color: var(--accentDark) !important;
+    background-color: var(--accentVeryLight) !important;
 }
 
 :root:not([data-menu-collapsed=false]) #navigation-rail-collapser[data-contrast=true],
-:root:not([data-menu-collapsed]) #navigation-rail-logo[data-contrast=true] svg {
+:root:not([data-menu-collapsed]) #navigation-rail-logo[data-contrast=true] {
     color: var(--fgContrast);
+    background-color: transparent;
+    translate: 0;
+    box-shadow: none;
 }
 
 #navigation-rail-controls {
