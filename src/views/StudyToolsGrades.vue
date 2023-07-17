@@ -109,8 +109,9 @@ function excludeSubject(i) {
     excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
 }
 
-function invertSubjectSelection() {
-    list.value.forEach((e, i) => {
+function invertSubjectSelection(override) {
+    if (override) excludedSubjects.value.clear()
+    else list.value.forEach((e, i) => {
         excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
     })
 }
@@ -184,25 +185,25 @@ function median(valueArray = []) {
 
     <section ref="grades" id="grades" class="full max-full">
         <Heading2 icon="summarize">Cijferoverzicht</Heading2>
-        <CollectionHorizontal id="grade-actions" wrap class="no-row-gap">
-            <Button id="aside-toggler" role="checkbox" class="secondary" title="Zijbalk weergeven of verbergen"
-                icon="dock_to_left" :aria-checked="asideVisible" @click="asideVisible = !asideVisible">Zijbalk</Button>
-            <Button icon="remove_selection" class="secondary" title="Selectie legen" @click="invertSubjectSelection()"
-                v-if="list.length > 0 && excludedSubjects.size === 0">
-                Selectie legen
+        <TransitionGroup name="horizontal" tag="div" class="collection-horizontal no-row-gap wrap" id="grade-actions">
+            <Button key="aside-toggler" role="checkbox" class="secondary" title="Zijpaneel weergeven of verbergen"
+                icon="dock_to_left" :aria-checked="asideVisible" @click="asideVisible = !asideVisible">Zijpaneel</Button>
+            <Button key="select-empty" icon="check_box_outline_blank" class="secondary" title="Alles deselecteren"
+                @click="invertSubjectSelection()" v-if="list.length > 0 && excludedSubjects.size === 0">
+                Alles deselecteren
             </Button>
-            <Button icon="select" class="secondary" title="Selectie vullen" @click="invertSubjectSelection()"
-                v-else-if="list.length > 0 && excludedSubjects.size === list.length">
-                Selectie vullen
+            <Button key="select-all" icon="select_check_box" class="secondary" title="Alles selecteren"
+                @click="invertSubjectSelection(true)" v-else-if="list.length > 0 && excludedSubjects.size > 0">
+                Alles selecteren
             </Button>
-            <Button icon="select" class="secondary" title="Selectie omkeren" @click="invertSubjectSelection()"
-                v-else-if="list.length > 0">
+            <Button key="select-invert" icon="indeterminate_check_box" class="secondary" title="Selectie omkeren"
+                @click="invertSubjectSelection()" v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length">
                 Selectie omkeren
             </Button>
-            <Button icon="upload" :title="$i18n('Import grades')" @click="input.click()" v-if="list.length < 1">{{
+            <Button key="import-big" icon="upload" :title="$i18n('Import grades')" @click="input.click()" v-if="list.length < 1">{{
                 $i18n('Import grades') }}</Button>
-            <Button icon="upload" class="secondary" :title="$i18n('Import grades')" @click="input.click()" v-else></Button>
-        </CollectionHorizontal>
+            <Button key="import-small" icon="upload" class="secondary" :title="$i18n('Import grades')" @click="input.click()" v-else></Button>
+        </TransitionGroup>
 
         <div ref="container" id="container" :class="asideVisible ? '' : 'hide-aside'">
 
@@ -223,8 +224,8 @@ function median(valueArray = []) {
                             <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
                                 :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
                                 @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
-                                @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'select'
-                                    : 'remove_selection' }}
+                                @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank'
+                                    : 'select_check_box' }}
                             </Icon>
                         </td>
                     </tr>
@@ -427,6 +428,7 @@ function median(valueArray = []) {
 }
 
 #grade-actions {
+    position: relative;
     grid-area: actions;
 }
 
@@ -680,12 +682,16 @@ td.grade.gemiddeldecolumn {
 .list-leave-active,
 .aside-move,
 .aside-enter-active,
-.aside-leave-active {
+.aside-leave-active,
+.horizontal-move,
+.horizontal-enter-active,
+.horizontal-leave-active {
     transition: all 200ms ease;
 }
 
 .list-leave-active,
-.aside-leave-active {
+.aside-leave-active,
+.horizontal-leave-active {
     position: absolute;
 }
 
@@ -702,6 +708,13 @@ td.grade.gemiddeldecolumn {
     translate: 0 -25%;
 }
 
+.horizontal-enter-from,
+.horizontal-leave-to {
+    opacity: 0;
+    scale: .5 1;
+    translate: 25%;
+}
+
 @media (max-width: 620px) {
     #grades {
         display: grid;
@@ -711,4 +724,5 @@ td.grade.gemiddeldecolumn {
             'content' 1fr
             / 1fr;
     }
-}</style>
+}
+</style>
