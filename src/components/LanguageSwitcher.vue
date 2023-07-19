@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref } from 'vue';
-import { setCookie, getCookie } from "typescript-cookie";
+import { computed, ref, inject } from 'vue';
+import { useRouter, useRoute } from 'vue-router'
 
 import Icon from './Icon.vue';
 import Modal from './Modal.vue';
@@ -8,40 +8,23 @@ import Button from './Button.vue';
 import Heading2 from './Heading2.vue';
 
 import CollectionHorizontal from './CollectionHorizontal.vue';
+
+const router = useRouter()
+const route = useRoute()
+
 const modal = ref()
 
-let languages = ref([{ languageId: 'en', localisedName: 'English', defaultName: 'English', translationProgress: 100, approvalProgress: 100 }]),
-    currentLanguage = ref(getCookie('language'))
+let allMeta = ref(inject('meta'))
+let currentLanguage = ref(inject('language'))
 
-getLanguages()
+// Remove English for now, so that it can be added at the top later
+let meta = computed(() => {
+    return (({ en, ...o }) => o)(allMeta.value)
+})
 
-async function getLanguages() {
-    const langNamesDefault = new Intl.DisplayNames([], { type: "language", fallback: "none", languageDisplay: 'standard' }),
-        res = await fetch(`https://raw.githubusercontent.com/QkeleQ10/Localisation/master/availableLanguages.json`),
-        resJson = await res.json()
-
-    resJson.data.forEach(l => {
-        let id = l.data.languageId,
-            langNamesLocalised = new Intl.DisplayNames(
-                [id || 'en'],
-                { type: "language", fallback: "none", languageDisplay: 'standard' }
-            ),
-            obj = {
-                localisedName: (langNamesLocalised.of(id) || langNamesDefault.of(id) || id).initial(),
-                defaultName: (langNamesDefault.of(id) || id).initial()
-            }
-        return languages.value.push({ ...l.data, ...obj })
-    })
-}
-
-function setLanguage(language) {
-    currentLanguage.value = language
-    setCookie('language', language, { expires: 10000 })
+function applyLanguage() {
     window.location.reload()
-}
-
-String.prototype.initial = function () {
-    return this.charAt(0).toUpperCase() + this.slice(1)
+    modal.value.dismissModal()
 }
 </script>
 
@@ -61,30 +44,32 @@ export default {
     <Modal class="dock-left" id="modal-language" ref="modal">
         <Heading2 icon="language" class="modal-title"> {{ $i18n('selectLanguage') }} </Heading2>
         <ul id="language-list">
-            <li v-for="(language, i) in languages" v-show="language.translationProgress > 20" class="language-item"
-                :style="{ '--animation-order': i }">
+            <!-- {{ $changeLanguage('fr') }} -->
+            <li v-for="(language, key, i) in { en: allMeta.en, ...meta }" v-show="language.translationProgress > 20"
+                class="language-item" :style="{ '--animation-order': i }">
                 <div class="language-item-container">
-                    <Button class="secondary left" :aria-label="language.defaultName"
-                        :title="$i18n('changeLanguageTooltip', { language: language.defaultName })"
+                    <Button class="secondary left" :aria-label="language.languageName" :title="language.languageName"
                         :id="'language-option-' + language.languageId" :key="language.languageId"
-                        :active="currentLanguage === language.languageId" @click="setLanguage(language.languageId)">
+                        :active="currentLanguage === language.languageId"
+                        @click="$changeLanguage(language.languageId); currentLanguage = language.languageId; applyLanguage()">
                         <div class="language-details">
                             <img :src="`https://raw.githubusercontent.com/QkeleQ10/http-resources/main/flags/${language.languageId}.png`"
-                                width="26" height="26" :alt="language.defaultName" aria-hidden="true">
-                            <span>{{ language.localisedName }}</span>
-                            <span>{{ language.defaultName }}</span>
-                            <span>{{ Number(language.translationProgress / 100).toLocaleString(currentLanguage,
-                                { style: 'percent' }) }}</span>
+                                width="26" height="26" :alt="language.languageName" aria-hidden="true">
+                            <span>{{ language.languageName }}</span>
+                            <span>{{ $i18n('translationProgress', {
+                                percentage: Number(language.translationProgress /
+                                    100).toLocaleString(currentLanguage, { style: 'percent' })
+                            }) }}</span>
                         </div>
                     </Button>
                     <Button v-show="language.translationProgress < 100" class="secondary insignificant" icon="edit"
                         :active="currentLanguage === language.languageId" :filled="currentLanguage === language.languageId"
-                        :title="$i18n('helpTranslateLanguage', { language: language.defaultName, progress: Number(language.translationProgress / 100).toLocaleString(currentLanguage, { style: 'percent' }) })"
+                        :title="$i18n('helpTranslate')"
                         :href="`https://crowdin.com/project/QkeleQ10/${language.languageId}`"></Button>
                 </div>
             </li>
         </ul>
-        <CollectionHorizontal class="wrap no-row-gap align-right" :style="{ '--animation-order': languages.length }">
+        <CollectionHorizontal class="wrap no-row-gap align-right" :style="{ '--animation-order': meta.length }">
             <Button class="secondary" icon="edit" href="https://crowdin.com/project/QkeleQ10/">
                 {{ $i18n('helpTranslate') }}</Button>
             <Button class="primary" icon="close" @click="modal.dismissModal()">
