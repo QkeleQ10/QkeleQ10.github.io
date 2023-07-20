@@ -15,19 +15,19 @@ h1 {
     color: var(--fgContrast);
 }
 
-@media (max-width: 1300px) {
+@media (width <= 1300px) {
     h1 {
         font-size: 6rem;
     }
 }
 
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
     h1 {
         font-size: 4.5rem;
     }
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     h1 {
         font-size: 3rem;
     }

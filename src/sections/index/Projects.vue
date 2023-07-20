@@ -64,7 +64,7 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
         / 1fr 1fr 1fr;
 }
 
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
     #projects>.sectionGrid {
         grid-template:
             'a1 a2' auto
@@ -74,7 +74,7 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
     }
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     #projects>.sectionGrid {
         grid-template:
             'a1' auto

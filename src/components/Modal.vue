@@ -48,7 +48,7 @@ dialog {
     background-color: transparent;
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     dialog {
         min-width: 85vw;
         max-width: none;

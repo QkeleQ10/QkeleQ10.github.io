@@ -35,13 +35,13 @@ h2>.icon {
     color: var(--fgPrimary);
 }
 
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
     h2 {
         font-size: 2.5rem;
     }
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     h2 {
         font-size: 1.75rem;
     }

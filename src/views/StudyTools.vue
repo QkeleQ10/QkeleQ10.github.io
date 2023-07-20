@@ -205,7 +205,7 @@ const installation = ref()
         / 1fr 1fr 1fr 1fr;
 }
 
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
     #st>#installation>.sectionGrid {
         grid-template:
             'a1 a1' auto
@@ -230,7 +230,7 @@ const installation = ref()
     }
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     #st>#installation>.sectionGrid {
         grid-template:
             'a1' auto

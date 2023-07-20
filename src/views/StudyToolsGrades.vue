@@ -714,7 +714,7 @@ td.grade.gemiddeldecolumn {
     translate: 25%;
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     #grades {
         display: grid;
         grid-template:

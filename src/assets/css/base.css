@@ -1,4 +1,5 @@
 @import url("colors.css");
+
 :root {
     --font1: "Work Sans", arial, sans-serif;
     --font2: "Inter", arial, sans-serif;
@@ -120,10 +121,15 @@ footer {
     color: var(--fgSecondary);
 }
 
-@media (hover: none) {
+/* At least one of these gotta work, right? */
+@media (hover: none),
+(width <=620px),
+(pointer:none),
+(pointer:coarse),
+(any-pointer: coarse) {
     html {
-            scroll-snap-type: none;
-        }
+        scroll-snap-type: none;
+    }
 }
 
 @keyframes fadeIn {

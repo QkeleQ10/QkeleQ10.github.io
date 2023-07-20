@@ -72,7 +72,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 }
 
 
-@media (max-width: 1100px) {
+@media (width <= 1100px) {
     #localisation>.sectionGrid {
         grid-template:
             'a1 a2' auto
@@ -82,7 +82,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
     }
 }
 
-@media (max-width: 620px) {
+@media (width <= 620px) {
     #localisation>.sectionGrid {
         grid-template:
             'a1' auto
