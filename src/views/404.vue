@@ -4,7 +4,6 @@ import { useThemeStore } from '../stores/theme'
 import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Icon from '@/components/Icon.vue';
-import Heading1 from '@/components/Heading1.vue';
 
 useMeta({ title: "Study Tools" })
 
@@ -17,18 +16,17 @@ const { x, y, sourceType } = useMouse(),
 
 <template>
     <main>
-        <Teleport to="#hero">
-            <div id="error"
-                :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-                <Heading1 class="section-title">Oops.</Heading1>
-                <p>This page doesn't exist.</p>
-                <RouterLink to="/">
-                    <Button icon="home" class="">Main page</Button>
-                </RouterLink>
-            </div>
-            <Icon
-                :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
-                warning</Icon>
+        <Teleport to="#hero-title">Oops</Teleport>
+        <Teleport to="#hero-description">
+            This page doesn't exist.
+        </Teleport>
+        <Teleport to="#hero-buttons">
+            <RouterLink to="/">
+                <Button icon="home" class="hero">Main page</Button>
+            </RouterLink>
+        </Teleport>
+        <Teleport to="#hero-icon">
+            <Icon>warning</Icon>
         </Teleport>
     </main>
 </template>

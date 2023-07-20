@@ -13,8 +13,6 @@ import imageToday from '@/assets/images/studytools/today.webp'
 import imageStudyguide from '@/assets/images/studytools/studyguide.webp'
 import imageGradecalculator from '@/assets/images/studytools/gradecalculator.webp'
 import imageGradebackup from '@/assets/images/studytools/gradebackup.webp'
-import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
-import Heading1 from '@/components/Heading1.vue'
 
 useMeta({ title: "Study Tools" })
 
@@ -28,26 +26,22 @@ const installation = ref()
 </script>
 
 <template>
-    <Teleport to="#hero">
-        <div
-            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <Heading1 class="section-title">Study Tools voor Magister</Heading1>
-            <p class="section-about">Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de
-                grootste
-                elektronische leeromgeving van Nederland.</p>
-        </div>
-        <CollectionHorizontal id="hero-buttons">
-            <Button icon="expand_more" class="hero" @click="installation.scrollIntoView({ behavior: 'smooth' })">{{
-                $i18n('getExtension') }}</Button>
-            <RouterLink to="/studytools/grades">
-                <Button icon="upload" class="hero">Cijferback-up</Button>
-            </RouterLink>
-            <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
-            <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
-        </CollectionHorizontal>
-        <Icon
-            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
-            school</Icon>
+    <Teleport to="#hero-title">Study Tools</Teleport>
+    <Teleport to="#hero-description">
+        Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de grootste elektronische leeromgeving van
+        Nederland.
+    </Teleport>
+    <Teleport to="#hero-buttons">
+        <Button icon="expand_more" class="hero" @click="installation.scrollIntoView({ behavior: 'smooth' })">{{
+            $i18n('getExtension') }}</Button>
+        <RouterLink to="/studytools/grades">
+            <Button icon="upload" class="hero">Cijferback-up</Button>
+        </RouterLink>
+        <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
+        <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
+    </Teleport>
+    <Teleport to="#hero-icon">
+        <Icon>school</Icon>
     </Teleport>
 
     <section ref="installation" id="installation" class="quarter">

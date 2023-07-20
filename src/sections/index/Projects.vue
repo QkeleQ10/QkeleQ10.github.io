@@ -8,7 +8,7 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
     <Heading2 icon="web">{{ $i18n('Projects') }}</Heading2>
     <div class="sectionGrid" role="list">
         <Card :image-src="studytoolsImage" image-alt="stats.fm" image-position>
-            <template #title>Study Tools voor Magister</template>
+            <template #title>Study Tools</template>
             <template #subtitle>{{ $i18n('Browser extension') }}</template>
             <template #content>{{ $i18n('studytoolsdesc') }}</template>
             <template #buttons>

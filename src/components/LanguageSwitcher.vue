@@ -9,21 +9,20 @@ import Heading2 from './Heading2.vue';
 
 import CollectionHorizontal from './CollectionHorizontal.vue';
 
-const router = useRouter()
-const route = useRoute()
-
 const modal = ref()
 
 let allMeta = ref(inject('meta'))
 let currentLanguage = ref(inject('language'))
+const changeLanguage = inject('changeLanguage')
 
 // Remove English for now, so that it can be added at the top later
 let meta = computed(() => {
     return (({ en, ...o }) => o)(allMeta.value)
 })
 
-function applyLanguage() {
-    window.location.reload()
+function applyLanguage(languageId) {
+    changeLanguage(languageId)
+    currentLanguage.value = languageId
     modal.value.dismissModal()
 }
 </script>
@@ -42,16 +41,16 @@ export default {
         </Button>
     </div>
     <Modal class="dock-left" id="modal-language" ref="modal">
-        <Heading2 icon="language" class="modal-title"> {{ $i18n('selectLanguage') }} </Heading2>
+        <Heading2 icon="language" class="modal-title"> {{ $i18n('Language') }} </Heading2>
         <ul id="language-list">
             <!-- {{ $changeLanguage('fr') }} -->
-            <li v-for="(language, key, i) in { en: allMeta.en, ...meta }" v-show="language.translationProgress > 20"
-                class="language-item" :style="{ '--animation-order': i }">
+            <li v-for="(language, key, i) in { en: allMeta.en, ...meta }"
+                v-show="language.translationProgress > 50 || currentLanguage === language.languageId" class="language-item"
+                :style="{ '--animation-order': i }">
                 <div class="language-item-container">
                     <Button class="secondary left" :aria-label="language.languageName" :title="language.languageName"
                         :id="'language-option-' + language.languageId" :key="language.languageId"
-                        :active="currentLanguage === language.languageId"
-                        @click="$changeLanguage(language.languageId); currentLanguage = language.languageId; applyLanguage()">
+                        :active="currentLanguage === language.languageId" @click="applyLanguage(language.languageId)">
                         <div class="language-details">
                             <img :src="`https://raw.githubusercontent.com/QkeleQ10/http-resources/main/flags/${language.languageId}.png`"
                                 width="26" height="26" :alt="language.languageName" aria-hidden="true">
@@ -62,14 +61,15 @@ export default {
                             }) }}</span>
                         </div>
                     </Button>
-                    <Button v-show="language.translationProgress < 100" class="secondary insignificant" icon="edit"
+                    <!-- <Button v-show="language.translationProgress < 100" class="secondary insignificant" icon="edit"
                         :active="currentLanguage === language.languageId" :filled="currentLanguage === language.languageId"
                         :title="$i18n('helpTranslate')"
-                        :href="`https://crowdin.com/project/QkeleQ10/${language.languageId}`"></Button>
+                        :href="`https://crowdin.com/project/QkeleQ10/${language.languageId}`"></Button> -->
                 </div>
             </li>
         </ul>
-        <CollectionHorizontal class="wrap no-row-gap align-right" :style="{ '--animation-order': meta.length }">
+        <CollectionHorizontal class="wrap no-row-gap align-right"
+            :style="{ '--animation-order': Object.keys(meta).length }">
             <Button class="secondary" icon="edit" href="https://crowdin.com/project/QkeleQ10/">
                 {{ $i18n('helpTranslate') }}</Button>
             <Button class="primary" icon="close" @click="modal.dismissModal()">

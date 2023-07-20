@@ -46,12 +46,13 @@ window.addEventListener("resize", () => {
     <div class="navigation-detector" id="navigation-detector-2" ref="navigationDetector2"
         v-element-visibility="onElementVisibility2"></div>
     <div id="navigation-rail">
-        <Icon id="navigation-rail-collapser" :data-contrast="isVisible2" @click="menuCollapse('toggle')"
+        <a id="navigation-rail-collapser" :data-contrast="isVisible2" @click="menuCollapse('toggle')"
             @keyup.enter="menuCollapse('toggle')" @keyup.space="menuCollapse('toggle')" aria-hidden="false" tabindex="0">
-            {{ collapsed ? 'menu' : 'close' }}</Icon>
+            <Icon>{{ collapsed ? 'menu' : 'close' }}</Icon>
+        </a>
         <RouterLink aria-hidden="false" tabindex="0" :aria-label="$i18n('navigateHome')" role="navigation" to="/"
             id="navigation-rail-logo" :data-contrast="isVisible1">
-            <Logo aria-hidden="true" @click="router.push('/')" transparent fill="monochrome" />
+            <Logo />
         </RouterLink>
         <CollectionVertical role="menubar" id="navigation-rail-controls" :data-contrast="isVisible2">
             <ThemeSwitcher />
@@ -108,6 +109,37 @@ window.addEventListener("resize", () => {
     transition: color 200ms, background-color 200ms, translate 200ms, box-shadow 200ms;
 }
 
+#navigation-rail-collapser>.icon {
+    transition: rotate 200ms;
+}
+
+:root[data-menu-collapsed] #navigation-rail-collapser {
+    display: flex;
+    place-content: center;
+    place-items: center;
+    pointer-events: auto;
+    grid-row: hamburger-start / logo-start;
+}
+
+:root[data-menu-collapsed=true] #navigation-rail-collapser {
+    translate: -10px -20px;
+    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+:root[data-menu-collapsed=false] #navigation-rail-collapser>.icon {
+    rotate: 180deg;
+}
+
+#navigation-rail-collapser:focus-visible {
+    color: var(--accentDark) !important;
+    background-color: var(--accentVeryLight) !important;
+    outline: none !important;
+}
+
+#navigation-rail-dismiss {
+    opacity: 0;
+}
+
 :root[data-menu-collapsed] #navigation-rail-dismiss {
     position: fixed;
     top: 0;
@@ -117,7 +149,6 @@ window.addEventListener("resize", () => {
     z-index: 9998;
     pointer-events: none;
     background-color: var(--bgContrast);
-    opacity: 0;
     transition: opacity 200ms;
 }
 
@@ -126,22 +157,6 @@ window.addEventListener("resize", () => {
     opacity: .5;
 }
 
-:root[data-menu-collapsed=true] #navigation-rail-collapser {
-    translate: -10px -20px;
-    box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.25);
-}
-
-#navigation-rail-collapser:focus-visible {
-    color: var(--accentDark);
-    background-color: var(--accentVeryLight);
-    outline: none;
-}
-
-:root[data-menu-collapsed] #navigation-rail-collapser {
-    display: block;
-    pointer-events: auto;
-    grid-row: hamburger-start / logo-start;
-}
 
 :root[data-menu-collapsed] #navigation-rail {
     padding-right: 22px;

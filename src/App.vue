@@ -15,7 +15,7 @@ useMeta({
     </metainfo>
     <NavigationRail />
     <main>
-        <section id="hero"></section>
+        <Hero />
         <router-view>
         </router-view>
     </main>

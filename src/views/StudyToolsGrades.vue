@@ -9,9 +9,8 @@ import Heading2 from '@/components/Heading2.vue'
 import Metric from '@/components/Metric.vue'
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
-import Heading1 from '@/components/Heading1.vue'
 
-useMeta({ title: "Cijferback-up" })
+useMeta({ title: "Cijferback-up | Study Tools" })
 
 const theme = useThemeStore()
 theme.setScheme('st')
@@ -167,20 +166,17 @@ function median(valueArray = []) {
 </script>
 
 <template>
-    <Teleport to="#hero">
-        <div
-            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <Heading1 class="section-title">Cijferback-up</Heading1>
-            <p class="section-about">Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.</p>
-        </div>
-        <CollectionHorizontal id="hero-buttons">
-            <Button icon="upload" class="hero" @click="input.click()">{{ $i18n('Import grades') }}</Button>
-            <input type="file" accept="application/JSON" @change="fileChanged"
-                @input="grades.scrollIntoView({ behavior: 'smooth' })" ref="input" id="input" style="display: none;">
-        </CollectionHorizontal>
-        <Icon
-            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
-            school</Icon>
+    <Teleport to="#hero-title">Cijferback-up</Teleport>
+    <Teleport to="#hero-description">
+        Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.
+    </Teleport>
+    <Teleport to="#hero-buttons">
+        <Button icon="upload" class="hero" @click="input.click()">{{ $i18n('Import grades') }}</Button>
+        <input type="file" accept="application/JSON" @change="fileChanged"
+            @input="grades.scrollIntoView({ behavior: 'smooth' })" ref="input" id="input" style="display: none;">
+    </Teleport>
+    <Teleport to="#hero-icon">
+        <Icon>school</Icon>
     </Teleport>
 
     <section ref="grades" id="grades" class="full max-full">
@@ -197,12 +193,15 @@ function median(valueArray = []) {
                 Alles selecteren
             </Button>
             <Button key="select-invert" icon="indeterminate_check_box" class="secondary" title="Selectie omkeren"
-                @click="invertSubjectSelection()" v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length">
+                @click="invertSubjectSelection()"
+                v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length">
                 Selectie omkeren
             </Button>
-            <Button key="import-big" icon="upload" :title="$i18n('Import grades')" @click="input.click()" v-if="list.length < 1">{{
-                $i18n('Import grades') }}</Button>
-            <Button key="import-small" icon="upload" class="secondary" :title="$i18n('Import grades')" @click="input.click()" v-else></Button>
+            <Button key="import-big" icon="upload" :title="$i18n('Import grades')" @click="input.click()"
+                v-if="list.length < 1">{{
+                    $i18n('Import grades') }}</Button>
+            <Button key="import-small" icon="upload" class="secondary" :title="$i18n('Import grades')"
+                @click="input.click()" v-else></Button>
         </TransitionGroup>
 
         <div ref="container" id="container" :class="asideVisible ? '' : 'hide-aside'">

@@ -1,41 +1,31 @@
 <script setup>
 import { useThemeStore } from '../stores/theme'
 import { ref } from 'vue'
-import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Localisation from '@/sections/index/Localisation.vue'
 import Projects from '@/sections/index/Projects.vue'
 import Logo from '@/components/Logo.vue';
-import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
-import Heading1 from '@/components/Heading1.vue'
 
 const theme = useThemeStore()
 theme.setScheme('normal')
-
-const { x, y, sourceType } = useMouse(),
-    { width, height } = useWindowSize()
 
 const projects = ref()
 </script>
 
 <template>
-    <Teleport to="#hero">
-        <div
-            :style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }">
-            <Heading1 class="section-title">{{ $i18n('heroTitle') }}</Heading1>
-            <p class="section-about">{{ $i18n('aboutme') }}</p>
-        </div>
-        <CollectionHorizontal id="hero-buttons">
-            <Button icon="expand_more" class="hero" @click="projects.scrollIntoView({ behavior: 'smooth' })">{{
-                $i18n('Projects') }}</Button>
-            <Button icon="groups" class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
-            <Button icon="code" class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
-            <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
-            <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
-            <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
-        </CollectionHorizontal>
-        <Logo transparent fill="monochrome"
-            :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }" />
+    <Teleport to="#hero-title">{{ $i18n('heroTitle') }}</Teleport>
+    <Teleport to="#hero-description">{{ $i18n('aboutme') }}</Teleport>
+    <Teleport to="#hero-buttons">
+        <Button icon="expand_more" class="hero" @click="projects.scrollIntoView({ behavior: 'smooth' })">{{
+            $i18n('Projects') }}</Button>
+        <Button icon="groups" class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
+        <Button icon="code" class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
+        <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
+        <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
+        <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
+    </Teleport>
+    <Teleport to="#hero-icon">
+        <Logo />
     </Teleport>
 
     <section id="projects" ref="projects">

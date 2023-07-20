@@ -28,15 +28,65 @@ defineExpose({
         <div class="modal-inner">
             <slot></slot>
         </div>
+        <div class="modal-background"></div>
     </dialog>
 </template>
 
 <style>
-dialog[open] {
-    padding: 0;
-    border: none;
+dialog {
+    position: fixed;
+    left: 0;
+    height: calc(100dvh - 64px);
     min-height: 100dvh;
     max-height: 100dvh;
+    min-width: 450px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    margin-right: 64px;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+@media (max-width: 620px) {
+    dialog {
+        min-width: 85vw;
+        max-width: none;
+    }
+}
+
+dialog[open] {
+    animation: modal-shadow-open 200ms both;
+}
+
+dialog.closing {
+    animation: modal-shadow-close 200ms both;
+}
+
+dialog::backdrop {
+    background-color: var(--bgContrast);
+    opacity: .5;
+}
+
+dialog[open]::backdrop {
+    animation: modal-backdrop-open 500ms both;
+}
+
+dialog.closing::backdrop {
+    animation: modal-backdrop-close 200ms both;
+}
+
+dialog[open]>.modal-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bgPrimary);
+    z-index: -1;
+    animation: modal-background-open 250ms both;
+}
+
+dialog.closing>.modal-background {
+    animation: modal-background-close 200ms both;
 }
 
 dialog[open]>.modal-inner {
@@ -46,81 +96,69 @@ dialog[open]>.modal-inner {
     box-sizing: border-box;
 }
 
-dialog::backdrop {
-    background-color: var(--bgContrast);
-    opacity: .5;
-}
-
-dialog[open]::backdrop {
-    animation: modalBackdrop 500ms;
-}
-
-dialog.closing[open]::backdrop {
-    animation: closeModalBackdrop 200ms;
-}
-
-dialog.dock-left {
-    position: fixed;
-    left: 0;
-    height: calc(100dvh - 64px);
-    margin: 0;
-    margin-right: 64px;
-    overflow: hidden;
-    background-color: transparent;
-    background-size: 100% 200%;
-    background-image: linear-gradient(to bottom, transparent 50%, var(--bgPrimary) 50%);
-    transition: background-position 2000ms cubic-bezier(0, 0, 0, 1), box-shadow 200ms;
-    animation: dockedModal 250ms both;
-}
-
-dialog.dock-left[open]>.modal-inner>*,
-dialog.dock-left[open]>.modal-inner>ul>li {
-    animation: dockedModalContent 250ms both;
+dialog[open]>.modal-inner>*,
+dialog[open]>.modal-inner>ul>li {
+    animation: modal-content-open 250ms both;
     animation-delay: calc(var(--animation-order) * 7ms);
 }
 
-dialog.dock-left.closing {
-    animation: closeDockedModal 200ms both;
+dialog.closing[open]>.modal-inner>*,
+dialog.closing[open]>.modal-inner>ul>li {
+    animation: modal-content-close 200ms both;
 }
 
-dialog.dock-left.closing[open]>.modal-inner>*,
-dialog.dock-left.closing[open]>.modal-inner>ul>li {
-    animation: closeDockedModalContent 200ms both;
-}
-
-@keyframes modalBackdrop {
+@keyframes modal-backdrop-open {
     from {
         opacity: 0;
     }
 }
 
-@keyframes closeModalBackdrop {
+@keyframes modal-backdrop-close {
     to {
         opacity: 0;
     }
 }
 
-@keyframes dockedModal {
-    to {
-        background-position: 0 -100%;
-        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
-    }
-}
-
-@keyframes closeDockedModal {
+@keyframes modal-background-open {
     from {
-        background-position: 0 -100%;
+        top: -100vh;
+    }
+
+    to {
+        top: 0;
+    }
+}
+
+@keyframes modal-background-close {
+    from {
+        top: 0;
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    }
+
+    to {
+        top: -100vh;
+    }
+}
+
+@keyframes modal-shadow-open {
+    to {
         box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
     }
 }
 
-@keyframes dockedModalContent {
+@keyframes modal-shadow-close {
+    from {
+        box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
+    }
+}
+
+@keyframes modal-content-open {
     from {
         translate: -150%;
     }
 }
 
-@keyframes closeDockedModalContent {
+@keyframes modal-content-close {
     to {
         translate: -150%;
     }
