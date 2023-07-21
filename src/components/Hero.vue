@@ -94,6 +94,7 @@ const { x, y, sourceType } = useMouse(),
     color: var(--fgContrast);
     opacity: .1;
     pointer-events: none;
+    -webkit-user-select: none;
     user-select: none;
 }
 

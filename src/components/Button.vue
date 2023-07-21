@@ -27,6 +27,7 @@ export default {
 <style>
 a {
     display: block;
+    min-width: -moz-fit-content;
     min-width: fit-content;
     height: fit-content;
     text-decoration: none;

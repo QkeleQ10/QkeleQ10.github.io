@@ -5,7 +5,7 @@ import statsfmImage from '@/assets/images/statsfm.webp'
 </script>
 
 <template>
-    <Heading2 icon="language">{{ $i18n('Localisation') }}</Heading2>
+    <Heading2 icon="public">{{ $i18n('Localisation') }}</Heading2>
     <div class="sectionGrid" role="list">
         <Card :image-src="statsfmImage" image-alt="stats.fm" image-position>
             <template #title>stats.fm</template>

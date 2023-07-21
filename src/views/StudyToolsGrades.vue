@@ -25,7 +25,7 @@ const container = ref()
 let asideVisible = ref(window.innerWidth < 1000 ? false : true)
 let view = ref({
     meta: { state: true, title: "Details", icon: 'info', requiresOne: true },
-    stats: { state: true, title: "Statistieken", icon: 'monitoring', requiresOne: true, disallow: 'calculator' },
+    stats: { state: true, title: "Statistieken", icon: 'analytics', requiresOne: true, disallow: 'calculator' },
     calculator: { state: false, title: "Cijfercalculator", icon: 'calculate', requiresOne: true, disallow: 'stats' }
 })
 let list = ref([])
@@ -105,12 +105,14 @@ function flipViewState(key) {
 }
 
 function excludeSubject(i) {
+    console.log(i)
     excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
 }
 
 function invertSubjectSelection(override) {
     if (override) excludedSubjects.value.clear()
     else list.value.forEach((e, i) => {
+        if (i === 0) return
         excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
     })
 }
@@ -181,9 +183,11 @@ function median(valueArray = []) {
 
     <section ref="grades" id="grades" class="full max-full">
         <Heading2 icon="summarize">Cijferoverzicht</Heading2>
+        {{ excludedSubjects }} {{ list.length }}
         <TransitionGroup name="horizontal" tag="div" class="collection-horizontal no-row-gap wrap" id="grade-actions">
             <Button key="aside-toggler" role="checkbox" class="secondary" title="Zijpaneel weergeven of verbergen"
-                icon="dock_to_left" :aria-checked="asideVisible" @click="asideVisible = !asideVisible">Zijpaneel</Button>
+                :icon="asideVisible ? 'right_panel_close' : 'right_panel_open'" :filled="asideVisible"
+                :aria-checked="asideVisible" @click="asideVisible = !asideVisible">Zijpaneel</Button>
             <Button key="select-empty" icon="check_box_outline_blank" class="secondary" title="Alles deselecteren"
                 @click="invertSubjectSelection()" v-if="list.length > 0 && excludedSubjects.size === 0">
                 Alles deselecteren
@@ -194,7 +198,7 @@ function median(valueArray = []) {
             </Button>
             <Button key="select-invert" icon="indeterminate_check_box" class="secondary" title="Selectie omkeren"
                 @click="invertSubjectSelection()"
-                v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length">
+                v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length - 1">
                 Selectie omkeren
             </Button>
             <Button key="import-big" icon="upload" :title="$i18n('Import grades')" @click="input.click()"
@@ -222,9 +226,10 @@ function median(valueArray = []) {
                             </span>
                             <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
                                 :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
-                                @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
-                                @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i) ? 'check_box_outline_blank'
-                                    : 'select_check_box' }}
+                                :filled="!excludedSubjects.has(i)" @click="excludeSubject(i)"
+                                @keyup.enter="excludeSubject(i)" @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i)
+                                    ? 'crop_square'
+                                    : 'check_box' }}
                             </Icon>
                         </td>
                     </tr>
@@ -235,8 +240,8 @@ function median(valueArray = []) {
 
             <TransitionGroup name="aside" tag="div" id="aside">
                 <CollectionHorizontal id="view" key="view" gapless stretch uniform>
-                    <Button v-for="(value, key) in view" :icon="view[key].icon" role="checkbox" class="secondary"
-                        :aria-checked="view[key].state"
+                    <Button v-for="(value, key) in view" :icon="view[key].icon" :filled="view[key].state" role="checkbox"
+                        class="secondary" :aria-checked="view[key].state"
                         :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
                         @click="flipViewState(key)"></Button>
                 </CollectionHorizontal>
@@ -600,7 +605,7 @@ td.text>.icon {
     right: 8px;
     top: 50%;
     translate: 150% -50%;
-    transition: translate 200ms, color 200ms;
+    transition: translate 200ms, color 200ms, font-variation-settings 200ms;
     color: var(--fgTertiary);
     background: var(--tablePrimary);
     cursor: pointer;
@@ -714,7 +719,7 @@ td.grade.gemiddeldecolumn {
     translate: 25%;
 }
 
-@media (width <= 620px) {
+@media (width <=620px) {
     #grades {
         display: grid;
         grid-template:

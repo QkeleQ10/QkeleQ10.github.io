@@ -54,7 +54,7 @@ window.addEventListener("resize", () => {
             id="navigation-rail-logo" :data-contrast="isVisible1">
             <Logo />
         </RouterLink>
-        <CollectionVertical role="menubar" id="navigation-rail-controls" :data-contrast="isVisible2">
+        <CollectionVertical role="navigation" id="navigation-rail-controls" :data-contrast="isVisible2">
             <ThemeSwitcher />
             <LanguageSwitcher />
         </CollectionVertical>

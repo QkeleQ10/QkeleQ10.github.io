@@ -22,7 +22,7 @@ defineProps({
         <p class="card-content">
             <slot name="content"></slot>
         </p>
-        <CollectionHorizontal role="menubar" class="card-buttons">
+        <CollectionHorizontal class="card-buttons">
             <slot name="buttons"></slot>
         </CollectionHorizontal>
     </div>

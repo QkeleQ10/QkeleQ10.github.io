@@ -35,13 +35,17 @@ h2>.icon {
     color: var(--fgPrimary);
 }
 
-@media (width <= 1100px) {
+h2>.icon:hover {
+    font-variation-settings: 'FILL' 1;
+}
+
+@media (width <=1100px) {
     h2 {
         font-size: 2.5rem;
     }
 }
 
-@media (width <= 620px) {
+@media (width <=620px) {
     h2 {
         font-size: 1.75rem;
     }

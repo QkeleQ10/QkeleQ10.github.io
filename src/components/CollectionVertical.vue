@@ -15,7 +15,7 @@ export default {
 </script>
 
 <template>
-    <div class="collection-vertical" role="list" :data-stretch="stretch" v-if="hasContent()">
+    <div class="collection-vertical" :data-stretch="stretch" v-if="hasContent()">
         <slot></slot>
     </div>
 </template>

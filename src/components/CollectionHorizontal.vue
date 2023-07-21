@@ -18,7 +18,7 @@ export default {
 </script>
 
 <template>
-    <div class="collection-horizontal" role="list" :data-gapless="gapless" :data-stretch="stretch" :data-uniform="uniform"
+    <div class="collection-horizontal" :data-gapless="gapless" :data-stretch="stretch" :data-uniform="uniform"
         :data-wrap="wrap" v-if="hasContent()">
         <slot></slot>
     </div>

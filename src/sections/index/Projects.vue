@@ -5,7 +5,7 @@ import studytoolsImage from '@/assets/images/studytools/themes.webp'
 </script>
 
 <template>
-    <Heading2 icon="web">{{ $i18n('Projects') }}</Heading2>
+    <Heading2 icon="imagesearch_roller">{{ $i18n('Projects') }}</Heading2>
     <div class="sectionGrid" role="list">
         <Card :image-src="studytoolsImage" image-alt="stats.fm" image-position>
             <template #title>Study Tools</template>

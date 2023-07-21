@@ -12,6 +12,7 @@ defineProps({
 
 <style>
 .icon {
+    -webkit-user-select: none;
     user-select: none;
     font-variation-settings: 'FILL' 0;
     transition: font-variation-settings 200ms ease-out;
