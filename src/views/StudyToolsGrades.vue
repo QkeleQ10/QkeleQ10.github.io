@@ -105,7 +105,6 @@ function flipViewState(key) {
 }
 
 function excludeSubject(i) {
-    console.log(i)
     excludedSubjects.value.has(i) ? excludedSubjects.value.delete(i) : excludedSubjects.value.add(i)
 }
 
@@ -183,7 +182,6 @@ function median(valueArray = []) {
 
     <section ref="grades" id="grades" class="full max-full">
         <Heading2 icon="summarize">Cijferoverzicht</Heading2>
-        {{ excludedSubjects }} {{ list.length }}
         <TransitionGroup name="horizontal" tag="div" class="collection-horizontal no-row-gap wrap" id="grade-actions">
             <Button key="aside-toggler" role="checkbox" class="secondary" title="Zijpaneel weergeven of verbergen"
                 :icon="asideVisible ? 'right_panel_close' : 'right_panel_open'" :filled="asideVisible"
@@ -441,7 +439,7 @@ function median(valueArray = []) {
     display: grid;
     grid-template-columns: 1fr 300px;
     grid-template-rows: 100%;
-    gap: 1.5rem;
+    gap: 10px;
     overflow: hidden;
     transition: grid-template-columns 200ms, gap 200ms;
 }
@@ -558,6 +556,11 @@ function median(valueArray = []) {
 
 #table-wrapper {
     overflow: auto;
+}
+
+#container:not(.hide-aside) #table-wrapper {
+    padding-right: 10px;
+    border-right: 2px solid var(--bgSecondary);
 }
 
 table {
