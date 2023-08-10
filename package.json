@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "vite",
     "expose": "vite --host",
-    "build": "vue-tsc --noEmit && vite build && cd docs && copy index.html 404.html && copy index.html studytools.html && xcopy index.html studytools\\grades.html* && cd ...",
+    "build": "vue-tsc --noEmit && vite build && cd docs && copy index.html 404.html && copy index.html studytools.html && copy index.html graphic-design.html && xcopy index.html studytools\\grades.html* && cd ...",
     "preview": "vite preview --port 5050",
     "typecheck": "vue-tsc --noEmit"
   },

@@ -1,7 +1,6 @@
 <script setup>
 import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
-import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Icon from '@/components/Icon.vue';
 
@@ -9,9 +8,6 @@ useMeta({ title: "Study Tools" })
 
 const theme = useThemeStore()
 theme.setScheme('error')
-
-const { x, y, sourceType } = useMouse(),
-    { width, height } = useWindowSize()
 </script>
 
 <template>

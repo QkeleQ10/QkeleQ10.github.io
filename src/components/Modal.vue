@@ -123,7 +123,6 @@ dialog.closing[open]>.modal-inner>ul>li {
     from {
         top: -100vh;
     }
-
     to {
         top: 0;
     }
@@ -134,7 +133,6 @@ dialog.closing[open]>.modal-inner>ul>li {
         top: 0;
         box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.75);
     }
-
     to {
         top: -100vh;
     }

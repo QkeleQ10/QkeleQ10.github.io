@@ -1,6 +1,5 @@
 <script setup>
 import CollectionHorizontal from "./CollectionHorizontal.vue";
-import Scrollable from "./Scrollable.vue"
 
 defineProps({
     imageSrc: String,
@@ -84,6 +83,14 @@ defineProps({
     translate: -50% -50%;
     opacity: 0.1;
     transition: opacity 500ms cubic-bezier(.17, .25, 0, .77);
+}
+
+.card:not(:hover) .card-image[data-position=reverse-hover] {
+    opacity: 1 !important;
+}
+
+.card:has(.card-image[data-position=reverse-hover]):not(:hover)>* {
+    opacity: 0;
 }
 
 .card:hover .card-image[data-position=hover] {

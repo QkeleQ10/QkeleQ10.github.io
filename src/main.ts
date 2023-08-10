@@ -24,6 +24,7 @@ async function initialise() {
             history: createWebHistory(),
             routes: [
                 { path: "/", name: "Home", component: Home },
+                { path: "/graphic-design", name: "Graphic Design", component: () => import('./views/GraphicDesign.vue'), },
                 { path: "/studytools", name: "Study Tools", component: () => import('./views/StudyTools.vue'), alias: ['/extensions/studytools', '/extensions/studytools/update', '/extensions/studytools/download'] },
                 { path: "/studytools/grades", name: "Cijferback-up | Study Tools", component: () => import('./views/StudyToolsGrades.vue') },
                 { path: "/:pathMatch(.*)*", name: "Not Found", component: () => import('./views/404.vue') }

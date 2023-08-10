@@ -2,7 +2,6 @@
 import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
 import { ref, computed } from 'vue'
-import { useMouse, useWindowSize } from '@vueuse/core'
 
 import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
@@ -14,9 +13,6 @@ useMeta({ title: "Cijferback-up | Study Tools" })
 
 const theme = useThemeStore()
 theme.setScheme('st')
-
-const { x, y, sourceType } = useMouse(),
-    { width, height } = useWindowSize()
 
 const grades = ref()
 const input = ref()

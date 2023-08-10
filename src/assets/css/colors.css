@@ -2,6 +2,12 @@
     --hue: 209;
 }
 
+:root[data-color-scheme=graphic] {
+    --hue: 240;
+    --sat1: 30%;
+    --sat2: 20%;
+}
+
 :root[data-color-scheme=error] {
     --sat1: 0%;
     --sat2: 0%;
