@@ -31,7 +31,7 @@ h2>.icon {
     position: relative;
     translate: 0 11.5%;
     margin-right: 0.5em;
-    font-size: 1em;
+    --size: 48px;
     color: var(--fgPrimary);
 }
 
