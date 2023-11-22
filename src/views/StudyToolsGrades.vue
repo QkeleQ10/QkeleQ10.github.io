@@ -176,23 +176,23 @@ function median(valueArray = []) {
         <Icon>school</Icon>
     </Teleport>
 
-    <section ref="grades" id="grades" class="full max-full">
-        <Heading2 icon="summarize">Cijferoverzicht</Heading2>
+    <section ref="grades" id="grades" :class="asideVisible ? 'full max-full' : 'full max-full hide-aside'">
+        <Heading2 icon="summarize" v-if="view.calculator.state">Cijfercalculator</Heading2>
+        <Heading2 icon="summarize" v-else>Cijferoverzicht</Heading2>
         <TransitionGroup name="horizontal" tag="div" class="collection-horizontal no-row-gap wrap" id="grade-actions">
-            <Button key="aside-toggler" role="checkbox" class="secondary" title="Zijpaneel weergeven of verbergen"
-                :icon="asideVisible ? 'right_panel_close' : 'right_panel_open'" :filled="asideVisible"
-                :aria-checked="asideVisible" @click="asideVisible = !asideVisible">Zijpaneel</Button>
-            <Button key="select-empty" icon="check_box_outline_blank" class="secondary" title="Alles deselecteren"
-                @click="invertSubjectSelection()" v-if="list.length > 0 && excludedSubjects.size === 0">
+            <Button key="select-empty" icon="deselect" class="secondary" title="Alles deselecteren"
+                @click="invertSubjectSelection()"
+                v-if="list.length > 0 && excludedSubjects.size === 0 && !view.calculator.state">
                 Alles deselecteren
             </Button>
-            <Button key="select-all" icon="select_check_box" class="secondary" title="Alles selecteren"
-                @click="invertSubjectSelection(true)" v-else-if="list.length > 0 && excludedSubjects.size > 0">
+            <Button key="select-all" icon="select_all" class="secondary" title="Alles selecteren"
+                @click="invertSubjectSelection(true)"
+                v-else-if="list.length > 0 && excludedSubjects.size > 0 && !view.calculator.state">
                 Alles selecteren
             </Button>
             <Button key="select-invert" icon="indeterminate_check_box" class="secondary" title="Selectie omkeren"
                 @click="invertSubjectSelection()"
-                v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length - 1">
+                v-if="list.length > 0 && excludedSubjects.size > 0 && excludedSubjects.size < list.length - 1 && !view.calculator.state">
                 Selectie omkeren
             </Button>
             <Button key="import-big" icon="upload" :title="$i18n('Import grades')" @click="input.click()"
@@ -200,215 +200,213 @@ function median(valueArray = []) {
                     $i18n('Import grades') }}</Button>
             <Button key="import-small" icon="upload" class="secondary" :title="$i18n('Import grades')"
                 @click="input.click()" v-else></Button>
+            <Button key="aside-toggler" role="checkbox" class="secondary" title="Zijpaneel weergeven of verbergen"
+                :icon="asideVisible ? 'right_panel_close' : 'right_panel_open'" :filled="asideVisible"
+                :aria-checked="asideVisible" @click="asideVisible = !asideVisible"></Button>
         </TransitionGroup>
 
-        <div ref="container" id="container" :class="asideVisible ? '' : 'hide-aside'">
+        <div id="table-wrapper">
+            <table>
+                <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
+                    <td v-for="(cell) in row" :class="cell.className" :key="cell.column">
+                        <span :tabindex="cell.result ? 1 : -1" role="button"
+                            :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
+                            :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
+                            :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
+                            :data-included="view.calculator.state && calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
+                            @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                            @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
+                            @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
+                            {{ cell.type === 'rowheader' ? cell.title : cell.result }}
+                        </span>
+                        <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
+                            :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
+                            :filled="!excludedSubjects.has(i)" @click="excludeSubject(i)" @keyup.enter="excludeSubject(i)"
+                            @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i)
+                                ? 'crop_square'
+                                : 'check_box' }}
+                        </Icon>
+                    </td>
+                </tr>
+            </table>
+            <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
+                de knop "{{ $i18n('Import grades') }}".</p>
+        </div>
 
-            <div id="table-wrapper">
-                <table>
-                    <tr v-for="(row, i) in list" :data-excluded="excludedSubjects.has(i)" :key="i">
-                        <td v-for="(cell) in row" :class="cell.className" :key="cell.column">
-                            <span :tabindex="cell.result ? 1 : -1" role="button"
-                                :aria-label="cell.result ? (`${(cell.className.includes('gemiddeldecolumn') ? 'Gemiddeld ' : '') + cell.result} voor ${row[0].title}. Titel: ${cell.title}. Kolom: ${cell.column}. Telt ${cell.weight} keer mee.`) : 'Lege cel'"
-                                :title="`${cell.result || 'Lege cel'}\n${cell.title || 'Geen kolomkop'}`"
-                                :data-current="currentlySelected.result === cell.result && currentlySelected.weight === cell.weight && currentlySelected.column === cell.column && currentlySelected.title === cell.title"
-                                :data-included="view.calculator.state && calculatorSelection.some(e => e.result === Number(String(cell.result).replace(',', '.')) && e.weight === Number(cell.weight) && e.column === cell.column && e.title === cell.title)"
-                                @click="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
-                                @keyup.enter="changeSelection(cell.result, cell.weight, cell.column, cell.title)"
-                                @keyup.space="changeSelection(cell.result, cell.weight, cell.column, cell.title)">
-                                {{ cell.type === 'rowheader' ? cell.title : cell.result }}
-                            </span>
-                            <Icon aria-hidden="false" role="button" v-if="cell.type === 'rowheader'" tabindex="1"
-                                :title="excludedSubjects.has(i) ? 'Weer aan selectie toevoegen' : 'Uit selectie verwijderen'"
-                                :filled="!excludedSubjects.has(i)" @click="excludeSubject(i)"
-                                @keyup.enter="excludeSubject(i)" @keyup.space="excludeSubject(i)">{{ excludedSubjects.has(i)
-                                    ? 'crop_square'
-                                    : 'check_box' }}
-                            </Icon>
-                        </td>
-                    </tr>
-                </table>
-                <p v-show="list.length === 0">Je cijferoverzicht zal hier verschijnen wanneer je deze hebt geüpload met
-                    de knop "{{ $i18n('Import grades') }}".</p>
-            </div>
-
-            <TransitionGroup name="aside" tag="div" id="aside">
-                <CollectionHorizontal id="view" key="view" gapless stretch uniform>
-                    <Button v-for="(value, key) in view" :icon="view[key].icon" :filled="view[key].state" role="checkbox"
-                        class="secondary" :aria-checked="view[key].state"
-                        :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
-                        @click="flipViewState(key)"></Button>
-                </CollectionHorizontal>
-                <Card id="meta" key="meta" v-if="view.meta.state" small>
-                    <template #title>Details</template>
-                    <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
-                        {{ importedDate }}</template>
-                    <template #content>
-                        <CollectionHorizontal stretch uniform wrap v-if="list.length > 0">
-                            <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
-                            <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight > 0 ?
-                                currentlySelected.weight + '×' : currentlySelected.weight === 0 ? 'formatief' : '?' }}
-                            </Metric>
-                            <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
-                            </Metric>
-                            <Metric description="Kolomkop" insignificant stretch>
-                                {{ currentlySelected.title || "Klik op een cijfer" }}
-                            </Metric>
-                        </CollectionHorizontal>
-                        <p v-else>Upload je cijfers om details te bekijken.</p>
-                    </template>
-                </Card>
-                <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
-                    <template #title>Statistieken</template>
-                    <template #content v-if="gradesArray.length > 0">
-                        <CollectionHorizontal stretch uniform wrap>
-                            <Metric description="Gemiddelde (excl. weging)">{{
-                                weightedMean(gradesArray)?.toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 3,
-                                    maximumFractionDigits: 3
-                                }) || '?' }}</Metric>
-                            <Metric description="Mediaan" insignificant>{{
-                                median(gradesArray)?.toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) || '?' }}</Metric>
-                            <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
-                            <Metric description="Voldoendes" insignificant
-                                :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                {{ gradesOkArray.length || "geen" }}</Metric>
-                            <Metric description="Onvoldoendes" insignificant
-                                :extra="gradesWarnArray.length ? (gradesWarnArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
-                                {{ gradesWarnArray.length || "geen" }}
-                            </Metric>
-                            <Metric description="Laagste cijfer" insignificant>{{
-                                Math.min(...gradesArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) }}</Metric>
-                            <Metric description="Hoogste cijfer" insignificant>{{
-                                Math.max(...gradesArray).toLocaleString('nl-NL', {
-                                    minimumFractionDigits: 1,
-                                    maximumFractionDigits: 1
-                                }) }}</Metric>
-                        </CollectionHorizontal>
-                        <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
-                        <div id="bar-chart">
-                            <div v-for="n in 10" :data-grade="n" :data-frequency="gradesFrequencyTable[n]"
-                                :data-percentage="Math.round(gradesFrequencyTable[n] / gradesArray.length * 100)"
-                                :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
-                            </div>
+        <TransitionGroup name="aside" tag="div" id="aside">
+            <CollectionHorizontal id="view" key="view" gapless stretch uniform>
+                <Button v-for="(value, key) in view" :icon="view[key].icon" :filled="view[key].state" role="checkbox"
+                    class="secondary" :aria-checked="view[key].state"
+                    :title="view[key].title + (view[key].state ? ` verbergen` : ` weergeven`)"
+                    @click="flipViewState(key)"></Button>
+            </CollectionHorizontal>
+            <Card id="meta" key="meta" v-if="view.meta.state" small>
+                <template #title>Details</template>
+                <template #subtitle v-if="importedDate && list.length > 0">Gegevens geïmporteerd uit back-up van
+                    {{ importedDate }}</template>
+                <template #content>
+                    <CollectionHorizontal stretch uniform wrap v-if="list.length > 0">
+                        <Metric description="Resultaat" stretch> {{ currentlySelected.result || '?' }} </Metric>
+                        <Metric description="Weegfactor" insignificant> {{ currentlySelected.weight > 0 ?
+                            currentlySelected.weight + '×' : currentlySelected.weight === 0 ? 'formatief' : '?' }}
+                        </Metric>
+                        <Metric description="Kolomnaam" insignificant> {{ currentlySelected.column || '?' }}
+                        </Metric>
+                        <Metric description="Kolomkop" insignificant stretch>
+                            {{ currentlySelected.title || "Klik op een cijfer" }}
+                        </Metric>
+                    </CollectionHorizontal>
+                    <p v-else>Upload je cijfers om details te bekijken.</p>
+                </template>
+            </Card>
+            <Card id="grade-stats" key="grade-stats" v-if="view.stats.state" small>
+                <template #title>Statistieken</template>
+                <template #content v-if="gradesArray.length > 0">
+                    <CollectionHorizontal stretch uniform wrap>
+                        <Metric description="Gemiddelde (excl. weging)">{{
+                            weightedMean(gradesArray)?.toLocaleString('nl-NL', {
+                                minimumFractionDigits: 3,
+                                maximumFractionDigits: 3
+                            }) || '?' }}</Metric>
+                        <Metric description="Mediaan" insignificant>{{
+                            median(gradesArray)?.toLocaleString('nl-NL', {
+                                minimumFractionDigits: 1,
+                                maximumFractionDigits: 1
+                            }) || '?' }}</Metric>
+                        <Metric description="Aantal" insignificant>{{ gradesArray.length }}</Metric>
+                        <Metric description="Voldoendes" insignificant
+                            :extra="gradesOkArray.length ? (gradesOkArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                            {{ gradesOkArray.length || "geen" }}</Metric>
+                        <Metric description="Onvoldoendes" insignificant
+                            :extra="gradesWarnArray.length ? (gradesWarnArray.length / gradesArray.length * 100).toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + '%' : ''">
+                            {{ gradesWarnArray.length || "geen" }}
+                        </Metric>
+                        <Metric description="Laagste cijfer" insignificant>{{
+                            Math.min(...gradesArray).toLocaleString('nl-NL', {
+                                minimumFractionDigits: 1,
+                                maximumFractionDigits: 1
+                            }) }}</Metric>
+                        <Metric description="Hoogste cijfer" insignificant>{{
+                            Math.max(...gradesArray).toLocaleString('nl-NL', {
+                                minimumFractionDigits: 1,
+                                maximumFractionDigits: 1
+                            }) }}</Metric>
+                    </CollectionHorizontal>
+                    <Metric id="bar-chart-title" description="Histogram (afgeronde behaalde cijfers)"></Metric>
+                    <div id="bar-chart">
+                        <div v-for="n in 10" :data-grade="n" :data-frequency="gradesFrequencyTable[n]"
+                            :data-percentage="Math.round(gradesFrequencyTable[n] / gradesArray.length * 100)"
+                            :style="`min-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%; max-height: ${(gradesFrequencyTable[n] / Math.max(...Object.values(gradesFrequencyTable)) * 100) || 0}%`">
                         </div>
-                    </template>
-                    <template #content v-else>
-                        Er zijn geen cijfers geselecteerd.
+                    </div>
+                </template>
+                <template #content v-else>
+                    Er zijn geen cijfers geselecteerd.
+                </template>
+            </Card>
+            <div id="calculator" key="calculator" v-if="view.calculator.state">
+                <Card id="calculator-added" small>
+                    <template #title>Toegevoegde cijfers</template>
+                    <template #content>
+                        <TransitionGroup name="list" tag="ul">
+                            <li v-for="(item, i) in calculatorSelection" :key="item.column" tabindex="1" role="button"
+                                @click="calculatorSelection.splice(i, 1)" @keyup.enter="calculatorSelection.splice(i, 1)"
+                                @keyup.space="calculatorSelection.splice(i, 1)">
+                                {{ `${item.result.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                })} (${item.weight}×) — ${item.column}, ${item.title}` }}
+                            </li>
+                            <p v-if="calculatorSelection.length < 1">
+                                Klik op de cijfers die je wilt toevoegen aan de berekening.
+                            </p>
+                        </TransitionGroup>
                     </template>
                 </Card>
-                <div id="calculator" key="calculator" v-if="view.calculator.state">
-                    <Card id="calculator-added" small>
-                        <template #title>Toegevoegde cijfers</template>
-                        <template #content>
-                            <TransitionGroup name="list" tag="ul">
-                                <li v-for="(item, i) in calculatorSelection" :key="item.column" tabindex="1" role="button"
-                                    @click="calculatorSelection.splice(i, 1)"
-                                    @keyup.enter="calculatorSelection.splice(i, 1)"
-                                    @keyup.space="calculatorSelection.splice(i, 1)">
-                                    {{ `${item.result.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    })} (${item.weight}×) — ${item.column}, ${item.title}` }}
-                                </li>
-                                <li v-if="calculatorSelection.length < 1">
-                                    Klik op de cijfers die je wilt toevoegen aan de berekening.
-                                </li>
-                            </TransitionGroup>
-                        </template>
-                    </Card>
-                    <Card id="calculator-result" small>
-                        <template #content>
-                            <CollectionHorizontal stretch uniform wrap>
-                                <Metric description="Gemiddelde (incl. weging)">{{
-                                    hypotheticalResultMean?.toLocaleString('nl-NL',
-                                        { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }}</Metric>
-                                <Metric description="Mediaan">{{
-                                    median(calculatorSelection.map(e => e.result))?.toLocaleString('nl-NL',
-                                        { minimumFractionDigits: 1, maximumFractionDigits: 1 }) || '?' }}</Metric>
-                            </CollectionHorizontal>
-                        </template>
-                    </Card>
-                    <Card id="calculator-chart" small>
-                        <template #title>Toekomstig cijfer</template>
-                        <template #subtitle>
-                            <TransitionGroup name="list">
-                                <span key="hovering-increase"
-                                    v-if="calculatorHovering.x && calculatorHovering.y.toFixed(2) > hypotheticalResultMean.toFixed(2)">
-                                    Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }} haalt, dan stijgt je gemiddelde tot een {{
+                <Card id="calculator-result" small>
+                    <template #content>
+                        <CollectionHorizontal stretch uniform wrap>
+                            <Metric description="Gemiddelde (incl. weging)">{{
+                                hypotheticalResultMean?.toLocaleString('nl-NL',
+                                    { minimumFractionDigits: 2, maximumFractionDigits: 2 }) || '?' }}</Metric>
+                            <Metric description="Mediaan">{{
+                                median(calculatorSelection.map(e => e.result))?.toLocaleString('nl-NL',
+                                    { minimumFractionDigits: 1, maximumFractionDigits: 1 }) || '?' }}</Metric>
+                        </CollectionHorizontal>
+                    </template>
+                </Card>
+                <Card id="calculator-chart" small>
+                    <template #title>Toekomstig cijfer</template>
+                    <template #subtitle>
+                        <TransitionGroup name="list">
+                            <span key="hovering-increase"
+                                v-if="calculatorHovering.x && calculatorHovering.y.toFixed(2) > hypotheticalResultMean.toFixed(2)">
+                                Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }} haalt, dan stijgt je gemiddelde tot een {{
     calculatorHovering.y.toLocaleString('nl-NL', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }) }}.
-                                </span>
-                                <span key="hovering-decrease"
-                                    v-else-if="calculatorHovering.x && calculatorHovering.y.toFixed(2) < hypotheticalResultMean.toFixed(2)">
-                                    Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }} haalt, dan zakt je gemiddelde tot een {{
+                            </span>
+                            <span key="hovering-decrease"
+                                v-else-if="calculatorHovering.x && calculatorHovering.y.toFixed(2) < hypotheticalResultMean.toFixed(2)">
+                                Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }} haalt, dan zakt je gemiddelde tot een {{
     calculatorHovering.y.toLocaleString('nl-NL', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }) }}.
-                                </span>
-                                <span key="hovering-same" v-else-if="calculatorHovering.x > 0">
-                                    Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }} haalt, dan blijf je gemiddeld een {{ calculatorHovering.y.toLocaleString('nl-NL',
+                            </span>
+                            <span key="hovering-same" v-else-if="calculatorHovering.x > 0">
+                                Als je een {{ calculatorHovering.x.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }} haalt, dan blijf je gemiddeld een {{ calculatorHovering.y.toLocaleString('nl-NL',
     {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     }) }} staan.
-                                </span>
-                                <span key="sufficient-guaranteed"
-                                    v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.x < 1.05">
-                                    Met een cijfer dat {{ hypotheticalWeight }}× meetelt blijf je in elk geval een voldoende
-                                    staan.
-                                </span>
-                                <span key="insufficient-guaranteed"
-                                    v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.y < 5.45">
-                                    Met een cijfer dat {{ hypotheticalWeight }}× meetelt kun je geen voldoende komen te
-                                    staan..
-                                </span>
-                                <span key="advice"
-                                    v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.x > 1.05">
-                                    Haal een {{ hypotheticalMinGrade.x.toLocaleString('nl-NL', {
-                                        minimumFractionDigits: 1,
-                                        maximumFractionDigits: 1
-                                    }) }} {{ hypotheticalMinGrade.x <= 9.95 ? "of hoger" : "" }} om een voldoende te {{
+                            </span>
+                            <span key="sufficient-guaranteed"
+                                v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.x < 1.05">
+                                Met een cijfer dat {{ hypotheticalWeight }}× meetelt blijf je in elk geval een voldoende
+                                staan.
+                            </span>
+                            <span key="insufficient-guaranteed"
+                                v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.y < 5.45">
+                                Met een cijfer dat {{ hypotheticalWeight }}× meetelt kun je geen voldoende komen te
+                                staan..
+                            </span>
+                            <span key="advice" v-else-if="calculatorSelection.length > 0 && hypotheticalMinGrade.x > 1.05">
+                                Haal een {{ hypotheticalMinGrade.x.toLocaleString('nl-NL', {
+                                    minimumFractionDigits: 1,
+                                    maximumFractionDigits: 1
+                                }) }} {{ hypotheticalMinGrade.x <= 9.95 ? "of hoger" : "" }} om een voldoende te {{
     hypotheticalResultMean >= 5.45 ? "blijven" : "komen" }} staan.
-                                </span>
-                                <span key="placeholder" v-else>
-                                    Zie hier wat je moet halen en wat je komt te staan.
-                                </span>
-                            </TransitionGroup>
-                        </template>
-                        <template #content>
-                            <input type="number" v-model="hypotheticalWeight" />
-                            <CollectionHorizontal stretch gapless @mouseleave="calculatorHovering = {}">
-                                <div v-for="item in hypotheticalPossibilities" class="grid-column"
-                                    :data-x="item.x.toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"
-                                    :data-y="item.y.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })"
-                                    @mouseenter="calculatorHovering = { x: item.x, y: item.y }">
-                                </div>
-                            </CollectionHorizontal>
-                        </template>
-                    </Card>
-                </div>
-            </TransitionGroup>
+                            </span>
+                            <span key="placeholder" v-else>
+                                Zie hier wat je moet halen en wat je komt te staan.
+                            </span>
+                        </TransitionGroup>
+                    </template>
+                    <template #content>
+                        <input type="number" v-model="hypotheticalWeight" />
+                        <CollectionHorizontal stretch gapless @mouseleave="calculatorHovering = {}">
+                            <div v-for="item in hypotheticalPossibilities" class="grid-column"
+                                :data-x="item.x.toLocaleString('nl-NL', { minimumFractionDigits: 1, maximumFractionDigits: 1 })"
+                                :data-y="item.y.toLocaleString('nl-NL', { minimumFractionDigits: 2, maximumFractionDigits: 2 })"
+                                @mouseenter="calculatorHovering = { x: item.x, y: item.y }">
+                            </div>
+                        </CollectionHorizontal>
+                    </template>
+                </Card>
+            </div>
+        </TransitionGroup>
 
-        </div>
     </section>
 </template>
 
@@ -418,11 +416,23 @@ function median(valueArray = []) {
 #grades {
     display: grid;
     grid-template:
-        'heading actions' auto
-        'content content' 1fr
-        / 1fr auto;
+        'heading actions aside' auto
+        'content content aside' 1fr
+        / 1fr auto 300px;
+    gap: 10px;
     max-height: 100vh;
     overflow: hidden;
+    transition: grid-template-columns 200ms, gap 200ms;
+}
+
+#grades.hide-aside {
+    grid-template-columns: 1fr auto 0px;
+    column-gap: 0;
+}
+
+#grades.hide-aside #aside {
+    opacity: 0;
+    pointer-events: none;
 }
 
 #grade-actions {
@@ -430,26 +440,17 @@ function median(valueArray = []) {
     grid-area: actions;
 }
 
-#container {
-    grid-area: content;
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    grid-template-rows: 100%;
-    gap: 10px;
-    overflow: hidden;
-    transition: grid-template-columns 200ms, gap 200ms;
-}
-
-#container.hide-aside {
-    grid-template-columns: 1fr 0px;
-    gap: 0;
+#grade-actions .button {
+    margin-top: 0;
 }
 
 #aside {
+    grid-area: aside;
     position: relative;
     width: 300px;
     overflow-y: auto;
     overflow-x: hidden;
+    transition: opacity 200ms;
 }
 
 #aside>* {
@@ -551,6 +552,7 @@ function median(valueArray = []) {
 }
 
 #table-wrapper {
+    grid-area: content;
     overflow: auto;
 }
 

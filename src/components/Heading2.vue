@@ -7,47 +7,56 @@ defineProps({
 </script>
 
 <template>
-    <h2>
+    <div class="h2">
         <Icon>{{ icon }}</Icon>
-        <slot></slot>
-    </h2>
+        <h2>
+            <slot></slot>
+        </h2>
+    </div>
 </template>
 
 <style>
-h2 {
-    font-size: 3rem;
+.h2 {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.5em;
+    height: 1em;
+    font-size: 36px;
 }
 
-h2:has(em) {
+.h2>h2 {
+    font-size: 1em;
+}
+
+.h2>h2:has(em) {
     color: var(--greyLight);
 }
 
-h2>em {
+.h2>h2>em {
     color: var(--fgPrimary);
     font-style: normal;
 }
 
-h2>.icon {
+.h2>.icon {
     position: relative;
-    translate: 0 11.5%;
-    margin-right: 0.5em;
-    --size: 48px;
+    --size: 1em;
     color: var(--fgPrimary);
 }
 
-h2>.icon:hover {
+.h2>.icon:hover {
     font-variation-settings: 'FILL' 1;
 }
 
 @media (width <=1100px) {
-    h2 {
-        font-size: 2.5rem;
+    .h2 {
+        font-size: 32px;
     }
 }
 
 @media (width <=620px) {
-    h2 {
-        font-size: 1.75rem;
+    .h2 {
+        font-size: 22px;
     }
 }
 </style>
