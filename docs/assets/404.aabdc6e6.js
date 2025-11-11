@@ -1,0 +1,1 @@
+import{q as t,u as s,o,c as _,f as e}from"./index.022612d5.js";const c={class:"centre"},n=e("h1",null,"Oops.",-1),a=e("p",null,"This page doesn't exist.",-1),r=[n,a],d={__name:"404",setup(l){return t({title:"Study Tools"}),s().setScheme("error"),(i,u)=>(o(),_("section",c,r))}};export{d as default};
