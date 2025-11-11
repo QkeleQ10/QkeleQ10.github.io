@@ -163,7 +163,7 @@ function median(valueArray = []) {
 </script>
 
 <template>
-    <Teleport to="#hero-title">Cijferback-up</Teleport>
+    <!-- <Teleport to="#hero-title">Cijferback-up</Teleport>
     <Teleport to="#hero-description">
         Importeer je eerder geback-upte cijferoverzicht met onderstaande knop.
     </Teleport>
@@ -174,7 +174,7 @@ function median(valueArray = []) {
     </Teleport>
     <Teleport to="#hero-icon">
         <Icon>school</Icon>
-    </Teleport>
+    </Teleport> -->
 
     <section ref="grades" id="grades" :class="asideVisible ? 'full max-full' : 'full max-full hide-aside'">
         <Heading2 icon="summarize" v-if="view.calculator.state">Cijfercalculator</Heading2>

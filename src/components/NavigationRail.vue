@@ -46,15 +46,15 @@ window.addEventListener("resize", () => {
     <div class="navigation-detector" id="navigation-detector-2" ref="navigationDetector2"
         v-element-visibility="onElementVisibility2"></div>
     <div id="navigation-rail">
-        <a id="navigation-rail-collapser" :data-contrast="isVisible2" @click="menuCollapse('toggle')"
+        <a id="navigation-rail-collapser"  @click="menuCollapse('toggle')"
             @keyup.enter="menuCollapse('toggle')" @keyup.space="menuCollapse('toggle')" aria-hidden="false" tabindex="0">
             <Icon>{{ collapsed ? 'menu' : 'close' }}</Icon>
         </a>
         <RouterLink aria-hidden="false" tabindex="0" :aria-label="$i18n('navigateHome')" role="navigation" to="/"
-            id="navigation-rail-logo" :data-contrast="isVisible1">
+            id="navigation-rail-logo" >
             <Logo />
         </RouterLink>
-        <CollectionVertical role="navigation" id="navigation-rail-controls" :data-contrast="isVisible2">
+        <CollectionVertical role="navigation" id="navigation-rail-controls" >
             <ThemeSwitcher />
             <LanguageSwitcher />
         </CollectionVertical>

@@ -11,20 +11,10 @@ theme.setScheme('error')
 </script>
 
 <template>
-    <main>
-        <Teleport to="#hero-title">Oops</Teleport>
-        <Teleport to="#hero-description">
-            This page doesn't exist.
-        </Teleport>
-        <Teleport to="#hero-buttons">
-            <RouterLink to="/">
-                <Button icon="home" class="hero">Main page</Button>
-            </RouterLink>
-        </Teleport>
-        <Teleport to="#hero-icon">
-            <Icon>warning</Icon>
-        </Teleport>
-    </main>
+    <section class="centre">
+        <h1>Oops.</h1>
+        <p>This page doesn't exist.</p>
+    </section>
 </template>
 
 <style>

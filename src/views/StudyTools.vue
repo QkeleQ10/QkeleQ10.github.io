@@ -22,7 +22,7 @@ const installation = ref()
 </script>
 
 <template>
-    <Teleport to="#hero-title">Study Tools</Teleport>
+    <!-- <Teleport to="#hero-title">Study Tools</Teleport>
     <Teleport to="#hero-description">
         Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de grootste elektronische leeromgeving van
         Nederland.
@@ -38,7 +38,7 @@ const installation = ref()
     </Teleport>
     <Teleport to="#hero-icon">
         <Icon>school</Icon>
-    </Teleport>
+    </Teleport> -->
 
     <section ref="installation" id="installation" class="quarter">
         <Heading2 icon="install_desktop">{{ $i18n('getExtension') }}</Heading2>

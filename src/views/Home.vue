@@ -13,30 +13,55 @@ const projects = ref()
 </script>
 
 <template>
-    <Teleport to="#hero-title">{{ $i18n('heroTitle') }}</Teleport>
-    <Teleport to="#hero-description">{{ $i18n('aboutme') }}</Teleport>
-    <Teleport to="#hero-buttons">
-        <Button icon="expand_more" class="hero" @click="projects.scrollIntoView({ behavior: 'smooth' })">{{
-            $i18n('Projects') }}</Button>
-        <Button icon="groups" class="hero" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
-        <Button icon="code" class="hero" href="https://github.com/QkeleQ10">GitHub</Button>
-        <Button class="hero" href="https://twitter.com/QkeleQ10">Twitter</Button>
-        <Button class="hero" href="https://crowdin.com/profile/QkeleQ10">Crowdin</Button>
-        <Button class="hero" href="https://premid.app/users/807917674477649943">PreMiD</Button>
-    </Teleport>
-    <Teleport to="#hero-icon">
-        <Logo />
-    </Teleport>
-
-    <section id="projects" ref="projects">
-        <Projects />
-    </section>
-
-    <section id="localisation" ref="localisation">
-        <Localisation />
+    <section class="centre">
+        <div>
+            <h1>Welcome!</h1>
+            <p>This page is under construction. For now:</p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <h2>Socials</h2>
+                <Button icon="groups" href="https://discord.gg/RVKXKyaS6y">Discord</Button>
+                <Button icon="code" href="https://github.com/QkeleQ10">GitHub</Button>
+            </div>
+            <div class="card">
+                <h2>Study Tools</h2>
+                <RouterLink to="/studytools">
+                    <Button icon="install_desktop">{{ $i18n('getExtension') }}</Button>
+                </RouterLink>
+                <RouterLink to="/studytools/grades">
+                    <Button icon="upload">{{ $i18n('Import grades') }}</Button>
+                </RouterLink>
+            </div>
+            <div class="card">
+                <h2>Pathé Tools</h2>
+                <Button onclick="window.location = 'http:\/\/qkeleq10.github.io/Pathe-Tools'">Go there</Button>
+            </div>
+        </div>
     </section>
 </template>
 
 <style>
-@import "../assets/css/base.css"
+@import "../assets/css/base.css";
+
+.centre {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    text-align: center;
+}
+
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: .25rem;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 350px 350px 350px;
+    gap: 1.5rem;
+}
 </style>
