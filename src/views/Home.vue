@@ -16,7 +16,7 @@ const projects = ref()
     <section class="centre">
         <div>
             <h1>Welcome!</h1>
-            <p>This page is under construction. For now:</p>
+            <p>This page is under construction. For now, you might be interested in one of the following:</p>
         </div>
         <div class="grid-3">
             <div class="card">

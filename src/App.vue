@@ -1,18 +1,12 @@
 <script setup>
-import { useMeta } from 'vue-meta'
 import Hero from './components/Hero.vue'
 import NavigationRail from './components/NavigationRail.vue';
+import { usePageTitle } from './composables/usePageTitle'
 
-useMeta({
-    title: '',
-    htmlAttrs: { lang: 'en', amp: true }
-})
+usePageTitle('')
 </script>
 
 <template>
-    <metainfo>
-        <template #title="{ content }">{{ content ? `${content} | QkeleQ10` : `QkeleQ10` }}</template>
-    </metainfo>
     <NavigationRail />
     <main>
         <router-view>

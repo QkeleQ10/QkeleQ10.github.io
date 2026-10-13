@@ -1,6 +1,6 @@
 <script setup>
-import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
+import { usePageTitle } from '../composables/usePageTitle'
 import { ref } from 'vue'
 
 import Card from '@/components/Card.vue'
@@ -13,7 +13,7 @@ import imageStudyguide from '@/assets/images/studytools/studyguide.webp'
 import imageGradecalculator from '@/assets/images/studytools/gradecalculator.webp'
 import imageGradebackup from '@/assets/images/studytools/gradebackup.webp'
 
-useMeta({ title: "Study Tools" })
+usePageTitle('Study Tools')
 
 const theme = useThemeStore()
 theme.setScheme('st')

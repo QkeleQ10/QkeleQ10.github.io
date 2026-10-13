@@ -1,8 +1,6 @@
 import { createApp } from 'vue'
-import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
-import { createMetaManager } from 'vue-meta'
+import { createRouter, createWebHistory } from 'vue-router'
 import { createPinia } from 'pinia'
-import { getCookie, setCookie } from 'typescript-cookie'
 import i18nPlugin from './plugins/i18n'
 import detectBrowserPlugin from './plugins/detectBrowser'
 import Button from './components/Button.vue'
@@ -19,8 +17,7 @@ async function initialise() {
     data = resJson
     if (!data) console.error(`No strings available`)
 
-    createApp(App)
-        .use(createRouter({
+    const router = createRouter({
             history: createWebHistory(),
             routes: [
                 { path: "/", name: "Home", component: Home },
@@ -40,8 +37,10 @@ async function initialise() {
                     }
                 }
             },
-        }))
-        .use(createMetaManager())
+        })
+
+    createApp(App)
+        .use(router)
         .use(createPinia())
         .use(i18nPlugin, { data })
         .use(detectBrowserPlugin)

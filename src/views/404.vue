@@ -1,10 +1,10 @@
 <script setup>
-import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
+import { usePageTitle } from '../composables/usePageTitle'
 
 import Icon from '@/components/Icon.vue';
 
-useMeta({ title: "Study Tools" })
+usePageTitle('Study Tools')
 
 const theme = useThemeStore()
 theme.setScheme('error')

@@ -1,6 +1,6 @@
 <script setup>
-import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
+import { usePageTitle } from '../composables/usePageTitle'
 import { ref, computed } from 'vue'
 
 import Card from '@/components/Card.vue'
@@ -9,7 +9,7 @@ import Metric from '@/components/Metric.vue'
 import Icon from '@/components/Icon.vue';
 import CollectionHorizontal from '@/components/CollectionHorizontal.vue';
 
-useMeta({ title: "Cijferback-up | Study Tools" })
+usePageTitle('Cijferback-up | Study Tools')
 
 const theme = useThemeStore()
 theme.setScheme('st')

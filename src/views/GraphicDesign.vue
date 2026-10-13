@@ -1,14 +1,12 @@
 <script setup>
-import path from 'path'
-import { useMeta } from 'vue-meta'
 import { useThemeStore } from '../stores/theme'
-import { ref, computed } from 'vue'
+import { usePageTitle } from '../composables/usePageTitle'
+import { ref } from 'vue'
 
-import Card from '@/components/Card.vue'
 import Heading2 from '@/components/Heading2.vue'
 import Icon from '@/components/Icon.vue';
 
-useMeta({ title: "Graphic Design" })
+usePageTitle('Graphic Design')
 
 const theme = useThemeStore()
 theme.setScheme('graphic')
