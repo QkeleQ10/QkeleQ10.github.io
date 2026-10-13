@@ -1,24 +1,25 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.dom.json",
-  "include": [
-    "env.d.ts",
-    "src/**/*",
-    "src/**/*.vue"
-  ],
   "compilerOptions": {
-    "module": "es2022",
-    "baseUrl": ".",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "importHelpers": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "allowImportingTsExtensions": true,
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": [
         "./src/*"
       ]
     },
-    "allowJs": true,
-    "ignoreDeprecations": "5.0",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
   },
-  "references": [
-    {
-      "path": "./tsconfig.vite-config.json"
-    }
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

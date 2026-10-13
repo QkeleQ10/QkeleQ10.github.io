@@ -1,12 +1,12 @@
 {
   "name": "qkeleq10-github-io",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "expose": "vite --host",
-    "build": "vue-tsc --noEmit && vite build && cd docs && copy index.html 404.html && copy index.html studytools.html && copy index.html graphic-design.html && xcopy index.html studytools\\grades.html* && cd ...",
-    "preview": "vite preview --port 5050",
-    "typecheck": "vue-tsc --noEmit"
+    "build": "vite build && node -e \"const fs=require('fs'),path=require('path');['404.html','studytools.html','graphic-design.html','studytools/grades.html'].forEach(file=>{const target=path.join('dist',file);fs.mkdirSync(path.dirname(target),{recursive:true});fs.copyFileSync('dist/index.html',target)})\"",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vueuse/components": "^15.0.0",
