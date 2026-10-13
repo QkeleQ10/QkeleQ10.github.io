@@ -16,17 +16,24 @@ const { x, y, sourceType } = useMouse(),
     <section id="hero">
         <!--:style="{ transform: `translateX(${((x - width / 2) * 10 / width)}px) translateY(${((y - height / 2) * 10 / height)}px)` }"-->
         <div>
-            <Heading1 class="section-title" id="hero-title"></Heading1>
-            <p class="section-about" id="hero-description"></p>
+            <Heading1 class="section-title" id="hero-title">
+                <slot name="title"></slot>
+            </Heading1>
+            <p class="section-about" id="hero-description">
+                <slot name="description"></slot>
+            </p>
         </div>
-        <CollectionHorizontal id="hero-buttons"></CollectionHorizontal>
+        <CollectionHorizontal id="hero-buttons">
+            <slot name="buttons"></slot>
+        </CollectionHorizontal>
         <div id="hero-icon"
             :style="{ transform: `translateX(${-((x - width / 2) * 50 / width)}px) translateY(${-((y - height / 2) * 50 / height)}px)` }">
+            <slot name="icon"></slot>
         </div>
     </section>
 </template>
 
-<style>
+<style scoped>
 @property --hueValue {
     syntax: '<number>';
     initial-value: 130;

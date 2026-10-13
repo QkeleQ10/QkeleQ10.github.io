@@ -1,44 +1,48 @@
 <script setup>
-import { useThemeStore } from '../stores/theme'
-import { usePageTitle } from '../composables/usePageTitle'
-import { ref } from 'vue'
+import { useThemeStore } from '../stores/theme';
+import { usePageTitle } from '../composables/usePageTitle';
+import { ref } from 'vue';
 
-import Card from '@/components/Card.vue'
-import Heading2 from '@/components/Heading2.vue'
+import Hero from '@/components/Hero.vue';
+import Card from '@/components/Card.vue';
+import Heading2 from '@/components/Heading2.vue';
 import Icon from '@/components/Icon.vue';
-import imageTheme from '@/assets/images/studytools/themes.webp'
-import imageLogin from '@/assets/images/studytools/login.webp'
-import imageToday from '@/assets/images/studytools/today.webp'
-import imageStudyguide from '@/assets/images/studytools/studyguide.webp'
-import imageGradecalculator from '@/assets/images/studytools/gradecalculator.webp'
-import imageGradebackup from '@/assets/images/studytools/gradebackup.webp'
+import imageA from '@/assets/images/studytools/a.webp';
+import imageB from '@/assets/images/studytools/b.webp';
+import imageC from '@/assets/images/studytools/c.webp';
+import imageD from '@/assets/images/studytools/d.webp';
+import imageE from '@/assets/images/studytools/e.webp';
+import imageF from '@/assets/images/studytools/f.webp';
 
-usePageTitle('Study Tools')
+usePageTitle('Study Tools');
 
-const theme = useThemeStore()
-theme.setScheme('st')
+const theme = useThemeStore();
+theme.setScheme('st');
 
-const installation = ref()
+const installation = ref();
 </script>
 
 <template>
-    <!-- <Teleport to="#hero-title">Study Tools</Teleport>
-    <Teleport to="#hero-description">
-        Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de grootste elektronische leeromgeving van
-        Nederland.
-    </Teleport>
-    <Teleport to="#hero-buttons">
-        <Button icon="expand_more" class="hero" @click="installation.scrollIntoView({ behavior: 'smooth' })">{{
-            $i18n('getExtension') }}</Button>
-        <RouterLink to="/studytools/grades">
-            <Button icon="upload" class="hero">Cijferback-up</Button>
-        </RouterLink>
-        <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
-        <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
-    </Teleport>
-    <Teleport to="#hero-icon">
-        <Icon>school</Icon>
-    </Teleport> -->
+    <Hero>
+        <template #title>Study Tools</template>
+        <template #description>
+            Een gratis flexibele browserextensie tjokvol verbeteringen voor Magister—de grootste elektronische
+            leeromgeving van
+            Nederland.
+        </template>
+        <template #buttons>
+            <Button icon="expand_more" class="hero" @click="installation.scrollIntoView({ behavior: 'smooth' })">{{
+                $i18n('getExtension') }}</Button>
+            <RouterLink to="/studytools/grades">
+                <Button icon="upload" class="hero">Cijferback-up</Button>
+            </RouterLink>
+            <Button icon="code" class="hero" href="https://github.com/QkeleQ10/Study-Tools">GitHub</Button>
+            <Button icon="volunteer_activism" class="hero" href="https://paypal.me/QkeleQ10">PayPal</Button>
+        </template>
+        <template #icon>
+            <Icon style="--size: 100vh;">school</Icon>
+        </template>
+    </Hero>
 
     <section ref="installation" id="installation" class="quarter">
         <Heading2 icon="install_desktop">{{ $i18n('getExtension') }}</Heading2>
@@ -66,39 +70,39 @@ const installation = ref()
     <section id="features" class="threequarters">
         <Heading2 icon="tips_and_updates">Functio&shy;naliteiten</Heading2>
         <div class="sectionGrid" role="list">
-            <Card stretch-buttons :image-src="imageTheme" image-alt="Thema" image-position="hover">
+            <Card stretch-buttons :image-src="imageA" image-alt="Thema" image-position="hover">
                 <template #title>Aangepaste thema's</template>
                 <template #subtitle>Klaar met de blauwe flashbang?</template>
                 <template #content>Kies je eigen thema- en accentkleur! Je kunt
                     kiezen uit een licht, donker en automatisch thema. De accentkleur kun je helemaal zelf kiezen. Je
                     mag zelfs je hele Magister gitzwart of knalroze maken. Mocht dat je ding zijn.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageLogin" image-alt="Inloggen" image-position="hover">
+            <Card stretch-buttons :image-src="imageB" image-alt="Inloggen" image-position="hover">
                 <template #title>Automatisch inloggen</template>
                 <template #subtitle>Nooit meer worden aangestaard door het inlogscherm</template>
                 <template #content>Compleet instelbare automatische login. Ondersteunt inloggen met gebruikersnaam en
                     wachtwoord of via een Microsoft-account. Of zet de optie gewoon uit.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageToday" image-alt="Vandaag" image-position="hover">
+            <Card stretch-buttons :image-src="imageC" image-alt="Vandaag" image-position="hover">
                 <template #title>Vandaag</template>
                 <template #subtitle>Zie het in één oogopslag</template>
                 <template #content>Geheel opnieuw opgebouwd met focus op overzichtelijkheid en aantrekkelijkheid. Je
                     kunt aanpassen hoe alles wordt weergegeven. Niet iedereen vindt dit fijn, dus je kunt het altijd
                     uitschakelen.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageStudyguide" image-alt="Studiewijzers" image-position="hover">
+            <Card stretch-buttons :image-src="imageD" image-alt="Studiewijzers" image-position="hover">
                 <template #title>Studiewijzers</template>
                 <template #subtitle>Geen speurtochten meer naar je huiswerk</template>
                 <template #content>Kies uit 3 weergave-opties om studiewijzers overzichtelijker weer te geven. Alles is
                     natuurlijk geheel aanpasbaar en uitschakelbaar.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageGradecalculator" image-alt="Cijfercalculator" image-position="hover">
+            <Card stretch-buttons :image-src="imageE" image-alt="Cijfercalculator" image-position="hover">
                 <template #title>Cijfercalculator</template>
                 <template #subtitle>Nooit meer cijfers overtypen op andere websites</template>
                 <template #content>Laat Study Tools voor je berekenen wat je moet halen of wat je komt te staan. Je kunt
                     alles aanpassen en je krijgt zelfs een handig grafiekje!</template>
             </Card>
-            <Card stretch-buttons :image-src="imageGradebackup" image-alt="Cijferback-up" image-position>
+            <Card stretch-buttons :image-src="imageF" image-alt="Cijferback-up" image-position>
                 <template #title>Cijferback-up</template>
                 <template #subtitle>Omzeil de regeling van je school</template>
                 <template #content>Met Study Tools kun je altijd bij je cijferlijst. Je kunt namelijk op elk moment je
@@ -149,7 +153,8 @@ const installation = ref()
                 <template #subtitle>Voor bijvoorbeeld Chrome, Edge, Brave en Opera</template>
                 <template #content>De laatste stabiele versie als .ZIP-bestand.</template>
                 <template #buttons><Button icon="download"
-                        href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip" target="_self">Stabiele
+                        href="https://github.com/QkeleQ10/Study-Tools/archive/refs/heads/main.zip"
+                        target="_self">Stabiele
                         versie downloaden voor Chromium</Button></template>
             </Card>
             <Card stretch-buttons data-highlight="false">
@@ -167,7 +172,8 @@ const installation = ref()
                 <template #content>Deze versie kan achterlopen of instabiel zijn. De Chromium-versie bovenaan de pagina
                     werkt ook voor Microsoft Edge. Het is beter om die te installeren.</template>
                 <template #buttons>
-                    <Button icon="expand_less" @click="installation.scrollIntoView({ behavior: 'smooth' })">Chromium-versie
+                    <Button icon="expand_less"
+                        @click="installation.scrollIntoView({ behavior: 'smooth' })">Chromium-versie
                         installeren</Button>
                     <Button icon="install_desktop"
                         href="https://microsoftedge.microsoft.com/addons/detail/study-tools-voor-magister/ohhafpjdnbhihibepefpcmnnodaodajc">Installeren
@@ -178,35 +184,33 @@ const installation = ref()
     </section>
 </template>
 
-<style>
-@import "../assets/css/base.css";
-
+<style scoped>
 #st>#installation>.sectionGrid {
     grid-template:
         'a1 a1 a2' auto
-        / 1fr 1fr 1fr;
+        / repeat(3, 1fr);
 }
 
 #st>#features>.sectionGrid {
     grid-template:
         'a1 a1 a1 a2 a2 a3 a3' auto
         'a4 a4 a5 a5 a5 a6 a6' auto
-        / 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        / repeat(7, 1fr);
 }
 
 #st>#advanced>.sectionGrid {
     grid-template:
         'a1 a1 a2 a3' auto
         'a1 a1 a4 a4' auto
-        / 1fr 1fr 1fr 1fr;
+        / repeat(4, 1fr);
 }
 
-@media (width <= 1100px) {
+@media (width <=1100px) {
     #st>#installation>.sectionGrid {
         grid-template:
             'a1 a1' auto
             'a2 a2' auto
-            / 1fr 1fr;
+            / repeat(2, 1fr);
     }
 
     #st>#features>.sectionGrid {
@@ -214,7 +218,7 @@ const installation = ref()
             'a1 a2' auto
             'a3 a4' auto
             'a5 a6' auto
-            / 1fr 1fr;
+            / repeat(2, 1fr);
     }
 
     #st>#advanced>.sectionGrid {
@@ -222,11 +226,11 @@ const installation = ref()
             'a1 a1' auto
             'a2 a3' auto
             'a4 a4' auto
-            / 1fr 1fr;
+            / repeat(2, 1fr);
     }
 }
 
-@media (width <= 620px) {
+@media (width <=620px) {
     #st>#installation>.sectionGrid {
         grid-template:
             'a1' auto

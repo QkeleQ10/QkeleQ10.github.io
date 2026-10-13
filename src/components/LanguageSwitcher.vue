@@ -41,7 +41,7 @@ export default {
         </Button>
     </div>
     <Modal class="dock-left" id="modal-language" ref="modal">
-        <Heading2 icon="language" class="modal-title"> {{ $i18n('Language') }} </Heading2>
+        <Heading2 icon="language" class="modal-title"> {{ $i18n('language') }} </Heading2>
         <ul id="language-list">
             <!-- {{ $changeLanguage('fr') }} -->
             <li v-for="(language, key, i) in { en: allMeta.en, ...meta }"

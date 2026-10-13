@@ -1,9 +1,10 @@
 <script setup>
-import Hero from './components/Hero.vue'
 import NavigationRail from './components/NavigationRail.vue';
-import { usePageTitle } from './composables/usePageTitle'
+import { usePageTitle } from './composables/usePageTitle';
 
-usePageTitle('')
+import './assets/css/base.css';
+
+usePageTitle('');
 </script>
 
 <template>
