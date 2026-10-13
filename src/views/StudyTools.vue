@@ -70,48 +70,47 @@ const installation = ref();
     <section id="features" class="threequarters">
         <Heading2 icon="tips_and_updates">Functio&shy;naliteiten</Heading2>
         <div class="sectionGrid" role="list">
-            <Card stretch-buttons :image-src="imageA" image-alt="Thema" image-position="hover">
-                <template #title>Aangepaste thema's</template>
-                <template #subtitle>Klaar met de blauwe flashbang?</template>
-                <template #content>Kies je eigen thema- en accentkleur! Je kunt
-                    kiezen uit een licht, donker en automatisch thema. De accentkleur kun je helemaal zelf kiezen. Je
-                    mag zelfs je hele Magister gitzwart of knalroze maken. Mocht dat je ding zijn.</template>
+            <Card stretch-buttons :image-src="imageA" image-alt="Een donker thema met rode tinten en een zonsondergang" image-position="hover">
+                <template #title>Thema's</template>
+                <template #subtitle>Maak het eigen</template>
+                <template #content>Uitgebreide thematisering waarbij de kleuren, de achtergrond en elk detail aangepast
+                    kunnen worden. Je mag zelfs je hele Magister gitzwart of knalroze maken. Mocht dat je ding zijn.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageB" image-alt="Inloggen" image-position="hover">
-                <template #title>Automatisch inloggen</template>
-                <template #subtitle>Nooit meer worden aangestaard door het inlogscherm</template>
-                <template #content>Compleet instelbare automatische login. Ondersteunt inloggen met gebruikersnaam en
-                    wachtwoord of via een Microsoft-account. Of zet de optie gewoon uit.</template>
-            </Card>
-            <Card stretch-buttons :image-src="imageC" image-alt="Vandaag" image-position="hover">
-                <template #title>Vandaag</template>
+            <Card stretch-buttons :image-src="imageB" image-alt="Een overzichtelijke pagina met widgets in een turkoois thema" image-position="hover">
+                <template #title>Start</template>
                 <template #subtitle>Zie het in één oogopslag</template>
-                <template #content>Geheel opnieuw opgebouwd met focus op overzichtelijkheid en aantrekkelijkheid. Je
+                <template #content>Vernieuwde startpagina met focus op overzichtelijkheid en aantrekkelijkheid. Je
                     kunt aanpassen hoe alles wordt weergegeven. Niet iedereen vindt dit fijn, dus je kunt het altijd
                     uitschakelen.</template>
             </Card>
-            <Card stretch-buttons :image-src="imageD" image-alt="Studiewijzers" image-position="hover">
-                <template #title>Studiewijzers</template>
-                <template #subtitle>Geen speurtochten meer naar je huiswerk</template>
-                <template #content>Kies uit 3 weergave-opties om studiewijzers overzichtelijker weer te geven. Alles is
-                    natuurlijk geheel aanpasbaar en uitschakelbaar.</template>
-            </Card>
-            <Card stretch-buttons :image-src="imageE" image-alt="Cijfercalculator" image-position="hover">
-                <template #title>Cijfercalculator</template>
-                <template #subtitle>Nooit meer cijfers overtypen op andere websites</template>
-                <template #content>Laat Study Tools voor je berekenen wat je moet halen of wat je komt te staan. Je kunt
-                    alles aanpassen en je krijgt zelfs een handig grafiekje!</template>
-            </Card>
-            <Card stretch-buttons :image-src="imageF" image-alt="Cijferback-up" image-position>
-                <template #title>Cijferback-up</template>
-                <template #subtitle>Omzeil de regeling van je school</template>
-                <template #content>Met Study Tools kun je altijd bij je cijferlijst. Je kunt namelijk op elk moment je
-                    cijfers exporteren en importeren.</template>
+            <Card stretch-buttons :image-src="imageC" image-alt="Een cijferoverzicht met statistieken aan de rechterkant, in een donker thema" image-position>
+                <template #title>Cijferoverzicht</template>
+                <template #subtitle>Overzicht in je cijfers</template>
+                <template #content>Een vernieuwd cijferoverzicht met leuke statistieken. Je kunt ook op elk moment je
+                    cijfers back-uppen.</template>
                 <template #buttons>
                     <RouterLink to="/studytools/grades">
                         <Button icon="upload">Cijferback-up importeren</Button>
                     </RouterLink>
                 </template>
+            </Card>
+            <Card stretch-buttons :image-src="imageD" image-alt="Een cijferoverzicht met de cijfercalculator aan de rechterkant, in een lichtroze thema" image-position="hover">
+                <template #title>Cijfercalculator</template>
+                <template #subtitle>Bereken in twee kliks wat je moet halen</template>
+                <template #content>Laat Study Tools voor je berekenen wat je moet halen of wat je komt te staan. Je kunt
+                    alles aanpassen en je krijgt zelfs handige grafieken!</template>
+            </Card>
+            <Card stretch-buttons :image-src="imageE" image-alt="De vernieuwde studiewijzers, in een lichtblauw thema" image-position="hover">
+                <template #title>Studiewijzers</template>
+                <template #subtitle>Klaar met speurtochten naar je huiswerk</template>
+                <template #content>Studiewijzers compleet vernieuwd voor efficiëntie en overzichtelijkheid. Alles is
+                    natuurlijk geheel aanpasbaar en uitschakelbaar.</template>
+            </Card>
+            <Card stretch-buttons :image-src="imageF" image-alt="De inlogpagina met pasteltinten" image-position="hover">
+                <template #title>Automatisch inloggen</template>
+                <template #subtitle>Geen escaperoom voor je bij je Magister kunt</template>
+                <template #content>Compleet instelbare automatische login. Ondersteunt inloggen met gebruikersnaam en
+                    wachtwoord of via een Microsoft-account. Of zet de optie gewoon uit.</template>
             </Card>
         </div>
     </section>
